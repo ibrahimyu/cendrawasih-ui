@@ -57,7 +57,7 @@ Never put text in `yellow` on white (1.6:1) or `red` at body size on white (4.4:
 ### Theme rules
 
 - Primary actions use `action` / `on-action`: maroon with white on Day, yellow with maroon on Night. Text on yellow is maroon (`on-yellow`), as in the brand guide.
-- On Night, `surface` is a maroon-black (#1c0305), not grey. Cards lift to `surface-raised`. Maroon outlines use `maroon-edge`, which lifts to a lighter maroon so it still shows.
+- Neutrals are true black and grey in both themes: `ink`, `ink-soft`, `line` and the surfaces carry no maroon tint. Maroon is an accent, never the room; a whole screen washed in it tires the eye. On Night, `surface` is a neutral near-black (#111111) and cards lift to `surface-raised` (#1c1c1c). Maroon outlines use `maroon-edge`, which lifts to a lighter maroon so it still shows.
 
 ### Tone pairs
 

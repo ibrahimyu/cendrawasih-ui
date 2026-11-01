@@ -70,14 +70,14 @@
     --font-display: "Google Sans", ui-sans-serif, system-ui, sans-serif;
     --font-text: Karla, ui-sans-serif, system-ui, sans-serif;
     --maroon-edge: light-dark(var(--maroon), #b8434a);
-    --surface: light-dark(var(--white), #1c0305);
-    --surface-sunk: light-dark(#fbf6f4, #140102);
-    --surface-raised: light-dark(var(--white), #2b080c);
-    --ink: light-dark(#14100f, #fff4ec);
-    --ink-soft: light-dark(#5e5456, #d8bcb9);
-    --line: light-dark(#f0e6e6, #4a1a1e);
-    --line-control: light-dark(#9c7477, #8a5a5e);
-    --line-strong: light-dark(#14100f, #fff4ec);
+    --surface: light-dark(var(--white), #111111);
+    --surface-sunk: light-dark(#f5f5f5, #0a0a0a);
+    --surface-raised: light-dark(var(--white), #1c1c1c);
+    --ink: light-dark(#121212, #f5f5f5);
+    --ink-soft: light-dark(#5c5c5c, #b0b0b0);
+    --line: light-dark(#e6e6e6, #2e2e2e);
+    --line-control: light-dark(#8a8a8a, #707070);
+    --line-strong: light-dark(#121212, #f5f5f5);
     --action: light-dark(var(--maroon), var(--yellow));
     --action-hover: light-dark(var(--maroon-deep), #ffd34d);
     --on-action: light-dark(var(--white), var(--maroon));
@@ -90,8 +90,8 @@
     --tint-red: light-dark(#fde8e6, #40100f);
     --tint-green: light-dark(#e2f3ea, #0b3220);
     --tint-orange: light-dark(#fdebd6, #3d2108);
-    --scrim: light-dark(rgb(58 3 7 / 0.56), rgb(0 0 0 / 0.64));
-    --shadow-overlay: 0 18px 40px -12px light-dark(rgb(82 5 10 / 0.32), rgb(0 0 0 / 0.7));
+    --scrim: light-dark(rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.64));
+    --shadow-overlay: 0 18px 40px -12px light-dark(rgb(0 0 0 / 0.16), rgb(0 0 0 / 0.7));
   }
   [data-theme="light"] { color-scheme: light; }
   [data-theme="dark"] { color-scheme: dark; }
