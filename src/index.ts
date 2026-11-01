@@ -1,10 +1,13 @@
 export { Band, type BandProps } from './components/Band.js';
 export { Button, type ButtonProps } from './components/Button.js';
 export { Card, type CardProps } from './components/Card.js';
+export { Checkbox, ChoiceGroup, RadioGroup, Switch, type CheckboxProps, type ChoiceGroupProps, type RadioGroupProps, type RadioOption, type SwitchProps } from './components/Choice.js';
 export { cx, type Plume } from './components/cx.js';
 export { Icon, iconNames, type IconName, type IconProps } from './components/Icon.js';
 export { Logogram, type LogogramProps } from './components/Logogram.js';
 export { Notice, type NoticeProps } from './components/Notice.js';
+export { SearchField, type SearchFieldProps } from './components/SearchField.js';
+export { Select, type SelectOption, type SelectProps } from './components/Select.js';
 export { PlumeBar, type PlumeBarProps } from './components/PlumeBar.js';
 export { Stat, type StatProps } from './components/Stat.js';
 export { Tabs, type TabItem, type TabsProps } from './components/Tabs.js';

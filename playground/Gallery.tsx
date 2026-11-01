@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Band, Button, Card, Icon, iconNames, Logogram, Notice, PlumeBar, Stat, Tabs, Tag, TextField, type Plume } from '@cendra/ui';
+import { Band, Button, Card, Checkbox, ChoiceGroup, Icon, iconNames, Logogram, Notice, PlumeBar, RadioGroup, SearchField, Select, Stat, Switch, Tabs, Tag, TextField, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import './gallery.css';
 
@@ -157,6 +157,44 @@ export function Gallery() {
             <TextField label="Company" optional defaultValue="Toko Sinar Abadi" />
             <TextField label="Phone" defaultValue="0812" error="Enter a full number, like 0812 3456 7890" />
             <TextField label="What should talk to what?" multiline placeholder="Shopee orders into Accurate…" />
+          </div>
+        </Section>
+
+        <Section title="Select and SearchField">
+          <div className="gl-grid">
+            <Select label="Warehouse" placeholder="Choose a warehouse" options={[
+              { value: 'jkt', label: 'Jakarta Barat' }, { value: 'sby', label: 'Surabaya' }, { value: 'mdn', label: 'Medan' },
+            ]} hint="Stock is read from this warehouse." />
+            <Select label="Sync every" defaultValue="5" options={[
+              { value: '5', label: '5 minutes' }, { value: '15', label: '15 minutes' }, { value: '60', label: 'Hour' },
+            ]} />
+            <Select label="Region" disabled defaultValue="id" options={[{ value: 'id', label: 'Indonesia' }]} />
+            <SearchField label="Search orders" hideLabel placeholder="Search by order ID or buyer" defaultValue="INV-2026" />
+          </div>
+        </Section>
+
+        <Section title="Checkbox, RadioGroup and Switch">
+          <div className="gl-grid">
+            <ChoiceGroup legend="Sync these to Accurate" hint="You can change this later.">
+              <Checkbox label="Orders" defaultChecked />
+              <Checkbox label="Payments" hint="Matched to invoices by amount and date." defaultChecked />
+              <Checkbox label="Stock levels" />
+              <Checkbox label="Refunds" disabled />
+            </ChoiceGroup>
+            <RadioGroup legend="When a SKU is missing" defaultValue="skip" options={[
+              { value: 'skip', label: 'Skip the order and tell me', hint: 'It waits in Failed records.' },
+              { value: 'create', label: 'Create the item in Accurate' },
+              { value: 'stop', label: 'Stop the whole sync' },
+            ]} />
+            <ChoiceGroup legend="Notifications">
+              <Switch label="WhatsApp me when a sync fails" defaultChecked />
+              <Switch label="Daily summary email" hint="Sent at 07:00 WIB." />
+              <Switch label="Weekly report" disabled />
+            </ChoiceGroup>
+            <ChoiceGroup legend="Agree before connecting" error="Tick this to connect Xendit">
+              <Checkbox label="I can read and write payments on this account" />
+              <Checkbox label="Select all channels" indeterminate />
+            </ChoiceGroup>
           </div>
         </Section>
 

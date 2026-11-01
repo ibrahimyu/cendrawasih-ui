@@ -20,7 +20,7 @@ export interface TabsProps {
   className?: string;
 }
 
-/** A pill track; the selected tab takes the action fill. Arrow keys, Home and End move between tabs */
+/** A pill track; the selected tab takes the plume wash, never the action fill. Arrow keys, Home and End move between tabs */
 export function Tabs({ items, value, defaultValue, onChange, panelIds, className, ...aria }: TabsProps) {
   const [own, setOwn] = useState(defaultValue ?? items[0]?.id);
   const selected = value ?? own;

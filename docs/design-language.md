@@ -533,8 +533,8 @@ Label (`label` style, ink) above a 48px control with a 2px `line-control` border
 
 #### You provide
 
-- `id` (required: it wires the label, hint and error for screen readers) and `label`.
-- `hint`, `error` (a sentence saying how to fix it), `optional` (true, or your own word such as *Opsional*).
+- `label`. An `id` is generated if you don't pass one; the label, hint and error are wired to the control for screen readers either way.
+- `hint`, `error` (a sentence saying how to fix it), `optional` (true, or your own word such as *Opsional*), `hideLabel` where the purpose is obvious without it.
 - `multiline` for a textarea. Every other prop goes to the native input (`value`, `onChange`, `type`, `inputMode`, `autoComplete`).
 
 #### Do and don't
@@ -543,6 +543,107 @@ Label (`label` style, ink) above a 48px control with a 2px `line-control` border
 - Do use real placeholder examples from the customer's world (a PT name, a WhatsApp number), never the label repeated.
 - Don't hide the label in the placeholder.
 - Don't mark required fields with asterisks; mark the optional ones.
+
+### Select
+
+A native select dressed as a field: one choice from a list of seven or more, or from a list whose labels are long. Phones get the platform's own picker; keyboards get type-to-jump for free.
+
+#### Anatomy
+
+The same label, 48px control, hint and error as TextField, with a 20px `chevron-down` in `ink-soft` at the end. Disabled takes the sunk fill and `ink-disabled`, like every control.
+
+#### You provide
+
+- `label` and `options`: `[{ value, label, disabled? }]`.
+- `placeholder` for a first, empty choice that names what to pick (*Choose a warehouse*). With `required`, it can't be picked back.
+- `hint`, `error`, `optional`, `hideLabel`, and any native select prop (`value`, `onChange`, `name`, `required`).
+
+#### Do and don't
+
+- Do use RadioGroup instead when there are six options or fewer and they fit on screen: people can compare them without opening anything.
+- Don't use Select for yes or no; that's a Checkbox or a Switch.
+- Don't put actions in a select (*Delete…*). Options are values, never commands.
+
+### SearchField
+
+A text field for finding things on the current screen: a search icon at the start and a clear button once there is something to clear.
+
+#### Anatomy
+
+A 48px field with a 20px `search` icon in `ink-soft` and, when it has a value, a 32px round clear button (`close`) at the end. The button takes the neutral hover and pressed washes, and grows to 44px on touch screens.
+
+#### You provide
+
+- `label`, usually with `hideLabel`: the icon and placeholder make the purpose plain, but screen readers still need the name.
+- `placeholder` saying what can be searched: *Search by order ID or buyer*.
+- `value` and `onChange` to control it, or `defaultValue`; `onClear` when the clear button empties it; `clearLabel` to translate *Clear search*.
+
+#### Do and don't
+
+- Do filter as people type when results are local; search on Enter when it calls a server, and say so in the hint.
+- Don't hide the field behind an icon button on desktop; show the field.
+
+### Checkbox
+
+A choice that is on or off and takes effect when the form is submitted. Group related checkboxes in a ChoiceGroup.
+
+#### Anatomy
+
+A 20px box with `radius-quill` corners and a 2px `line-control` border, then the label in `body` and an optional hint in `ink-soft` below it. Checked fills the box with `action` and draws the check in `on-action`; indeterminate draws a bar. The whole row is the hit area: at least 24px tall with a pointer, 44px on touch screens.
+
+#### You provide
+
+- `label`, and optionally `hint`.
+- `checked` and `onChange`, or `defaultChecked`; `indeterminate` when it stands for a set that is partly checked; any native input prop (`name`, `value`, `disabled`, `required`).
+
+#### ChoiceGroup
+
+Wraps related checkboxes (or switches) in a fieldset. Its `legend` asks the question (*Sync these to Accurate*); `hint` and `error` work like a field's. With `error`, unchecked boxes take a `danger` border. `inline` lays short options side by side.
+
+#### Do and don't
+
+- Do phrase labels positively: *Send a daily summary*, not *Don't send a daily summary*.
+- Do use a single checkbox for consent and confirmations (*I can read and write payments on this account*).
+- Don't use a checkbox for a setting that applies at once; that's a Switch.
+
+### RadioGroup
+
+One choice out of two to six, all visible at once. Arrow keys move between options and choose them.
+
+#### Anatomy
+
+A fieldset: the `legend` in the `label` style, an optional hint, then one row per option. Each radio is a 20px circle with a 2px `line-control` border; the chosen one draws its border and a 10px dot in `action`. Rows are spaced like checkboxes and share their hit area.
+
+#### You provide
+
+- `legend` and `options`: `[{ value, label, hint?, disabled? }]`.
+- `value` and `onChange`, or `defaultValue`. A `name` is generated if you don't pass one.
+- `hint`, `error`, `inline` for two or three short options side by side, `required`, `disabled`.
+
+#### Do and don't
+
+- Do choose a sensible default when one exists, and put it first.
+- Do use Select instead past six options.
+- Don't use two radios for on and off; that's a Checkbox or a Switch.
+
+### Switch
+
+A setting that takes effect the moment it flips: notifications, auto-sync, a feature on or off.
+
+#### Anatomy
+
+A 40 × 24px pill track with a 2px `line-control` border and a 14px knob. Off: `surface-sunk` track and an `ink-soft` knob on the left. On: the track fills with `action` and the knob slides right in `on-action`, over `duration-base`. The label sits to the right, with an optional hint.
+
+#### You provide
+
+- `label`, and optionally `hint`.
+- `checked` and `onChange`, or `defaultChecked`; any native input prop. It is announced as a switch, not a checkbox.
+
+#### Do and don't
+
+- Do save the change at once and confirm it if it can fail: a toast or an inline message.
+- Don't put a switch in a form with a submit button; use a Checkbox there.
+- Don't label a switch with its state (*On*, *Enabled*). Name the setting; the switch shows the state.
 
 ### Notice
 

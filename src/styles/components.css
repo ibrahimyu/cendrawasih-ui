@@ -188,6 +188,78 @@
   .cx-field__error { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 700; color: var(--danger); }
   .cx-field__error .cx-icon { width: 16px; height: 16px; }
 
+  .cx-visually-hidden {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+
+  /* Select: a native select in field clothing, with Cendra's chevron */
+  .cx-select, .cx-search { position: relative; display: block; }
+  .cx-select__control { appearance: none; padding-right: calc(var(--space-4) + 28px); cursor: pointer; }
+  .cx-select__chevron { position: absolute; right: var(--space-4); top: 50%; translate: 0 -50%; pointer-events: none; color: var(--ink-soft); }
+  .cx-select__control:disabled + .cx-select__chevron { color: var(--ink-disabled); }
+
+  /* SearchField: icon at the start, a clear button once there is something to clear */
+  .cx-search__icon { position: absolute; left: var(--space-4); top: 50%; translate: 0 -50%; pointer-events: none; color: var(--ink-soft); }
+  .cx-search__control { padding-left: calc(var(--space-4) + 28px); padding-right: calc(var(--space-4) + 28px); }
+  .cx-search__control::-webkit-search-cancel-button { appearance: none; }
+  .cx-search__clear {
+    position: absolute; right: var(--space-2); top: 50%; translate: 0 -50%;
+    display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px;
+    border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink-soft); cursor: pointer;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  }
+  .cx-search__clear:hover { background: var(--fill-hover); color: var(--ink); }
+  .cx-search__clear:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  .cx-search__clear:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+
+  /* Checkbox, Radio, Switch: the native input, restyled. The whole row is the hit area */
+  .cx-choices { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; margin: 0; padding: 0; border: 0; }
+  .cx-choices > legend { padding: 0; margin-bottom: var(--space-2); }
+  .cx-choices > .cx-field__hint { margin-top: calc(-1 * var(--space-2)); }
+  .cx-choices__list { display: flex; flex-direction: column; gap: var(--space-1); }
+  .cx-choices--inline .cx-choices__list { flex-direction: row; flex-wrap: wrap; column-gap: var(--space-6); }
+  .cx-choice { display: flex; align-items: flex-start; gap: var(--space-3); min-height: var(--size-target); padding: var(--space-1) 0; }
+  .cx-choice__text { display: flex; flex-direction: column; gap: 2px; padding-top: 1px; }
+  .cx-choice__label { font-family: var(--font-text); font-size: 16px; line-height: 1.4; font-weight: 500; color: var(--ink); cursor: pointer; }
+  .cx-choice__hint { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); }
+  .cx-choice__input {
+    appearance: none; flex: none; position: relative; display: grid; place-content: center;
+    width: 20px; height: 20px; margin: 1px 0 0;
+    background: var(--surface); border: var(--stroke-bold) solid var(--line-control); cursor: pointer;
+    transition: background-color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+  }
+  .cx-choice__input:hover { border-color: var(--ink-soft); }
+  .cx-choice__input:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-choice__input:checked, .cx-choice__input:indeterminate { background: var(--action); border-color: var(--action); }
+  .cx-choice__input:checked:hover, .cx-choice__input:indeterminate:hover { background: var(--action-hover); border-color: var(--action-hover); }
+  .cx-choice__input::before { content: ""; background: var(--on-action); scale: 0; transition: scale var(--duration-fast) var(--ease-out); }
+  .cx-choice__input:checked::before, .cx-choice__input:indeterminate::before { scale: 1; }
+
+  .cx-choice__input--check { border-radius: var(--radius-quill); }
+  .cx-choice__input--check::before { width: 12px; height: 12px; clip-path: polygon(14% 44%, 0 62%, 42% 100%, 100% 18%, 84% 4%, 40% 66%); }
+  .cx-choice__input--check:indeterminate::before { clip-path: inset(40% 8% 40% 8% round 1px); }
+
+  .cx-choice__input--radio { border-radius: 50%; }
+  .cx-choice__input--radio:checked { background: var(--surface); }
+  .cx-choice__input--radio:checked:hover { background: var(--surface); }
+  .cx-choice__input--radio::before { width: 10px; height: 10px; border-radius: 50%; background: var(--action); }
+  .cx-choice__input--radio:checked:hover::before { background: var(--action-hover); }
+
+  .cx-choice__input--switch {
+    width: 40px; height: 24px; margin-top: -1px; border-radius: var(--radius-pill); background: var(--surface-sunk);
+    place-content: center start; padding: 0 3px;
+  }
+  .cx-choice__input--switch::before { width: 14px; height: 14px; border-radius: 50%; background: var(--ink-soft); scale: 1; transition: translate var(--duration-base) var(--ease-out); }
+  .cx-choice__input--switch:checked::before { background: var(--on-action); translate: 16px 0; }
+
+  .cx-choice__input:disabled { background: var(--surface-sunk); border-color: var(--line); cursor: not-allowed; }
+  .cx-choice__input:disabled::before { background: var(--ink-disabled); }
+  .cx-choice__input--check:disabled:is(:checked, :indeterminate) { background: var(--line); }
+  .cx-choice__input--check:disabled:is(:checked, :indeterminate)::before { background: var(--ink-disabled); }
+  .cx-choice:has(.cx-choice__input:disabled) :is(.cx-choice__label, .cx-choice__hint) { color: var(--ink-disabled); cursor: not-allowed; }
+  .cx-choices--error .cx-choice__input:not(:checked) { border-color: var(--danger); }
+
   /* Notice: icon and title always carry the meaning; color only confirms it */
   .cx-notice {
     display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: var(--space-3);
@@ -231,11 +303,14 @@
 
   /* One density, but touch screens get full-size targets */
   @media (pointer: coarse) {
-    .cx-btn--sm, .cx-tab { min-height: var(--size-touch); }
+    .cx-btn--sm, .cx-tab, .cx-search__clear { min-height: var(--size-touch); }
+    .cx-search__clear { width: var(--size-touch); right: 2px; }
+    .cx-choice { min-height: var(--size-touch); align-items: center; }
+    .cx-choice__text { padding-top: 0; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .cx-btn, .cx-card, .cx-tab, .cx-field__control { transition: none; }
+    .cx-btn, .cx-card, .cx-tab, .cx-field__control, .cx-search__clear, .cx-choice__input, .cx-choice__input::before { transition: none; }
     a.cx-card:hover { transform: none; }
   }
 }
