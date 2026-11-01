@@ -104,9 +104,9 @@ export function Dashboard() {
                   <span className="cx-body-sm db-soft">Last 14 days, by channel</span>
                 </div>
                 <div className="db-legend">
-                  <span><i style={{ background: 'var(--maroon-edge)' }} />Shopee</span>
-                  <span><i style={{ background: 'var(--green)' }} />Tokopedia</span>
-                  <span><i style={{ background: 'var(--orange)' }} />Website</span>
+                  <span><i style={{ background: 'var(--chart-1)' }} />Shopee</span>
+                  <span><i style={{ background: 'var(--chart-2)' }} />Tokopedia</span>
+                  <span><i style={{ background: 'var(--chart-3)' }} />Website</span>
                 </div>
               </div>
               <div className="db-chart" role="img" aria-label="Stacked bar chart of orders synced per day from 19 Oct to 1 Nov, between 870 and 1.370 a day, 1.284 today.">
@@ -121,9 +121,9 @@ export function Dashboard() {
                     return (
                       <div key={d} className="db-bar" data-today={today || undefined}>
                         {today ? <span className="cx-caption db-bar__total">{fmt(shopee[i]! + tokped[i]! + web[i]!)}</span> : null}
-                        <i style={{ height: px(web[i]!), background: 'var(--orange)' }} />
-                        <i style={{ height: px(tokped[i]!), background: 'var(--green)' }} />
-                        <i style={{ height: px(shopee[i]!), background: 'var(--maroon-edge)' }} />
+                        <i style={{ height: px(web[i]!), background: 'var(--chart-3)' }} />
+                        <i style={{ height: px(tokped[i]!), background: 'var(--chart-2)' }} />
+                        <i style={{ height: px(shopee[i]!), background: 'var(--chart-1)' }} />
                         <span className="cx-caption db-bar__label">{d}</span>
                       </div>
                     );

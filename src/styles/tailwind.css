@@ -55,6 +55,11 @@
   --color-tint-red: var(--tint-red);
   --color-tint-green: var(--tint-green);
   --color-tint-orange: var(--tint-orange);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-other: var(--chart-other);
   --color-scrim: var(--scrim);
 }
 

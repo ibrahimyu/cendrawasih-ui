@@ -115,6 +115,11 @@
     --tint-red: light-dark(#fde8e6, #40100f);
     --tint-green: light-dark(#e2f3ea, #0b3220);
     --tint-orange: light-dark(#fdebd6, #3d2108);
+    --chart-1: light-dark(var(--maroon), #b8434a);
+    --chart-2: light-dark(var(--green-deep), #3ccf86);
+    --chart-3: light-dark(#d4741a, var(--orange));
+    --chart-4: var(--yellow);
+    --chart-other: var(--line-control);
     --scrim: light-dark(rgb(0 0 0 / 0.5), rgb(0 0 0 / 0.64));
     --shadow-overlay: 0 18px 40px -12px light-dark(rgb(0 0 0 / 0.16), rgb(0 0 0 / 0.7));
   }

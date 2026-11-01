@@ -222,6 +222,34 @@
       },
       "$description": "Wash behind soft orange tags."
     },
+    "chart-1": {
+      "$value": "{color.brand.maroon}",
+      "$description": "First chart series, and the only color of a single-series chart. Maroon; lifts to maroon-edge on Night."
+    },
+    "chart-2": {
+      "$value": "{color.brand.green-deep}",
+      "$description": "Second series. Green, deepened on Day and brightened on Night so it never meets maroon under red-green color blindness."
+    },
+    "chart-3": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8314,
+          0.4549,
+          0.102
+        ],
+        "hex": "#d4741a"
+      },
+      "$description": "Third series. Orange, deepened on Day to 3.3:1 on white."
+    },
+    "chart-4": {
+      "$value": "{color.brand.yellow}",
+      "$description": "Fourth and last series. Yellow. Below 3:1 on Day surfaces, so never alone and always with its numbers in text."
+    },
+    "chart-other": {
+      "$value": "{color.line-control}",
+      "$description": "Every series past the fourth, grouped as Other, and the rest of the data when one series is highlighted."
+    },
     "scrim": {
       "$value": {
         "colorSpace": "srgb",

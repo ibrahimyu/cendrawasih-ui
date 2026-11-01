@@ -144,6 +144,25 @@ Every state is its own color step, named as a token. Nothing is faded with opaci
 | Loading | Working on it | The label changes to the action in progress ("Syncing…") and the control stops taking presses (`aria-busy`). No spinner on its own; say what's happening. |
 | Error | Something needs fixing | A `danger` border on the field and the message under it, in `danger`, written as an instruction. Never color alone: the message and an icon carry it. |
 
+## Data visualization
+
+Charts use the plumage in a fixed order, tuned so every pair of series stays apart under protanopia, deuteranopia and tritanopia (CIEDE2000 13 or more between any two on Day, 11.9 or more on Night, with Machado 2009 simulation). The shades differ by theme; the order and hues don't, so a series keeps its color when the theme changes.
+
+| Series | Token | Day | Night |
+| --- | --- | --- | --- |
+| 1 | `chart-1` | maroon #52050a | maroon-edge #b8434a |
+| 2 | `chart-2` | green-deep #00733c | bright green #3ccf86 |
+| 3 | `chart-3` | deep orange #d4741a | orange #e8862a |
+| 4 | `chart-4` | yellow #fdc41e | yellow #fdc41e |
+| Rest | `chart-other` | grey (`line-control`) | grey (`line-control`) |
+
+- Assign series in order: a chart with two series uses `chart-1` and `chart-2`, never 1 and 4. Keep the same series on the same color across a screen.
+- Four colors at most. Group everything past the fourth into "Other" in `chart-other`. To spotlight one series, draw it in `chart-1` and the rest in `chart-other`.
+- Red is never a series color. It is kept for failures and errors, so a red bar always means something went wrong.
+- Separate stacked segments and adjacent bars with a 2px gap in the surface color, so neighbors never rely on color alone to part.
+- Every chart has a legend in series order, and its numbers are available as text: a total on each bar, a tooltip, or a table beside it. Yellow and orange sit below 3:1 on Day surfaces, which is acceptable only because of this.
+- Gridlines are dashed `line`; axis labels are `caption` in `ink-soft` with tabular figures. No 3D, no gradients, no shadows, no pie charts past three slices.
+
 ## Iconography
 
 Cendra's icons are Lucide (lucide.dev, ISC license): 2px rounded strokes on a 24px grid, rounded caps and joins, no fills. They match the 2px line the rest of the system draws with. A custom set drawn from the plume curves can replace them later on the same grid, without changing a single name.
@@ -215,6 +234,11 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `tint-red` | `#fde8e6` | `#40100f` | Wash behind error notices and soft red tags. Ink on it 15:1+. |
 | `tint-green` | `#e2f3ea` | `#0b3220` | Wash behind success notices and soft green tags. |
 | `tint-orange` | `#fdebd6` | `#3d2108` | Wash behind soft orange tags. |
+| `chart-1` | `maroon` | `#b8434a` | First chart series, and the only color of a single-series chart. Maroon; lifts to maroon-edge on Night. |
+| `chart-2` | `green-deep` | `#3ccf86` | Second series. Green, deepened on Day and brightened on Night so it never meets maroon under red-green color blindness. |
+| `chart-3` | `#d4741a` | `orange` | Third series. Orange, deepened on Day to 3.3:1 on white. |
+| `chart-4` | `yellow` | `yellow` | Fourth and last series. Yellow. Below 3:1 on Day surfaces, so never alone and always with its numbers in text. |
+| `chart-other` | `line-control` | `line-control` | Every series past the fourth, grouped as Other, and the rest of the data when one series is highlighted. |
 | `scrim` | `rgb(0 0 0 / 0.5)` | `rgb(0 0 0 / 0.64)` | Backdrop behind dialogs and sheets. |
 
 ### Type scale
