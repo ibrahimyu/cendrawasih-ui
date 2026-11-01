@@ -99,6 +99,18 @@
         },
         "$description": "Hover fill of yellow buttons; the primary hover on Night."
       },
+      "yellow-deep": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9098,
+            0.6902,
+            0.0627
+          ],
+          "hex": "#e8b010"
+        },
+        "$description": "Pressed fill of yellow buttons; the primary pressed state on Night (7.7:1 with maroon text)."
+      },
       "orange": {
         "$value": {
           "colorSpace": "srgb",

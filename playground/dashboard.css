@@ -30,7 +30,8 @@
   font: 600 15px/1.2 var(--font-display);
   transition: background-color 160ms ease-out, color 160ms ease-out;
 }
-.db-nav a:hover { background: var(--surface-sunk); color: var(--ink); }
+.db-nav a:hover { background: var(--fill-hover); color: var(--ink); }
+.db-nav a:active { background: var(--fill-pressed); }
 .db-nav a[aria-current="page"] { background: var(--selected); color: var(--on-selected); }
 .db-nav a:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
 .db-badge {

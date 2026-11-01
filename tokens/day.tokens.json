@@ -26,6 +26,22 @@
       "$value": "{color.brand.white}",
       "$description": "Small lifts: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline, in both themes."
     },
+    "fill-hover": {
+      "$value": "{color.surface-sunk}",
+      "$description": "Hover wash behind neutral controls: secondary and ghost buttons, nav items, menu rows."
+    },
+    "fill-pressed": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.902,
+          0.902,
+          0.902
+        ],
+        "hex": "#e6e6e6"
+      },
+      "$description": "Pressed wash behind neutral controls, one step past fill-hover."
+    },
     "ink": {
       "$value": {
         "colorSpace": "srgb",
@@ -49,6 +65,18 @@
         "hex": "#5c5c5c"
       },
       "$description": "Secondary text: intros, hints, metadata. Neutral grey, 6.1:1+ on Day surfaces."
+    },
+    "ink-disabled": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.6196,
+          0.6196,
+          0.6196
+        ],
+        "hex": "#9e9e9e"
+      },
+      "$description": "Text and icons of disabled controls. Deliberately below 4.5:1; never use it for anything a person must read."
     },
     "line": {
       "$value": {
@@ -93,6 +121,18 @@
     "action-hover": {
       "$value": "{color.brand.maroon-deep}",
       "$description": "Primary button fill on hover and press."
+    },
+    "action-pressed": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1647,
+          0.0078,
+          0.0196
+        ],
+        "hex": "#2a0205"
+      },
+      "$description": "Primary button while pressed: one step past hover."
     },
     "on-action": {
       "$value": "{color.brand.white}",

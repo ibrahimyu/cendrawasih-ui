@@ -40,6 +40,7 @@
     --green-deep: #00733c;
     --yellow: #fdc41e;
     --yellow-light: #ffd34d;
+    --yellow-deep: #e8b010;
     --orange: #e8862a;
     --white: #ffffff;
     --on-maroon: var(--white);
@@ -75,13 +76,17 @@
     --surface: light-dark(var(--white), #111111);
     --surface-sunk: light-dark(#f5f5f5, #0a0a0a);
     --surface-raised: light-dark(var(--white), #1c1c1c);
+    --fill-hover: light-dark(var(--surface-sunk), var(--surface-raised));
+    --fill-pressed: light-dark(#e6e6e6, #2b2b2b);
     --ink: light-dark(#121212, #f5f5f5);
     --ink-soft: light-dark(#5c5c5c, #b0b0b0);
+    --ink-disabled: light-dark(#9e9e9e, #5c5c5c);
     --line: light-dark(#e6e6e6, #3a3a3a);
     --line-control: light-dark(#8a8a8a, #707070);
     --line-strong: light-dark(#121212, #f5f5f5);
     --action: light-dark(var(--maroon), var(--yellow));
     --action-hover: light-dark(var(--maroon-deep), var(--yellow-light));
+    --action-pressed: light-dark(#2a0205, var(--yellow-deep));
     --on-action: light-dark(var(--white), var(--maroon));
     --selected: var(--tint-yellow);
     --on-selected: light-dark(var(--maroon), var(--yellow));

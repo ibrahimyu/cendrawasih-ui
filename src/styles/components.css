@@ -21,20 +21,26 @@
 
   .cx-btn--primary { background: var(--action); color: var(--on-action); }
   .cx-btn--primary:hover { background: var(--action-hover); }
+  .cx-btn--primary:active { background: var(--action-pressed); }
 
   .cx-btn--plume { background: var(--yellow); color: var(--on-yellow); }
   .cx-btn--plume:hover { background: var(--yellow-light); }
+  .cx-btn--plume:active { background: var(--yellow-deep); }
 
   .cx-btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-control); }
-  .cx-btn--secondary:hover { background: var(--surface-sunk); border-color: var(--line-strong); }
+  .cx-btn--secondary:hover { background: var(--fill-hover); border-color: var(--line-strong); }
+  .cx-btn--secondary:active { background: var(--fill-pressed); }
 
   .cx-btn--ghost { background: transparent; color: var(--ink); }
-  .cx-btn--ghost:hover { background: var(--surface-sunk); }
+  .cx-btn--ghost:hover { background: var(--fill-hover); }
+  .cx-btn--ghost:active { background: var(--fill-pressed); }
 
   .cx-btn--danger { background: var(--red-deep); color: var(--on-red); }
   .cx-btn--danger:hover { background: var(--maroon); color: var(--on-maroon); }
+  .cx-btn--danger:active { background: var(--maroon-deep); color: var(--on-maroon); }
 
-  .cx-btn:disabled, .cx-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+  /* Disabled looks the same for every variant: a sunk fill and disabled ink, never faded with opacity */
+  .cx-btn:is(:disabled, [aria-disabled="true"]) { background: var(--surface-sunk); color: var(--ink-disabled); border-color: var(--line); cursor: not-allowed; }
 
   /* Tag: labels, never buttons */
   .cx-tag {
@@ -175,7 +181,7 @@
   .cx-field__control::placeholder { color: var(--ink-soft); opacity: 1; }
   .cx-field__control:hover { border-color: var(--ink-soft); }
   .cx-field__control:focus { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; border-color: var(--ink); }
-  .cx-field__control:disabled { background: var(--surface-sunk); border-color: var(--line); cursor: not-allowed; }
+  .cx-field__control:disabled { background: var(--surface-sunk); color: var(--ink-disabled); border-color: var(--line); cursor: not-allowed; }
   .cx-field--error .cx-field__control { border-color: var(--danger); }
   .cx-field__hint { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); }
   .cx-field__error { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 700; color: var(--danger); }
@@ -213,6 +219,7 @@
     transition: background-color 160ms ease-out, color 160ms ease-out;
   }
   .cx-tab:hover { color: var(--ink); background: var(--surface-raised); }
+  .cx-tab:active { background: var(--fill-pressed); }
   .cx-tab[aria-selected="true"] { background: var(--selected); color: var(--on-selected); }
   .cx-tab:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
   .cx-tab__count {

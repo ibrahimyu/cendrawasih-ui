@@ -21,6 +21,7 @@
   --color-green-deep: var(--green-deep);
   --color-yellow: var(--yellow);
   --color-yellow-light: var(--yellow-light);
+  --color-yellow-deep: var(--yellow-deep);
   --color-orange: var(--orange);
   --color-white: var(--white);
   --color-on-maroon: var(--on-maroon);
@@ -31,13 +32,17 @@
   --color-surface: var(--surface);
   --color-surface-sunk: var(--surface-sunk);
   --color-surface-raised: var(--surface-raised);
+  --color-fill-hover: var(--fill-hover);
+  --color-fill-pressed: var(--fill-pressed);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
+  --color-ink-disabled: var(--ink-disabled);
   --color-line: var(--line);
   --color-line-control: var(--line-control);
   --color-line-strong: var(--line-strong);
   --color-action: var(--action);
   --color-action-hover: var(--action-hover);
+  --color-action-pressed: var(--action-pressed);
   --color-on-action: var(--on-action);
   --color-selected: var(--selected);
   --color-on-selected: var(--on-selected);

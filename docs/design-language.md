@@ -106,11 +106,20 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 
 Quick and physical. 160ms ease-out for color and border changes. Buttons, tabs and nav items change color on hover, never shape; linked cards lift 4px. No parallax, no looping animation, and nothing moves under `prefers-reduced-motion`.
 
-## Focus and states
+## States
 
-- Keyboard focus is a 3px solid ring in `focus` with a 2px gap: green-deep on Day, yellow on Night, yellow on the Night band and white on Sunrise and Forest bands.
-- Hover darkens fills (`action-hover`) or draws a stronger border (`line-strong`). Disabled is 45% opacity and no pointer.
-- Errors put the message under the field, in `danger`, written as an instruction.
+Every state is its own color step, named as a token. Nothing is faded with opacity: opacity is for watermarks only. A control shows one state at a time, in this order of precedence: disabled, pressed, selected, hover, rest. Focus is drawn on top of any of them.
+
+| State | What it means | How it looks |
+| --- | --- | --- |
+| Rest | Can be used | The variant's own fill or outline. |
+| Hover | The pointer is on it | One step: `action-hover`, `yellow-light`, or the `fill-hover` wash behind neutral controls. Secondary buttons also draw their border in `line-strong`. Color only, never shape. |
+| Pressed | It is being pressed | One step past hover: `action-pressed`, `yellow-deep`, `fill-pressed`, `maroon-deep` for danger. Lasts as long as the press. |
+| Selected | You are here | `selected` with `on-selected` text, for the active tab and nav item. Never the `action` fill: that means "press this". |
+| Focus | The keyboard is on it | A 3px solid ring in `focus` with a 2px gap: green-deep on Day, yellow on Night, yellow on the Night band and white on Sunrise and Forest bands. Only on `:focus-visible`. |
+| Disabled | Can't be used right now | The same for every variant: `surface-sunk` fill, `line` border, `ink-disabled` text, no pointer. Prefer leaving a control enabled and explaining what's missing when it's used. |
+| Loading | Working on it | The label changes to the action in progress ("Syncing…") and the control stops taking presses (`aria-busy`). No spinner on its own; say what's happening. |
+| Error | Something needs fixing | A `danger` border on the field and the message under it, in `danger`, written as an instruction. Never color alone: the message and an icon carry it. |
 
 ## Iconography
 
@@ -142,6 +151,7 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `green-deep` | `#00733c` | `#00733c` | Green that carries text or small marks: success text, focus ring in the Day theme. 6.0:1 on white. |
 | `yellow` | `#fdc41e` | `#fdc41e` | The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1). |
 | `yellow-light` | `#ffd34d` | `#ffd34d` | Hover fill of yellow buttons; the primary hover on Night. |
+| `yellow-deep` | `#e8b010` | `#e8b010` | Pressed fill of yellow buttons; the primary pressed state on Night (7.7:1 with maroon text). |
 | `orange` | `#e8862a` | `#e8862a` | From the logo gradient. Fourth stripe of the plume bar and illustration accents; maroon text on it (5.7:1). Never white text. |
 | `white` | `#ffffff` | `#ffffff` | Paper. Logo knock-outs and text on maroon, red-deep and green-deep fills. |
 | `on-maroon` | `white` | `white` | Text on maroon and maroon-deep fills (15:1+). |
@@ -152,13 +162,17 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `surface` | `white` | `#111111` | Page background. |
 | `surface-sunk` | `#f5f5f5` | `#0a0a0a` | Wells, table stripes and quiet section backgrounds. A true grey, never tinted. |
 | `surface-raised` | `white` | `#1c1c1c` | Small lifts: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline, in both themes. |
+| `fill-hover` | `surface-sunk` | `surface-raised` | Hover wash behind neutral controls: secondary and ghost buttons, nav items, menu rows. |
+| `fill-pressed` | `#e6e6e6` | `#2b2b2b` | Pressed wash behind neutral controls, one step past fill-hover. |
 | `ink` | `#121212` | `#f5f5f5` | Primary text and icons on every surface and tint. A neutral near-black (17:1+ on Day surfaces). |
 | `ink-soft` | `#5c5c5c` | `#b0b0b0` | Secondary text: intros, hints, metadata. Neutral grey, 6.1:1+ on Day surfaces. |
+| `ink-disabled` | `#9e9e9e` | `#5c5c5c` | Text and icons of disabled controls. Deliberately below 4.5:1; never use it for anything a person must read. |
 | `line` | `#e6e6e6` | `#3a3a3a` | Decorative hairlines and the 2px outline of neutral cards and panels. Neutral grey. Never the only boundary of a control. |
 | `line-control` | `#8a8a8a` | `#707070` | Input and checkbox borders at rest. 3.1:1+ on Day surfaces. |
 | `line-strong` | `#121212` | `#f5f5f5` | Hover border on cards, secondary button border, the selected tab rule. |
 | `action` | `maroon` | `yellow` | Primary button fill. Maroon on Day, yellow on Night. |
 | `action-hover` | `maroon-deep` | `yellow-light` | Primary button fill on hover and press. |
+| `action-pressed` | `#2a0205` | `yellow-deep` | Primary button while pressed: one step past hover. |
 | `on-action` | `white` | `maroon` | Text and icons on `action` (15.2:1 Day, 9.5:1 Night). |
 | `selected` | `tint-yellow` | `tint-yellow` | Where you are: the active tab and nav item. A plume wash, never the action fill, so a selected item never reads as a button. |
 | `on-selected` | `maroon` | `yellow` | Text and icons on selected (14:1 Day, 8.7:1 Night). |
