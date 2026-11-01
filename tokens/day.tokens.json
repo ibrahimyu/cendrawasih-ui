@@ -4,7 +4,7 @@
     "$type": "color",
     "maroon-edge": {
       "$value": "{color.brand.maroon}",
-      "$description": "Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface-raised)."
+      "$description": "Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface)."
     },
     "surface": {
       "$value": "{color.brand.white}",
@@ -24,7 +24,7 @@
     },
     "surface-raised": {
       "$value": "{color.brand.white}",
-      "$description": "Cards, menus and dialogs. On Day it equals surface and is set apart by a `line` border."
+      "$description": "Small lifts: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline, in both themes."
     },
     "ink": {
       "$value": {
@@ -60,7 +60,7 @@
         ],
         "hex": "#e6e6e6"
       },
-      "$description": "Decorative hairlines and resting card borders. Neutral grey. Never the only boundary of a control."
+      "$description": "Decorative hairlines and the 2px outline of neutral cards and panels. Neutral grey. Never the only boundary of a control."
     },
     "line-control": {
       "$value": {

@@ -57,7 +57,7 @@ Never put text in `yellow` on white (1.6:1) or `red` at body size on white (4.4:
 ### Theme rules
 
 - Primary actions use `action` / `on-action`: maroon with white on Day, yellow with maroon on Night. Text on yellow is maroon (`on-yellow`), as in the brand guide.
-- Neutrals are true black and grey in both themes: `ink`, `ink-soft`, `line` and the surfaces carry no maroon tint. Maroon is an accent, never the room; a whole screen washed in it tires the eye. On Night, `surface` is a neutral near-black (#111111) and cards lift to `surface-raised` (#1c1c1c). Maroon outlines use `maroon-edge`, which lifts to a lighter maroon so it still shows.
+- Neutrals are true black and grey in both themes: `ink`, `ink-soft`, `line` and the surfaces carry no maroon tint. Maroon is an accent, never the room; a whole screen washed in it tires the eye. On Night, `surface` is a neutral near-black (#111111). Maroon outlines use `maroon-edge`, which lifts to a lighter maroon so it still shows.
 
 ### Tone pairs
 
@@ -88,6 +88,7 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 
 - Radii: `radius-pill` for buttons, tabs and nav items; `radius-feather` (three 10px corners and a 2px tip) for tags, badges and counts; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box.
 - Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
+- Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts (a hovered tab) and for menus and dialogs.
 - Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat: no ledges, no drop shadows.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones; card grids use `space-5` gaps; content max width 1200px with a `space-6` gutter (`space-4` minimum on phones).
 
@@ -146,13 +147,13 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `on-yellow` | `maroon` | `maroon` | Text on yellow fills: the plume button, yellow tags (9.5:1). |
 | `on-red` | `white` | `white` | Text on red-deep (6.2:1). On plain red, display sizes only. |
 | `on-green` | `white` | `white` | Text on green-deep (6.0:1). On plain green, display sizes only. |
-| `maroon-edge` | `maroon` | `#b8434a` | Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface-raised). |
+| `maroon-edge` | `maroon` | `#b8434a` | Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface). |
 | `surface` | `white` | `#111111` | Page background. |
 | `surface-sunk` | `#f5f5f5` | `#0a0a0a` | Wells, table stripes and quiet section backgrounds. A true grey, never tinted. |
-| `surface-raised` | `white` | `#1c1c1c` | Cards, menus and dialogs. On Day it equals surface and is set apart by a `line` border. |
+| `surface-raised` | `white` | `#1c1c1c` | Small lifts: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline, in both themes. |
 | `ink` | `#121212` | `#f5f5f5` | Primary text and icons on every surface and tint. A neutral near-black (17:1+ on Day surfaces). |
 | `ink-soft` | `#5c5c5c` | `#b0b0b0` | Secondary text: intros, hints, metadata. Neutral grey, 6.1:1+ on Day surfaces. |
-| `line` | `#e6e6e6` | `#2e2e2e` | Decorative hairlines and resting card borders. Neutral grey. Never the only boundary of a control. |
+| `line` | `#e6e6e6` | `#3a3a3a` | Decorative hairlines and the 2px outline of neutral cards and panels. Neutral grey. Never the only boundary of a control. |
 | `line-control` | `#8a8a8a` | `#707070` | Input and checkbox borders at rest. 3.1:1+ on Day surfaces. |
 | `line-strong` | `#121212` | `#f5f5f5` | Hover border on cards, secondary button border, the selected tab rule. |
 | `action` | `maroon` | `yellow` | Primary button fill. Maroon on Day, yellow on Night. |
@@ -335,7 +336,7 @@ A key number in a large outlined box: the plume color is the outline and the sma
 
 #### Anatomy
 
-- Outline: `stroke-accent` (3px) in the tone's edge color. Background stays `surface-raised`.
+- Outline: `stroke-accent` (3px) in the tone's edge color. Background stays `surface`.
 - Label: a filled `Tag` in the tone. The only filled color in the box.
 - Value: Google Sans 44px, `ink`, tabular figures. With `alert`, `danger`.
 - Meta: one line of context in `ink-soft`: the comparison, the target or the source.

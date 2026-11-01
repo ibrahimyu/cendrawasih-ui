@@ -12,7 +12,7 @@
         ],
         "hex": "#b8434a"
       },
-      "$description": "Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface-raised)."
+      "$description": "Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface)."
     },
     "surface": {
       "$value": {
@@ -48,7 +48,7 @@
         ],
         "hex": "#1c1c1c"
       },
-      "$description": "Cards, menus and dialogs, one step lighter than surface."
+      "$description": "Small lifts on Night: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline."
     },
     "ink": {
       "$value": {
@@ -78,13 +78,13 @@
       "$value": {
         "colorSpace": "srgb",
         "components": [
-          0.1804,
-          0.1804,
-          0.1804
+          0.2275,
+          0.2275,
+          0.2275
         ],
-        "hex": "#2e2e2e"
+        "hex": "#3a3a3a"
       },
-      "$description": "Decorative hairlines and resting card borders."
+      "$description": "Decorative hairlines and the 2px outline of neutral cards and panels."
     },
     "line-control": {
       "$value": {

@@ -77,7 +77,7 @@
     --surface-raised: light-dark(var(--white), #1c1c1c);
     --ink: light-dark(#121212, #f5f5f5);
     --ink-soft: light-dark(#5c5c5c, #b0b0b0);
-    --line: light-dark(#e6e6e6, #2e2e2e);
+    --line: light-dark(#e6e6e6, #3a3a3a);
     --line-control: light-dark(#8a8a8a, #707070);
     --line-strong: light-dark(#121212, #f5f5f5);
     --action: light-dark(var(--maroon), var(--yellow));

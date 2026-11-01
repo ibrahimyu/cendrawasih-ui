@@ -67,7 +67,7 @@
   /* Card: 2px line, no shadow. The plume shape is for the featured one */
   .cx-card {
     display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;
-    padding: var(--space-4); background: var(--surface-raised); color: var(--ink);
+    padding: var(--space-4); background: var(--surface); color: var(--ink);
     border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg);
     text-decoration: none;
     transition: transform 160ms ease-out, border-color 160ms ease-out;
@@ -116,7 +116,7 @@
   .cx-stat {
     position: relative; overflow: hidden; isolation: isolate; min-width: 0;
     display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3);
-    padding: var(--space-6); background: var(--surface-raised); color: var(--ink);
+    padding: var(--space-6); background: var(--surface); color: var(--ink);
     border: var(--stroke-accent) solid var(--cx-edge); border-radius: var(--radius-lg);
     container-type: inline-size;
   }
@@ -131,7 +131,7 @@
   /* Band: the logogram supergraphic. Outlined in layouts; filled for full-bleed marketing moments */
   .cx-band { position: relative; overflow: hidden; isolation: isolate; }
   .cx-band:not(.cx-band--filled) {
-    background: var(--surface-raised); color: var(--ink);
+    background: var(--surface); color: var(--ink);
     border: var(--stroke-accent) solid var(--cx-edge); border-radius: var(--radius-lg);
   }
   .cx-band__plume {

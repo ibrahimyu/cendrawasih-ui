@@ -43,7 +43,7 @@
   position: relative; overflow: hidden; isolation: isolate; margin-top: auto;
   display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;
   border-radius: var(--radius-plume) var(--radius-quill); border: var(--stroke-accent) solid var(--cx-edge);
-  background: var(--surface-raised);
+  background: var(--surface);
 }
 .db-help .cx-body-sm { color: var(--ink-soft); }
 
@@ -63,7 +63,7 @@
 .db-panel {
   flex: 1 1 320px; min-width: 0; box-sizing: border-box; padding: 24px;
   display: flex; flex-direction: column; gap: 16px;
-  border-radius: var(--radius-lg); background: var(--surface-raised); border: var(--stroke-bold) solid var(--line);
+  border-radius: var(--radius-lg); background: var(--surface); border: var(--stroke-bold) solid var(--line);
 }
 .db-panel--wide { flex: 999 1 480px; gap: 20px; }
 .db-panel__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; }
@@ -78,7 +78,7 @@
 .db-chart__line { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--line); }
 .db-chart__line span {
   position: absolute; left: 0; top: -8px; padding-right: 6px;
-  background: var(--surface-raised); color: var(--ink-soft); font-variant-numeric: tabular-nums;
+  background: var(--surface); color: var(--ink-soft); font-variant-numeric: tabular-nums;
 }
 .db-chart__bars { position: absolute; left: 44px; right: 0; top: 0; bottom: 0; display: flex; gap: 6px; }
 .db-bar { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px; }
