@@ -30,7 +30,8 @@
     "build": "npm run tokens && tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
     "build:playground": "vite build",
     "typecheck": "tsc --noEmit",
-    "icons": "node scripts/build-icons.mjs"
+    "icons": "node scripts/build-icons.mjs",
+    "ds:bundle": "node scripts/build-ds-bundle.mjs"
   },
   "peerDependencies": {
     "react": ">=19"
