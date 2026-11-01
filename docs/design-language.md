@@ -89,6 +89,7 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 - Radii: `radius-pill` for buttons, tabs and nav items; `radius-feather` (three 10px corners and a 2px tip) for tags, badges and counts; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box.
 - Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
 - Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts (a hovered tab) and for menus and dialogs.
+- Selected: the active tab and nav item take `selected` (a pale plume wash) with `on-selected` text: maroon on Day, yellow on Night. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other.
 - Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat: no ledges, no drop shadows.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones; card grids use `space-5` gaps; content max width 1200px with a `space-6` gutter (`space-4` minimum on phones).
 
@@ -159,6 +160,8 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `action` | `maroon` | `yellow` | Primary button fill. Maroon on Day, yellow on Night. |
 | `action-hover` | `maroon-deep` | `yellow-light` | Primary button fill on hover and press. |
 | `on-action` | `white` | `maroon` | Text and icons on `action` (15.2:1 Day, 9.5:1 Night). |
+| `selected` | `tint-yellow` | `tint-yellow` | Where you are: the active tab and nav item. A plume wash, never the action fill, so a selected item never reads as a button. |
+| `on-selected` | `maroon` | `yellow` | Text and icons on selected (14:1 Day, 8.7:1 Night). |
 | `link` | `red-deep` | `#ff8a7e` | Inline links on any surface (6.2:1 Day, 7:1+ Night). Underlined, always. |
 | `focus` | `green-deep` | `yellow` | Keyboard focus ring: 3px solid, 2px gap in the surface color. 6:1 on Day surfaces, 11:1+ on Night. |
 | `success` | `green-deep` | `#3ccf86` | Success text and icons on surfaces and on tint-green. |
@@ -439,7 +442,7 @@ An inline message about the state of something: a sync, a payment, a form. Icon 
 
 ### Tabs
 
-A pill track that switches between views of the same thing; the selected tab takes the `action` fill. Counts inside a tab are feather badges.
+A pill track that switches between views of the same thing; the selected tab takes the plume wash (`selected` with `on-selected` text), never the `action` fill, so it reads as "you are here" rather than as a button. Counts inside a tab are feather badges.
 
 #### You provide
 

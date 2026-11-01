@@ -98,6 +98,14 @@
       "$value": "{color.brand.white}",
       "$description": "Text and icons on `action` (15.2:1 Day, 9.5:1 Night)."
     },
+    "selected": {
+      "$value": "{color.tint-yellow}",
+      "$description": "Where you are: the active tab and nav item. A plume wash, never the action fill, so a selected item never reads as a button."
+    },
+    "on-selected": {
+      "$value": "{color.brand.maroon}",
+      "$description": "Text and icons on selected (14:1 Day, 8.7:1 Night)."
+    },
     "link": {
       "$value": "{color.brand.red-deep}",
       "$description": "Inline links on any surface (6.2:1 Day, 7:1+ Night). Underlined, always."

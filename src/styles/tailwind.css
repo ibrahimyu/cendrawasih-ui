@@ -39,6 +39,8 @@
   --color-action: var(--action);
   --color-action-hover: var(--action-hover);
   --color-on-action: var(--on-action);
+  --color-selected: var(--selected);
+  --color-on-selected: var(--on-selected);
   --color-link: var(--link);
   --color-focus: var(--focus);
   --color-success: var(--success);

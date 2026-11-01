@@ -122,6 +122,14 @@
       "$value": "{color.brand.maroon}",
       "$description": "Text and icons on `action` (15.2:1 Day, 9.5:1 Night)."
     },
+    "selected": {
+      "$value": "{color.tint-yellow}",
+      "$description": "Where you are: the active tab and nav item. A plume wash, never the action fill, so a selected item never reads as a button."
+    },
+    "on-selected": {
+      "$value": "{color.brand.yellow}",
+      "$description": "Text and icons on selected (14:1 Day, 8.7:1 Night)."
+    },
     "link": {
       "$value": {
         "colorSpace": "srgb",

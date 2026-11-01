@@ -31,7 +31,7 @@
   transition: background-color 160ms ease-out, color 160ms ease-out;
 }
 .db-nav a:hover { background: var(--surface-sunk); color: var(--ink); }
-.db-nav a[aria-current="page"] { background: var(--action); color: var(--on-action); }
+.db-nav a[aria-current="page"] { background: var(--selected); color: var(--on-selected); }
 .db-nav a:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
 .db-badge {
   margin-left: auto; min-width: 24px; padding: 2px 8px; box-sizing: border-box; border-radius: var(--radius-feather);

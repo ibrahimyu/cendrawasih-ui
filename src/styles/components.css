@@ -199,7 +199,7 @@
   .cx-notice__body { font-family: var(--font-text); font-size: 15px; line-height: 1.55; font-weight: 500; }
   .cx-notice__action { align-self: center; }
 
-  /* Tabs: a pill track; the selected tab takes the action fill. Counts are feather badges */
+  /* Tabs: a pill track; the selected tab takes the plume wash (selected), never the action fill. Counts are feather badges */
   .cx-tabs {
     display: inline-flex; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
     padding: var(--space-1); background: var(--surface-sunk);
@@ -213,13 +213,13 @@
     transition: background-color 160ms ease-out, color 160ms ease-out;
   }
   .cx-tab:hover { color: var(--ink); background: var(--surface-raised); }
-  .cx-tab[aria-selected="true"] { background: var(--action); color: var(--on-action); }
+  .cx-tab[aria-selected="true"] { background: var(--selected); color: var(--on-selected); }
   .cx-tab:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
   .cx-tab__count {
     min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-feather);
     background: var(--surface); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
   }
-  .cx-tab[aria-selected="true"] .cx-tab__count { background: var(--on-action); color: var(--action); }
+  .cx-tab[aria-selected="true"] .cx-tab__count { background: var(--on-selected); color: var(--selected); }
 
   @media (prefers-reduced-motion: reduce) {
     .cx-btn, .cx-card, .cx-tab, .cx-field__control { transition: none; }

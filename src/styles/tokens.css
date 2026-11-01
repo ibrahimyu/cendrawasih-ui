@@ -83,6 +83,8 @@
     --action: light-dark(var(--maroon), var(--yellow));
     --action-hover: light-dark(var(--maroon-deep), var(--yellow-light));
     --on-action: light-dark(var(--white), var(--maroon));
+    --selected: var(--tint-yellow);
+    --on-selected: light-dark(var(--maroon), var(--yellow));
     --link: light-dark(var(--red-deep), #ff8a7e);
     --focus: light-dark(var(--green-deep), var(--yellow));
     --success: light-dark(var(--green-deep), #3ccf86);
