@@ -10,3 +10,21 @@
 .gl-icon { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; width: 72px; font: 500 12px/1.4 var(--font-text); color: var(--ink-soft); }
 .gl-icon .cx-icon { color: var(--ink); }
 .gl-logos { gap: 24px; }
+.gl-note { color: var(--ink-soft); margin-top: -8px !important; }
+.gl-states { display: flex; flex-direction: column; gap: 12px; }
+.gl-state-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.gl-state-row .cx-label { width: 96px; }
+.gl-swatch { display: inline-flex; align-items: center; min-height: 40px; padding: 0 20px; border-radius: var(--radius-pill); font: 600 14px/1 var(--font-display); }
+.gl-motion { display: flex; align-items: center; gap: 16px; }
+.gl-motion code { width: 120px; color: var(--ink-soft); }
+.gl-motion__track { position: relative; flex: 1; max-width: 360px; height: 24px; border-radius: var(--radius-pill); background: var(--surface-sunk); }
+.gl-motion__dot { position: absolute; left: 4px; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--action); transition: transform var(--gl-d) var(--ease-out); }
+.gl-motion:hover .gl-motion__dot { transform: translateX(320px); }
+.gl-cols { margin-bottom: 8px; }
+.gl-cols > span { display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 0 8px; border-radius: var(--radius-quill); background: var(--tint-yellow); color: var(--ink); font: 600 12px/1.3 var(--font-display); text-align: center; }
+.gl-series { display: inline-flex; align-items: center; gap: 8px; font: 500 14px/1.5 var(--font-text); }
+.gl-series i { width: 14px; height: 14px; border-radius: var(--radius-nib); }
+.gl-bars { display: flex; align-items: flex-end; gap: 12px; height: 180px; }
+.gl-bar { display: flex; flex-direction: column-reverse; gap: 2px; width: 48px; }
+.gl-bar i { display: block; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce) { .gl-motion__dot { transition: none; } }

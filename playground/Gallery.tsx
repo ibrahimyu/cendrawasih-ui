@@ -5,6 +5,15 @@ import './gallery.css';
 
 const plumes: Plume[] = ['maroon', 'red', 'orange', 'yellow', 'green'];
 
+type Step = [name: string, bg: string, fg: string, border?: string];
+const stateRows: [string, Step[]][] = [
+  ['Primary', [['Rest', 'action', 'on-action'], ['Hover', 'action-hover', 'on-action'], ['Pressed', 'action-pressed', 'on-action']]],
+  ['Plume', [['Rest', 'yellow', 'on-yellow'], ['Hover', 'yellow-light', 'on-yellow'], ['Pressed', 'yellow-deep', 'on-yellow']]],
+  ['Secondary', [['Rest', 'surface', 'ink', 'line-control'], ['Hover', 'fill-hover', 'ink', 'line-strong'], ['Pressed', 'fill-pressed', 'ink', 'line-strong']]],
+  ['Selected', [['Selected', 'selected', 'on-selected']]],
+  ['Disabled', [['Disabled', 'surface-sunk', 'ink-disabled', 'line']]],
+];
+
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="gl-section">
@@ -24,6 +33,62 @@ export function Gallery() {
           <h1 className="cx-display">Cendrawasih UI</h1>
           <p className="cx-body-lg">Fill small, outline large. Black type, plume accents, one spotlight per view. Pills are pressed; feather tips only label.</p>
         </header>
+
+        <Section title="States">
+          <p className="cx-body-sm gl-note">Every state is its own color step. Nothing fades with opacity.</p>
+          <div className="gl-states">
+            {stateRows.map(([label, steps]) => (
+              <div key={label} className="gl-state-row">
+                <span className="cx-label">{label}</span>
+                {steps.map(([name, bg, fg, border]) => (
+                  <span key={name} className="gl-swatch" style={{ background: `var(--${bg})`, color: `var(--${fg})`, boxShadow: border ? `inset 0 0 0 2px var(--${border})` : undefined }}>{name}</span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Motion">
+          <p className="cx-body-sm gl-note">Hover a row to play it. Three durations, ease-out, nothing longer than 240ms.</p>
+          <div className="gl-stack">
+            {(['fast', 'base', 'slow'] as const).map((d) => (
+              <div key={d} className="gl-motion" style={{ ['--gl-d' as string]: `var(--duration-${d})` }}>
+                <code className="cx-caption">duration-{d}</code>
+                <span className="gl-motion__track"><span className="gl-motion__dot" /></span>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Layout grid">
+          <p className="cx-body-sm gl-note">12 columns at every size. Resize the window: the spans follow the tablet, laptop and wide breakpoints.</p>
+          <div className="cx-grid gl-cols">
+            {Array.from({ length: 12 }, (_, i) => <span key={i} className="cx-span-1">{i + 1}</span>)}
+          </div>
+          <div className="cx-grid gl-cols">
+            <span className="cx-span-tablet-6 cx-span-laptop-8">tablet 6 · laptop 8</span>
+            <span className="cx-span-tablet-6 cx-span-laptop-4">tablet 6 · laptop 4</span>
+          </div>
+          <div className="cx-grid gl-cols">
+            {[1, 2, 3, 4].map((i) => <span key={i} className="cx-span-6 cx-span-laptop-3">6 · laptop 3</span>)}
+          </div>
+        </Section>
+
+        <Section title="Chart colors">
+          <p className="cx-body-sm gl-note">Series in this order, never skipping. Red is kept for errors.</p>
+          <div className="gl-row">
+            {['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-other'].map((c) => (
+              <span key={c} className="gl-series"><i style={{ background: `var(--${c})` }} />{c}</span>
+            ))}
+          </div>
+          <div className="gl-bars" aria-hidden>
+            {[[40, 30, 20, 10], [30, 35, 25, 10], [45, 20, 20, 15], [25, 30, 30, 15]].map((bar, i) => (
+              <span key={i} className="gl-bar">
+                {bar.map((h, j) => <i key={j} style={{ height: h * 1.6, background: `var(--chart-${j + 1})` }} />)}
+              </span>
+            ))}
+          </div>
+        </Section>
 
         <Section title="Button">
           <div className="gl-row">
