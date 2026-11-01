@@ -104,7 +104,14 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 
 ## Motion
 
-Quick and physical. 160ms ease-out for color and border changes. Buttons, tabs and nav items change color on hover, never shape; linked cards lift 4px. No parallax, no looping animation, and nothing moves under `prefers-reduced-motion`.
+Crisp: quick, physical and never decorative. Three durations and two easings cover everything; there is no other timing.
+
+- `duration-base` (160ms) with `ease-out` for color and border changes: hover, selected, a field taking focus.
+- `duration-fast` (120ms) for press feedback, so a press always feels immediate, and for anything leaving the screen (with `ease-in`).
+- `duration-slow` (240ms) with `ease-out` for things that move or appear: a linked card lifting 4px, a menu or dialog opening. Nothing takes longer.
+- Buttons, tabs and nav items change color, never shape or size. No bounce or overshoot, no parallax, no looping animation.
+- Under `prefers-reduced-motion`, nothing moves: transitions are off and cards don't lift. Color changes still happen, instantly.
+- Motion never carries meaning on its own. If something changed, the screen says so in words.
 
 ## States
 
@@ -206,7 +213,7 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 | `cx-label` | Google Sans | 14px / 1.3 | 600 | 0 | Form labels and table headers. |
 | `cx-eyebrow` | Google Sans | 12px / 1.3 | 600 | 0.1em | Uppercase kicker above a section title. Write it in sentence case; the style sets the caps. |
 
-### Spacing, radius, shape, stroke, opacity, elevation
+### Spacing, radius, shape, stroke, opacity, motion, elevation
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -232,6 +239,11 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 | `stroke-bold` | 2px | Card, input and secondary button borders: Cendra draws with a 2px line. |
 | `stroke-focus` | 3px | Focus ring width. |
 | `opacity-watermark` | 0.3 | The oversized icon or logogram behind a large outlined box, drawn in a second plume color. |
+| `duration-fast` | 120ms | Press feedback: the pressed step of buttons, tabs and nav items. Also things leaving the screen. |
+| `duration-base` | 160ms | Color and border changes: hover, selected, focus on fields. |
+| `duration-slow` | 240ms | Things that move or appear: a linked card lifting, a menu or dialog opening. The longest anything takes. |
+| `ease-out` | cubic-bezier(0.2, 0, 0, 1) | Quick start, soft landing. For everything that changes, moves or appears. |
+| `ease-in` | cubic-bezier(0.4, 0, 1, 1) | Slow start, quick exit. Only for things leaving the screen, with duration-fast. |
 | `radius-feather` | `radius-sm radius-sm radius-sm radius-nib` | Tags, badges and counts: three round corners and one sharp tip. Never on anything clickable. |
 | `shadow-overlay` | Day and Night pair | Menus, popovers and dialogs only. Cards on the page use borders, not shadows. |
 <!-- tokens:end -->

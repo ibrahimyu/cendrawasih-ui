@@ -28,10 +28,10 @@
   display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px;
   border-radius: var(--radius-pill); color: var(--ink-soft); text-decoration: none;
   font: 600 15px/1.2 var(--font-display);
-  transition: background-color 160ms ease-out, color 160ms ease-out;
+  transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
 }
 .db-nav a:hover { background: var(--fill-hover); color: var(--ink); }
-.db-nav a:active { background: var(--fill-pressed); }
+.db-nav a:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
 .db-nav a[aria-current="page"] { background: var(--selected); color: var(--on-selected); }
 .db-nav a:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
 .db-badge {

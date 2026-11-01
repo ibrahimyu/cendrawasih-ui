@@ -12,8 +12,9 @@
     border: var(--stroke-bold) solid transparent; border-radius: var(--radius-pill);
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2; letter-spacing: 0.005em;
     text-decoration: none; white-space: nowrap; cursor: pointer;
-    transition: background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
   }
+  .cx-btn:active { transition-duration: var(--duration-fast); }
   .cx-btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: 14px; }
   .cx-btn--lg { min-height: 56px; padding: 0 var(--space-7); font-size: 17px; }
   .cx-btn__icon { display: inline-flex; }
@@ -76,7 +77,7 @@
     padding: var(--space-4); background: var(--surface); color: var(--ink);
     border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg);
     text-decoration: none;
-    transition: transform 160ms ease-out, border-color 160ms ease-out;
+    transition: transform var(--duration-slow) var(--ease-out), border-color var(--duration-base) var(--ease-out);
   }
   .cx-card--plume { border-radius: var(--radius-plume) var(--radius-quill); }
   .cx-card--toned { position: relative; overflow: hidden; isolation: isolate; border: var(--stroke-accent) solid var(--cx-edge); }
@@ -175,7 +176,7 @@
     background: var(--surface); color: var(--ink);
     border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-sm);
     font-family: var(--font-text); font-size: 16px; font-weight: 500; line-height: 1.4;
-    transition: border-color 160ms ease-out;
+    transition: border-color var(--duration-base) var(--ease-out);
   }
   textarea.cx-field__control { min-height: 120px; padding: var(--space-3) var(--space-4); resize: vertical; }
   .cx-field__control::placeholder { color: var(--ink-soft); opacity: 1; }
@@ -216,10 +217,10 @@
     min-height: 40px; padding: 0 var(--space-5); border: 0; border-radius: var(--radius-pill);
     background: transparent; color: var(--ink-soft); cursor: pointer;
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2;
-    transition: background-color 160ms ease-out, color 160ms ease-out;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
   }
   .cx-tab:hover { color: var(--ink); background: var(--surface-raised); }
-  .cx-tab:active { background: var(--fill-pressed); }
+  .cx-tab:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
   .cx-tab[aria-selected="true"] { background: var(--selected); color: var(--on-selected); }
   .cx-tab:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
   .cx-tab__count {

@@ -46,6 +46,8 @@ function value(token, type) {
     case 'color': return color(v);
     case 'dimension': return dim(v);
     case 'shadow': return `${dim(v.offsetX)} ${dim(v.offsetY)} ${dim(v.blur)} ${dim(v.spread)} ${color(v.color)}`;
+    case 'duration': return dim(v);
+    case 'cubicBezier': return `cubic-bezier(${v.join(', ')})`;
     case 'fontFamily': return v.map((f) => (/\s/.test(f) ? `"${f}"` : f)).join(', ');
     default: return String(v);
   }
@@ -127,7 +129,7 @@ ${typeStyles.map((s) => `  .cx-${s.name} { font-family: ${s.family}; font-size: 
 `;
 
 // Tailwind 4: colors are inlined as var() so they keep switching with the theme. Fonts, radii,
-// shadows and type sizes share Tailwind's namespaces, so they are declared with literal values
+// shadows, easings and type sizes share Tailwind's namespaces, so they are declared with literal values
 const colorNames = decls.map((d) => d.trim().split(':')[0]).filter((n) => {
   const p = [...leaves(brand), ...leaves(day)].find(([path]) => varName(path) === n);
   return p && p[0][0] === 'color';
@@ -152,7 +154,7 @@ ${colorNames.map((n) => `  --color-${n.slice(2)}: var(${n});`).join('\n')}
 
 @theme {
   --spacing: 4px;
-  ${[...literal('--font-'), ...literal('--radius-'), ...literal('--shadow-')].join('\n  ')}
+  ${[...literal('--font-'), ...literal('--radius-'), ...literal('--shadow-'), ...literal('--ease-')].join('\n  ')}
 ${typeStyles.map((s) => [
   `  --text-${s.name}: ${s.size};`,
   `  --text-${s.name}--line-height: ${s.lineHeight};`,
@@ -181,7 +183,7 @@ const typeRows = typeStyles.map((s) => {
   return row(code(`cx-${s.name}`), family, `${s.size} / ${s.lineHeight}`, s.weight, s.tracking, describe(t));
 });
 const scaleRows = [
-  ...['space', 'radius', 'stroke', 'opacity'].flatMap((g) => [...leaves(brand[g])].map(([p, t]) =>
+  ...['space', 'radius', 'stroke', 'opacity', 'duration', 'ease'].flatMap((g) => [...leaves(brand[g])].map(([p, t]) =>
     row(code(varName([g, ...p]).slice(2)), value(t, typeOf(brand, [g, ...p])), describe(t)))),
   ...shapes.map(([name, val, use]) => row(code(name), code(val.replace(/var\(--([a-z0-9-]+)\)/g, '$1')), use)),
   row(code('shadow-overlay'), 'Day and Night pair', describe(day.shadow.overlay)),
@@ -205,7 +207,7 @@ ${row('Class', 'Family', 'Size / line height', 'Weight', 'Tracking', 'Use')}
 ${row('---', '---', '---', '---', '---', '---')}
 ${typeRows.join('\n')}
 
-### Spacing, radius, shape, stroke, opacity, elevation
+### Spacing, radius, shape, stroke, opacity, motion, elevation
 
 ${row('Token', 'Value', 'Use')}
 ${row('---', '---', '---')}

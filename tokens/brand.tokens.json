@@ -318,6 +318,51 @@
       "$description": "The oversized icon or logogram behind a large outlined box, drawn in a second plume color."
     }
   },
+  "duration": {
+    "$type": "duration",
+    "fast": {
+      "$value": {
+        "value": 120,
+        "unit": "ms"
+      },
+      "$description": "Press feedback: the pressed step of buttons, tabs and nav items. Also things leaving the screen."
+    },
+    "base": {
+      "$value": {
+        "value": 160,
+        "unit": "ms"
+      },
+      "$description": "Color and border changes: hover, selected, focus on fields."
+    },
+    "slow": {
+      "$value": {
+        "value": 240,
+        "unit": "ms"
+      },
+      "$description": "Things that move or appear: a linked card lifting, a menu or dialog opening. The longest anything takes."
+    }
+  },
+  "ease": {
+    "$type": "cubicBezier",
+    "out": {
+      "$value": [
+        0.2,
+        0,
+        0,
+        1
+      ],
+      "$description": "Quick start, soft landing. For everything that changes, moves or appears."
+    },
+    "in": {
+      "$value": [
+        0.4,
+        0,
+        1,
+        1
+      ],
+      "$description": "Slow start, quick exit. Only for things leaving the screen, with duration-fast."
+    }
+  },
   "font": {
     "family": {
       "$type": "fontFamily",

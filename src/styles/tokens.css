@@ -69,6 +69,11 @@
     --stroke-bold: 2px;
     --stroke-focus: 3px;
     --opacity-watermark: 0.3;
+    --duration-fast: 120ms;
+    --duration-base: 160ms;
+    --duration-slow: 240ms;
+    --ease-out: cubic-bezier(0.2, 0, 0, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --font-display: "Google Sans", ui-sans-serif, system-ui, sans-serif;
     --font-text: Karla, ui-sans-serif, system-ui, sans-serif;
     --radius-feather: var(--radius-sm) var(--radius-sm) var(--radius-sm) var(--radius-nib);
