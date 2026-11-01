@@ -8,15 +8,15 @@
      Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
   .cx-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
-    min-height: 44px; padding: 0 var(--space-6);
+    min-height: var(--size-control); padding: 0 var(--space-6);
     border: var(--stroke-bold) solid transparent; border-radius: var(--radius-pill);
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2; letter-spacing: 0.005em;
     text-decoration: none; white-space: nowrap; cursor: pointer;
     transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
   }
   .cx-btn:active { transition-duration: var(--duration-fast); }
-  .cx-btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: 14px; }
-  .cx-btn--lg { min-height: 56px; padding: 0 var(--space-7); font-size: 17px; }
+  .cx-btn--sm { min-height: var(--size-control-sm); padding: 0 var(--space-4); font-size: 14px; }
+  .cx-btn--lg { min-height: var(--size-control-lg); padding: 0 var(--space-7); font-size: 17px; }
   .cx-btn__icon { display: inline-flex; }
   .cx-btn:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
 
@@ -172,7 +172,7 @@
   .cx-field__label { display: flex; justify-content: space-between; gap: var(--space-3); font-family: var(--font-display); font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--ink); }
   .cx-field__optional { font-family: var(--font-text); font-weight: 500; color: var(--ink-soft); }
   .cx-field__control {
-    width: 100%; min-height: 48px; padding: 0 var(--space-4); box-sizing: border-box;
+    width: 100%; min-height: var(--size-field); padding: 0 var(--space-4); box-sizing: border-box;
     background: var(--surface); color: var(--ink);
     border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-sm);
     font-family: var(--font-text); font-size: 16px; font-weight: 500; line-height: 1.4;
@@ -228,6 +228,11 @@
     background: var(--surface); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
   }
   .cx-tab[aria-selected="true"] .cx-tab__count { background: var(--on-selected); color: var(--selected); }
+
+  /* One density, but touch screens get full-size targets */
+  @media (pointer: coarse) {
+    .cx-btn--sm, .cx-tab { min-height: var(--size-touch); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .cx-btn, .cx-card, .cx-tab, .cx-field__control { transition: none; }

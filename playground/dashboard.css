@@ -25,7 +25,7 @@
 
 .db-nav { display: flex; flex-direction: column; gap: 4px; }
 .db-nav a {
-  display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px;
+  display: flex; align-items: center; gap: 12px; min-height: var(--size-control); padding: 0 16px;
   border-radius: var(--radius-pill); color: var(--ink-soft); text-decoration: none;
   font: 600 15px/1.2 var(--font-display);
   transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);

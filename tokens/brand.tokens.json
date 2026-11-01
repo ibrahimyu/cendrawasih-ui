@@ -311,6 +311,52 @@
       "$description": "Edge margin from laptop and wide."
     }
   },
+  "size": {
+    "$type": "dimension",
+    "$description": "One density: every product uses these heights. There is no compact mode.",
+    "control-sm": {
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      },
+      "$description": "Small buttons, with a pointer only. Grows to size-touch on touch screens."
+    },
+    "control": {
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      },
+      "$description": "Buttons, nav items and tabs: the default height of anything you press."
+    },
+    "control-lg": {
+      "$value": {
+        "value": 56,
+        "unit": "px"
+      },
+      "$description": "Large buttons in heroes and bands."
+    },
+    "field": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "Text fields and selects."
+    },
+    "target": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Smallest hit area of anything clickable with a pointer (WCAG 2.2 target size)."
+    },
+    "touch": {
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      },
+      "$description": "Smallest hit area of anything tappable on a touch screen."
+    }
+  },
   "radius": {
     "$type": "dimension",
     "nib": {

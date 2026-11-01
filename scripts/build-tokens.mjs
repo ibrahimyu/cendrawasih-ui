@@ -209,7 +209,7 @@ const typeRows = typeStyles.map((s) => {
   return row(code(`cx-${s.name}`), family, `${s.size} / ${s.lineHeight}`, s.weight, s.tracking, describe(t));
 });
 const scaleRows = [
-  ...['space', 'breakpoint', 'layout', 'radius', 'stroke', 'opacity', 'duration', 'ease'].flatMap((g) => [...leaves(brand[g])].map(([p, t]) =>
+  ...['space', 'breakpoint', 'layout', 'size', 'radius', 'stroke', 'opacity', 'duration', 'ease'].flatMap((g) => [...leaves(brand[g])].map(([p, t]) =>
     row(code(varName([g, ...p]).slice(2)), value(t, typeOf(brand, [g, ...p])), describe(t)))),
   ...shapes.map(([name, val, use]) => row(code(name), code(val.replace(/var\(--([a-z0-9-]+)\)/g, '$1')), use)),
   row(code('shadow-overlay'), 'Day and Night pair', describe(day.shadow.overlay)),
@@ -233,7 +233,7 @@ ${row('Class', 'Family', 'Size / line height', 'Weight', 'Tracking', 'Use')}
 ${row('---', '---', '---', '---', '---', '---')}
 ${typeRows.join('\n')}
 
-### Spacing, layout, radius, shape, stroke, opacity, motion, elevation
+### Spacing, layout, size, radius, shape, stroke, opacity, motion, elevation
 
 ${row('Token', 'Value', 'Use')}
 ${row('---', '---', '---')}

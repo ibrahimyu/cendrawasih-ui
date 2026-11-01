@@ -68,6 +68,12 @@
     --layout-margin-phone: 16px;
     --layout-margin-tablet: 24px;
     --layout-margin-laptop: 32px;
+    --size-control-sm: 36px;
+    --size-control: 44px;
+    --size-control-lg: 56px;
+    --size-field: 48px;
+    --size-target: 24px;
+    --size-touch: 44px;
     --radius-nib: 2px;
     --radius-quill: 4px;
     --radius-sm: 10px;
