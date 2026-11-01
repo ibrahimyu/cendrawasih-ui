@@ -73,6 +73,9 @@
   --shadow-overlay: 0 18px 40px -12px light-dark(rgb(0 0 0 / 0.16), rgb(0 0 0 / 0.7));
   --ease-out: cubic-bezier(0.2, 0, 0, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --breakpoint-tablet: 600px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-wide: 1440px;
   --text-display-xl: 64px;
   --text-display-xl--line-height: 1.04;
   --text-display-xl--font-weight: 600;

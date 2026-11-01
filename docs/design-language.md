@@ -91,7 +91,23 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 - Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts (a hovered tab) and for menus and dialogs.
 - Selected: the active tab and nav item take `selected` (a pale plume wash) with `on-selected` text: maroon on Day, yellow on Night. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other.
 - Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat: no ledges, no drop shadows.
-- Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones; card grids use `space-5` gaps; content max width 1200px with a `space-6` gutter (`space-4` minimum on phones).
+- Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones. Page structure follows the grid under Layout.
+
+## Layout
+
+A 12-column fluid grid at every size, mobile first, with four breakpoints. Content stops at 1200px (`layout-max`) and centers; the margins take the rest.
+
+| Breakpoint | From | Gutter | Margin | Typical spans |
+| --- | --- | --- | --- | --- |
+| Phone | 0 | 16px | 16px | 12, sometimes 6 |
+| Tablet | 600px (`breakpoint-tablet`) | 20px | 24px | 6 |
+| Laptop | 1024px (`breakpoint-laptop`) | 24px | 32px | 8 + 4, 4, 3 |
+| Wide | 1440px (`breakpoint-wide`) | 24px | 32px | 3, or 8 + 4 |
+
+- Use `cx-container` for the page width and `cx-grid` for the columns. Children span all 12 until told otherwise: `cx-span-6` everywhere, `cx-span-tablet-6`, `cx-span-laptop-4`, `cx-span-wide-3` from that breakpoint up. With Tailwind, the same breakpoints are the `tablet:`, `laptop:` and `wide:` variants.
+- Below laptop, the app's side nav becomes a top bar. Below tablet, bands and heroes switch to their phone layout.
+- Inside a component, respond to the space it has (container queries), not the screen: a Stat in a narrow column shrinks its number on its own.
+- Keep reading text under about 70 characters a line (680px at body size), even on wide screens.
 
 ## Signature elements
 
@@ -200,7 +216,7 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 
 | Class | Family | Size / line height | Weight | Tracking | Use |
 | --- | --- | --- | --- | --- | --- |
-| `cx-display-xl` | Google Sans | 64px / 1.04 | 600 | -0.02em | Hero headline, one per page. Steps down to `display` under 720px. |
+| `cx-display-xl` | Google Sans | 64px / 1.04 | 600 | -0.02em | Hero headline, one per page. Steps down to `display` below tablet (600px). |
 | `cx-display` | Google Sans | 48px / 1.08 | 600 | -0.02em | Section titles on marketing pages; hero on mobile. |
 | `cx-headline` | Google Sans | 34px / 1.15 | 600 | -0.015em | Page titles inside products; section titles on mobile. |
 | `cx-title` | Google Sans | 24px / 1.25 | 600 | -0.01em | Card titles, dialog titles, settings groups. |
@@ -213,7 +229,7 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 | `cx-label` | Google Sans | 14px / 1.3 | 600 | 0 | Form labels and table headers. |
 | `cx-eyebrow` | Google Sans | 12px / 1.3 | 600 | 0.1em | Uppercase kicker above a section title. Write it in sentence case; the style sets the caps. |
 
-### Spacing, radius, shape, stroke, opacity, motion, elevation
+### Spacing, layout, radius, shape, stroke, opacity, motion, elevation
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -227,6 +243,17 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 | `space-8` | 48px | Space between groups inside a section. |
 | `space-9` | 72px | Section padding on mobile. |
 | `space-10` | 112px | Section padding on desktop: the Cendra rhythm is generous. |
+| `breakpoint-tablet` | 600px | Tablets and small laptop windows. Two-up grids start here. |
+| `breakpoint-laptop` | 1024px | Laptops. The app side nav appears; below this it is a top bar. |
+| `breakpoint-wide` | 1440px | Large screens. Content stops growing at layout-max and centers. |
+| `layout-columns` | 12 | Columns at every breakpoint. Phones span 12 or 6; wider screens use 6, 4 or 3. |
+| `layout-max` | 1200px | Widest the content gets. Margins grow beyond it. |
+| `layout-gutter-phone` | 16px | Space between columns on phones. |
+| `layout-gutter-tablet` | 20px | Space between columns from tablet. |
+| `layout-gutter-laptop` | 24px | Space between columns from laptop and wide. |
+| `layout-margin-phone` | 16px | Space between content and the screen edge on phones. |
+| `layout-margin-tablet` | 24px | Edge margin from tablet. |
+| `layout-margin-laptop` | 32px | Edge margin from laptop and wide. |
 | `radius-nib` | 2px | The sharp tip of the feather on tags, badges and counts. |
 | `radius-quill` | 4px | The sharp pair of corners in the large plume shape; table cells and code. |
 | `radius-sm` | 10px | Inputs and menu items; the round corners of the feather. |

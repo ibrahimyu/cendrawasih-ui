@@ -228,6 +228,89 @@
       "$description": "Section padding on desktop: the Cendra rhythm is generous."
     }
   },
+  "breakpoint": {
+    "$type": "dimension",
+    "$description": "Mobile first: each breakpoint is the min-width where its layout starts. Phone is everything below tablet.",
+    "tablet": {
+      "$value": {
+        "value": 600,
+        "unit": "px"
+      },
+      "$description": "Tablets and small laptop windows. Two-up grids start here."
+    },
+    "laptop": {
+      "$value": {
+        "value": 1024,
+        "unit": "px"
+      },
+      "$description": "Laptops. The app side nav appears; below this it is a top bar."
+    },
+    "wide": {
+      "$value": {
+        "value": 1440,
+        "unit": "px"
+      },
+      "$description": "Large screens. Content stops growing at layout-max and centers."
+    }
+  },
+  "layout": {
+    "$type": "dimension",
+    "$description": "The 12-column grid. Columns are fluid; gutters and margins step up at each breakpoint.",
+    "columns": {
+      "$type": "number",
+      "$value": 12,
+      "$description": "Columns at every breakpoint. Phones span 12 or 6; wider screens use 6, 4 or 3."
+    },
+    "max": {
+      "$value": {
+        "value": 1200,
+        "unit": "px"
+      },
+      "$description": "Widest the content gets. Margins grow beyond it."
+    },
+    "gutter-phone": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Space between columns on phones."
+    },
+    "gutter-tablet": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$description": "Space between columns from tablet."
+    },
+    "gutter-laptop": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Space between columns from laptop and wide."
+    },
+    "margin-phone": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Space between content and the screen edge on phones."
+    },
+    "margin-tablet": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Edge margin from tablet."
+    },
+    "margin-laptop": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Edge margin from laptop and wide."
+    }
+  },
   "radius": {
     "$type": "dimension",
     "nib": {
@@ -400,7 +483,7 @@
           "unit": "px"
         }
       },
-      "$description": "Hero headline, one per page. Steps down to `display` under 720px.",
+      "$description": "Hero headline, one per page. Steps down to `display` below tablet (600px).",
       "$extensions": {
         "co.cendra": {
           "letterSpacingEm": -0.02

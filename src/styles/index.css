@@ -1,5 +1,5 @@
 /* Cendrawasih UI: tokens, type styles and components. Everything sits in the `cendra` cascade
    layer, so your own unlayered CSS always wins. */
-@layer cendra.tokens, cendra.type, cendra.components;
+@layer cendra.tokens, cendra.type, cendra.layout, cendra.components;
 @import "./tokens.css";
 @import "./components.css";

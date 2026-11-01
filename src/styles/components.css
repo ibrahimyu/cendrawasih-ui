@@ -161,7 +161,7 @@
   .cx-band--filled .cx-btn--primary:hover { background: var(--yellow); color: var(--on-yellow); }
   .cx-band--filled .cx-btn--secondary { color: var(--white); border-color: var(--white); }
   .cx-band--filled .cx-btn--secondary:hover { background: var(--white); color: var(--maroon); }
-  @media (max-width: 720px) {
+  @media (max-width: 599px) {
     .cx-band__plume { height: 280px; top: -96px; left: auto; right: -96px; }
     .cx-band__inner { max-width: none; padding: var(--space-7) var(--space-5); }
     .cx-band--filled .cx-band__inner { padding: 176px var(--space-4) var(--space-8); }

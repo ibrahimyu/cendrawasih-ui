@@ -111,7 +111,7 @@
 .db-table td.db-strong { font-weight: 700; }
 .db-table .num { text-align: right; }
 
-@media (max-width: 760px) {
+@media (max-width: 1023px) {
   .db-side { border-right: 0; border-bottom: var(--stroke-bold) solid var(--line); }
   .db-nav { flex-direction: row; overflow-x: auto; }
   .db-nav a { flex: none; }
