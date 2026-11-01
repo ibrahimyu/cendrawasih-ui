@@ -1,4 +1,4 @@
-import { Band, Button, Icon, Notice, PlumeBar, Stat, Tabs, Tag, type Plume } from '@cendra/ui';
+import { Band, Button, Icon, Notice, PlumeBar, Stat, Tabs, Tag, type IconName, type Plume } from '@cendra/ui';
 import logoDay from '../assets/logos/cendra-main-horizontal.svg';
 import logoNight from '../assets/logos/cendra-white-horizontal.svg';
 import './dashboard.css';
@@ -30,13 +30,13 @@ const runs: { time: string; flow: string; data: string; records: string; status:
   { time: '09:15', flow: 'Accurate → Tokopedia', data: 'Stock levels', records: '1.120', status: 'Retrying', tone: 'orange', duration: '2m 10s' },
 ];
 
-const nav = [
-  { label: 'Overview', current: true, d: 'M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z' },
-  { label: 'Integrations', d: 'M9 2v6M15 2v6M6 8h12v3a6 6 0 0 1-12 0V8ZM12 17v5' },
-  { label: 'Sync runs', d: 'M20 11a8 8 0 0 0-14.9-3.5M4 4v4h4M4 13a8 8 0 0 0 14.9 3.5M20 20v-4h-4' },
-  { label: 'Field mapping', d: 'M7 4 3 8l4 4M3 8h14M17 12l4 4-4 4M21 16H7' },
-  { label: 'Alerts', badge: 12, d: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0' },
-  { label: 'Settings', d: 'M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6' },
+const nav: { label: string; icon: IconName; current?: boolean; badge?: number }[] = [
+  { label: 'Overview', icon: 'overview', current: true },
+  { label: 'Integrations', icon: 'plug' },
+  { label: 'Sync runs', icon: 'sync' },
+  { label: 'Field mapping', icon: 'mapping' },
+  { label: 'Alerts', icon: 'alerts', badge: 12 },
+  { label: 'Settings', icon: 'settings' },
 ];
 
 export function Dashboard() {
@@ -55,9 +55,7 @@ export function Dashboard() {
           <nav className="db-nav" aria-label="Main">
             {nav.map((item) => (
               <a key={item.label} href="#dashboard" aria-current={item.current ? 'page' : undefined}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d={item.d} />
-                </svg>
+                <Icon name={item.icon} />
                 {item.label}
                 {item.badge ? <span className="db-badge">{item.badge}</span> : null}
               </a>

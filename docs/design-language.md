@@ -146,7 +146,14 @@ Every state is its own color step, named as a token. Nothing is faded with opaci
 
 ## Iconography
 
-The brand has no icon set of its own yet. Until one is drawn, use 2px rounded-stroke outline icons on a 24px grid (Lucide matches: rounded caps and joins, no fills), shown at 20px in `ink` or the status color, and at 136px as a watermark. The `Icon` component carries the set used so far. This is a stand-in, not part of the brand. No emoji as icons.
+Cendra's icons are Lucide (lucide.dev, ISC license): 2px rounded strokes on a 24px grid, rounded caps and joins, no fills. They match the 2px line the rest of the system draws with. A custom set drawn from the plume curves can replace them later on the same grid, without changing a single name.
+
+- Use the `Icon` component and Cendra's names (`orders`, `payments`, `sync`), not Lucide's. A name says what the icon means here, so the drawing behind it can change.
+- Sizes: 16px inside small buttons and inline errors, 20px next to text (the default), 24px alone as an icon button, 136px as a watermark. Nothing in between.
+- Color: `ink`, `ink-soft`, or the status color of what it sits next to. Never a plume color on its own small icon, except as a watermark.
+- An icon never carries meaning alone. Next to text it is decorative; standing alone (an icon-only button) it gets a `title` or the button gets an `aria-label`.
+- Need one that isn't in the set? Add the Lucide icon to `scripts/build-icons.mjs` under a Cendra name and run `npm run icons`. Don't draw your own, change the stroke width, or fill an outline.
+- No emoji as icons.
 
 ## Imagery
 
@@ -513,9 +520,14 @@ Arrow keys, Home and End move between tabs.
 
 ### Icon
 
-The stand-in icon set: 2px rounded strokes on a 24px grid, drawn in `currentColor`.
+The Cendra icon set, drawn from Lucide: 2px rounded strokes on a 24px grid, in `currentColor`.
 
-Names: `orders`, `payments`, `clock`, `sync`, `chat`, `plug`, `package`, `chart`, `info`, `success`, `warning`, `danger`.
+Names:
+- Status: `info`, `success`, `warning`, `danger`.
+- Commerce and sync: `orders`, `payments`, `receipt`, `package`, `truck`, `store`, `building`, `sync`, `plug`, `mapping`, `chart`, `clock`, `chat`.
+- App: `overview`, `alerts`, `settings`, `user`, `mail`, `calendar`, `link`, `help`, `menu`, `logout`.
+- Actions: `search`, `add`, `close`, `check`, `edit`, `copy`, `delete`, `download`, `upload`, `filter`, `external`, `show`, `hide`.
+- Direction: `arrow-right`, `chevron-down`, `chevron-right`.
 
 #### You provide
 
