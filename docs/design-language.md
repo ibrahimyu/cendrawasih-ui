@@ -10,7 +10,7 @@ Cendrawasih UI is how every Cendra product looks and talks: cendra.co, AppGrout,
 2. **Black type, plume accents.** Text and icons are `ink`, a neutral near-black. Brand colors mark things: a label, an outline, a button, a watermark. Black reads; the plumage brands.
 3. **One plume per view.** Yellow is the spotlight. Each screen gets at most one yellow action (`Button variant="plume"`) and at most one highlighted word in a headline (`cx-highlight`).
 4. **Contrast before decoration.** Every text pair in this system is checked (see Color). When a brand color fails as text, use its `-deep` partner; never lighten the brand to make it work.
-5. **Shape says what it does.** The plume, two round corners and two sharp ones like a feather, is the shape of everything you press or that labels: buttons, inputs and tabs take the control plume (`radius-control`), tags and badges the small plume (`radius-small`). Rounded rectangles (`radius-lg`) hold content. The large plume (`radius-plume` + `radius-quill`) marks the one featured box. The feather (`radius-feather`) is only for conversation actions.
+5. **Shape says what it does.** Pills (`radius-pill`) are things you press: buttons, tabs, nav items. The feather tip (`radius-feather`: three round corners and one sharp one) is things that only label or report: tags, badges and counts, never clickable. Inputs are softly rounded (`radius-sm`). Rounded rectangles (`radius-lg`) hold content. The large plume (`radius-plume` + `radius-quill`) marks the one featured box.
 6. **Two languages, one layout.** Every product ships in English and Bahasa Indonesia. Leave about 30% slack in every label and button.
 
 ## Content fundamentals
@@ -86,9 +86,9 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 
 ## Shape and spacing
 
-- Radii: the plume family for controls. `radius-control` (16px and 4px diagonals) on buttons, inputs and the tab track; `radius-small` (10px and 2px) on tags, tab items and badges; `radius-feather` (three 16px corners and a 2px tip) on conversation actions. `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box. `radius-pill` is left for avatars and status dots.
+- Radii: `radius-pill` for buttons, tabs and nav items; `radius-feather` (three 10px corners and a 2px tip) for tags, badges and counts; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box.
 - Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
-- Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat; their shape does the talking.
+- Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat: no ledges, no drop shadows.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones; card grids use `space-5` gaps; content max width 1200px with a `space-6` gutter (`space-4` minimum on phones).
 
 ## Signature elements
@@ -96,14 +96,13 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 - **Band:** a wide outlined box with the logogram bleeding off its edge as a watermark. The hero of a dashboard or an empty state; filled, the hero of a marketing page. See the Band component.
 - **Watermark icon:** an oversized stroke icon cropped off the corner of a large box, in the paired plume color at 30%. See Stat and Card.
 - **Plume bar:** the five-color stripe in logo order. Once per screen, at the top of the shell or at a seam.
-- **Plume shape:** two rounded corners and two sharp ones, like a feather. Every control wears it at its own scale, so the shape reads as Cendra on its own. At card scale it is for one featured card or media frame per group.
-- **The flip:** on hover a plume control swaps its diagonals; on press it squares its corners. It is the system's only hover motion on controls.
-- **Feather:** three round corners and a sharp tip, the shape of a chat bubble. Only on conversation actions (*Chat on WhatsApp*, *Message buyer*, *Reply*), so the shape means something.
+- **Plume shape:** two rounded corners and two sharp ones, like a feather. One featured card or media frame per group.
+- **Feather tip:** tags, badges and counts have three round corners and one sharp tip. The tip says *this is a label, not a button*; anything you can press is a pill.
 - **Highlighted word:** one word in a headline on a small yellow fill.
 
 ## Motion
 
-Quick and physical. 160ms ease-out for color, border and corner changes. Buttons, tabs and nav items flip their corners on hover and square them on press; linked cards lift 4px. No parallax, no looping animation, and nothing moves under `prefers-reduced-motion` (the corners still change, instantly). Corner changes are a plain repaint, with no layers, blur or GPU compositing.
+Quick and physical. 160ms ease-out for color and border changes. Buttons, tabs and nav items change color on hover, never shape; linked cards lift 4px. No parallax, no looping animation, and nothing moves under `prefers-reduced-motion`.
 
 ## Focus and states
 
@@ -203,24 +202,19 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 | `space-8` | 48px | Space between groups inside a section. |
 | `space-9` | 72px | Section padding on mobile. |
 | `space-10` | 112px | Section padding on desktop: the Cendra rhythm is generous. |
-| `radius-nib` | 2px | The sharp corners of the small plume: tags, tab items and badges. |
-| `radius-quill` | 4px | The sharp corners of the control plume: buttons, inputs and the tab track. Also table cells and code. |
-| `radius-sm` | 10px | The round corners of the small plume: tags, tab items and badges (`radius-small`). |
-| `radius-md` | 16px | The round corners of the control plume: buttons, inputs and the tab track (`radius-control`). Also notices and image tiles. |
+| `radius-nib` | 2px | The sharp tip of the feather on tags, badges and counts. |
+| `radius-quill` | 4px | The sharp pair of corners in the large plume shape; table cells and code. |
+| `radius-sm` | 10px | Inputs and menu items; the round corners of the feather. |
+| `radius-md` | 16px | Image tiles inside cards, notices, menus. |
 | `radius-lg` | 24px | Cards and dialogs. |
 | `radius-plume` | 40px | The rounded pair of corners in the plume shape: `border-radius: var(--radius-plume) var(--radius-quill)`. Featured cards, hero media, the Band's inner panel. |
-| `radius-pill` | 999px | Avatars and status dots only. Things you press or that label use the plume shapes. |
+| `radius-pill` | 999px | Buttons, tabs, nav items and avatars: everything you press. |
 | `stroke-hair` | 1px | Table rules and dividers. |
 | `stroke-accent` | 3px | Colored outlines on large boxes: stat tiles, toned cards, the outlined Band. Thicker than `stroke-bold` so the color reads. |
 | `stroke-bold` | 2px | Card, input and secondary button borders: Cendra draws with a 2px line. |
 | `stroke-focus` | 3px | Focus ring width. |
 | `opacity-watermark` | 0.3 | The oversized icon or logogram behind a large outlined box, drawn in a second plume color. |
-| `radius-control` | `radius-md radius-quill` | Buttons, inputs and the tab track: two round corners, two sharp. |
-| `radius-control-flip` | `radius-quill radius-md` | The control plume on hover: the diagonals swap. |
-| `radius-small` | `radius-sm radius-nib` | Tags, tab items and badges. |
-| `radius-small-flip` | `radius-nib radius-sm` | The small plume on hover. |
-| `radius-feather` | `radius-md radius-md radius-md radius-nib` | Conversation actions only (chat, message, reply): three round corners and one sharp tip. |
-| `radius-feather-flip` | `radius-md radius-md radius-nib radius-md` | The feather on hover: the tip moves to the other side. |
+| `radius-feather` | `radius-sm radius-sm radius-sm radius-nib` | Tags, badges and counts: three round corners and one sharp tip. Never on anything clickable. |
 | `shadow-overlay` | Day and Night pair | Menus, popovers and dialogs only. Cards on the page use borders, not shadows. |
 <!-- tokens:end -->
 
@@ -230,25 +224,22 @@ Reference implementations are the React components in `src/components/`. Each co
 
 ### Button
 
-A plume-shaped control; five variants that rank actions by how loudly they ask. Hover flips the corners (`radius-control-flip`), press squares them (`radius-quill`).
+A flat pill you press; five variants that rank actions by how loudly they ask. Hover changes the fill, never the shape.
 
 #### Variants
 
 - `plume`: flat yellow, `yellow-light` on hover. The one action the screen exists for: *Book a call*, *Start pilot*, *Publish*. **One per view**, and only where the yellow has room to glow.
 - `primary` (default): `action` fill. Maroon on Day, yellow on Night. The main action in product screens and forms.
-- `secondary`: 2px `line-strong` outline that fills with ink on hover. The alternative path next to a primary.
+- `secondary`: a 2px grey `line-control` outline that turns `line-strong` over a `surface-sunk` wash on hover. The alternative path next to a primary.
 - `ghost`: text only. Cancel, Back, low-stakes toggles in toolbars.
 - `danger`: `red-deep` fill. Destructive actions, always worded as the thing that happens (*Delete integration*, not *OK*).
 
 Sizes: `sm` 36px (tables, toolbars), `md` 44px (default; the minimum touch target), `lg` 56px (hero and Band CTAs).
 
-Shapes: `plume` (default) and `feather`. The feather has three round corners and a sharp tip, like a chat bubble, and its tip moves to the other side on hover. Use it only for conversation actions: *Chat on WhatsApp*, *Message buyer*, *Reply*.
-
 #### You provide
 
 - `children`: the label, in sentence case, a verb first. Leave about 30% slack for Bahasa Indonesia (*Book a call* becomes *Jadwalkan panggilan*).
 - `href` to render a link that looks like a button, otherwise it is a `<button type="button">`.
-- `shape="feather"` for a conversation action.
 - `iconStart` / `iconEnd`: an optional 20px icon node.
 - Any native button or anchor attribute (`onClick`, `disabled`, `type="submit"`, `target`).
 
@@ -256,14 +247,14 @@ Shapes: `plume` (default) and `feather`. The feather has three round corners and
 
 - Do pair one primary with one secondary. Order: primary first (left), then secondary.
 - Do put a plume button on maroon, white or the Night surface.
-- Don't use the feather for anything but talking to someone: on *Save* or *Export* it reads as a message.
+- Don't give a button any shape but the pill: a sharp corner marks a label, not an action.
 - Don't place two plume buttons on one screen, or a plume next to a primary: the yellow already is the primary.
 - Don't use the yellow plume on a yellow or orange ground.
 - Inside a `Band`, `primary` turns white and `secondary` draws in white automatically.
 
 ### Tag
 
-A short label in the small plume shape (`radius-small`) for a category or a state; one or two words, never clickable.
+A short label with the feather tip (`radius-feather`: three round corners, one sharp) for a category or a state; one or two words, never clickable. The sharp tip is what tells it apart from a button.
 
 #### Tones
 
@@ -409,7 +400,7 @@ A labeled text input or textarea with an optional hint and an inline error.
 
 #### Anatomy
 
-Label (`label` style, ink) above a 48px control with a 2px `line-control` border and the control plume (`radius-control`). Fields don't flip on hover; only things you press do. Hint below in `ink-soft`. On error the border turns `danger` and a bold message with an icon appears above the hint.
+Label (`label` style, ink) above a 48px control with a 2px `line-control` border and `radius-sm` corners. Hint below in `ink-soft`. On error the border turns `danger` and a bold message with an icon appears above the hint.
 
 #### You provide
 
@@ -447,7 +438,7 @@ An inline message about the state of something: a sync, a payment, a form. Icon 
 
 ### Tabs
 
-A plume track that switches between views of the same thing; the selected tab takes the `action` fill. Each tab is a small plume that flips on hover, like a button.
+A pill track that switches between views of the same thing; the selected tab takes the `action` fill. Counts inside a tab are feather badges.
 
 #### You provide
 

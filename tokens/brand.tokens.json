@@ -223,28 +223,28 @@
         "value": 2,
         "unit": "px"
       },
-      "$description": "The sharp corners of the small plume: tags, tab items and badges."
+      "$description": "The sharp tip of the feather on tags, badges and counts."
     },
     "quill": {
       "$value": {
         "value": 4,
         "unit": "px"
       },
-      "$description": "The sharp corners of the control plume: buttons, inputs and the tab track. Also table cells and code."
+      "$description": "The sharp pair of corners in the large plume shape; table cells and code."
     },
     "sm": {
       "$value": {
         "value": 10,
         "unit": "px"
       },
-      "$description": "The round corners of the small plume: tags, tab items and badges (`radius-small`)."
+      "$description": "Inputs and menu items; the round corners of the feather."
     },
     "md": {
       "$value": {
         "value": 16,
         "unit": "px"
       },
-      "$description": "The round corners of the control plume: buttons, inputs and the tab track (`radius-control`). Also notices and image tiles."
+      "$description": "Image tiles inside cards, notices, menus."
     },
     "lg": {
       "$value": {
@@ -265,7 +265,7 @@
         "value": 999,
         "unit": "px"
       },
-      "$description": "Avatars and status dots only. Things you press or that label use the plume shapes."
+      "$description": "Buttons, tabs, nav items and avatars: everything you press."
     }
   },
   "stroke": {

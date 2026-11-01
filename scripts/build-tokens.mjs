@@ -67,15 +67,10 @@ for (const [path, token] of leaves(brand)) {
   decls.push(`  ${varName(path)}: ${value(token, typeOf(brand, path))};`);
 }
 
-// The plume family: composite corner shapes built from the radius tokens. Each has a flipped
-// partner (the diagonals swap) that controls take on hover
+// Composite corner shapes built from the radius tokens. The feather tip marks things that only
+// label (tags, badges, counts); anything you press is a pill
 const shapes = [
-  ['radius-control', 'var(--radius-md) var(--radius-quill)', 'Buttons, inputs and the tab track: two round corners, two sharp.'],
-  ['radius-control-flip', 'var(--radius-quill) var(--radius-md)', 'The control plume on hover: the diagonals swap.'],
-  ['radius-small', 'var(--radius-sm) var(--radius-nib)', 'Tags, tab items and badges.'],
-  ['radius-small-flip', 'var(--radius-nib) var(--radius-sm)', 'The small plume on hover.'],
-  ['radius-feather', 'var(--radius-md) var(--radius-md) var(--radius-md) var(--radius-nib)', 'Conversation actions only (chat, message, reply): three round corners and one sharp tip.'],
-  ['radius-feather-flip', 'var(--radius-md) var(--radius-md) var(--radius-nib) var(--radius-md)', 'The feather on hover: the tip moves to the other side.'],
+  ['radius-feather', 'var(--radius-sm) var(--radius-sm) var(--radius-sm) var(--radius-nib)', 'Tags, badges and counts: three round corners and one sharp tip. Never on anything clickable.'],
 ];
 for (const [name, val] of shapes) decls.push(`  --${name}: ${val};`);
 

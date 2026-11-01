@@ -22,7 +22,7 @@ export function Gallery() {
         <header className="gl-head">
           <span className="cx-eyebrow">Design language</span>
           <h1 className="cx-display">Cendrawasih UI</h1>
-          <p className="cx-body-lg">Fill small, outline large. Black type, plume accents, one spotlight per view. Hover a button to see it flip.</p>
+          <p className="cx-body-lg">Fill small, outline large. Black type, plume accents, one spotlight per view. Pills are pressed; feather tips only label.</p>
         </header>
 
         <Section title="Button">
@@ -33,10 +33,6 @@ export function Gallery() {
             <Button variant="ghost">Cancel</Button>
             <Button variant="danger">Disconnect Xendit</Button>
             <Button disabled>Retry sync</Button>
-          </div>
-          <div className="gl-row">
-            <Button variant="secondary" shape="feather" iconStart={<Icon name="chat" size={18} />}>Chat on WhatsApp</Button>
-            <Button shape="feather">Message buyer</Button>
           </div>
           <div className="gl-row">
             <Button size="sm" variant="secondary">Small</Button>

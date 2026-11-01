@@ -4,15 +4,15 @@
   .cx-logogram { display: inline-block; flex: none; }
   .cx-icon { display: block; flex: none; }
 
-  /* Button: the control plume, two round corners and two sharp. Hover flips the diagonals, press
-     squares the corners. Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
+  /* Button: a flat pill you press. Anything you can press is a pill; labels take the feather tip.
+     Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
   .cx-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
     min-height: 44px; padding: 0 var(--space-6);
-    border: var(--stroke-bold) solid transparent; border-radius: var(--radius-control);
+    border: var(--stroke-bold) solid transparent; border-radius: var(--radius-pill);
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2; letter-spacing: 0.005em;
     text-decoration: none; white-space: nowrap; cursor: pointer;
-    transition: border-radius 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
+    transition: background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
   }
   .cx-btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: 14px; }
   .cx-btn--lg { min-height: 56px; padding: 0 var(--space-7); font-size: 17px; }
@@ -25,8 +25,8 @@
   .cx-btn--plume { background: var(--yellow); color: var(--on-yellow); }
   .cx-btn--plume:hover { background: var(--yellow-light); }
 
-  .cx-btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
-  .cx-btn--secondary:hover { background: var(--ink); color: var(--surface); }
+  .cx-btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-control); }
+  .cx-btn--secondary:hover { background: var(--surface-sunk); border-color: var(--line-strong); }
 
   .cx-btn--ghost { background: transparent; color: var(--ink); }
   .cx-btn--ghost:hover { background: var(--surface-sunk); }
@@ -36,16 +36,10 @@
 
   .cx-btn:disabled, .cx-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
 
-  /* The feather: three round corners and a sharp tip, for conversation actions only */
-  .cx-btn--feather { border-radius: var(--radius-feather); }
-  .cx-btn:not(:disabled, [aria-disabled="true"]):hover { border-radius: var(--radius-control-flip); }
-  .cx-btn--feather:not(:disabled, [aria-disabled="true"]):hover { border-radius: var(--radius-feather-flip); }
-  .cx-btn:not(:disabled, [aria-disabled="true"]):active { border-radius: var(--radius-quill); }
-
   /* Tag: labels, never buttons */
   .cx-tag {
     display: inline-flex; align-items: center; gap: var(--space-1);
-    min-height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-small);
+    min-height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-feather);
     font-family: var(--font-display); font-size: 13px; font-weight: 600; line-height: 1.2; white-space: nowrap;
   }
   .cx-tag--maroon { background: var(--maroon); color: var(--on-maroon); }
@@ -173,7 +167,7 @@
   .cx-field__control {
     width: 100%; min-height: 48px; padding: 0 var(--space-4); box-sizing: border-box;
     background: var(--surface); color: var(--ink);
-    border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-control);
+    border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-sm);
     font-family: var(--font-text); font-size: 16px; font-weight: 500; line-height: 1.4;
     transition: border-color 160ms ease-out;
   }
@@ -205,25 +199,24 @@
   .cx-notice__body { font-family: var(--font-text); font-size: 15px; line-height: 1.55; font-weight: 500; }
   .cx-notice__action { align-self: center; }
 
-  /* Tabs: a plume track; the selected tab takes the action fill. Tabs flip like buttons on hover */
+  /* Tabs: a pill track; the selected tab takes the action fill. Counts are feather badges */
   .cx-tabs {
     display: inline-flex; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
     padding: var(--space-1); background: var(--surface-sunk);
-    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-control);
+    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-pill);
   }
   .cx-tab {
-    --tab-round: calc(var(--radius-md) - var(--space-1));
     display: inline-flex; align-items: center; gap: var(--space-2); flex: none;
-    min-height: 40px; padding: 0 var(--space-5); border: 0; border-radius: var(--tab-round) var(--radius-nib);
+    min-height: 40px; padding: 0 var(--space-5); border: 0; border-radius: var(--radius-pill);
     background: transparent; color: var(--ink-soft); cursor: pointer;
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2;
-    transition: border-radius 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out;
+    transition: background-color 160ms ease-out, color 160ms ease-out;
   }
-  .cx-tab:hover { color: var(--ink); background: var(--surface-raised); border-radius: var(--radius-nib) var(--tab-round); }
+  .cx-tab:hover { color: var(--ink); background: var(--surface-raised); }
   .cx-tab[aria-selected="true"] { background: var(--action); color: var(--on-action); }
   .cx-tab:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
   .cx-tab__count {
-    min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-small);
+    min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-feather);
     background: var(--surface); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
   }
   .cx-tab[aria-selected="true"] .cx-tab__count { background: var(--on-action); color: var(--action); }
