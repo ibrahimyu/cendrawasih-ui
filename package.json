@@ -1,0 +1,49 @@
+{
+  "name": "@cendra/ui",
+  "version": "0.1.0",
+  "description": "Cendrawasih UI: the Cendra design language as tokens, CSS and React components.",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles/index.css",
+    "./tokens.css": "./dist/styles/tokens.css",
+    "./tailwind.css": "./dist/styles/tailwind.css",
+    "./tokens/*": "./tokens/*",
+    "./logos/*": "./assets/logos/*",
+    "./illustrations/*": "./assets/illustrations/*"
+  },
+  "files": [
+    "dist",
+    "tokens",
+    "assets"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "tokens": "node scripts/build-tokens.mjs",
+    "build": "npm run tokens && tsc -p tsconfig.build.json && node scripts/copy-styles.mjs",
+    "build:playground": "vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

@@ -1,0 +1,229 @@
+/* Cendrawasih UI components. Every value comes from tokens.css; class prefix cx- */
+
+@layer cendra.components {
+  .cx-logogram { display: inline-block; flex: none; }
+  .cx-icon { display: block; flex: none; }
+
+  /* Button: pills you press. Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
+  .cx-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+    min-height: 44px; padding: 0 var(--space-6);
+    border: var(--stroke-bold) solid transparent; border-radius: var(--radius-pill);
+    font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2; letter-spacing: 0.005em;
+    text-decoration: none; white-space: nowrap; cursor: pointer;
+    transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
+  }
+  .cx-btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: 14px; }
+  .cx-btn--lg { min-height: 56px; padding: 0 var(--space-7); font-size: 17px; }
+  .cx-btn__icon { display: inline-flex; }
+  .cx-btn:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+
+  .cx-btn--primary { background: var(--action); color: var(--on-action); }
+  .cx-btn--primary:hover { background: var(--action-hover); }
+
+  .cx-btn--plume { background: var(--yellow); color: var(--on-yellow); box-shadow: var(--shadow-perch); }
+  .cx-btn--plume:hover { transform: translateY(-2px); }
+  .cx-btn--plume:active { transform: translateY(4px); box-shadow: none; }
+
+  .cx-btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .cx-btn--secondary:hover { background: var(--ink); color: var(--surface); }
+
+  .cx-btn--ghost { background: transparent; color: var(--ink); }
+  .cx-btn--ghost:hover { background: var(--surface-sunk); }
+
+  .cx-btn--danger { background: var(--red-deep); color: var(--on-red); }
+  .cx-btn--danger:hover { background: var(--maroon); color: var(--on-maroon); }
+
+  .cx-btn:disabled, .cx-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* Tag: labels, never buttons */
+  .cx-tag {
+    display: inline-flex; align-items: center; gap: var(--space-1);
+    min-height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-pill);
+    font-family: var(--font-display); font-size: 13px; font-weight: 600; line-height: 1.2; white-space: nowrap;
+  }
+  .cx-tag--maroon { background: var(--maroon); color: var(--on-maroon); }
+  .cx-tag--red { background: var(--red-deep); color: var(--on-red); }
+  .cx-tag--green { background: var(--green-deep); color: var(--on-green); }
+  .cx-tag--yellow { background: var(--yellow); color: var(--on-yellow); }
+  .cx-tag--orange { background: var(--orange); color: var(--on-yellow); }
+  .cx-tag--neutral { background: var(--surface-sunk); color: var(--ink); box-shadow: inset 0 0 0 var(--stroke-bold) var(--line); }
+  .cx-tag--soft.cx-tag--maroon { background: var(--surface-sunk); color: var(--ink); }
+  .cx-tag--soft.cx-tag--red { background: var(--tint-red); color: var(--danger); }
+  .cx-tag--soft.cx-tag--green { background: var(--tint-green); color: var(--success); }
+  .cx-tag--soft.cx-tag--yellow { background: var(--tint-yellow); color: var(--ink); }
+  .cx-tag--soft.cx-tag--orange { background: var(--tint-orange); color: var(--ink); }
+
+  /* Plume bar: the five feathers, in logo order */
+  .cx-plumebar { display: flex; height: 8px; width: 100%; }
+  .cx-plumebar--thin { height: 6px; }
+  .cx-plumebar > span { flex: 1; }
+  .cx-plumebar__maroon { background: var(--maroon); }
+  .cx-plumebar__red { background: var(--red); }
+  .cx-plumebar__orange { background: var(--orange); }
+  .cx-plumebar__yellow { background: var(--yellow); }
+  .cx-plumebar__green { background: var(--green); }
+
+  /* Card: 2px line, no shadow. The plume shape is for the featured one */
+  .cx-card {
+    display: flex; flex-direction: column; gap: var(--space-3); min-width: 0;
+    padding: var(--space-4); background: var(--surface-raised); color: var(--ink);
+    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: transform 160ms ease-out, border-color 160ms ease-out;
+  }
+  .cx-card--plume { border-radius: var(--radius-plume) var(--radius-quill); }
+  .cx-card--toned { position: relative; overflow: hidden; isolation: isolate; border: var(--stroke-accent) solid var(--cx-edge); }
+  a.cx-card--toned:hover { border-color: var(--cx-edge); }
+  a.cx-card:hover { border-color: var(--line-strong); transform: translateY(-4px); }
+  a.cx-card:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-card__media {
+    display: flex; align-items: center; justify-content: center; min-height: 176px;
+    padding: var(--space-5); border-radius: var(--radius-md); overflow: hidden;
+  }
+  .cx-card--plume .cx-card__media { border-radius: calc(var(--radius-plume) - var(--space-2)) var(--radius-quill); }
+  .cx-card__media img { display: block; max-width: 100%; max-height: 144px; object-fit: contain; }
+  .cx-card__media--maroon { background: var(--maroon); color: var(--on-maroon); }
+  .cx-card__media--red { background: var(--red); color: var(--on-red); }
+  .cx-card__media--green { background: var(--green); color: var(--on-green); }
+  .cx-card__media--yellow { background: var(--yellow); color: var(--on-yellow); }
+  .cx-card__media--orange { background: var(--orange); color: var(--on-yellow); }
+  .cx-card__eyebrow, .cx-card__title, .cx-card__body, .cx-card__footer { padding: 0 var(--space-1); }
+  .cx-card__eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+  .cx-card__title { font-family: var(--font-display); font-size: 22px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
+  .cx-card__body { font-family: var(--font-text); font-size: 16px; line-height: 1.6; font-weight: 500; color: var(--ink-soft); }
+  .cx-card__footer { display: flex; flex-wrap: wrap; gap: var(--space-3); padding-bottom: var(--space-1); }
+
+  /* Fill small, outline large. A tone gives a large box its outline (--cx-edge) and the second
+     plume color for its watermark (--cx-mark) */
+  .cx-tone--maroon { --cx-edge: var(--maroon-edge); --cx-mark: var(--red); }
+  .cx-tone--red { --cx-edge: var(--red); --cx-mark: var(--orange); }
+  .cx-tone--orange { --cx-edge: var(--orange); --cx-mark: var(--maroon-edge); }
+  .cx-tone--yellow { --cx-edge: var(--yellow); --cx-mark: var(--green); }
+  .cx-tone--green { --cx-edge: var(--green); --cx-mark: var(--yellow); }
+  .cx-watermark {
+    position: absolute; z-index: -1; pointer-events: none;
+    right: -20px; bottom: -24px; width: 136px; height: 136px;
+    color: var(--cx-mark); opacity: var(--opacity-watermark);
+  }
+  .cx-highlight {
+    padding: 0 0.18em; border-radius: var(--radius-quill);
+    background: var(--yellow); color: var(--on-yellow);
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
+
+  /* Stat: a key number in a large outlined box */
+  .cx-stat {
+    position: relative; overflow: hidden; isolation: isolate; min-width: 0;
+    display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3);
+    padding: var(--space-6); background: var(--surface-raised); color: var(--ink);
+    border: var(--stroke-accent) solid var(--cx-edge); border-radius: var(--radius-lg);
+    container-type: inline-size;
+  }
+  .cx-stat--plume { border-radius: var(--radius-plume) var(--radius-quill); }
+  .cx-stat__value {
+    font-family: var(--font-display); font-size: clamp(28px, 16cqi, 44px); line-height: 1; font-weight: 600; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .cx-stat__value--alert { color: var(--danger); }
+  .cx-stat__meta { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); }
+
+  /* Band: the logogram supergraphic. Outlined in layouts; filled for full-bleed marketing moments */
+  .cx-band { position: relative; overflow: hidden; isolation: isolate; }
+  .cx-band:not(.cx-band--filled) {
+    background: var(--surface-raised); color: var(--ink);
+    border: var(--stroke-accent) solid var(--cx-edge); border-radius: var(--radius-lg);
+  }
+  .cx-band__plume {
+    position: absolute; z-index: -1; pointer-events: none;
+    height: 150%; width: auto; aspect-ratio: 1; top: -22%; left: 54%;
+  }
+  .cx-band:not(.cx-band--filled) .cx-band__plume { color: var(--cx-mark); opacity: var(--opacity-watermark); }
+  .cx-band__inner {
+    position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5);
+    max-width: min(600px, 50%); padding: var(--space-8) var(--space-7);
+  }
+  .cx-band--filled { color: var(--on-maroon); }
+  .cx-band--filled .cx-band__inner { padding: var(--space-9) var(--space-6); }
+  .cx-band--filled.cx-band--night { background: var(--maroon); --focus: var(--yellow); }
+  .cx-band--filled.cx-band--sunrise { background: var(--red); --focus: var(--white); }
+  .cx-band--filled.cx-band--forest { background: var(--green); --focus: var(--white); }
+  .cx-band--filled.cx-band--night .cx-band__plume { color: var(--red); }
+  .cx-band--filled.cx-band--sunrise .cx-band__plume, .cx-band--filled.cx-band--forest .cx-band__plume { color: var(--yellow); }
+  .cx-band--filled .cx-btn--primary { background: var(--white); color: var(--maroon); }
+  .cx-band--filled .cx-btn--primary:hover { background: var(--yellow); color: var(--on-yellow); }
+  .cx-band--filled .cx-btn--secondary { color: var(--white); border-color: var(--white); }
+  .cx-band--filled .cx-btn--secondary:hover { background: var(--white); color: var(--maroon); }
+  .cx-band--filled.cx-band--night .cx-btn--plume { box-shadow: 0 4px 0 0 var(--maroon-deep); }
+  @media (max-width: 720px) {
+    .cx-band__plume { height: 280px; top: -96px; left: auto; right: -96px; }
+    .cx-band__inner { max-width: none; padding: var(--space-7) var(--space-5); }
+    .cx-band--filled .cx-band__inner { padding: 176px var(--space-4) var(--space-8); }
+  }
+
+  /* Text field */
+  .cx-field { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+  .cx-field__label { display: flex; justify-content: space-between; gap: var(--space-3); font-family: var(--font-display); font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+  .cx-field__optional { font-family: var(--font-text); font-weight: 500; color: var(--ink-soft); }
+  .cx-field__control {
+    width: 100%; min-height: 48px; padding: 0 var(--space-4); box-sizing: border-box;
+    background: var(--surface); color: var(--ink);
+    border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-sm);
+    font-family: var(--font-text); font-size: 16px; font-weight: 500; line-height: 1.4;
+    transition: border-color 160ms ease-out;
+  }
+  textarea.cx-field__control { min-height: 120px; padding: var(--space-3) var(--space-4); resize: vertical; }
+  .cx-field__control::placeholder { color: var(--ink-soft); opacity: 1; }
+  .cx-field__control:hover { border-color: var(--ink-soft); }
+  .cx-field__control:focus { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; border-color: var(--ink); }
+  .cx-field__control:disabled { background: var(--surface-sunk); border-color: var(--line); cursor: not-allowed; }
+  .cx-field--error .cx-field__control { border-color: var(--danger); }
+  .cx-field__hint { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); }
+  .cx-field__error { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 700; color: var(--danger); }
+  .cx-field__error .cx-icon { width: 16px; height: 16px; }
+
+  /* Notice: icon and title always carry the meaning; color only confirms it */
+  .cx-notice {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: var(--space-3);
+    padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); color: var(--ink);
+  }
+  .cx-notice--info { background: var(--surface-sunk); box-shadow: inset 0 0 0 var(--stroke-bold) var(--line); }
+  .cx-notice--success { background: var(--tint-green); }
+  .cx-notice--warning { background: var(--tint-yellow); }
+  .cx-notice--danger { background: var(--tint-red); }
+  .cx-notice__icon { padding-top: 1px; color: var(--ink); }
+  .cx-notice--success .cx-notice__icon { color: var(--success); }
+  .cx-notice--warning .cx-notice__icon { color: var(--warning); }
+  .cx-notice--danger .cx-notice__icon { color: var(--danger); }
+  .cx-notice__text { display: flex; flex-direction: column; gap: var(--space-1); }
+  .cx-notice__title { font-family: var(--font-display); font-size: 16px; line-height: 1.35; font-weight: 600; }
+  .cx-notice__body { font-family: var(--font-text); font-size: 15px; line-height: 1.55; font-weight: 500; }
+  .cx-notice__action { align-self: center; }
+
+  /* Tabs: a pill track; the selected tab takes the action fill */
+  .cx-tabs {
+    display: inline-flex; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
+    padding: var(--space-1); background: var(--surface-sunk);
+    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-pill);
+  }
+  .cx-tab {
+    display: inline-flex; align-items: center; gap: var(--space-2); flex: none;
+    min-height: 40px; padding: 0 var(--space-5); border: 0; border-radius: var(--radius-pill);
+    background: transparent; color: var(--ink-soft); cursor: pointer;
+    font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2;
+    transition: background-color 160ms ease-out, color 160ms ease-out;
+  }
+  .cx-tab:hover { color: var(--ink); background: var(--surface-raised); }
+  .cx-tab[aria-selected="true"] { background: var(--action); color: var(--on-action); }
+  .cx-tab:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-tab__count {
+    min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-pill);
+    background: var(--surface); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
+  }
+  .cx-tab[aria-selected="true"] .cx-tab__count { background: var(--on-action); color: var(--action); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cx-btn, .cx-card, .cx-tab, .cx-field__control { transition: none; }
+    .cx-btn--plume:hover, a.cx-card:hover { transform: none; }
+  }
+}

@@ -1,0 +1,567 @@
+{
+  "$description": "Cendrawasih UI base tokens: the plumage, spacing, shape and type. Theme-aware colors live in day.tokens.json and night.tokens.json.",
+  "color": {
+    "$type": "color",
+    "brand": {
+      "maroon": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3216,
+            0.0196,
+            0.0392
+          ],
+          "hex": "#52050a"
+        },
+        "$description": "The brand's dark field: heroes, the Night band, primary buttons on Day. Carries white or yellow text (`on-maroon`, `yellow`). As text on white, 15.2:1, for brand moments only; running text is `ink`."
+      },
+      "maroon-deep": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2275,
+            0.0118,
+            0.0275
+          ],
+          "hex": "#3a0307"
+        },
+        "$description": "Pressed state of maroon fills; the footer band."
+      },
+      "red": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8588,
+            0.2392,
+            0.2392
+          ],
+          "hex": "#db3d3d"
+        },
+        "$description": "The Sunrise field and big red shapes. Not a text color: 4.4:1 on white, so white text on red must be 24px+ or bold 19px+."
+      },
+      "red-deep": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7216,
+            0.1647,
+            0.1647
+          ],
+          "hex": "#b82a2a"
+        },
+        "$description": "Red that carries text or small marks: links, danger buttons, error text. 6.2:1 on white."
+      },
+      "green": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.5725,
+            0.298
+          ],
+          "hex": "#00924c"
+        },
+        "$description": "The Forest field and the crest in illustrations. White text on green must be 24px+ or bold 19px+ (4.0:1)."
+      },
+      "green-deep": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0,
+            0.451,
+            0.2353
+          ],
+          "hex": "#00733c"
+        },
+        "$description": "Green that carries text or small marks: success text, focus ring in the Day theme. 6.0:1 on white."
+      },
+      "yellow": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9922,
+            0.7686,
+            0.1176
+          ],
+          "hex": "#fdc41e"
+        },
+        "$description": "The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1)."
+      },
+      "orange": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9098,
+            0.5255,
+            0.1647
+          ],
+          "hex": "#e8862a"
+        },
+        "$description": "From the logo gradient. Fourth stripe of the plume bar and illustration accents; maroon text on it (5.7:1). Never white text."
+      },
+      "white": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "hex": "#ffffff"
+        },
+        "$description": "Paper. Logo knock-outs and text on maroon, red-deep and green-deep fills."
+      }
+    },
+    "on": {
+      "maroon": {
+        "$value": "{color.brand.white}",
+        "$description": "Text on maroon and maroon-deep fills (15:1+)."
+      },
+      "yellow": {
+        "$value": "{color.brand.maroon}",
+        "$description": "Text on yellow fills: the plume button, yellow tags (9.5:1)."
+      },
+      "red": {
+        "$value": "{color.brand.white}",
+        "$description": "Text on red-deep (6.2:1). On plain red, display sizes only."
+      },
+      "green": {
+        "$value": "{color.brand.white}",
+        "$description": "Text on green-deep (6.0:1). On plain green, display sizes only."
+      }
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "perch": {
+      "$value": {
+        "color": "{color.brand.maroon-deep}",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 4,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "The hard maroon ledge under the plume button and under a pressed-in yellow tag. Drops to 0 on press."
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "1": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "Icon-to-label gap inside tags."
+    },
+    "2": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$description": "Gap between a label and its input; icon to text in buttons."
+    },
+    "3": {
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Gap between stacked buttons and between tags."
+    },
+    "4": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Inner padding of compact cards and inputs; mobile side gutter minimum."
+    },
+    "5": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      },
+      "$description": "Gap between cards in a grid."
+    },
+    "6": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Card padding; the page gutter on desktop."
+    },
+    "7": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$description": "Space between a section title and its content."
+    },
+    "8": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      },
+      "$description": "Space between groups inside a section."
+    },
+    "9": {
+      "$value": {
+        "value": 72,
+        "unit": "px"
+      },
+      "$description": "Section padding on mobile."
+    },
+    "10": {
+      "$value": {
+        "value": 112,
+        "unit": "px"
+      },
+      "$description": "Section padding on desktop: the Cendra rhythm is generous."
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "quill": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$description": "The sharp pair of corners in the plume shape; table cells and code."
+    },
+    "sm": {
+      "$value": {
+        "value": 10,
+        "unit": "px"
+      },
+      "$description": "Inputs, textareas and menu items."
+    },
+    "md": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "Image tiles inside cards, notices, menus."
+    },
+    "lg": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      },
+      "$description": "Cards and dialogs."
+    },
+    "plume": {
+      "$value": {
+        "value": 40,
+        "unit": "px"
+      },
+      "$description": "The rounded pair of corners in the plume shape: `border-radius: var(--radius-plume) var(--radius-quill)`. Featured cards, hero media, the Band's inner panel."
+    },
+    "pill": {
+      "$value": {
+        "value": 999,
+        "unit": "px"
+      },
+      "$description": "Buttons, tags, tabs, avatars: everything you press or that labels."
+    }
+  },
+  "stroke": {
+    "$type": "dimension",
+    "hair": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      },
+      "$description": "Table rules and dividers."
+    },
+    "accent": {
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      },
+      "$description": "Colored outlines on large boxes: stat tiles, toned cards, the outlined Band. Thicker than `stroke-bold` so the color reads."
+    },
+    "bold": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "Card, input and secondary button borders: Cendra draws with a 2px line."
+    },
+    "focus": {
+      "$value": {
+        "value": 3,
+        "unit": "px"
+      },
+      "$description": "Focus ring width."
+    }
+  },
+  "opacity": {
+    "$type": "number",
+    "watermark": {
+      "$value": 0.3,
+      "$description": "The oversized icon or logogram behind a large outlined box, drawn in a second plume color."
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": [
+          "Google Sans",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ]
+      },
+      "text": {
+        "$value": [
+          "Karla",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ]
+      }
+    }
+  },
+  "typography": {
+    "$type": "typography",
+    "display-xl": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 64,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.04,
+        "letterSpacing": {
+          "value": -1.28,
+          "unit": "px"
+        }
+      },
+      "$description": "Hero headline, one per page. Steps down to `display` under 720px.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": -0.02
+        }
+      }
+    },
+    "display": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 48,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.08,
+        "letterSpacing": {
+          "value": -0.96,
+          "unit": "px"
+        }
+      },
+      "$description": "Section titles on marketing pages; hero on mobile.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": -0.02
+        }
+      }
+    },
+    "headline": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 34,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.15,
+        "letterSpacing": {
+          "value": -0.51,
+          "unit": "px"
+        }
+      },
+      "$description": "Page titles inside products; section titles on mobile.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": -0.015
+        }
+      }
+    },
+    "title": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 24,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.25,
+        "letterSpacing": {
+          "value": -0.24,
+          "unit": "px"
+        }
+      },
+      "$description": "Card titles, dialog titles, settings groups.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": -0.01
+        }
+      }
+    },
+    "subtitle": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 18,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.35,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "List item titles, table group headers, form section headings."
+    },
+    "body-lg": {
+      "$value": {
+        "fontFamily": "{font.family.text}",
+        "fontSize": {
+          "value": 19,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.6,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Intros under a headline; marketing body copy."
+    },
+    "body": {
+      "$value": {
+        "fontFamily": "{font.family.text}",
+        "fontSize": {
+          "value": 16,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.6,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Default running text in products."
+    },
+    "body-sm": {
+      "$value": {
+        "fontFamily": "{font.family.text}",
+        "fontSize": {
+          "value": 14,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.5,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Hints, table cells, metadata."
+    },
+    "caption": {
+      "$value": {
+        "fontFamily": "{font.family.text}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "fontWeight": 500,
+        "lineHeight": 1.4,
+        "letterSpacing": {
+          "value": 0.12,
+          "unit": "px"
+        }
+      },
+      "$description": "Timestamps, captions, footnotes. Never for instructions.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": 0.01
+        }
+      }
+    },
+    "button": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 15,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.2,
+        "letterSpacing": {
+          "value": 0.07,
+          "unit": "px"
+        }
+      },
+      "$description": "Buttons and tabs. Sentence case.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": 0.005
+        }
+      }
+    },
+    "label": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 14,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.3,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Form labels and table headers."
+    },
+    "eyebrow": {
+      "$value": {
+        "fontFamily": "{font.family.display}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "fontWeight": 600,
+        "lineHeight": 1.3,
+        "letterSpacing": {
+          "value": 1.2,
+          "unit": "px"
+        }
+      },
+      "$description": "Uppercase kicker above a section title. Write it in sentence case; the style sets the caps.",
+      "$extensions": {
+        "co.cendra": {
+          "letterSpacingEm": 0.1,
+          "textTransform": "uppercase"
+        }
+      }
+    }
+  }
+}

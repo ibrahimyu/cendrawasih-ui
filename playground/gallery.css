@@ -1,0 +1,12 @@
+.gl { min-height: 100vh; background: var(--surface); color: var(--ink); }
+.gl h1, .gl h2, .gl h3, .gl p { margin: 0; }
+.gl-main { max-width: 1200px; margin: 0 auto; padding: 48px 24px 112px; display: flex; flex-direction: column; gap: 56px; }
+.gl-head { display: flex; flex-direction: column; gap: 12px; }
+.gl-head .cx-eyebrow, .gl-head p { color: var(--ink-soft); }
+.gl-section { display: flex; flex-direction: column; gap: 20px; }
+.gl-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.gl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; align-items: start; }
+.gl-stack { display: flex; flex-direction: column; gap: 12px; }
+.gl-icon { display: inline-flex; flex-direction: column; align-items: center; gap: 6px; width: 72px; font: 500 12px/1.4 var(--font-text); color: var(--ink-soft); }
+.gl-icon .cx-icon { color: var(--ink); }
+.gl-logos { gap: 24px; }

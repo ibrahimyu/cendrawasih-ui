@@ -1,0 +1,18 @@
+@layer app-base {
+  body { margin: 0; background: var(--surface); color: var(--ink); font-family: var(--font-text); }
+  a { color: var(--link); }
+  a:hover { color: var(--ink); }
+}
+
+/* Playground chrome */
+.pg-bar {
+  position: fixed; z-index: 10; right: 16px; bottom: 16px;
+  display: flex; align-items: center; gap: 12px; padding: 6px 6px 6px 8px;
+  background: var(--surface-raised); border: 2px solid var(--line); border-radius: 999px;
+  box-shadow: var(--shadow-overlay); font: 600 13px/1 var(--font-display);
+}
+.pg-bar nav { display: flex; gap: 4px; }
+.pg-bar a { padding: 8px 12px; border-radius: 999px; color: var(--ink-soft); text-decoration: none; }
+.pg-bar a[aria-current="page"] { background: var(--action); color: var(--on-action); }
+.pg-bar label { display: flex; align-items: center; gap: 6px; padding-right: 6px; color: var(--ink-soft); }
+.pg-bar select { font: inherit; color: var(--ink); background: var(--surface-sunk); border: 2px solid var(--line-control); border-radius: 999px; padding: 4px 8px; }
