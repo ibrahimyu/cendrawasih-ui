@@ -4,14 +4,15 @@
   .cx-logogram { display: inline-block; flex: none; }
   .cx-icon { display: block; flex: none; }
 
-  /* Button: pills you press. Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
+  /* Button: the control plume, two round corners and two sharp. Hover flips the diagonals, press
+     squares the corners. Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
   .cx-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
     min-height: 44px; padding: 0 var(--space-6);
-    border: var(--stroke-bold) solid transparent; border-radius: var(--radius-pill);
+    border: var(--stroke-bold) solid transparent; border-radius: var(--radius-control);
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2; letter-spacing: 0.005em;
     text-decoration: none; white-space: nowrap; cursor: pointer;
-    transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
+    transition: border-radius 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out, border-color 160ms ease-out;
   }
   .cx-btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: 14px; }
   .cx-btn--lg { min-height: 56px; padding: 0 var(--space-7); font-size: 17px; }
@@ -21,9 +22,8 @@
   .cx-btn--primary { background: var(--action); color: var(--on-action); }
   .cx-btn--primary:hover { background: var(--action-hover); }
 
-  .cx-btn--plume { background: var(--yellow); color: var(--on-yellow); box-shadow: var(--shadow-perch); }
-  .cx-btn--plume:hover { transform: translateY(-2px); }
-  .cx-btn--plume:active { transform: translateY(4px); box-shadow: none; }
+  .cx-btn--plume { background: var(--yellow); color: var(--on-yellow); }
+  .cx-btn--plume:hover { background: var(--yellow-light); }
 
   .cx-btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
   .cx-btn--secondary:hover { background: var(--ink); color: var(--surface); }
@@ -34,12 +34,18 @@
   .cx-btn--danger { background: var(--red-deep); color: var(--on-red); }
   .cx-btn--danger:hover { background: var(--maroon); color: var(--on-maroon); }
 
-  .cx-btn:disabled, .cx-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+  .cx-btn:disabled, .cx-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+
+  /* The feather: three round corners and a sharp tip, for conversation actions only */
+  .cx-btn--feather { border-radius: var(--radius-feather); }
+  .cx-btn:not(:disabled, [aria-disabled="true"]):hover { border-radius: var(--radius-control-flip); }
+  .cx-btn--feather:not(:disabled, [aria-disabled="true"]):hover { border-radius: var(--radius-feather-flip); }
+  .cx-btn:not(:disabled, [aria-disabled="true"]):active { border-radius: var(--radius-quill); }
 
   /* Tag: labels, never buttons */
   .cx-tag {
     display: inline-flex; align-items: center; gap: var(--space-1);
-    min-height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-pill);
+    min-height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-small);
     font-family: var(--font-display); font-size: 13px; font-weight: 600; line-height: 1.2; white-space: nowrap;
   }
   .cx-tag--maroon { background: var(--maroon); color: var(--on-maroon); }
@@ -154,7 +160,6 @@
   .cx-band--filled .cx-btn--primary:hover { background: var(--yellow); color: var(--on-yellow); }
   .cx-band--filled .cx-btn--secondary { color: var(--white); border-color: var(--white); }
   .cx-band--filled .cx-btn--secondary:hover { background: var(--white); color: var(--maroon); }
-  .cx-band--filled.cx-band--night .cx-btn--plume { box-shadow: 0 4px 0 0 var(--maroon-deep); }
   @media (max-width: 720px) {
     .cx-band__plume { height: 280px; top: -96px; left: auto; right: -96px; }
     .cx-band__inner { max-width: none; padding: var(--space-7) var(--space-5); }
@@ -168,7 +173,7 @@
   .cx-field__control {
     width: 100%; min-height: 48px; padding: 0 var(--space-4); box-sizing: border-box;
     background: var(--surface); color: var(--ink);
-    border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-sm);
+    border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-control);
     font-family: var(--font-text); font-size: 16px; font-weight: 500; line-height: 1.4;
     transition: border-color 160ms ease-out;
   }
@@ -200,30 +205,31 @@
   .cx-notice__body { font-family: var(--font-text); font-size: 15px; line-height: 1.55; font-weight: 500; }
   .cx-notice__action { align-self: center; }
 
-  /* Tabs: a pill track; the selected tab takes the action fill */
+  /* Tabs: a plume track; the selected tab takes the action fill. Tabs flip like buttons on hover */
   .cx-tabs {
     display: inline-flex; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
     padding: var(--space-1); background: var(--surface-sunk);
-    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-pill);
+    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-control);
   }
   .cx-tab {
+    --tab-round: calc(var(--radius-md) - var(--space-1));
     display: inline-flex; align-items: center; gap: var(--space-2); flex: none;
-    min-height: 40px; padding: 0 var(--space-5); border: 0; border-radius: var(--radius-pill);
+    min-height: 40px; padding: 0 var(--space-5); border: 0; border-radius: var(--tab-round) var(--radius-nib);
     background: transparent; color: var(--ink-soft); cursor: pointer;
     font-family: var(--font-display); font-size: 15px; font-weight: 600; line-height: 1.2;
-    transition: background-color 160ms ease-out, color 160ms ease-out;
+    transition: border-radius 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out;
   }
-  .cx-tab:hover { color: var(--ink); background: var(--surface-raised); }
+  .cx-tab:hover { color: var(--ink); background: var(--surface-raised); border-radius: var(--radius-nib) var(--tab-round); }
   .cx-tab[aria-selected="true"] { background: var(--action); color: var(--on-action); }
   .cx-tab:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
   .cx-tab__count {
-    min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-pill);
+    min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-small);
     background: var(--surface); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
   }
   .cx-tab[aria-selected="true"] .cx-tab__count { background: var(--on-action); color: var(--action); }
 
   @media (prefers-reduced-motion: reduce) {
     .cx-btn, .cx-card, .cx-tab, .cx-field__control { transition: none; }
-    .cx-btn--plume:hover, a.cx-card:hover { transform: none; }
+    a.cx-card:hover { transform: none; }
   }
 }

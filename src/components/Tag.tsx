@@ -8,7 +8,7 @@ export interface TagProps extends ComponentProps<'span'> {
   soft?: boolean;
 }
 
-/** A small filled label. Never a button */
+/** A small filled label in the small plume shape. Never a button */
 export function Tag({ tone = 'neutral', soft, className, ...rest }: TagProps) {
   return <span {...rest} className={cx('cx-tag', `cx-tag--${tone}`, soft && 'cx-tag--soft', className)} />;
 }

@@ -87,6 +87,18 @@
         },
         "$description": "The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1)."
       },
+      "yellow-light": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1.0,
+            0.8275,
+            0.302
+          ],
+          "hex": "#ffd34d"
+        },
+        "$description": "Hover fill of yellow buttons; the primary hover on Night."
+      },
       "orange": {
         "$value": {
           "colorSpace": "srgb",
@@ -129,31 +141,6 @@
         "$value": "{color.brand.white}",
         "$description": "Text on green-deep (6.0:1). On plain green, display sizes only."
       }
-    }
-  },
-  "shadow": {
-    "$type": "shadow",
-    "perch": {
-      "$value": {
-        "color": "{color.brand.maroon-deep}",
-        "offsetX": {
-          "value": 0,
-          "unit": "px"
-        },
-        "offsetY": {
-          "value": 4,
-          "unit": "px"
-        },
-        "blur": {
-          "value": 0,
-          "unit": "px"
-        },
-        "spread": {
-          "value": 0,
-          "unit": "px"
-        }
-      },
-      "$description": "The hard maroon ledge under the plume button and under a pressed-in yellow tag. Drops to 0 on press."
     }
   },
   "space": {
@@ -231,26 +218,33 @@
   },
   "radius": {
     "$type": "dimension",
+    "nib": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      },
+      "$description": "The sharp corners of the small plume: tags, tab items and badges."
+    },
     "quill": {
       "$value": {
         "value": 4,
         "unit": "px"
       },
-      "$description": "The sharp pair of corners in the plume shape; table cells and code."
+      "$description": "The sharp corners of the control plume: buttons, inputs and the tab track. Also table cells and code."
     },
     "sm": {
       "$value": {
         "value": 10,
         "unit": "px"
       },
-      "$description": "Inputs, textareas and menu items."
+      "$description": "The round corners of the small plume: tags, tab items and badges (`radius-small`)."
     },
     "md": {
       "$value": {
         "value": 16,
         "unit": "px"
       },
-      "$description": "Image tiles inside cards, notices, menus."
+      "$description": "The round corners of the control plume: buttons, inputs and the tab track (`radius-control`). Also notices and image tiles."
     },
     "lg": {
       "$value": {
@@ -271,7 +265,7 @@
         "value": 999,
         "unit": "px"
       },
-      "$description": "Buttons, tags, tabs, avatars: everything you press or that labels."
+      "$description": "Avatars and status dots only. Things you press or that label use the plume shapes."
     }
   },
   "stroke": {

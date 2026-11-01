@@ -26,14 +26,15 @@
 .db-nav { display: flex; flex-direction: column; gap: 4px; }
 .db-nav a {
   display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 16px;
-  border-radius: var(--radius-pill); color: var(--ink-soft); text-decoration: none;
+  border-radius: var(--radius-control); color: var(--ink-soft); text-decoration: none;
   font: 600 15px/1.2 var(--font-display);
+  transition: border-radius 160ms ease-out, background-color 160ms ease-out, color 160ms ease-out;
 }
-.db-nav a:hover { background: var(--surface-sunk); color: var(--ink); }
+.db-nav a:hover { background: var(--surface-sunk); color: var(--ink); border-radius: var(--radius-control-flip); }
 .db-nav a[aria-current="page"] { background: var(--action); color: var(--on-action); }
 .db-nav a:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
 .db-badge {
-  margin-left: auto; min-width: 24px; padding: 2px 8px; box-sizing: border-box; border-radius: var(--radius-pill);
+  margin-left: auto; min-width: 24px; padding: 2px 8px; box-sizing: border-box; border-radius: var(--radius-small);
   background: var(--red-deep); color: var(--on-red); font-size: 12px; text-align: center;
 }
 
@@ -115,4 +116,7 @@
   .db-nav a { flex: none; }
   .db-help { display: none; }
   .db-main { padding: 20px 16px 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .db-nav a { transition: none; }
 }

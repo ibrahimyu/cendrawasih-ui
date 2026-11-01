@@ -67,7 +67,7 @@ export function Dashboard() {
             <Icon name="chat" className="cx-watermark" />
             <span className="cx-subtitle">Need a hand?</span>
             <span className="cx-body-sm">Your Cendra engineer replies within an hour on WhatsApp.</span>
-            <Button variant="secondary" size="sm">Chat on WhatsApp</Button>
+            <Button variant="secondary" size="sm" shape="feather" iconStart={<Icon name="chat" size={16} />}>Chat on WhatsApp</Button>
           </div>
         </aside>
 

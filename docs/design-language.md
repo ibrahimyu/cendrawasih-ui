@@ -10,7 +10,7 @@ Cendrawasih UI is how every Cendra product looks and talks: cendra.co, AppGrout,
 2. **Black type, plume accents.** Text and icons are `ink`, a warm black. Brand colors mark things: a label, an outline, a button, a watermark. Black reads; the plumage brands.
 3. **One plume per view.** Yellow is the spotlight. Each screen gets at most one yellow action (`Button variant="plume"`) and at most one highlighted word in a headline (`cx-highlight`).
 4. **Contrast before decoration.** Every text pair in this system is checked (see Color). When a brand color fails as text, use its `-deep` partner; never lighten the brand to make it work.
-5. **Shape says what it does.** Pills (`radius-pill`) are things you press or that label. Rounded rectangles (`radius-lg`) hold content. The plume shape (`radius-plume` + `radius-quill`) marks the one featured thing.
+5. **Shape says what it does.** The plume, two round corners and two sharp ones like a feather, is the shape of everything you press or that labels: buttons, inputs and tabs take the control plume (`radius-control`), tags and badges the small plume (`radius-small`). Rounded rectangles (`radius-lg`) hold content. The large plume (`radius-plume` + `radius-quill`) marks the one featured box. The feather (`radius-feather`) is only for conversation actions.
 6. **Two languages, one layout.** Every product ships in English and Bahasa Indonesia. Leave about 30% slack in every label and button.
 
 ## Content fundamentals
@@ -86,9 +86,9 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 
 ## Shape and spacing
 
-- Radii: `radius-pill` for buttons, tags and tabs; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the plume shape (`border-radius: var(--radius-plume) var(--radius-quill)`).
+- Radii: the plume family for controls. `radius-control` (16px and 4px diagonals) on buttons, inputs and the tab track; `radius-small` (10px and 2px) on tags, tab items and badges; `radius-feather` (three 16px corners and a 2px tip) on conversation actions. `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box. `radius-pill` is left for avatars and status dots.
 - Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
-- Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. `shadow-perch` is the hard maroon ledge under the plume button.
+- Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat; their shape does the talking.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones; card grids use `space-5` gaps; content max width 1200px with a `space-6` gutter (`space-4` minimum on phones).
 
 ## Signature elements
@@ -96,12 +96,14 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 - **Band:** a wide outlined box with the logogram bleeding off its edge as a watermark. The hero of a dashboard or an empty state; filled, the hero of a marketing page. See the Band component.
 - **Watermark icon:** an oversized stroke icon cropped off the corner of a large box, in the paired plume color at 30%. See Stat and Card.
 - **Plume bar:** the five-color stripe in logo order. Once per screen, at the top of the shell or at a seam.
-- **Plume shape:** two rounded corners and two sharp ones, like a feather. One featured card or media frame per group.
+- **Plume shape:** two rounded corners and two sharp ones, like a feather. Every control wears it at its own scale, so the shape reads as Cendra on its own. At card scale it is for one featured card or media frame per group.
+- **The flip:** on hover a plume control swaps its diagonals; on press it squares its corners. It is the system's only hover motion on controls.
+- **Feather:** three round corners and a sharp tip, the shape of a chat bubble. Only on conversation actions (*Chat on WhatsApp*, *Message buyer*, *Reply*), so the shape means something.
 - **Highlighted word:** one word in a headline on a small yellow fill.
 
 ## Motion
 
-Quick and physical. 160ms ease-out for color and border changes. Hover lifts by 2px (buttons) or 4px (cards); the plume button presses 4px down into its ledge. No parallax, no looping animation, and nothing moves under `prefers-reduced-motion`.
+Quick and physical. 160ms ease-out for color, border and corner changes. Buttons, tabs and nav items flip their corners on hover and square them on press; linked cards lift 4px. No parallax, no looping animation, and nothing moves under `prefers-reduced-motion` (the corners still change, instantly). Corner changes are a plain repaint, with no layers, blur or GPU compositing.
 
 ## Focus and states
 
@@ -122,117 +124,10 @@ Illustrations are flat and warm: faceless people with simple features, clothing 
 Use the files in the Logos group. Gradient (Main) on white is the default. On maroon use the White logo; on yellow, red or green use a flat single-ink version from the color flexibility page (green on yellow, yellow on red, white on green). Give the logo generous clear space; nothing touches it. Never stretch, recolor outside these pairs, add effects or place the gradient logo on a busy image.
 
 
+<!-- tokens:start (generated by scripts/build-tokens.mjs; edit tokens/ instead) -->
 ## Tokens
 
-Drop this block into any product. Day is the default; Night applies under `[data-theme="dark"]`.
-
-```css
-:root {
-  /* Brand plumage: same in both themes */
-  --maroon: #52050a;
-  --maroon-deep: #3a0307;
-  --red: #db3d3d;
-  --red-deep: #b82a2a;
-  --green: #00924c;
-  --green-deep: #00733c;
-  --yellow: #fdc41e;
-  --orange: #e8862a;
-  --white: #ffffff;
-  --on-maroon: #ffffff;
-  --on-yellow: #52050a;
-  --on-red: #ffffff;
-  --on-green: #ffffff;
-
-  /* Semantic: Day */
-  --maroon-edge: #52050a;
-  --surface: #ffffff;
-  --surface-sunk: #fbf6f4;
-  --surface-raised: #ffffff;
-  --ink: #14100f;
-  --ink-soft: #5e5456;
-  --line: #f0e6e6;
-  --line-control: #9c7477;
-  --line-strong: #14100f;
-  --action: #52050a;
-  --action-hover: #3a0307;
-  --on-action: #ffffff;
-  --link: #b82a2a;
-  --focus: #00733c;
-  --success: #00733c;
-  --danger: #b82a2a;
-  --warning: #a8520c;
-  --tint-yellow: #fff6d6;
-  --tint-red: #fde8e6;
-  --tint-green: #e2f3ea;
-  --tint-orange: #fdebd6;
-  --scrim: rgba(58, 3, 7, 0.56);
-
-  /* Elevation */
-  --shadow-overlay: 0 18px 40px -12px rgba(82, 5, 10, 0.32);
-  --shadow-perch: 0 4px 0 0 #3a0307;
-
-  /* Type */
-  --font-display: "Google Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-text: Karla, ui-sans-serif, system-ui, sans-serif;
-
-  /* Spacing */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-7: 32px;
-  --space-8: 48px;
-  --space-9: 72px;
-  --space-10: 112px;
-
-  /* Radius */
-  --radius-quill: 4px;
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-plume: 40px;
-  --radius-pill: 999px;
-
-  /* Stroke */
-  --stroke-hair: 1px;
-  --stroke-accent: 3px;
-  --stroke-bold: 2px;
-  --stroke-focus: 3px;
-
-  /* Opacity */
-  --opacity-watermark: 0.3;
-}
-
-[data-theme="dark"] {
-  /* Semantic: Night */
-  --maroon-edge: #b8434a;
-  --surface: #1c0305;
-  --surface-sunk: #140102;
-  --surface-raised: #2b080c;
-  --ink: #fff4ec;
-  --ink-soft: #d8bcb9;
-  --line: #4a1a1e;
-  --line-control: #8a5a5e;
-  --line-strong: #fff4ec;
-  --action: #fdc41e;
-  --action-hover: #ffd34d;
-  --on-action: #52050a;
-  --link: #ff8a7e;
-  --focus: #fdc41e;
-  --success: #3ccf86;
-  --danger: #ff8a7e;
-  --warning: #f5a54a;
-  --tint-yellow: #3a2a04;
-  --tint-red: #40100f;
-  --tint-green: #0b3220;
-  --tint-orange: #3d2108;
-  --scrim: rgba(0, 0, 0, 0.64);
-  --shadow-overlay: 0 18px 40px -12px rgba(0, 0, 0, 0.7);
-  color-scheme: dark;
-}
-```
+The source of truth is `tokens/` (W3C design token format). `npm run tokens` compiles it to `src/styles/tokens.css`, which every product imports, and rewrites this section.
 
 ### What each color is for
 
@@ -240,60 +135,61 @@ Drop this block into any product. Day is the default; Night applies under `[data
 | --- | --- | --- | --- |
 | `maroon` | `#52050a` | `#52050a` | The brand's dark field: heroes, the Night band, primary buttons on Day. Carries white or yellow text (`on-maroon`, `yellow`). As text on white, 15.2:1, for brand moments only; running text is `ink`. |
 | `maroon-deep` | `#3a0307` | `#3a0307` | Pressed state of maroon fills; the footer band. |
-| `maroon-edge` | `#52050a` | `#b8434a` | Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface-raised). |
 | `red` | `#db3d3d` | `#db3d3d` | The Sunrise field and big red shapes. Not a text color: 4.4:1 on white, so white text on red must be 24px+ or bold 19px+. |
 | `red-deep` | `#b82a2a` | `#b82a2a` | Red that carries text or small marks: links, danger buttons, error text. 6.2:1 on white. |
 | `green` | `#00924c` | `#00924c` | The Forest field and the crest in illustrations. White text on green must be 24px+ or bold 19px+ (4.0:1). |
 | `green-deep` | `#00733c` | `#00733c` | Green that carries text or small marks: success text, focus ring in the Day theme. 6.0:1 on white. |
 | `yellow` | `#fdc41e` | `#fdc41e` | The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1). |
+| `yellow-light` | `#ffd34d` | `#ffd34d` | Hover fill of yellow buttons; the primary hover on Night. |
 | `orange` | `#e8862a` | `#e8862a` | From the logo gradient. Fourth stripe of the plume bar and illustration accents; maroon text on it (5.7:1). Never white text. |
 | `white` | `#ffffff` | `#ffffff` | Paper. Logo knock-outs and text on maroon, red-deep and green-deep fills. |
-| `surface` | `#ffffff` | `#1c0305` | Page background. |
-| `surface-sunk` | `#fbf6f4` | `#140102` | Wells, table stripes, the inside of inputs on Night, quiet section backgrounds. |
-| `surface-raised` | `#ffffff` | `#2b080c` | Cards, menus and dialogs. On Day it equals surface and is set apart by a `line` border. |
-| `ink` | `#14100f` | `#fff4ec` | Primary text and icons on surface, surface-sunk, surface-raised and every tint (16:1+ Day, 15:1+ Night). A warm black. |
-| `ink-soft` | `#5e5456` | `#d8bcb9` | Secondary text: intros, hints, metadata. On any surface (6.8:1+ Day, 10.3:1+ Night). |
-| `line` | `#f0e6e6` | `#4a1a1e` | Decorative hairlines and resting card borders. Never the only boundary of a control. |
-| `line-control` | `#9c7477` | `#8a5a5e` | Input and checkbox borders at rest (3:1+ on surface in both themes). |
-| `line-strong` | `#14100f` | `#fff4ec` | Hover border on cards, secondary button border, the selected tab rule. |
-| `action` | `#52050a` | `#fdc41e` | Primary button fill. Maroon on Day, yellow on Night. |
-| `action-hover` | `#3a0307` | `#ffd34d` | Primary button fill on hover and press. |
-| `on-action` | `#ffffff` | `#52050a` | Text and icons on `action` (15.2:1 Day, 9.5:1 Night). |
-| `on-maroon` | `#ffffff` | `#ffffff` | Text on maroon and maroon-deep fills (15:1+). |
-| `on-yellow` | `#52050a` | `#52050a` | Text on yellow fills: the plume button, yellow tags (9.5:1). |
-| `on-red` | `#ffffff` | `#ffffff` | Text on red-deep (6.2:1). On plain red, display sizes only. |
-| `on-green` | `#ffffff` | `#ffffff` | Text on green-deep (6.0:1). On plain green, display sizes only. |
-| `link` | `#b82a2a` | `#ff8a7e` | Inline links on any surface (6.2:1 Day, 7:1+ Night). Underlined, always. |
-| `focus` | `#00733c` | `#fdc41e` | Keyboard focus ring: 3px solid, 2px gap in the surface color. 6:1 on Day surfaces, 11:1+ on Night. |
-| `success` | `#00733c` | `#3ccf86` | Success text and icons on surfaces and on tint-green. |
-| `danger` | `#b82a2a` | `#ff8a7e` | Error text, icons and destructive actions on surfaces and on tint-red. |
+| `on-maroon` | `white` | `white` | Text on maroon and maroon-deep fills (15:1+). |
+| `on-yellow` | `maroon` | `maroon` | Text on yellow fills: the plume button, yellow tags (9.5:1). |
+| `on-red` | `white` | `white` | Text on red-deep (6.2:1). On plain red, display sizes only. |
+| `on-green` | `white` | `white` | Text on green-deep (6.0:1). On plain green, display sizes only. |
+| `maroon-edge` | `maroon` | `#b8434a` | Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface-raised). |
+| `surface` | `white` | `#111111` | Page background. |
+| `surface-sunk` | `#f5f5f5` | `#0a0a0a` | Wells, table stripes and quiet section backgrounds. A true grey, never tinted. |
+| `surface-raised` | `white` | `#1c1c1c` | Cards, menus and dialogs. On Day it equals surface and is set apart by a `line` border. |
+| `ink` | `#121212` | `#f5f5f5` | Primary text and icons on every surface and tint. A neutral near-black (17:1+ on Day surfaces). |
+| `ink-soft` | `#5c5c5c` | `#b0b0b0` | Secondary text: intros, hints, metadata. Neutral grey, 6.1:1+ on Day surfaces. |
+| `line` | `#e6e6e6` | `#2e2e2e` | Decorative hairlines and resting card borders. Neutral grey. Never the only boundary of a control. |
+| `line-control` | `#8a8a8a` | `#707070` | Input and checkbox borders at rest. 3.1:1+ on Day surfaces. |
+| `line-strong` | `#121212` | `#f5f5f5` | Hover border on cards, secondary button border, the selected tab rule. |
+| `action` | `maroon` | `yellow` | Primary button fill. Maroon on Day, yellow on Night. |
+| `action-hover` | `maroon-deep` | `yellow-light` | Primary button fill on hover and press. |
+| `on-action` | `white` | `maroon` | Text and icons on `action` (15.2:1 Day, 9.5:1 Night). |
+| `link` | `red-deep` | `#ff8a7e` | Inline links on any surface (6.2:1 Day, 7:1+ Night). Underlined, always. |
+| `focus` | `green-deep` | `yellow` | Keyboard focus ring: 3px solid, 2px gap in the surface color. 6:1 on Day surfaces, 11:1+ on Night. |
+| `success` | `green-deep` | `#3ccf86` | Success text and icons on surfaces and on tint-green. |
+| `danger` | `red-deep` | `#ff8a7e` | Error text, icons and destructive actions on surfaces and on tint-red. |
 | `warning` | `#a8520c` | `#f5a54a` | Warning text and icons on surfaces and on tint-yellow (5:1+). |
 | `tint-yellow` | `#fff6d6` | `#3a2a04` | Highlight wash: warning notices, selected rows, the new-item tag. |
 | `tint-red` | `#fde8e6` | `#40100f` | Wash behind error notices and soft red tags. Ink on it 15:1+. |
 | `tint-green` | `#e2f3ea` | `#0b3220` | Wash behind success notices and soft green tags. |
 | `tint-orange` | `#fdebd6` | `#3d2108` | Wash behind soft orange tags. |
-| `scrim` | `rgba(58, 3, 7, 0.56)` | `rgba(0, 0, 0, 0.64)` | Backdrop behind dialogs and sheets. |
+| `scrim` | `rgb(0 0 0 / 0.5)` | `rgb(0 0 0 / 0.64)` | Backdrop behind dialogs and sheets. |
 
 ### Type scale
 
-Fonts are self-hosted: `public/fonts/google-sans-latin-wght-normal.woff2` (Google Sans, variable 400 to 700) and `public/fonts/karla-latin-{400,500,700}-normal.woff2`.
+Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Karla (400, 500, 700).
 
-| Style | Family | Size / line height | Weight | Tracking | Use |
+| Class | Family | Size / line height | Weight | Tracking | Use |
 | --- | --- | --- | --- | --- | --- |
-| `display-xl` | Google Sans | 64px / 1.04 | 600 | -0.02em | Hero headline, one per page. Steps down to `display` under 720px. |
-| `display` | Google Sans | 48px / 1.08 | 600 | -0.02em | Section titles on marketing pages; hero on mobile. |
-| `headline` | Google Sans | 34px / 1.15 | 600 | -0.015em | Page titles inside products; section titles on mobile. |
-| `title` | Google Sans | 24px / 1.25 | 600 | -0.01em | Card titles, dialog titles, settings groups. |
-| `subtitle` | Google Sans | 18px / 1.35 | 600 | 0 | List item titles, table group headers, form section headings. |
-| `body-lg` | Karla | 19px / 1.6 | 500 | 0 | Intros under a headline; marketing body copy. |
-| `body` | Karla | 16px / 1.6 | 500 | 0 | Default running text in products. |
-| `body-sm` | Karla | 14px / 1.5 | 500 | 0 | Hints, table cells, metadata. |
-| `caption` | Karla | 12px / 1.4 | 500 | 0.01em | Timestamps, captions, footnotes. Never for instructions. |
-| `button` | Google Sans | 15px / 1.2 | 600 | 0.005em | Buttons and tabs. Sentence case. |
-| `label` | Google Sans | 14px / 1.3 | 600 | 0 | Form labels and table headers. |
-| `eyebrow` | Google Sans | 12px / 1.3 | 600 | 0.1em | Uppercase kicker above a section title. Write it in sentence case; the style sets the caps. |
+| `cx-display-xl` | Google Sans | 64px / 1.04 | 600 | -0.02em | Hero headline, one per page. Steps down to `display` under 720px. |
+| `cx-display` | Google Sans | 48px / 1.08 | 600 | -0.02em | Section titles on marketing pages; hero on mobile. |
+| `cx-headline` | Google Sans | 34px / 1.15 | 600 | -0.015em | Page titles inside products; section titles on mobile. |
+| `cx-title` | Google Sans | 24px / 1.25 | 600 | -0.01em | Card titles, dialog titles, settings groups. |
+| `cx-subtitle` | Google Sans | 18px / 1.35 | 600 | 0 | List item titles, table group headers, form section headings. |
+| `cx-body-lg` | Karla | 19px / 1.6 | 500 | 0 | Intros under a headline; marketing body copy. |
+| `cx-body` | Karla | 16px / 1.6 | 500 | 0 | Default running text in products. |
+| `cx-body-sm` | Karla | 14px / 1.5 | 500 | 0 | Hints, table cells, metadata. |
+| `cx-caption` | Karla | 12px / 1.4 | 500 | 0.01em | Timestamps, captions, footnotes. Never for instructions. |
+| `cx-button` | Google Sans | 15px / 1.2 | 600 | 0.005em | Buttons and tabs. Sentence case. |
+| `cx-label` | Google Sans | 14px / 1.3 | 600 | 0 | Form labels and table headers. |
+| `cx-eyebrow` | Google Sans | 12px / 1.3 | 600 | 0.1em | Uppercase kicker above a section title. Write it in sentence case; the style sets the caps. |
 
-### Spacing, radius, stroke, opacity, elevation
+### Spacing, radius, shape, stroke, opacity, elevation
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -307,19 +203,26 @@ Fonts are self-hosted: `public/fonts/google-sans-latin-wght-normal.woff2` (Googl
 | `space-8` | 48px | Space between groups inside a section. |
 | `space-9` | 72px | Section padding on mobile. |
 | `space-10` | 112px | Section padding on desktop: the Cendra rhythm is generous. |
-| `radius-quill` | 4px | The sharp pair of corners in the plume shape; table cells and code. |
-| `radius-sm` | 10px | Inputs, textareas and menu items. |
-| `radius-md` | 16px | Image tiles inside cards, notices, menus. |
+| `radius-nib` | 2px | The sharp corners of the small plume: tags, tab items and badges. |
+| `radius-quill` | 4px | The sharp corners of the control plume: buttons, inputs and the tab track. Also table cells and code. |
+| `radius-sm` | 10px | The round corners of the small plume: tags, tab items and badges (`radius-small`). |
+| `radius-md` | 16px | The round corners of the control plume: buttons, inputs and the tab track (`radius-control`). Also notices and image tiles. |
 | `radius-lg` | 24px | Cards and dialogs. |
 | `radius-plume` | 40px | The rounded pair of corners in the plume shape: `border-radius: var(--radius-plume) var(--radius-quill)`. Featured cards, hero media, the Band's inner panel. |
-| `radius-pill` | 999px | Buttons, tags, tabs, avatars: everything you press or that labels. |
+| `radius-pill` | 999px | Avatars and status dots only. Things you press or that label use the plume shapes. |
 | `stroke-hair` | 1px | Table rules and dividers. |
 | `stroke-accent` | 3px | Colored outlines on large boxes: stat tiles, toned cards, the outlined Band. Thicker than `stroke-bold` so the color reads. |
 | `stroke-bold` | 2px | Card, input and secondary button borders: Cendra draws with a 2px line. |
 | `stroke-focus` | 3px | Focus ring width. |
 | `opacity-watermark` | 0.3 | The oversized icon or logogram behind a large outlined box, drawn in a second plume color. |
-| `shadow-overlay` | `0 18px 40px -12px rgba(82, 5, 10, 0.32)` | Menus, popovers and dialogs only. Cards on the page use borders, not shadows. |
-| `shadow-perch` | `0 4px 0 0 #3a0307` | The hard maroon ledge under the plume button and under a pressed-in yellow tag. Drops to 0 on press. |
+| `radius-control` | `radius-md radius-quill` | Buttons, inputs and the tab track: two round corners, two sharp. |
+| `radius-control-flip` | `radius-quill radius-md` | The control plume on hover: the diagonals swap. |
+| `radius-small` | `radius-sm radius-nib` | Tags, tab items and badges. |
+| `radius-small-flip` | `radius-nib radius-sm` | The small plume on hover. |
+| `radius-feather` | `radius-md radius-md radius-md radius-nib` | Conversation actions only (chat, message, reply): three round corners and one sharp tip. |
+| `radius-feather-flip` | `radius-md radius-md radius-nib radius-md` | The feather on hover: the tip moves to the other side. |
+| `shadow-overlay` | Day and Night pair | Menus, popovers and dialogs only. Cards on the page use borders, not shadows. |
+<!-- tokens:end -->
 
 ## Components
 
@@ -327,11 +230,11 @@ Reference implementations are the React components in `src/components/`. Each co
 
 ### Button
 
-A pill you press; five variants that rank actions by how loudly they ask.
+A plume-shaped control; five variants that rank actions by how loudly they ask. Hover flips the corners (`radius-control-flip`), press squares them (`radius-quill`).
 
 #### Variants
 
-- `plume`: yellow with a hard maroon ledge (`shadow-perch`). The one action the screen exists for: *Book a call*, *Start pilot*, *Publish*. **One per view**, and only where the yellow has room to glow.
+- `plume`: flat yellow, `yellow-light` on hover. The one action the screen exists for: *Book a call*, *Start pilot*, *Publish*. **One per view**, and only where the yellow has room to glow.
 - `primary` (default): `action` fill. Maroon on Day, yellow on Night. The main action in product screens and forms.
 - `secondary`: 2px `line-strong` outline that fills with ink on hover. The alternative path next to a primary.
 - `ghost`: text only. Cancel, Back, low-stakes toggles in toolbars.
@@ -339,24 +242,28 @@ A pill you press; five variants that rank actions by how loudly they ask.
 
 Sizes: `sm` 36px (tables, toolbars), `md` 44px (default; the minimum touch target), `lg` 56px (hero and Band CTAs).
 
+Shapes: `plume` (default) and `feather`. The feather has three round corners and a sharp tip, like a chat bubble, and its tip moves to the other side on hover. Use it only for conversation actions: *Chat on WhatsApp*, *Message buyer*, *Reply*.
+
 #### You provide
 
 - `children`: the label, in sentence case, a verb first. Leave about 30% slack for Bahasa Indonesia (*Book a call* becomes *Jadwalkan panggilan*).
 - `href` to render a link that looks like a button, otherwise it is a `<button type="button">`.
+- `shape="feather"` for a conversation action.
 - `iconStart` / `iconEnd`: an optional 20px icon node.
 - Any native button or anchor attribute (`onClick`, `disabled`, `type="submit"`, `target`).
 
 #### Do and don't
 
 - Do pair one primary with one secondary. Order: primary first (left), then secondary.
-- Do put a plume button on maroon, white or the Night surface. Inside a Band it keeps its ledge.
+- Do put a plume button on maroon, white or the Night surface.
+- Don't use the feather for anything but talking to someone: on *Save* or *Export* it reads as a message.
 - Don't place two plume buttons on one screen, or a plume next to a primary: the yellow already is the primary.
 - Don't use the yellow plume on a yellow or orange ground.
 - Inside a `Band`, `primary` turns white and `secondary` draws in white automatically.
 
 ### Tag
 
-A short pill label for a category or a state; one or two words, never clickable.
+A short label in the small plume shape (`radius-small`) for a category or a state; one or two words, never clickable.
 
 #### Tones
 
@@ -484,7 +391,7 @@ Use the outlined Band inside products and page layouts: dashboard heroes, empty 
 
 - Headline in `display-xl`, `display` or `headline`. Highlight one word with `<span class="cx-highlight">`: a small yellow fill behind the word. On a filled Night band, color the word `yellow` instead.
 - Text is `ink` on outlined bands; ink stays readable over the 30% watermark.
-- Buttons work as on any surface. On a filled band they recolor themselves: `primary` turns white, `secondary` draws in white, `plume` keeps its yellow and ledge.
+- Buttons work as on any surface. On a filled band they recolor themselves: `primary` turns white, `secondary` draws in white, `plume` keeps its yellow.
 
 #### You provide
 
@@ -502,7 +409,7 @@ A labeled text input or textarea with an optional hint and an inline error.
 
 #### Anatomy
 
-Label (`label` style, ink) above a 48px control with a 2px `line-control` border and `radius-sm` corners. Hint below in `ink-soft`. On error the border turns `danger` and a bold message with an icon appears above the hint.
+Label (`label` style, ink) above a 48px control with a 2px `line-control` border and the control plume (`radius-control`). Fields don't flip on hover; only things you press do. Hint below in `ink-soft`. On error the border turns `danger` and a bold message with an icon appears above the hint.
 
 #### You provide
 
@@ -540,7 +447,7 @@ An inline message about the state of something: a sync, a payment, a form. Icon 
 
 ### Tabs
 
-A pill track that switches between views of the same thing; the selected tab takes the `action` fill.
+A plume track that switches between views of the same thing; the selected tab takes the `action` fill. Each tab is a small plume that flips on hover, like a button.
 
 #### You provide
 

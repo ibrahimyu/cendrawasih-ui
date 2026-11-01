@@ -39,13 +39,13 @@
     --green: #00924c;
     --green-deep: #00733c;
     --yellow: #fdc41e;
+    --yellow-light: #ffd34d;
     --orange: #e8862a;
     --white: #ffffff;
     --on-maroon: var(--white);
     --on-yellow: var(--maroon);
     --on-red: var(--white);
     --on-green: var(--white);
-    --shadow-perch: 0 4px 0 0 var(--maroon-deep);
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -56,6 +56,7 @@
     --space-8: 48px;
     --space-9: 72px;
     --space-10: 112px;
+    --radius-nib: 2px;
     --radius-quill: 4px;
     --radius-sm: 10px;
     --radius-md: 16px;
@@ -69,6 +70,12 @@
     --opacity-watermark: 0.3;
     --font-display: "Google Sans", ui-sans-serif, system-ui, sans-serif;
     --font-text: Karla, ui-sans-serif, system-ui, sans-serif;
+    --radius-control: var(--radius-md) var(--radius-quill);
+    --radius-control-flip: var(--radius-quill) var(--radius-md);
+    --radius-small: var(--radius-sm) var(--radius-nib);
+    --radius-small-flip: var(--radius-nib) var(--radius-sm);
+    --radius-feather: var(--radius-md) var(--radius-md) var(--radius-md) var(--radius-nib);
+    --radius-feather-flip: var(--radius-md) var(--radius-md) var(--radius-nib) var(--radius-md);
     --maroon-edge: light-dark(var(--maroon), #b8434a);
     --surface: light-dark(var(--white), #111111);
     --surface-sunk: light-dark(#f5f5f5, #0a0a0a);
@@ -79,7 +86,7 @@
     --line-control: light-dark(#8a8a8a, #707070);
     --line-strong: light-dark(#121212, #f5f5f5);
     --action: light-dark(var(--maroon), var(--yellow));
-    --action-hover: light-dark(var(--maroon-deep), #ffd34d);
+    --action-hover: light-dark(var(--maroon-deep), var(--yellow-light));
     --on-action: light-dark(var(--white), var(--maroon));
     --link: light-dark(var(--red-deep), #ff8a7e);
     --focus: light-dark(var(--green-deep), var(--yellow));
