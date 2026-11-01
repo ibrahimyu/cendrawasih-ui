@@ -7,7 +7,7 @@ Cendrawasih UI is how every Cendra product looks and talks: cendra.co, AppGrout,
 ## Principles
 
 1. **Fill small, outline large.** Brand colors fill small things at full value: tags, badges, buttons, icon tiles, the plume bar. Large boxes (stat tiles, toned cards, bands, panels) stay on the surface, take the color as a 3px outline (`stroke-accent`), and carry one oversized icon or the logogram in the paired plume color at 30% (`opacity-watermark`). The full-color field is kept for full-bleed marketing sections (`Band filled`).
-2. **Black type, plume accents.** Text and icons are `ink`, a warm black. Brand colors mark things: a label, an outline, a button, a watermark. Black reads; the plumage brands.
+2. **Black type, plume accents.** Text and icons are `ink`, a neutral near-black. Brand colors mark things: a label, an outline, a button, a watermark. Black reads; the plumage brands.
 3. **One plume per view.** Yellow is the spotlight. Each screen gets at most one yellow action (`Button variant="plume"`) and at most one highlighted word in a headline (`cx-highlight`).
 4. **Contrast before decoration.** Every text pair in this system is checked (see Color). When a brand color fails as text, use its `-deep` partner; never lighten the brand to make it work.
 5. **Shape says what it does.** The plume, two round corners and two sharp ones like a feather, is the shape of everything you press or that labels: buttons, inputs and tabs take the control plume (`radius-control`), tags and badges the small plume (`radius-small`). Rounded rectangles (`radius-lg`) hold content. The large plume (`radius-plume` + `radius-quill`) marks the one featured box. The feather (`radius-feather`) is only for conversation actions.
