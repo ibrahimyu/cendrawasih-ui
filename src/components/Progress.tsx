@@ -21,7 +21,7 @@ export interface ProgressProps {
 
 /**
  * How far along a sync, an import or an upload is: a label, the amount, and an 8px pill bar. Without a
- * value, the bar sweeps: the one looping animation in Cendra, and it stops under reduced motion
+ * value, the bar sweeps: the one looping animation in the system, and it stops under reduced motion
  */
 export function Progress({ label, value, max = 100, valueText, tone = 'action', hideLabel, locale, className }: ProgressProps) {
   const id = useId();

@@ -1,0 +1,257 @@
+{
+  "$description": "The plumage of the cendrawasih. Colorful plumage, strong contrast, clean surfaces. The palette is private to this file; components only see the roles under color.",
+  "$extensions": {
+    "co.cendra": {
+      "name": "Cendra",
+      "mark": "assets/logos/cendra-black-logogram.svg",
+      "fontFaces": [
+        {
+          "family": "Google Sans",
+          "file": "google-sans-latin-wght-normal",
+          "weight": "400 700"
+        },
+        {
+          "family": "Karla",
+          "file": "karla-latin-400-normal",
+          "weight": "400"
+        },
+        {
+          "family": "Karla",
+          "file": "karla-latin-500-normal",
+          "weight": "500"
+        },
+        {
+          "family": "Karla",
+          "file": "karla-latin-700-normal",
+          "weight": "700"
+        }
+      ]
+    }
+  },
+  "palette": {
+    "$type": "color",
+    "maroon": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.3216,
+          0.0196,
+          0.0392
+        ],
+        "hex": "#52050a"
+      },
+      "$description": "The brand's dark field: heroes, the Night band, primary buttons on Day. Carries white or yellow text (`on-maroon`, `yellow`). As text on white, 15.2:1, for brand moments only; running text is `ink`."
+    },
+    "maroon-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2275,
+          0.0118,
+          0.0275
+        ],
+        "hex": "#3a0307"
+      },
+      "$description": "Pressed state of maroon fills; the footer band."
+    },
+    "red": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8588,
+          0.2392,
+          0.2392
+        ],
+        "hex": "#db3d3d"
+      },
+      "$description": "The Sunrise field and big red shapes. Not a text color: 4.4:1 on white, so white text on red must be 24px+ or bold 19px+."
+    },
+    "red-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7216,
+          0.1647,
+          0.1647
+        ],
+        "hex": "#b82a2a"
+      },
+      "$description": "Red that carries text or small marks: links, danger buttons, error text. 6.2:1 on white."
+    },
+    "green": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0.5725,
+          0.298
+        ],
+        "hex": "#00924c"
+      },
+      "$description": "The Forest field and the crest in illustrations. White text on green must be 24px+ or bold 19px+ (4.0:1)."
+    },
+    "green-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0.451,
+          0.2353
+        ],
+        "hex": "#00733c"
+      },
+      "$description": "Green that carries text or small marks: success text, focus ring in the Day theme. 6.0:1 on white."
+    },
+    "yellow": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9922,
+          0.7686,
+          0.1176
+        ],
+        "hex": "#fdc41e"
+      },
+      "$description": "The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1)."
+    },
+    "yellow-light": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.8275,
+          0.302
+        ],
+        "hex": "#ffd34d"
+      },
+      "$description": "Hover fill of yellow buttons; the primary hover on Night."
+    },
+    "yellow-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9098,
+          0.6902,
+          0.0627
+        ],
+        "hex": "#e8b010"
+      },
+      "$description": "Pressed fill of yellow buttons; the primary pressed state on Night (7.7:1 with maroon text)."
+    },
+    "orange": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9098,
+          0.5255,
+          0.1647
+        ],
+        "hex": "#e8862a"
+      },
+      "$description": "From the logo gradient. Fourth stripe of the plume bar and illustration accents; maroon text on it (5.7:1). Never white text."
+    },
+    "white": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Paper. Logo knock-outs and text on maroon, red-deep and green-deep fills."
+    },
+    "maroon-pressed": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1647,
+          0.0078,
+          0.0196
+        ],
+        "hex": "#2a0205"
+      },
+      "$description": "Pressed state of maroon fills, one step past maroon-deep."
+    }
+  },
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": "{palette.maroon}"
+    },
+    "primary-hover": {
+      "$value": "{palette.maroon-deep}"
+    },
+    "primary-pressed": {
+      "$value": "{palette.maroon-pressed}"
+    },
+    "on-primary": {
+      "$value": "{palette.white}"
+    },
+    "secondary": {
+      "$value": "{palette.red}"
+    },
+    "secondary-strong": {
+      "$value": "{palette.red-deep}"
+    },
+    "on-secondary": {
+      "$value": "{palette.white}"
+    },
+    "tertiary": {
+      "$value": "{palette.orange}"
+    },
+    "on-tertiary": {
+      "$value": "{palette.maroon}"
+    },
+    "spotlight": {
+      "$value": "{palette.yellow}"
+    },
+    "spotlight-hover": {
+      "$value": "{palette.yellow-light}"
+    },
+    "spotlight-pressed": {
+      "$value": "{palette.yellow-deep}"
+    },
+    "on-spotlight": {
+      "$value": "{palette.maroon}"
+    },
+    "accent": {
+      "$value": "{palette.green}"
+    },
+    "accent-strong": {
+      "$value": "{palette.green-deep}"
+    },
+    "on-accent": {
+      "$value": "{palette.white}"
+    },
+    "danger-fill-hover": {
+      "$value": "{color.primary}",
+      "$description": "Destructive buttons darken into maroon on hover."
+    },
+    "danger-fill-pressed": {
+      "$value": "{color.primary-hover}"
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": [
+          "Google Sans",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ]
+      },
+      "text": {
+        "$value": [
+          "Karla",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ]
+      }
+    }
+  }
+}

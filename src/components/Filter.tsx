@@ -11,7 +11,7 @@ export interface FilterChipProps extends Omit<ComponentProps<'button'>, 'onChang
   children: ReactNode;
 }
 
-/** A filter you turn on and off. A pill, because you press it; on, it takes the plume wash and a check */
+/** A filter you turn on and off. A pill, because you press it; on, it takes the selected wash and a check */
 export function FilterChip({ pressed, onPressedChange, count, className, children, ...rest }: FilterChipProps) {
   return (
     <button

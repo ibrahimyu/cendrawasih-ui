@@ -1,15 +1,15 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { Accordion, AccordionItem, Avatar, AvatarGroup, Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
+import { Accordion, AccordionItem, Avatar, AvatarGroup, Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, BrandMark, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, TopBar, Tooltip, useToast, type Tone } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import { orders, rupiah, statusTone, type Order, type Status } from './data';
 import './gallery.css';
 
-const plumes: Plume[] = ['maroon', 'red', 'orange', 'yellow', 'green'];
+const tones: Tone[] = ['primary', 'secondary', 'tertiary', 'spotlight', 'accent'];
 
 type Step = [name: string, bg: string, fg: string, border?: string];
 const stateRows: [string, Step[]][] = [
   ['Primary', [['Rest', 'action', 'on-action'], ['Hover', 'action-hover', 'on-action'], ['Pressed', 'action-pressed', 'on-action']]],
-  ['Plume', [['Rest', 'yellow', 'on-yellow'], ['Hover', 'yellow-light', 'on-yellow'], ['Pressed', 'yellow-deep', 'on-yellow']]],
+  ['Spotlight', [['Rest', 'spotlight', 'on-spotlight'], ['Hover', 'spotlight-hover', 'on-spotlight'], ['Pressed', 'spotlight-pressed', 'on-spotlight']]],
   ['Secondary', [['Rest', 'surface', 'ink', 'line-control'], ['Hover', 'fill-hover', 'ink', 'line-strong'], ['Pressed', 'fill-pressed', 'ink', 'line-strong']]],
   ['Selected', [['Selected', 'selected', 'on-selected']]],
   ['Disabled', [['Disabled', 'surface-sunk', 'ink-disabled', 'line']]],
@@ -60,7 +60,7 @@ function DataDemo() {
           { key: 'id', header: 'Order', sort: true, width: '200px' },
           { key: 'buyer', header: 'Buyer', sort: true },
           { key: 'channel', header: 'Channel' },
-          { key: 'status', header: 'Status', cell: (o) => <Tag tone={statusTone[o.status]} soft>{o.status}</Tag> },
+          { key: 'status', header: 'Status', cell: (o) => <Tag tone={statusTone[o.status]}>{o.status}</Tag> },
           { key: 'total', header: 'Total', numeric: true, sort: true, cell: (o) => `Rp ${rupiah.format(o.total)}` },
           { key: 'time', header: 'Time', numeric: true, sort: true },
         ]}
@@ -145,8 +145,23 @@ export function Gallery() {
         <header className="gl-head">
           <span className="cx-eyebrow">Design language</span>
           <h1 className="cx-display">Cendrawasih UI</h1>
-          <p className="cx-body-lg">Fill small, outline large. Black type, plume accents, one spotlight per view. Pills are pressed; feather tips only label.</p>
+          <p className="cx-body-lg">Fill small, outline large. Black type, brand accents, one spotlight per view. Pills are pressed; feather tips only label.</p>
         </header>
+
+        <Section title="Brand roles">
+          <p className="cx-body-sm gl-note">What the active brand gives each role: the color, its strong step for small fills, its tint for soft tags, and its outline.</p>
+          <div className="gl-states">
+            {tones.map((t) => (
+              <div key={t} className="gl-state-row">
+                <span className="cx-label">{t}</span>
+                <span className="gl-swatch" style={{ background: `var(--${t})`, color: `var(--on-${t})` }}>{t}</span>
+                <span className="gl-swatch" style={{ background: `var(--${t}-strong)`, color: `var(--on-${t})` }}>strong</span>
+                <span className="gl-swatch" style={{ background: `var(--${t}-tint)`, color: 'var(--ink)' }}>tint</span>
+                <span className="gl-swatch" style={{ boxShadow: `inset 0 0 0 3px var(--${t}-edge)`, color: 'var(--ink)' }}>edge</span>
+              </div>
+            ))}
+          </div>
+        </Section>
 
         <Section title="States">
           <p className="cx-body-sm gl-note">Every state is its own color step. Nothing fades with opacity.</p>
@@ -206,7 +221,7 @@ export function Gallery() {
 
         <Section title="Button">
           <div className="gl-row">
-            <Button variant="plume">Book a call</Button>
+            <Button variant="spotlight">Book a call</Button>
             <Button>Discuss an integration</Button>
             <Button variant="secondary">See our work</Button>
             <Button variant="ghost">Cancel</Button>
@@ -222,30 +237,35 @@ export function Gallery() {
 
         <Section title="Tag">
           <div className="gl-row">
-            {plumes.map((t) => <Tag key={t} tone={t}>{t}</Tag>)}
+            {tones.map((t) => <Tag key={t} tone={t}>{t}</Tag>)}
             <Tag>neutral</Tag>
           </div>
           <div className="gl-row">
-            {plumes.map((t) => <Tag key={t} tone={t} soft>{t} soft</Tag>)}
+            {tones.map((t) => <Tag key={t} tone={t} soft>{t} soft</Tag>)}
+          </div>
+          <div className="gl-row">
+            <Tag tone="success">Synced</Tag>
+            <Tag tone="warning">Waiting</Tag>
+            <Tag tone="danger">Failed</Tag>
           </div>
         </Section>
 
         <Section title="Stat">
           <div className="gl-grid">
-            <Stat tone="yellow" shape="plume" icon="orders" label="Orders synced" value="1.284" meta="+9% vs last Sunday" />
-            <Stat tone="green" icon="payments" label="Payments matched" value="Rp 48,2 jt" meta="312 of 318" />
-            <Stat tone="red" icon="warning" label="Failed records" value="12" alert meta="Since 09:35 WIB" />
-            <Stat tone="orange" icon="package" label="Stock updates" value="1.120" meta="Accurate → Shopee" />
-            <Stat tone="maroon" icon="clock" label="Sync delay" value="2m 40s" meta="Target: under 5 minutes" />
+            <Stat tone="spotlight" shape="plume" icon="orders" label="Orders synced" value="1.284" meta="+9% vs last Sunday" />
+            <Stat tone="accent" icon="payments" label="Payments matched" value="Rp 48,2 jt" meta="312 of 318" />
+            <Stat tone="secondary" icon="warning" label="Failed records" value="12" alert meta="Since 09:35 WIB" />
+            <Stat tone="tertiary" icon="package" label="Stock updates" value="1.120" meta="Accurate → Shopee" />
+            <Stat tone="primary" icon="clock" label="Sync delay" value="2m 40s" meta="Target: under 5 minutes" />
           </div>
         </Section>
 
         <Section title="Card">
           <div className="gl-grid">
-            <Card shape="plume" media={<img src={mainstream} alt="" />} mediaTone="yellow" eyebrow="Audit" title="AppGrout" footer={<Button size="sm" variant="secondary">Learn more</Button>}>
+            <Card shape="plume" media={<img src={mainstream} alt="" />} mediaTone="spotlight" eyebrow="Audit" title="AppGrout" footer={<Button size="sm" variant="secondary">Learn more</Button>}>
               Reviews code built with Lovable, Bolt or Cursor before launch.
             </Card>
-            <Card tone="green" icon="plug" eyebrow="Integration" title="Systems integration">
+            <Card tone="accent" icon="plug" eyebrow="Integration" title="Systems integration">
               We connect your ERP, CRM, payments and internal tools so data flows without manual work.
             </Card>
             <Card href="#components" eyebrow="Linked" title="A neutral card">
@@ -255,11 +275,11 @@ export function Gallery() {
         </Section>
 
         <Section title="Band">
-          <Band tone="night">
+          <Band>
             <h3 className="cx-headline">Your systems, finally <span className="cx-highlight">talking</span> to each other.</h3>
-            <Button variant="plume">Book a call</Button>
+            <Button variant="spotlight">Book a call</Button>
           </Band>
-          <Band tone="forest" filled>
+          <Band tone="accent" filled>
             <h3 className="cx-display">Filled, for full-bleed marketing</h3>
             <Button>Discuss an integration</Button>
           </Band>
@@ -332,8 +352,8 @@ export function Gallery() {
             <Avatar size="lg" name="Dewi Lestari" />
             <Avatar size="lg" name="Agus" />
             <Avatar size="lg" name="Toko Sinar Abadi" kind="org" />
-            <Avatar size="lg" name="Shopee" kind="org" tone="orange" />
-            <Avatar size="lg" name="Accurate" kind="org" tone="green" src="/missing-logo.png" />
+            <Avatar size="lg" name="Shopee" kind="org" tone="tertiary" />
+            <Avatar size="lg" name="Accurate" kind="org" tone="accent" src="/missing-logo.png" />
           </div>
           <div className="gl-row">
             <AvatarGroup label="6 people on this workspace">
@@ -348,7 +368,7 @@ export function Gallery() {
             <AccordionItem title="Payments" meta="5 fields">
               <p>Matched to invoices by amount and date, within one day.</p>
             </AccordionItem>
-            <AccordionItem title="Stock levels" meta={<Tag tone="red" soft>2 unmapped</Tag>}>
+            <AccordionItem title="Stock levels" meta={<Tag tone="danger">2 unmapped</Tag>}>
               <p>Two SKUs exist in Shopee but not in Accurate. Map them or skip them.</p>
             </AccordionItem>
           </Accordion>
@@ -382,7 +402,7 @@ export function Gallery() {
                 Everything from the last 24 hours reached Accurate.
               </EmptyState>
             </div>
-            <EmptyState tone="green" icon="plug" title="Connect your first store" actions={<><Button>Connect a store</Button><Button variant="ghost">How it works</Button></>}>
+            <EmptyState tone="accent" icon="plug" title="Connect your first store" actions={<><Button>Connect a store</Button><Button variant="ghost">How it works</Button></>}>
               Shopee, Tokopedia or your website. Orders start flowing into Accurate within minutes.
             </EmptyState>
           </div>
@@ -422,15 +442,15 @@ export function Gallery() {
 
         <Overlays />
 
-        <Section title="Icon and logogram">
+        <Section title="Icon and brand mark">
           <div className="gl-row">
             {iconNames.map((n) => <span key={n} className="gl-icon"><Icon name={n} size={24} />{n}</span>)}
           </div>
           <div className="gl-row gl-logos">
-            <Logogram size={56} title="Cendra" style={{ color: 'var(--maroon-edge)' }} />
-            <Logogram size={56} style={{ color: 'var(--red)' }} />
-            <Logogram size={56} style={{ color: 'var(--green)' }} />
-            <Logogram size={56} style={{ color: 'var(--ink)' }} />
+            <BrandMark size={56} title="Brand mark" style={{ color: 'var(--primary-edge)' }} />
+            <BrandMark size={56} style={{ color: 'var(--secondary)' }} />
+            <BrandMark size={56} style={{ color: 'var(--accent)' }} />
+            <BrandMark size={56} style={{ color: 'var(--ink)' }} />
           </div>
         </Section>
       </main>

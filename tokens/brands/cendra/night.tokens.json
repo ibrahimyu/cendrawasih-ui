@@ -1,0 +1,50 @@
+{
+  "$description": "Cendra Night overrides of the system theme.",
+  "color": {
+    "$type": "color",
+    "primary-edge": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7216,
+          0.2627,
+          0.2902
+        ],
+        "hex": "#b8434a"
+      },
+      "$description": "Maroon lifts to a lighter maroon so its outline still shows on near-black (3.5:1)."
+    },
+    "secondary-tint": {
+      "$value": "{color.danger-tint}"
+    },
+    "tertiary-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2392,
+          0.1294,
+          0.0314
+        ],
+        "hex": "#3d2108"
+      }
+    },
+    "spotlight-tint": {
+      "$value": "{color.warning-tint}"
+    },
+    "accent-tint": {
+      "$value": "{color.success-tint}"
+    },
+    "link": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.5412,
+          0.4941
+        ],
+        "hex": "#ff8a7e"
+      },
+      "$description": "A light red for links on near-black (7:1+)."
+    }
+  }
+}

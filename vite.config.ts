@@ -8,6 +8,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: /^@cendra\/ui\/styles\.css$/, replacement: new URL('src/styles/index.css', import.meta.url).pathname },
+      { find: /^@cendra\/ui\/brands\/(.+)$/, replacement: `${new URL('src/styles/brands/', import.meta.url).pathname}$1` },
       { find: /^@cendra\/ui$/, replacement: new URL('src/index.ts', import.meta.url).pathname },
     ],
   },

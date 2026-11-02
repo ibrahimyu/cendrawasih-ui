@@ -1,4 +1,4 @@
-import { Band, Button, Icon, Notice, PageHeader, Stat, Tabs, Tag, type Plume } from '@cendra/ui';
+import { Band, Button, Icon, Notice, PageHeader, Stat, Tabs, Tag, type TagProps } from '@cendra/ui';
 import { Frame } from './Frame';
 
 const fmt = (n: number) => n.toLocaleString('id-ID');
@@ -11,21 +11,21 @@ const web = [90, 110, 100, 95, 120, 140, 130, 105, 110, 115, 125, 140, 150, 131]
 const MAX = 1500;
 const px = (v: number) => Math.round((v / MAX) * 200);
 
-const connections: { code: string; tile: string; name: string; meta: string; status: string; tone: Plume }[] = [
-  { code: 'SP', tile: 'orange', name: 'Shopee → Accurate', meta: 'Orders and stock · 2 min ago', status: 'Connected', tone: 'green' },
-  { code: 'TK', tile: 'green', name: 'Tokopedia → Accurate', meta: 'Orders and stock · 7 min ago', status: '12 failed', tone: 'red' },
-  { code: 'XD', tile: 'maroon', name: 'Xendit → Accurate', meta: 'Payments · 4 min ago', status: 'Renew soon', tone: 'yellow' },
-  { code: 'WA', tile: 'green', name: 'WhatsApp Business', meta: 'Order updates to buyers · live', status: 'Connected', tone: 'green' },
-  { code: 'WC', tile: 'red', name: 'Website → Accurate', meta: 'WooCommerce orders · 9 min ago', status: 'Connected', tone: 'green' },
+const connections: { code: string; tile: string; name: string; meta: string; status: string; tone: TagProps['tone'] }[] = [
+  { code: 'SP', tile: 'tertiary', name: 'Shopee → Accurate', meta: 'Orders and stock · 2 min ago', status: 'Connected', tone: 'success' },
+  { code: 'TK', tile: 'accent', name: 'Tokopedia → Accurate', meta: 'Orders and stock · 7 min ago', status: '12 failed', tone: 'danger' },
+  { code: 'XD', tile: 'primary', name: 'Xendit → Accurate', meta: 'Payments · 4 min ago', status: 'Renew soon', tone: 'warning' },
+  { code: 'WA', tile: 'accent', name: 'WhatsApp Business', meta: 'Order updates to buyers · live', status: 'Connected', tone: 'success' },
+  { code: 'WC', tile: 'secondary', name: 'Website → Accurate', meta: 'WooCommerce orders · 9 min ago', status: 'Connected', tone: 'success' },
 ];
 
-const runs: { time: string; flow: string; data: string; records: string; status: string; tone: Plume; duration: string }[] = [
-  { time: '09:42', flow: 'Shopee → Accurate', data: 'Orders', records: '214', status: 'Synced', tone: 'green', duration: '38s' },
-  { time: '09:40', flow: 'Xendit → Accurate', data: 'Payments', records: '96', status: 'Synced', tone: 'green', duration: '12s' },
-  { time: '09:35', flow: 'Tokopedia → Accurate', data: 'Orders', records: '12', status: 'Failed', tone: 'red', duration: '9s' },
-  { time: '09:30', flow: 'Accurate → Shopee', data: 'Stock levels', records: '1.120', status: 'Synced', tone: 'green', duration: '1m 04s' },
-  { time: '09:20', flow: 'Website → Accurate', data: 'Orders', records: '41', status: 'Synced', tone: 'green', duration: '15s' },
-  { time: '09:15', flow: 'Accurate → Tokopedia', data: 'Stock levels', records: '1.120', status: 'Retrying', tone: 'orange', duration: '2m 10s' },
+const runs: { time: string; flow: string; data: string; records: string; status: string; tone: TagProps['tone']; duration: string }[] = [
+  { time: '09:42', flow: 'Shopee → Accurate', data: 'Orders', records: '214', status: 'Synced', tone: 'success', duration: '38s' },
+  { time: '09:40', flow: 'Xendit → Accurate', data: 'Payments', records: '96', status: 'Synced', tone: 'success', duration: '12s' },
+  { time: '09:35', flow: 'Tokopedia → Accurate', data: 'Orders', records: '12', status: 'Failed', tone: 'danger', duration: '9s' },
+  { time: '09:30', flow: 'Accurate → Shopee', data: 'Stock levels', records: '1.120', status: 'Synced', tone: 'success', duration: '1m 04s' },
+  { time: '09:20', flow: 'Website → Accurate', data: 'Orders', records: '41', status: 'Synced', tone: 'success', duration: '15s' },
+  { time: '09:15', flow: 'Accurate → Tokopedia', data: 'Stock levels', records: '1.120', status: 'Retrying', tone: 'tertiary', duration: '2m 10s' },
 ];
 
 export function Dashboard() {
@@ -37,18 +37,18 @@ export function Dashboard() {
             Last sync 09:42 WIB
           </PageHeader>
 
-          <Band tone="night">
-            <Tag tone="maroon">Sunday, 1 Nov 2026</Tag>
+          <Band>
+            <Tag tone="primary">Sunday, 1 Nov 2026</Tag>
             <h2 className="cx-headline">Your stores are <span className="cx-highlight">in sync</span>, except one thing.</h2>
             <p className="cx-body db-soft">1.284 orders and 312 payments moved in the last 24 hours. 12 Tokopedia orders are waiting on a missing SKU in Accurate.</p>
-            <Button variant="plume" size="lg">Review 12 failed orders</Button>
+            <Button variant="spotlight" size="lg">Review 12 failed orders</Button>
           </Band>
 
           <section className="db-stats" aria-label="Key numbers">
-            <Stat tone="yellow" shape="plume" icon="orders" label="Orders synced, 24h" value="1.284" meta="+9% vs last Sunday" />
-            <Stat tone="green" icon="payments" label="Payments matched" value="Rp 48,2 jt" meta="312 of 318 matched to invoices" />
-            <Stat tone="red" icon="warning" label="Failed records" value="12" alert meta="Tokopedia orders since 09:35 WIB" />
-            <Stat tone="maroon" icon="clock" label="Average sync delay" value="2m 40s" meta="Target: under 5 minutes" />
+            <Stat tone="spotlight" shape="plume" icon="orders" label="Orders synced, 24h" value="1.284" meta="+9% vs last Sunday" />
+            <Stat tone="accent" icon="payments" label="Payments matched" value="Rp 48,2 jt" meta="312 of 318 matched to invoices" />
+            <Stat tone="secondary" icon="warning" label="Failed records" value="12" alert meta="Tokopedia orders since 09:35 WIB" />
+            <Stat tone="primary" icon="clock" label="Average sync delay" value="2m 40s" meta="Target: under 5 minutes" />
           </section>
 
           <div className="db-row">

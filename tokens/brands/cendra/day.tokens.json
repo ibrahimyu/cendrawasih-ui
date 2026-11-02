@@ -1,0 +1,42 @@
+{
+  "$description": "Cendra Day overrides of the system theme.",
+  "color": {
+    "$type": "color",
+    "secondary-tint": {
+      "$value": "{color.danger-tint}"
+    },
+    "tertiary-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9922,
+          0.9216,
+          0.8392
+        ],
+        "hex": "#fdebd6"
+      }
+    },
+    "spotlight-tint": {
+      "$value": "{color.warning-tint}"
+    },
+    "accent-tint": {
+      "$value": "{color.success-tint}"
+    },
+    "link": {
+      "$value": "{color.secondary-strong}",
+      "$description": "Links in red-deep (6.2:1)."
+    },
+    "chart-3": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8314,
+          0.4549,
+          0.102
+        ],
+        "hex": "#d4741a"
+      },
+      "$description": "Orange, deepened on Day to 3.3:1 on white."
+    }
+  }
+}

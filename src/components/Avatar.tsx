@@ -1,6 +1,6 @@
 'use client';
 import { useState, type ReactNode } from 'react';
-import { cx, type Plume } from './cx.js';
+import { cx, type Tone } from './cx.js';
 
 export interface AvatarProps {
   /** Whose avatar. Gives the initials, the color and the accessible name */
@@ -11,14 +11,14 @@ export interface AvatarProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
   /** person: a circle. org: a rounded square, for stores, companies and connected tools. Default person */
   kind?: 'person' | 'org';
-  /** The fill behind the initials. Default: picked from the name, so the same name always gets the same plume */
-  tone?: Plume;
+  /** The fill behind the initials. Default: picked from the name, so the same name always gets the same tone */
+  tone?: Tone;
   /** Hide it from screen readers when the name is written beside it */
   decorative?: boolean;
   className?: string;
 }
 
-const tones: Plume[] = ['maroon', 'green', 'orange', 'red', 'yellow'];
+const tones: Tone[] = ['primary', 'accent', 'tertiary', 'secondary', 'spotlight'];
 
 /** Up to two initials: the first letters of the first and last words. "Toko Sinar Abadi" → TA */
 function initials(name: string) {
@@ -28,14 +28,14 @@ function initials(name: string) {
   return (first + last).toUpperCase();
 }
 
-function toneFor(name: string): Plume {
+function toneFor(name: string): Tone {
   let hash = 0;
   for (const ch of name) hash = (hash * 31 + ch.codePointAt(0)!) >>> 0;
   return tones[hash % tones.length]!;
 }
 
 /**
- * A person or an organization, as a photo or as initials on a plume fill. Small, so filled: the same
+ * A person or an organization, as a photo or as initials on a tone fill. Small, so filled: the same
  * name always gets the same color
  */
 export function Avatar({ name, src, size = 'md', kind = 'person', tone, decorative, className }: AvatarProps) {

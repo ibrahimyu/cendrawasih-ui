@@ -1,0 +1,28 @@
+{
+  "$description": "Example Day overrides of the system theme.",
+  "color": {
+    "$type": "color",
+    "primary-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8902,
+          0.9333,
+          0.9451
+        ],
+        "hex": "#e3eef1"
+      }
+    },
+    "spotlight-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9922,
+          0.9569,
+          0.8471
+        ],
+        "hex": "#fdf4d8"
+      }
+    }
+  }
+}

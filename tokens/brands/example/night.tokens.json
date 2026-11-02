@@ -1,0 +1,40 @@
+{
+  "$description": "Example Night overrides of the system theme.",
+  "color": {
+    "$type": "color",
+    "primary-edge": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.302,
+          0.5765,
+          0.651
+        ],
+        "hex": "#4d93a6"
+      },
+      "$description": "Teal lifts so its outline still shows on near-black."
+    },
+    "primary-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0588,
+          0.1647,
+          0.1922
+        ],
+        "hex": "#0f2a31"
+      }
+    },
+    "spotlight-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2275,
+          0.1843,
+          0.0392
+        ],
+        "hex": "#3a2f0a"
+      }
+    }
+  }
+}

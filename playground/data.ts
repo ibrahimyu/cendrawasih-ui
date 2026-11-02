@@ -15,4 +15,4 @@ export const orders: Order[] = Array.from({ length: 23 }, (_, i) => ({
 }));
 
 export const rupiah = new Intl.NumberFormat('id-ID');
-export const statusTone = { Synced: 'green', Waiting: 'yellow', Failed: 'red' } as const;
+export const statusTone = { Synced: 'success', Waiting: 'warning', Failed: 'danger' } as const;

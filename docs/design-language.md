@@ -1,95 +1,98 @@
 # Cendrawasih UI
 
-The design language for every Cendra product. Built from the CENDRA Brand Design Guidelines and cendra.co. The code lives in this repo (`src/`, `tokens/`); the component previews are also in the design system at https://claude.ai/artifact/66dF6jzFZibk3Gt7MjFUbg. Type styles are CSS classes with a `cx-` prefix: the `headline` style is `.cx-headline`.
+A design language for products that want color to read as a decision: bold plain type, clean surfaces, and brand color in confident strokes. Small things are filled with it, large boxes are drawn with it, and oversized icons are washed in a second brand color. It began as Cendra's and is named after the bird in Cendra's logo, but nothing in the system is Cendra's: a brand plugs in its own palette, faces and mark. The code lives in this repo (`src/`, `tokens/`). Type styles are CSS classes with a `cx-` prefix: the `headline` style is `.cx-headline`.
 
-Cendrawasih UI is how every Cendra product looks and talks: cendra.co, AppGrout, Morro, Lyvia AI, Sloppeh, TractionCue, and the client apps we build. It is named after the bird in our logo. The cendrawasih wears its colors at full strength against a dark body; so do we. Color comes in confident strokes: small things filled with it, large boxes drawn with it, and oversized icons washed in a second plume color. Type is bold and plain, and every surface is clean enough that the color reads as a decision.
+## System and brand
+
+The system and the brand are kept apart, so an improvement to the system reaches every brand, and a brand can change without touching a component.
+
+| | The system (this page) | A brand (`docs/brands/<name>.md`) |
+| --- | --- | --- |
+| Owns | Layout, density, shape, motion, states, the type scale, every component, the status colors and the neutrals | Its palette, mapped onto five roles; its two faces; its mark; its voice and imagery |
+| Lives in | `tokens/system/`, `src/` | `tokens/brands/<name>/`, `docs/brands/<name>.md` |
+| Ships as | `@cendra/ui/styles.css` | `@cendra/ui/brands/<name>.css` |
+
+Components only ever use roles: `primary`, never a hue name. Brands live in `docs/brands/`: [Cendra](brands/cendra.md) is the first. To add one, follow [Adding a brand](adding-a-brand.md).
 
 ## Principles
 
-1. **Fill small, outline large.** Brand colors fill small things at full value: tags, badges, buttons, icon tiles, the plume bar. Large boxes (stat tiles, toned cards, bands, panels) stay on the surface, take the color as a 3px outline (`stroke-accent`), and carry one oversized icon or the logogram in the paired plume color at 30% (`opacity-watermark`). The full-color field is kept for full-bleed marketing sections (`Band filled`).
-2. **Black type, plume accents.** Text and icons are `ink`, a neutral near-black. Brand colors mark things: a label, an outline, a button, a watermark. Black reads; the plumage brands.
-3. **One plume per view.** Yellow is the spotlight. Each screen gets at most one yellow action (`Button variant="plume"`) and at most one highlighted word in a headline (`cx-highlight`).
-4. **Contrast before decoration.** Every text pair in this system is checked (see Color). When a brand color fails as text, use its `-deep` partner; never lighten the brand to make it work.
+1. **Fill small, outline large.** Brand colors fill small things at full value: tags, badges, buttons, icon tiles, the plume bar. Large boxes (stat tiles, toned cards, bands, panels) stay on the surface, take the color as a 3px outline (`stroke-accent`), and carry one oversized icon or the brand mark in the paired tone at 30% (`opacity-watermark`). The full-color field is kept for full-bleed marketing sections (`Band filled`).
+2. **Black type, brand accents.** Text and icons are `ink`, a neutral near-black. Brand colors mark things: a label, an outline, a button, a watermark. Black reads; the palette brands.
+3. **One spotlight per view.** `spotlight` is the one color that calls for attention. Each screen gets at most one spotlight action (`Button variant="spotlight"`) and at most one highlighted word in a headline (`cx-highlight`).
+4. **Contrast before decoration.** Every text pair is checked for every brand, in both themes, when the tokens build (see Color). When a brand color fails as text, the brand gives it a `-strong` step; never lighten text to make it work.
 5. **Shape says what it does.** Pills (`radius-pill`) are things you press: buttons, tabs, nav items. The feather tip (`radius-feather`: three round corners and one sharp one) is things that only label or report: tags, badges and counts, never clickable. Inputs are softly rounded (`radius-sm`). Rounded rectangles (`radius-lg`) hold content. The large plume (`radius-plume` + `radius-quill`) marks the one featured box.
 6. **Any language, one layout.** Products ship in whatever languages their customers read. Leave about 30% slack in every label and button for longer translations.
 
 ## Content fundamentals
 
-- **Voice:** direct, senior and warm. We talk like an engineer who has done this before, explaining it to a business owner. Short sentences, concrete nouns, no hype.
-- **Person:** *we* for Cendra, *you* for the customer. Never *the user*.
-- **Casing:** sentence case everywhere: headings, buttons, tabs, labels. Product names keep their own casing (AppGrout, TractionCue, Lyvia AI). The `eyebrow` style sets its own caps; write it in sentence case.
-- **Name real things.** Say *ERP, CRM, payments, WhatsApp, Xendit, Accurate, Shopee*, not *platforms* or *solutions*. Say *12 orders failed to sync*, not *An error occurred*.
-- **Buttons are verbs:** *Book a call*, *Discuss an integration*, *Retry sync*, *Disconnect Xendit*.
+The brand sets the voice (see its page). These rules hold for every brand:
+
+- **Person:** *we* for the company, *you* for the customer. Never *the user*.
+- **Casing:** sentence case everywhere: headings, buttons, tabs, labels. Product names keep their own casing. The `eyebrow` style sets its own caps; write it in sentence case.
+- **Name real things.** Say *ERP, CRM, payments, WhatsApp*, not *platforms* or *solutions*. Say *12 orders failed to sync*, not *An error occurred*.
+- **Buttons are verbs:** *Book a call*, *Retry sync*, *Disconnect Xendit*.
 - **Numbers and money:** format for the reader's locale, never by hand (see Language and locale): the same amount is `$1,250.00` in the US and `Rp 1.250.000` in Indonesia. Set columns of figures with `font-variant-numeric: tabular-nums`.
 - **No emoji** in product UI or marketing headlines. Exclamation marks: none.
 
-Examples from cendra.co:
-
-> Your systems, finally **talking** to each other.
-
-> We connect your ERP, CRM, payments and internal tools so data flows without manual work.
-
-> Built with Lovable, Bolt, Cursor or Replit? Our audit service, AppGrout, reviews the code and tells you exactly what to fix before launch.
-
 ## Color
 
-The palette is the brand guide's five colors plus `orange` from the logo gradient. Brand tokens (`maroon`, `red`, `green`, `yellow`, `orange`, and the `-deep` partners) are the same in both themes. Semantic tokens (`surface`, `ink`, `action`, `line`…) change between **Day** (light) and **Night** (dark).
+Color comes in three layers. **Neutrals** (`surface`, `ink`, `line` and their steps) and **status** (`success`, `warning`, `danger`) belong to the system, the same for every brand. **Brand roles** come from the brand's palette. **Semantic tokens** (`action`, `selected`, `link`, `focus`, the charts) point at roles by default, and a brand may repoint any of them.
 
-### Approved pairings
+### Brand roles
 
-| Text or mark | Ground | Contrast | Use |
-| --- | --- | --- | --- |
-| `ink` | `surface` (white) | 18.9:1 | All text on Day |
-| `maroon` | `surface` (white) | 15.2:1 | Brand words, logo wordmark, big numbers that carry the brand |
-| `white` | `maroon` | 15.2:1 | Heroes, Night band, primary buttons |
-| `yellow` | `maroon` | 9.5:1 | Highlighted headline word, logo, plume button on maroon |
-| `maroon` | `yellow` | 9.5:1 | Plume button label, yellow tags |
-| `maroon` | `orange` | 5.7:1 | Orange tags and tiles |
-| `white` | `red-deep` | 6.2:1 | Danger buttons, red tags |
-| `white` | `green-deep` | 6.0:1 | Green tags |
-| `white` | `red` | 4.4:1 | **Display text only** (24px+, or bold 19px+) |
-| `white` | `green` | 4.0:1 | **Display text only** |
-| `green` | `yellow` | 2.5:1 | **Logo only** (from the brand guide), never text |
-| `yellow` | `red` | 2.8:1 | **Logo and supergraphic only**, never text |
+Every brand fills five roles, in plume-bar order. Each has the color itself, an `on-` color for text on it, and steps the system derives unless the brand sets them.
 
-Never put text in `yellow` on white (1.6:1) or `red` at body size on white (4.4:1): use `link` / `red-deep`.
+| Role | What it is for | Steps |
+| --- | --- | --- |
+| `primary` | The main color: the Day action, heroes, the default tone | `-hover`, `-pressed`, `-strong`, `-edge`, `-tint`, `-mark` |
+| `secondary` | Second color: big shapes, outlines, watermarks, filled bands | `-strong`, `-edge`, `-tint`, `-mark` |
+| `tertiary` | Third color | `-strong`, `-edge`, `-tint`, `-mark` |
+| `spotlight` | The one call for attention: spotlight button, highlighted word, selected wash, the Night action | `-hover`, `-pressed`, `-strong`, `-edge`, `-tint`, `-mark` |
+| `accent` | Fifth color. A brand with fewer may repeat one | `-strong`, `-edge`, `-tint`, `-mark` |
+
+- `X-strong` fills small things that carry text: tags, avatars, icon tiles. It defaults to `X`; a brand deepens it when `on-X` needs more contrast.
+- `X-edge` is the 3px outline of an X-toned box. It defaults to `X`; a dark color lifts on Night so it still shows. Only `primary-edge` must reach 3:1: the others are decorative, because the box's filled label carries the meaning.
+- `X-tint` is the pale wash behind a soft X tag, with `ink` text. It defaults to `surface-sunk`.
+- `X-mark` is the watermark color of an X-toned box: the second color in its tone pair (below).
 
 ### Theme rules
 
-- Primary actions use `action` / `on-action`: maroon with white on Day, yellow with maroon on Night. Text on yellow is maroon (`on-yellow`), as in the brand guide.
-- Neutrals are true black and grey in both themes: `ink`, `ink-soft`, `line` and the surfaces carry no maroon tint. Maroon is an accent, never the room; a whole screen washed in it tires the eye. On Night, `surface` is a neutral near-black (#111111). Maroon outlines use `maroon-edge`, which lifts to a lighter maroon so it still shows.
+- Primary actions use `action` / `on-action`: `primary` on Day, `spotlight` on Night, where a dark primary would sink into the page. A brand with a light primary may keep it on both.
+- Neutrals are true black and grey in both themes: `ink`, `ink-soft`, `line` and the surfaces carry no brand tint. Brand color is an accent, never the room; a whole screen washed in it tires the eye. On Night, `surface` is a neutral near-black (#111111).
+- Status always carries a word and an icon; color is never the only signal. `success`, `warning` and `danger` for text and icons; `success-tint`, `warning-tint` and `danger-tint` behind them. A brand never needs a red or a green of its own: a *Failed* tag is `tone="danger"`, not the brand's red.
 
 ### Tone pairs
 
-Every large outlined box pairs its outline color with a second plume color for its watermark:
+Every large outlined box pairs its outline with a second tone for its watermark. The defaults:
 
 | tone | outline | watermark at 30% |
 | --- | --- | --- |
-| maroon | `maroon-edge` | `red` |
-| red | `red` | `orange` |
-| orange | `orange` | `maroon-edge` |
-| yellow | `yellow` | `green` |
-| green | `green` | `yellow` |
+| primary | `primary-edge` | `secondary` |
+| secondary | `secondary-edge` | `tertiary` |
+| tertiary | `tertiary-edge` | `primary-edge` |
+| spotlight | `spotlight-edge` | `accent` |
+| accent | `accent-edge` | `spotlight` |
 
-A yellow outline is decorative (1.6:1 on white); the box's filled label carries the meaning.
-- Status: `success`, `warning`, `danger` for text and icons; `tint-green`, `tint-yellow`, `tint-red` behind them. Status always carries a word and an icon; red and green are never the only signal.
+### Contrast
+
+`npm run tokens` checks every brand against the pairs in its page (ink on surface, on-action on action, on-X on X-strong, status on its tint, and the rest) in Day and Night, and stops with a list of what to fix if any pair misses. The minimums are 4.5:1 for text, and 3:1 for display text, outlines and the focus ring. Use the roles as intended and you are covered.
 
 ## Typography
 
-**Google Sans** (display, variable 400 to 700) for headings, buttons, labels, tags and numbers. **Karla** (text, 400 to 700) for everything you read in sentences. Google Sans replaces the brand guide's Poppins: it keeps the round geometry with friendlier, more open letterforms at UI sizes. Both ship as files in `fonts/`.
+The brand sets two faces: a **display** face (`font-display`) for headings, buttons, labels, tags and numbers, and a **text** face (`font-text`) for everything you read in sentences. Without them, both are the system sans. The scale, weights and tracking are the system's.
 
-- Headlines: Google Sans 600 with tight tracking (`display-xl`, `display`, `headline`, `title`, `subtitle`). One `display-xl` per page.
-- Running text: Karla Medium 500 (`body-lg`, `body`, `body-sm`, `caption`), line-height 1.5 to 1.6, max 65 characters per line.
-- Interface: `button`, `label`, `eyebrow` in Google Sans 600.
+- Headlines: the display face at 600 with tight tracking (`display-xl`, `display`, `headline`, `title`, `subtitle`). One `display-xl` per page.
+- Running text: the text face at 500 (`body-lg`, `body`, `body-sm`, `caption`), line-height 1.5 to 1.6, max 65 characters per line.
+- Interface: `button`, `label`, `eyebrow` in the display face at 600.
 - On phones, step each display style down one level (`display-xl` → `display`).
-- Highlight a word, not a phrase: a small yellow fill behind it (`cx-highlight`, maroon text). On a filled Night band, color the word `yellow` instead.
+- Highlight a word, not a phrase: a small `spotlight` fill behind it (`cx-highlight`, `on-spotlight` text).
 
 ## Shape and spacing
 
 - Radii: `radius-pill` for buttons, tabs and nav items; `radius-feather` (three 10px corners and a 2px tip) for tags, badges and counts; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box.
-- Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
+- Lines: the system draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
 - Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts, like a hovered tab.
-- Selected: the active tab and nav item take `selected` (a pale plume wash) with `on-selected` text: maroon on Day, yellow on Night. The current page in Pagination and a FilterChip that is on take it too. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other. Checked rows in a table are a selection, not a place: they take `surface-sunk` with a 3px `action` bar at the leading edge, so soft yellow tags inside them stay visible.
+- Selected: the active tab and nav item take `selected` (a pale `spotlight` wash) with `on-selected` text: `primary` on Day, `spotlight` on Night. The current page in Pagination and a FilterChip that is on take it too. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other. Checked rows in a table are a selection, not a place: they take `surface-sunk` with a 3px `action` bar at the leading edge, so soft tags inside them stay visible.
 - Elevation: no shadows on things that sit on the page. Things that float (menus, dialogs, sheets, toasts) sit on `surface` like everything else, with a 2px `line` border and `shadow-overlay`; that shadow is what lifts them, never a grey fill or a blur. Tooltips are the exception: small labels, so they are filled in `ink`. Buttons are flat: no ledges, no drop shadows.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones. Page structure follows the grid under Layout.
 
@@ -124,12 +127,12 @@ Table rows are at least 48px tall; list rows in nav and menus are 44px.
 
 ## Signature elements
 
-- **Band:** a wide outlined box with the logogram bleeding off its edge as a watermark. The hero of a dashboard or an empty state; filled, the hero of a marketing page. See the Band component.
-- **Watermark icon:** an oversized stroke icon cropped off the corner of a large box, in the paired plume color at 30%. See Stat and Card.
-- **Plume bar:** the five-color stripe in logo order. Once per screen, at the top of the shell or at a seam.
+- **Band:** a wide outlined box with the brand mark bleeding off its edge as a watermark. The hero of a dashboard or an empty state; filled, the hero of a marketing page. See the Band component.
+- **Watermark icon:** an oversized stroke icon cropped off the corner of a large box, in the paired tone at 30%. See Stat and Card.
+- **Plume bar:** the five brand roles as a stripe, in order. Once per screen, at the top of the shell or at a seam.
 - **Plume shape:** two rounded corners and two sharp ones, like a feather. One featured card or media frame per group.
 - **Feather tip:** tags, badges and counts have three round corners and one sharp tip. The tip says *this is a label, not a button*; anything you can press is a pill.
-- **Highlighted word:** one word in a headline on a small yellow fill.
+- **Highlighted word:** one word in a headline on a small `spotlight` fill.
 
 ## Motion
 
@@ -149,58 +152,53 @@ Every state is its own color step, named as a token. Nothing is faded with opaci
 | State | What it means | How it looks |
 | --- | --- | --- |
 | Rest | Can be used | The variant's own fill or outline. |
-| Hover | The pointer is on it | One step: `action-hover`, `yellow-light`, or the `fill-hover` wash behind neutral controls. Secondary buttons also draw their border in `line-strong`. Color only, never shape. |
-| Pressed | It is being pressed | One step past hover: `action-pressed`, `yellow-deep`, `fill-pressed`, `maroon-deep` for danger. Lasts as long as the press. |
+| Hover | The pointer is on it | One step: `action-hover`, `spotlight-hover`, or the `fill-hover` wash behind neutral controls. Secondary buttons also draw their border in `line-strong`. Color only, never shape. |
+| Pressed | It is being pressed | One step past hover: `action-pressed`, `spotlight-pressed`, `fill-pressed`, `danger-fill-pressed` for danger. Lasts as long as the press. |
 | Selected | You are here | `selected` with `on-selected` text, for the active tab and nav item. Never the `action` fill: that means "press this". |
-| Focus | The keyboard is on it | A 3px solid ring in `focus` with a 2px gap: green-deep on Day, yellow on Night, yellow on the Night band and white on Sunrise and Forest bands. Only on `:focus-visible`. |
+| Focus | The keyboard is on it | A 3px solid ring in `focus` with a 2px gap. On a filled band it takes the band's `on-` color, or `spotlight` on a primary band. Only on `:focus-visible`. |
 | Disabled | Can't be used right now | The same for every variant: `surface-sunk` fill, `line` border, `ink-disabled` text, no pointer. Prefer leaving a control enabled and explaining what's missing when it's used. |
 | Loading | Working on it | The label changes to the action in progress ("Syncing…") and the control stops taking presses (`aria-busy`). Longer work gets a Progress bar with words; content on its way gets still Skeleton blocks. No spinner on its own; say what's happening. |
 | Error | Something needs fixing | A `danger` border on the field and the message under it, in `danger`, written as an instruction. Never color alone: the message and an icon carry it. |
 
 ## Data visualization
 
-Charts use the plumage in a fixed order, tuned so every pair of series stays apart under protanopia, deuteranopia and tritanopia (CIEDE2000 13 or more between any two on Day, 11.9 or more on Night, with Machado 2009 simulation). The shades differ by theme; the order and hues don't, so a series keeps its color when the theme changes.
+Charts use four series colors in a fixed order. By default they follow the brand: `primary-edge`, `success`, `tertiary`, `spotlight`. A brand should tune them so every pair of series stays apart under protanopia, deuteranopia and tritanopia, and record how in its page (Cendra's are checked to CIEDE2000 13 or more on Day and 11.9 or more on Night, with Machado 2009 simulation). The shades may differ by theme; the order doesn't, so a series keeps its color when the theme changes.
 
-| Series | Token | Day | Night |
-| --- | --- | --- | --- |
-| 1 | `chart-1` | maroon #52050a | maroon-edge #b8434a |
-| 2 | `chart-2` | green-deep #00733c | bright green #3ccf86 |
-| 3 | `chart-3` | deep orange #d4741a | orange #e8862a |
-| 4 | `chart-4` | yellow #fdc41e | yellow #fdc41e |
-| Rest | `chart-other` | grey (`line-control`) | grey (`line-control`) |
+| Series | Token | Default |
+| --- | --- | --- |
+| 1 | `chart-1` | `primary-edge` |
+| 2 | `chart-2` | `success` |
+| 3 | `chart-3` | `tertiary` |
+| 4 | `chart-4` | `spotlight` |
+| Rest | `chart-other` | grey (`line-control`) |
 
 - Assign series in order: a chart with two series uses `chart-1` and `chart-2`, never 1 and 4. Keep the same series on the same color across a screen.
 - Four colors at most. Group everything past the fourth into "Other" in `chart-other`. To spotlight one series, draw it in `chart-1` and the rest in `chart-other`.
-- Red is never a series color. It is kept for failures and errors, so a red bar always means something went wrong.
+- `danger` is never a series color. It is kept for failures and errors, so a red bar always means something went wrong. A brand whose palette has a red keeps it out of the chart tokens.
 - Separate stacked segments and adjacent bars with a 2px gap in the surface color, so neighbors never rely on color alone to part.
-- Every chart has a legend in series order, and its numbers are available as text: a total on each bar, a tooltip, or a table beside it. Yellow and orange sit below 3:1 on Day surfaces, which is acceptable only because of this.
+- Every chart has a legend in series order, and its numbers are available as text: a total on each bar, a tooltip, or a table beside it. Light series colors often sit below 3:1 on Day surfaces, which is acceptable only because of this.
 - Gridlines are dashed `line`; axis labels are `caption` in `ink-soft` with tabular figures. No 3D, no gradients, no shadows, no pie charts past three slices.
 
 ## Iconography
 
-Cendra's icons are Lucide (lucide.dev, ISC license): 2px rounded strokes on a 24px grid, rounded caps and joins, no fills. They match the 2px line the rest of the system draws with. A custom set drawn from the plume curves can replace them later on the same grid, without changing a single name.
+The icons are Lucide (lucide.dev, ISC license): 2px rounded strokes on a 24px grid, rounded caps and joins, no fills. They match the 2px line the rest of the system draws with. A custom set can replace them later on the same grid, without changing a single name.
 
-- Use the `Icon` component and Cendra's names (`orders`, `payments`, `sync`), not Lucide's. A name says what the icon means here, so the drawing behind it can change.
+- Use the `Icon` component and the system's names (`orders`, `payments`, `sync`), not Lucide's. A name says what the icon means here, so the drawing behind it can change.
 - Sizes: 16px inside small buttons and inline errors, 20px next to text (the default), 24px alone as an icon button, 136px as a watermark. Nothing in between.
-- Color: `ink`, `ink-soft`, or the status color of what it sits next to. Never a plume color on its own small icon, except as a watermark.
+- Color: `ink`, `ink-soft`, or the status color of what it sits next to. Never a brand color on its own small icon, except as a watermark.
 - An icon never carries meaning alone. Next to text it is decorative; standing alone (an icon-only button) it gets a `title` or the button gets an `aria-label`.
-- Need one that isn't in the set? Add the Lucide icon to `scripts/build-icons.mjs` under a Cendra name and run `npm run icons`. Don't draw your own, change the stroke width, or fill an outline.
+- Need one that isn't in the set? Add the Lucide icon to `scripts/build-icons.mjs` under a meaningful name and run `npm run icons`. Don't draw your own, change the stroke width, or fill an outline.
 - No emoji as icons.
 
-## Imagery
+## Imagery and logo
 
-Illustrations are flat and warm: faceless people with simple features, clothing in plume colors with soft gradients, and frosted glass panels. They sit on color tiles in cards or float on white. See the Illustrations assets. Product screenshots go on a plume-colored tile with `radius-md` corners. No stock photography.
-
-## Logo
-
-Use the files in the Logos group. Gradient (Main) on white is the default. On maroon use the White logo; on yellow, red or green use a flat single-ink version from the color flexibility page (green on yellow, yellow on red, white on green). Give the logo generous clear space; nothing touches it. Never stretch, recolor outside these pairs, add effects or place the gradient logo on a busy image.
-
+Illustrations, photography and the logo belong to the brand: see its page under `docs/brands/`. The system asks only that images sit on a `radius-md` tile or float on the surface, and that the brand's mark is a single-ink SVG so the Band and `BrandMark` can draw it in any tone.
 
 ## Accessibility
 
-Every Cendra product meets WCAG 2.2 level AA. This is the floor, not the goal.
+Every product built on Cendrawasih UI meets WCAG 2.2 level AA. This is the floor, not the goal.
 
-- **Contrast:** body text 4.5:1 or more against its background, large text and the boundaries of controls 3:1 or more. Every pairing in the color tables states its ratio; use the approved pairings and you are covered. Disabled controls are exempt, which is why `ink-disabled` must never carry anything a person needs to read.
+- **Contrast:** body text 4.5:1 or more against its background, large text and the boundaries of controls 3:1 or more. The token build checks every brand's pairs in both themes and lists the ratios in its page; use the roles as intended and you are covered. Disabled controls are exempt, which is why `ink-disabled` must never carry anything a person needs to read.
 - **Never color alone:** status pairs color with an icon and words, charts with a legend and numbers, errors with a message. A screen in greyscale must still make sense.
 - **Targets:** anything clickable is at least 24px (`size-target`) with a pointer and 44px (`size-touch`) on touch screens. Components already meet this; custom controls must too.
 - **Keyboard:** everything works without a mouse, in reading order. Focus is always visible (the `focus` ring) and never trapped, except inside an open dialog. Tabs move with arrow keys, Home and End.
@@ -264,7 +262,7 @@ Example: *Settings*. Tabs split the areas; each area is one of two kinds, never 
 Example: *First run*. Greet the person, say how long it takes, and show the steps:
 
 - A Progress bar that counts steps: *1 of 3 steps done*.
-- Each step in a box: done steps with a green check and a *Done* tag; the one current step as a large toned box (yellow outline) with its primary button; later steps muted, without buttons.
+- Each step in a box: done steps with a `success` check and a *Done* tag; the one current step as a large box in the spotlight tone with its primary button; later steps muted, without buttons.
 - A way to get a human: *Book 15 minutes*.
 
 ### Saving and confirming
@@ -295,31 +293,47 @@ Example: *First run*. Greet the person, say how long it takes, and show the step
 <!-- tokens:start (generated by scripts/build-tokens.mjs; edit tokens/ instead) -->
 ## Tokens
 
-The source of truth is `tokens/` (W3C design token format). `npm run tokens` compiles it to `src/styles/tokens.css`, which every product imports, and rewrites this section.
+The source of truth is `tokens/system/` (W3C design token format). `npm run tokens` compiles it to `src/styles/tokens.css`, which every product imports, and rewrites this section. A brand's own values are listed in its page under `docs/brands/`.
+
+### What a brand provides
+
+Every brand in `tokens/brands/` must set these. Everything else has a default it may override.
+
+| Role | What it is |
+| --- | --- |
+| `primary` | The brand's main color: the Day action fill, heroes, the primary tone. Must carry on-primary at 4.5:1. |
+| `primary-hover` | primary one step darker (or lighter on a dark primary): hover on primary fills. |
+| `primary-pressed` | One step past primary-hover: primary fills while pressed. |
+| `on-primary` | Text and icons on primary, primary-hover and primary-pressed (4.5:1+). |
+| `secondary` | Second brand color: big shapes, outlines, watermarks, filled bands. |
+| `on-secondary` | Text on secondary-strong (4.5:1+), and display text on secondary (3:1+). |
+| `tertiary` | Third brand color. |
+| `on-tertiary` | Text on tertiary-strong (4.5:1+), and display text on tertiary (3:1+). |
+| `spotlight` | The one color that calls for attention: the spotlight button, the highlighted word, the selected wash, the Night action. |
+| `spotlight-hover` | spotlight on hover. |
+| `spotlight-pressed` | spotlight while pressed. |
+| `on-spotlight` | Text and icons on spotlight and its hover and pressed steps (4.5:1+). |
+| `accent` | Fifth brand color. A brand with fewer colors may repeat one, or use a tint of primary. |
+| `on-accent` | Text on accent-strong (4.5:1+), and display text on accent (3:1+). |
 
 ### What each color is for
 
+Defaults are written as the role they point to; a brand may override any of them.
+
 | Token | Day | Night | Use |
 | --- | --- | --- | --- |
-| `maroon` | `#52050a` | `#52050a` | The brand's dark field: heroes, the Night band, primary buttons on Day. Carries white or yellow text (`on-maroon`, `yellow`). As text on white, 15.2:1, for brand moments only; running text is `ink`. |
-| `maroon-deep` | `#3a0307` | `#3a0307` | Pressed state of maroon fills; the footer band. |
-| `red` | `#db3d3d` | `#db3d3d` | The Sunrise field and big red shapes. Not a text color: 4.4:1 on white, so white text on red must be 24px+ or bold 19px+. |
-| `red-deep` | `#b82a2a` | `#b82a2a` | Red that carries text or small marks: links, danger buttons, error text. 6.2:1 on white. |
-| `green` | `#00924c` | `#00924c` | The Forest field and the crest in illustrations. White text on green must be 24px+ or bold 19px+ (4.0:1). |
-| `green-deep` | `#00733c` | `#00733c` | Green that carries text or small marks: success text, focus ring in the Day theme. 6.0:1 on white. |
-| `yellow` | `#fdc41e` | `#fdc41e` | The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1). |
-| `yellow-light` | `#ffd34d` | `#ffd34d` | Hover fill of yellow buttons; the primary hover on Night. |
-| `yellow-deep` | `#e8b010` | `#e8b010` | Pressed fill of yellow buttons; the primary pressed state on Night (7.7:1 with maroon text). |
-| `orange` | `#e8862a` | `#e8862a` | From the logo gradient. Fourth stripe of the plume bar and illustration accents; maroon text on it (5.7:1). Never white text. |
-| `white` | `#ffffff` | `#ffffff` | Paper. Logo knock-outs and text on maroon, red-deep and green-deep fills. |
-| `on-maroon` | `white` | `white` | Text on maroon and maroon-deep fills (15:1+). |
-| `on-yellow` | `maroon` | `maroon` | Text on yellow fills: the plume button, yellow tags (9.5:1). |
-| `on-red` | `white` | `white` | Text on red-deep (6.2:1). On plain red, display sizes only. |
-| `on-green` | `white` | `white` | Text on green-deep (6.0:1). On plain green, display sizes only. |
-| `maroon-edge` | `maroon` | `#b8434a` | Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface). |
-| `surface` | `white` | `#111111` | Page background. |
+| `primary-strong` | `primary` | `primary` | primary as a small fill that carries text: tags, avatars, icon tiles. Defaults to primary; a brand deepens it when on-primary needs more contrast. |
+| `secondary-strong` | `secondary` | `secondary` | secondary as a small fill that carries text: tags, avatars, icon tiles. Defaults to secondary; a brand deepens it when on-secondary needs more contrast. |
+| `tertiary-strong` | `tertiary` | `tertiary` | tertiary as a small fill that carries text: tags, avatars, icon tiles. Defaults to tertiary; a brand deepens it when on-tertiary needs more contrast. |
+| `spotlight-strong` | `spotlight` | `spotlight` | spotlight as a small fill that carries text: tags, avatars, icon tiles. Defaults to spotlight; a brand deepens it when on-spotlight needs more contrast. |
+| `accent-strong` | `accent` | `accent` | accent as a small fill that carries text: tags, avatars, icon tiles. Defaults to accent; a brand deepens it when on-accent needs more contrast. |
+| `danger-fill` | `#b82a2a` | `#b82a2a` | Fill of destructive buttons and alert badges. The same in both themes (6.2:1 with white). |
+| `danger-fill-hover` | `#8f1f1f` | `#8f1f1f` | danger-fill on hover. |
+| `danger-fill-pressed` | `#6b1717` | `#6b1717` | danger-fill while pressed. |
+| `on-danger` | `#ffffff` | `#ffffff` | Text and icons on danger-fill and its hover and pressed steps. |
+| `surface` | `#ffffff` | `#111111` | Page background. |
 | `surface-sunk` | `#f5f5f5` | `#0a0a0a` | Wells, table stripes and quiet section backgrounds. A true grey, never tinted. |
-| `surface-raised` | `white` | `#1c1c1c` | Small lifts: a hovered tab. Cards, panels and overlays stay on surface and are drawn by their outline, in both themes. |
+| `surface-raised` | `#ffffff` | `#1c1c1c` | Small lifts: a hovered tab. Cards, panels and overlays stay on surface and are drawn by their outline, in both themes. |
 | `fill-hover` | `surface-sunk` | `surface-raised` | Hover wash behind neutral controls: secondary and ghost buttons, nav items, menu rows. |
 | `fill-pressed` | `#e6e6e6` | `#2b2b2b` | Pressed wash behind neutral controls, one step past fill-hover. |
 | `ink` | `#121212` | `#f5f5f5` | Primary text and icons on every surface and tint. A neutral near-black (17:1+ on Day surfaces). |
@@ -328,46 +342,60 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `line` | `#e6e6e6` | `#3a3a3a` | Decorative hairlines and the 2px outline of neutral cards and panels. Neutral grey. Never the only boundary of a control. |
 | `line-control` | `#8a8a8a` | `#707070` | Input and checkbox borders at rest. 3.1:1+ on Day surfaces. |
 | `line-strong` | `#121212` | `#f5f5f5` | Hover border on cards, secondary button border, the selected tab rule. |
-| `action` | `maroon` | `yellow` | Primary button fill. Maroon on Day, yellow on Night. |
-| `action-hover` | `maroon-deep` | `yellow-light` | Primary button fill on hover and press. |
-| `action-pressed` | `#2a0205` | `yellow-deep` | Primary button while pressed: one step past hover. |
-| `on-action` | `white` | `maroon` | Text and icons on `action` (15.2:1 Day, 9.5:1 Night). |
-| `selected` | `tint-yellow` | `tint-yellow` | Where you are: the active tab and nav item. A plume wash, never the action fill, so a selected item never reads as a button. |
-| `on-selected` | `maroon` | `yellow` | Text and icons on selected (14:1 Day, 8.7:1 Night). |
-| `link` | `red-deep` | `#ff8a7e` | Inline links on any surface (6.2:1 Day, 7:1+ Night). Underlined, always. |
-| `focus` | `green-deep` | `yellow` | Keyboard focus ring: 3px solid, 2px gap in the surface color. 6:1 on Day surfaces, 11:1+ on Night. |
-| `success` | `green-deep` | `#3ccf86` | Success text and icons on surfaces and on tint-green. |
-| `danger` | `red-deep` | `#ff8a7e` | Error text, icons and destructive actions on surfaces and on tint-red. |
-| `warning` | `#a8520c` | `#f5a54a` | Warning text and icons on surfaces and on tint-yellow (5:1+). |
-| `tint-yellow` | `#fff6d6` | `#3a2a04` | Highlight wash: warning notices, selected rows, the new-item tag. |
-| `tint-red` | `#fde8e6` | `#40100f` | Wash behind error notices and soft red tags. Ink on it 15:1+. |
-| `tint-green` | `#e2f3ea` | `#0b3220` | Wash behind success notices and soft green tags. |
-| `tint-orange` | `#fdebd6` | `#3d2108` | Wash behind soft orange tags. |
-| `chart-1` | `maroon` | `#b8434a` | First chart series, and the only color of a single-series chart. Maroon; lifts to maroon-edge on Night. |
-| `chart-2` | `green-deep` | `#3ccf86` | Second series. Green, deepened on Day and brightened on Night so it never meets maroon under red-green color blindness. |
-| `chart-3` | `#d4741a` | `orange` | Third series. Orange, deepened on Day to 3.3:1 on white. |
-| `chart-4` | `yellow` | `yellow` | Fourth and last series. Yellow. Below 3:1 on Day surfaces, so never alone and always with its numbers in text. |
+| `primary-edge` | `primary` | `primary` | primary as a 3px outline on the surface: primary-toned cards, stats and bands. Must reach 3:1 on surface; a dark primary lifts on Night. |
+| `secondary-edge` | `secondary` | `secondary` | secondary as a 3px outline on the surface. Decorative: the box's filled label carries the meaning. |
+| `tertiary-edge` | `tertiary` | `tertiary` | tertiary as a 3px outline on the surface. Decorative: the box's filled label carries the meaning. |
+| `spotlight-edge` | `spotlight` | `spotlight` | spotlight as a 3px outline on the surface. Decorative: the box's filled label carries the meaning. |
+| `accent-edge` | `accent` | `accent` | accent as a 3px outline on the surface. Decorative: the box's filled label carries the meaning. |
+| `primary-mark` | `secondary` | `secondary` | The watermark color of a primary-toned box, shown at opacity-watermark: the second plume in its tone pair. |
+| `secondary-mark` | `tertiary` | `tertiary` | The watermark color of a secondary-toned box, shown at opacity-watermark: the second plume in its tone pair. |
+| `tertiary-mark` | `primary-edge` | `primary-edge` | The watermark color of a tertiary-toned box, shown at opacity-watermark: the second plume in its tone pair. |
+| `spotlight-mark` | `accent` | `accent` | The watermark color of a spotlight-toned box, shown at opacity-watermark: the second plume in its tone pair. |
+| `accent-mark` | `spotlight` | `spotlight` | The watermark color of a accent-toned box, shown at opacity-watermark: the second plume in its tone pair. |
+| `primary-tint` | `surface-sunk` | `surface-sunk` | A pale primary wash behind soft primary tags, with ink text (4.5:1+). Defaults to surface-sunk. |
+| `secondary-tint` | `surface-sunk` | `surface-sunk` | A pale secondary wash behind soft secondary tags, with ink text (4.5:1+). Defaults to surface-sunk. |
+| `tertiary-tint` | `surface-sunk` | `surface-sunk` | A pale tertiary wash behind soft tertiary tags, with ink text (4.5:1+). Defaults to surface-sunk. |
+| `spotlight-tint` | `surface-sunk` | `surface-sunk` | A pale spotlight wash behind soft spotlight tags, with ink text (4.5:1+). Defaults to surface-sunk. |
+| `accent-tint` | `surface-sunk` | `surface-sunk` | A pale accent wash behind soft accent tags, with ink text (4.5:1+). Defaults to surface-sunk. |
+| `action` | `primary` | `spotlight` | Primary button fill, checked controls, the selected-row bar. primary on Day, spotlight on Night, where a dark primary would sink into the page. |
+| `action-hover` | `primary-hover` | `spotlight-hover` | action on hover. |
+| `action-pressed` | `primary-pressed` | `spotlight-pressed` | action while pressed: one step past hover. |
+| `on-action` | `on-primary` | `on-spotlight` | Text and icons on action (4.5:1+). |
+| `selected` | `spotlight-tint` | `spotlight-tint` | Where you are: the active tab, nav item, page and filter chip. A spotlight wash, never the action fill, so it never reads as a button. |
+| `on-selected` | `primary` | `spotlight` | Text and icons on selected (4.5:1+). |
+| `link` | `primary` | `spotlight` | Inline links on any surface (4.5:1+). Underlined, always. |
+| `focus` | `accent-strong` | `spotlight` | Keyboard focus ring: 3px solid, 2px gap in the surface color (3:1+ on surface). |
+| `success` | `#00733c` | `#3ccf86` | Success text and icons on surfaces and on success-tint. |
+| `warning` | `#a8520c` | `#f5a54a` | Warning text and icons on surfaces and on warning-tint (4.5:1+). |
+| `danger` | `#b82a2a` | `#ff8a7e` | Error text and icons on surfaces and on danger-tint. |
+| `success-tint` | `#e2f3ea` | `#0b3220` | Wash behind success notices, banners and success tags. |
+| `warning-tint` | `#fff6d6` | `#3a2a04` | Wash behind warning notices, banners and warning tags. |
+| `danger-tint` | `#fde8e6` | `#40100f` | Wash behind error notices, banners and danger tags. Ink on it 4.5:1+. |
+| `chart-1` | `primary-edge` | `primary-edge` | First chart series, and the only color of a single-series chart. |
+| `chart-2` | `success` | `success` | Second series. |
+| `chart-3` | `tertiary` | `tertiary` | Third series. |
+| `chart-4` | `spotlight` | `spotlight` | Fourth and last series. Often below 3:1 on Day surfaces, so never alone and always with its numbers in text. |
 | `chart-other` | `line-control` | `line-control` | Every series past the fourth, grouped as Other, and the rest of the data when one series is highlighted. |
 | `scrim` | `rgb(0 0 0 / 0.5)` | `rgb(0 0 0 / 0.64)` | Backdrop behind dialogs and sheets. |
 
 ### Type scale
 
-Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Karla (400, 500, 700).
+The brand sets the two faces, `font-display` and `font-text`. Without one, both are the system sans.
 
-| Class | Family | Size / line height | Weight | Tracking | Use |
+| Class | Face | Size / line height | Weight | Tracking | Use |
 | --- | --- | --- | --- | --- | --- |
-| `cx-display-xl` | Google Sans | 64px / 1.04 | 600 | -0.02em | Hero headline, one per page. Steps down to `display` below tablet (600px). |
-| `cx-display` | Google Sans | 48px / 1.08 | 600 | -0.02em | Section titles on marketing pages; hero on mobile. |
-| `cx-headline` | Google Sans | 34px / 1.15 | 600 | -0.015em | Page titles inside products; section titles on mobile. |
-| `cx-title` | Google Sans | 24px / 1.25 | 600 | -0.01em | Card titles, dialog titles, settings groups. |
-| `cx-subtitle` | Google Sans | 18px / 1.35 | 600 | 0 | List item titles, table group headers, form section headings. |
-| `cx-body-lg` | Karla | 19px / 1.6 | 500 | 0 | Intros under a headline; marketing body copy. |
-| `cx-body` | Karla | 16px / 1.6 | 500 | 0 | Default running text in products. |
-| `cx-body-sm` | Karla | 14px / 1.5 | 500 | 0 | Hints, table cells, metadata. |
-| `cx-caption` | Karla | 12px / 1.4 | 500 | 0.01em | Timestamps, captions, footnotes. Never for instructions. |
-| `cx-button` | Google Sans | 15px / 1.2 | 600 | 0.005em | Buttons and tabs. Sentence case. |
-| `cx-label` | Google Sans | 14px / 1.3 | 600 | 0 | Form labels and table headers. |
-| `cx-eyebrow` | Google Sans | 12px / 1.3 | 600 | 0.1em | Uppercase kicker above a section title. Write it in sentence case; the style sets the caps. |
+| `cx-display-xl` | display | 64px / 1.04 | 600 | -0.02em | Hero headline, one per page. Steps down to `display` below tablet (600px). |
+| `cx-display` | display | 48px / 1.08 | 600 | -0.02em | Section titles on marketing pages; hero on mobile. |
+| `cx-headline` | display | 34px / 1.15 | 600 | -0.015em | Page titles inside products; section titles on mobile. |
+| `cx-title` | display | 24px / 1.25 | 600 | -0.01em | Card titles, dialog titles, settings groups. |
+| `cx-subtitle` | display | 18px / 1.35 | 600 | 0 | List item titles, table group headers, form section headings. |
+| `cx-body-lg` | text | 19px / 1.6 | 500 | 0 | Intros under a headline; marketing body copy. |
+| `cx-body` | text | 16px / 1.6 | 500 | 0 | Default running text in products. |
+| `cx-body-sm` | text | 14px / 1.5 | 500 | 0 | Hints, table cells, metadata. |
+| `cx-caption` | text | 12px / 1.4 | 500 | 0.01em | Timestamps, captions, footnotes. Never for instructions. |
+| `cx-button` | display | 15px / 1.2 | 600 | 0.005em | Buttons and tabs. Sentence case. |
+| `cx-label` | display | 14px / 1.3 | 600 | 0 | Form labels and table headers. |
+| `cx-eyebrow` | display | 12px / 1.3 | 600 | 0.1em | Uppercase kicker above a section title. Write it in sentence case; the style sets the caps. |
 
 ### Spacing, layout, size, radius, shape, stroke, opacity, motion, elevation
 
@@ -431,11 +459,11 @@ A flat pill you press; five variants that rank actions by how loudly they ask. H
 
 #### Variants
 
-- `plume`: flat yellow, `yellow-light` on hover. The one action the screen exists for: *Book a call*, *Start pilot*, *Publish*. **One per view**, and only where the yellow has room to glow.
-- `primary` (default): `action` fill. Maroon on Day, yellow on Night. The main action in product screens and forms.
+- `spotlight`: flat `spotlight`, `spotlight-hover` on hover. The one action the screen exists for: *Book a call*, *Start pilot*, *Publish*. **One per view**, and only where it has room to glow.
+- `primary` (default): `action` fill: `primary` on Day, `spotlight` on Night. The main action in product screens and forms.
 - `secondary`: a 2px grey `line-control` outline that turns `line-strong` over a `surface-sunk` wash on hover. The alternative path next to a primary.
 - `ghost`: text only. Cancel, Back, low-stakes toggles in toolbars.
-- `danger`: `red-deep` fill. Destructive actions, always worded as the thing that happens (*Delete integration*, not *OK*).
+- `danger`: `danger-fill`. Destructive actions, always worded as the thing that happens (*Delete integration*, not *OK*).
 
 Sizes: `sm` 36px (tables, toolbars), `md` 44px (default; the minimum touch target), `lg` 56px (hero and Band CTAs).
 
@@ -449,11 +477,11 @@ Sizes: `sm` 36px (tables, toolbars), `md` 44px (default; the minimum touch targe
 #### Do and don't
 
 - Do pair one primary with one secondary. Order: primary first (left), then secondary.
-- Do put a plume button on maroon, white or the Night surface.
+- Do put a spotlight button on a primary ground, white or the Night surface.
 - Don't give a button any shape but the pill: a sharp corner marks a label, not an action.
-- Don't place two plume buttons on one screen, or a plume next to a primary: the yellow already is the primary.
-- Don't use the yellow plume on a yellow or orange ground.
-- Inside a `Band`, `primary` turns white and `secondary` draws in white automatically.
+- Don't place two spotlight buttons on one screen, or a spotlight next to a primary: the spotlight already is the primary.
+- Don't put a spotlight button on a spotlight ground.
+- Inside a filled `Band`, `primary` and `secondary` take the band's `on-` color automatically.
 
 ### Tag
 
@@ -461,31 +489,30 @@ A short label with the feather tip (`radius-feather`: three round corners, one s
 
 #### Tones
 
-Solid tags are the plumage: use them for **categories** (service lines, product names, the hero tag row). Soft tags sit on a tint: use them for **states** in product UI.
+Brand tones are for **categories** (service lines, product names, the hero tag row): solid, or `soft` on the tone's tint. Status tones are for **states** in product UI, and are always soft.
 
 | tone | solid | soft |
 | --- | --- | --- |
-| `yellow` | yellow, maroon text | tint-yellow, ink. *New*, highlights |
-| `green` | green-deep, white | tint-green, success. *Connected*, *Paid* |
-| `red` | red-deep, white | tint-red, danger. *Failed*, *Overdue* |
-| `orange` | orange, maroon text | tint-orange, ink. *Beta*, *Pending* |
-| `maroon` | maroon, white | surface-sunk, ink. *Archived* |
+| `primary`, `secondary`, `tertiary`, `spotlight`, `accent` | `X-strong`, `on-X` text | `X-tint`, ink |
+| `success` | — | `success-tint`, `success` text. *Connected*, *Paid* |
+| `warning` | — | `warning-tint`, `warning` text. *Waiting*, *Renew soon* |
+| `danger` | — | `danger-tint`, `danger` text. *Failed*, *Overdue* |
 | `neutral` (default) | surface-sunk with a 2px line | — |
 
 #### You provide
 
-`children` (the words), `tone`, and `soft` for state tags.
+`children` (the words), `tone`, and `soft` for a brand tone on its tint.
 
 #### Do and don't
 
-- Do let a row of solid tags use different tones, in plume-bar order (maroon, red, orange, yellow, green), as the site hero does.
-- Do write the state as a word. Color confirms it; it never carries it alone.
+- Do let a row of solid tags use different tones, in plume-bar order (primary, secondary, tertiary, spotlight, accent).
+- Do use a status tone for a state, never a brand tone that happens to be red or green. Write the state as a word; color confirms it, never carries it alone.
 - Don't make a tag a button. Use a `ghost` Button at `sm` for filters.
-- Don't put a solid yellow tag on a yellow Band, or a maroon tag on the Night band.
+- Don't put a solid tag on a filled Band of the same tone.
 
 ### PlumeBar
 
-The five feathers in a row: maroon, red, orange, yellow, green, in the order they appear in the logogram. The signature divider of every Cendra product.
+The five brand roles in a row: primary, secondary, tertiary, spotlight, accent. The signature divider of every product on the system.
 
 #### Where it goes
 
@@ -513,11 +540,11 @@ A bordered container for one thing you can open or act on: a product, a service,
 
 #### Tone
 
-`tone` (maroon, red, orange, yellow, green) gives a card a 3px outline in that plume color, and `icon` adds an oversized watermark icon in the paired color at 30%, cropped off the bottom-right corner. Use a toned card when the card stands for one thing with an identity (a service line, an integration, a product). Leave the rest on the neutral `line` border.
+`tone` (any brand role) gives a card a 3px outline in that role's edge, and `icon` adds an oversized watermark icon in the paired tone at 30%, cropped off the bottom-right corner. Use a toned card when the card stands for one thing with an identity (a service line, an integration, a product). Leave the rest on the neutral `line` border.
 
 #### Anatomy
 
-An optional color tile (`media` + `mediaTone`: maroon, red, green, yellow, orange) holding an illustration or the logogram, then `eyebrow`, `title`, body (`children`) and an optional `footer` of buttons. The tile takes the product's own plume color, as on cendra.co: AppGrout maroon, Morro orange, Lyvia red, Sloppeh yellow, TractionCue green.
+An optional color tile (`media` + `mediaTone`, any brand role, default `primary`) holding an illustration or the brand mark, then `eyebrow`, `title`, body (`children`) and an optional `footer` of buttons. A brand may give each of its products a tile tone; Cendra's are in its page.
 
 #### You provide
 
@@ -529,63 +556,58 @@ An optional color tile (`media` + `mediaTone`: maroon, red, green, yellow, orang
 
 - Don't add shadows to cards on the page. Separation is the 2px `line` border; `shadow-overlay` is for things that float.
 - Don't use colored left borders or accent rails. A toned card is outlined on all four sides.
-- Don't fill a card with a plume color. The media tile is the one exception: it frames an illustration, as the product tiles on cendra.co do.
+- Don't fill a card with a brand color. The media tile is the one exception: it frames an illustration.
 - Don't nest cards.
 
 ### Stat
 
-A key number in a large outlined box: the plume color is the outline and the small filled label, and an oversized icon in the paired color sits behind it as a watermark.
+A key number in a large outlined box: the tone is the outline and the small filled label, and an oversized icon in the paired tone sits behind it as a watermark.
 
 #### Anatomy
 
 - Outline: `stroke-accent` (3px) in the tone's edge color. Background stays `surface`.
 - Label: a filled `Tag` in the tone. The only filled color in the box.
-- Value: Google Sans 44px, `ink`, tabular figures. With `alert`, `danger`.
+- Value: the display face at 44px, `ink`, tabular figures. With `alert`, `danger`.
 - Meta: one line of context in `ink-soft`: the comparison, the target or the source.
-- Watermark: a 136px icon cropped off the bottom-right corner, in the paired plume color at `opacity-watermark` (30%).
+- Watermark: a 136px icon cropped off the bottom-right corner, in the tone's `-mark` color at `opacity-watermark` (30%).
 
 #### Tone pairs
 
-| tone | outline | watermark |
-| --- | --- | --- |
-| `maroon` | maroon-edge | red |
-| `red` | red | orange |
-| `orange` | orange | maroon-edge |
-| `yellow` | yellow | green |
-| `green` | green | yellow |
+The tone pairs under Color: the outline is `X-edge`, the watermark `X-mark`.
 
 #### You provide
 
-`tone`, `label`, `value` (formatted: `1.284`, `Rp 48,2 jt`, `2m 40s`), optional `meta`, `icon` (a name from `Icon`), `alert` for a number that needs action, and `shape="plume"` for the one featured stat in a row.
+`tone` (default `primary`), `label`, `value` (formatted: `1.284`, `Rp 48,2 jt`, `2m 40s`), optional `meta`, `icon` (a name from `Icon`), `alert` for a number that needs action, and `shape="plume"` for the one featured stat in a row.
 
 #### Do and don't
 
 - Do give each stat in a row its own tone, in plume-bar order where you can.
-- Do use `alert` with the red tone for counts of failures; the word in the label carries the meaning too.
+- Do use `alert` for counts of failures: it sets the number in `danger`. The word in the label carries the meaning too.
 - Don't fill the box with color. Large boxes are outlined; fills are for small things.
 - Don't put more than one sentence in `meta`.
 
 ### Band
 
-A wide hero box with the logogram supergraphic bleeding off its right edge. Outlined by default: a 3px plume-colored border on the surface, with the bird as a 30% watermark in the paired color. `filled` turns it into the brand guide's full-color field for marketing moments.
+A wide hero box with the brand mark as a supergraphic bleeding off its right edge. Outlined by default: a 3px border in the tone's edge on the surface, with the mark as a 30% watermark in the paired tone. `filled` turns it into a full-color field for marketing moments. The mark is the brand's `--brand-mark`; a brand without one gets a plain band.
 
 #### Tones
 
-The three pairings from the brand guide:
+Any brand role (default `primary`):
 
-| tone | outlined (default) | filled |
+| | outlined (default) | filled |
 | --- | --- | --- |
-| `night` | maroon-edge outline, red watermark | maroon ground, red supergraphic, white text |
-| `sunrise` | red outline, orange watermark | red ground, yellow supergraphic, white **display text only** |
-| `forest` | green outline, yellow watermark | green ground, yellow supergraphic, white **display text only** |
+| Ground | `surface` | the tone |
+| Border | `X-edge`, 3px | none |
+| Supergraphic | `X-mark` at 30% | `spotlight`; on a primary or spotlight ground, `X-mark` |
+| Text | `ink` | `on-X`: body text only where it reaches 4.5:1 (the brand page says which), display text otherwise |
 
-Use the outlined Band inside products and page layouts: dashboard heroes, empty states, onboarding. Use `filled` only for full-bleed marketing sections (a campaign header, a closing CTA on cendra.co) where the band runs edge to edge.
+Use the outlined Band inside products and page layouts: dashboard heroes, empty states, onboarding. Use `filled` only for full-bleed marketing sections (a campaign header, a closing CTA) where the band runs edge to edge.
 
 #### Inside a band
 
-- Headline in `display-xl`, `display` or `headline`. Highlight one word with `<span class="cx-highlight">`: a small yellow fill behind the word. On a filled Night band, color the word `yellow` instead.
+- Headline in `display-xl`, `display` or `headline`. Highlight one word with `<span class="cx-highlight">`: a small `spotlight` fill behind the word.
 - Text is `ink` on outlined bands; ink stays readable over the 30% watermark.
-- Buttons work as on any surface. On a filled band they recolor themselves: `primary` turns white, `secondary` draws in white, `plume` keeps its yellow.
+- Buttons work as on any surface. On a filled band they recolor themselves: `primary` fills with the band's `on-` color, `secondary` draws in it, `spotlight` keeps its color.
 
 #### You provide
 
@@ -595,7 +617,7 @@ Use the outlined Band inside products and page layouts: dashboard heroes, empty 
 
 - Don't fill a band that sits inside a layout with other boxes; that is the outlined band's job.
 - Don't stack two bands of the same tone.
-- Don't recolor the supergraphic outside these pairings.
+- Don't recolor the supergraphic outside these pairings, or replace the brand mark with another image.
 
 ### TextField
 
@@ -725,7 +747,7 @@ An inline message about the state of something: a sync, a payment, a form. Icon 
 
 #### Tones
 
-`success` (tint-green), `warning` (tint-yellow), `danger` (tint-red), `info` (surface-sunk with a line border). Text is always `ink`; only the icon takes the status color.
+`success` (`success-tint`), `warning` (`warning-tint`), `danger` (`danger-tint`), `info` (surface-sunk with a line border). Text is always `ink`; only the icon takes the status color.
 
 #### You provide
 
@@ -742,7 +764,7 @@ An inline message about the state of something: a sync, a payment, a form. Icon 
 
 ### Tabs
 
-A pill track that switches between views of the same thing; the selected tab takes the plume wash (`selected` with `on-selected` text), never the `action` fill, so it reads as "you are here" rather than as a button. Counts inside a tab are feather badges.
+A pill track that switches between views of the same thing; the selected tab takes the selected wash (`selected` with `on-selected` text), never the `action` fill, so it reads as "you are here" rather than as a button. Counts inside a tab are feather badges.
 
 #### You provide
 
@@ -899,7 +921,7 @@ Which rows are showing and buttons to move between pages, under a Table.
 
 #### Anatomy
 
-The range on the left in `body-sm` `ink-soft`, like *151–175 of 1.284*, read out when it changes. On the right, 36px pill buttons: previous, the first and last pages, the current page with a neighbor each side, and an ellipsis for the gaps. The current page takes the plume wash (`selected`, `on-selected`) with `aria-current="page"`. Previous and next are disabled at the ends. On phones only the range and the arrows show; on touch screens the buttons grow to 44px. With nothing to page, it renders nothing.
+The range on the left in `body-sm` `ink-soft`, like *151–175 of 1.284*, read out when it changes. On the right, 36px pill buttons: previous, the first and last pages, the current page with a neighbor each side, and an ellipsis for the gaps. The current page takes the selected wash (`selected`, `on-selected`) with `aria-current="page"`. Previous and next are disabled at the ends. On phones only the range and the arrows show; on touch screens the buttons grow to 44px. With nothing to page, it renders nothing.
 
 #### You provide
 
@@ -918,7 +940,7 @@ A filter you turn on and off: a status, a channel. It is a pill, because you pre
 
 #### Anatomy
 
-36px, a 2px `line-control` border and label text. On, it takes the plume wash with an `on-selected` border and a check before the label. An optional count sits in a feather badge. It is a toggle button (`aria-pressed`). It grows to 44px on touch screens.
+36px, a 2px `line-control` border and label text. On, it takes the selected wash with an `on-selected` border and a check before the label. An optional count sits in a feather badge. It is a toggle button (`aria-pressed`). It grows to 44px on touch screens.
 
 #### You provide
 
@@ -950,7 +972,7 @@ The controls on the left, wrapping when there is no room. On the right, the resu
 
 ### AppShell
 
-The frame of a Cendra app: the plume bar, the navigation and the page. From laptop width (1024px), a 264px side column holds the logo, what you put above the nav (usually the workspace), the SideNav, and what you put at its foot (help, the account). Below laptop, a TopBar takes its place, and its menu button opens the same column in a sheet: from the left on tablets, from the bottom on phones.
+The frame of an app: the plume bar, the navigation and the page. From laptop width (1024px), a 264px side column holds the logo, what you put above the nav (usually the workspace), the SideNav, and what you put at its foot (help, the account). Below laptop, a TopBar takes its place, and its menu button opens the same column in a sheet: from the left on tablets, from the bottom on phones.
 
 #### Anatomy
 
@@ -972,11 +994,11 @@ The plume bar stays at the top as the page scrolls. The side column sits under i
 
 ### SideNav
 
-The app's main navigation: a list of pages, each a 44px pill row with an icon. The current page takes the plume wash (`selected`, `on-selected`) and `aria-current="page"`, never the `action` fill. AppShell renders it; use it alone for a settings page with its own sections.
+The app's main navigation: a list of pages, each a 44px pill row with an icon. The current page takes the selected wash (`selected`, `on-selected`) and `aria-current="page"`, never the `action` fill. AppShell renders it; use it alone for a settings page with its own sections.
 
 #### Anatomy
 
-Rows are `ink-soft` in the button type at rest, take `fill-hover` on hover and `fill-pressed` while pressed, and draw the focus ring around the pill. A count sits at the end in a feather badge: neutral (`surface-sunk`) for things to look at, red (`red-deep`) with `alert` for failures. Sections can have an eyebrow heading.
+Rows are `ink-soft` in the button type at rest, take `fill-hover` on hover and `fill-pressed` while pressed, and draw the focus ring around the pill. A count sits at the end in a feather badge: neutral (`surface-sunk`) for things to look at, `danger-fill` with `alert` for failures. Sections can have an eyebrow heading.
 
 #### You provide
 
@@ -1027,7 +1049,7 @@ How far along a sync, an import or an upload is: a label, the amount, and an 8px
 
 #### Anatomy
 
-The label in the label style on the left, the amount in `body-sm` `ink-soft` on the right, and the bar under them: a `fill-pressed` track with the fill in `action` while working, `success` when done, `danger` when it stopped. The fill grows over `duration-slow`. With no value, a 40% segment sweeps across at an even speed, the one loop in Cendra. Under reduced motion it stands still, full width and hatched. It is a `progressbar` named by its label, with the amount as its value text.
+The label in the label style on the left, the amount in `body-sm` `ink-soft` on the right, and the bar under them: a `fill-pressed` track with the fill in `action` while working, `success` when done, `danger` when it stopped. The fill grows over `duration-slow`. With no value, a 40% segment sweeps across at an even speed, the one loop in the system. Under reduced motion it stands still, full width and hatched. It is a `progressbar` named by its label, with the amount as its value text.
 
 #### You provide
 
@@ -1066,7 +1088,7 @@ What a list, a table or a page shows when there is nothing in it yet, and how to
 
 #### Anatomy
 
-Plain, inside a panel or a Table: centered, with the icon in a 56px `fill-hover` circle, a title in the subtitle style, a sentence in `ink-soft` and up to two buttons. Toned, for an empty page: a large box, so outlined (3px in its plume color) with its icon as a watermark in the paired color at 30% (120px, or 200px once the box is 560px wide inside), left-aligned, the title in the title style.
+Plain, inside a panel or a Table: centered, with the icon in a 56px `fill-hover` circle, a title in the subtitle style, a sentence in `ink-soft` and up to two buttons. Toned, for an empty page: a large box, so outlined (3px in its tone) with its icon as a watermark in the paired tone at 30% (120px, or 200px once the box is 560px wide inside), left-aligned, the title in the title style.
 
 #### You provide
 
@@ -1102,16 +1124,16 @@ A full-width strip with square edges in the Notice tints (`info` on `surface-sun
 
 ### Avatar
 
-A person or an organization: a photo or a logo, or initials on a plume fill. Avatars are small, so they are filled, and the same name always gets the same plume. People are circles; organizations (stores, companies, connected tools) are rounded squares.
+A person or an organization: a photo or a logo, or initials on a tone fill. Avatars are small, so they are filled, and the same name always gets the same tone. People are circles; organizations (stores, companies, connected tools) are rounded squares.
 
 #### Anatomy
 
-`sm` 24px, `md` 32px, `lg` 40px, `xl` 56px. Up to two initials in the display face, from the first and last words of the name (*Toko Sinar Abadi* → TA), on `maroon`, `red-deep`, `green-deep`, `yellow` or `orange` with their paired text color. A photo fills the shape; if it fails to load, the initials take its place.
+`sm` 24px, `md` 32px, `lg` 40px, `xl` 56px. Up to two initials in the display face, from the first and last words of the name (*Toko Sinar Abadi* → TA), on one of the five brand roles' `-strong` fills with its `on-` text. A photo fills the shape; if it fails to load, the initials take its place.
 
 #### You provide
 
 - `name`, always: it gives the initials, the color and the accessible name. `src` for a photo or logo.
-- `size`, `kind` (`person` or `org`), and `tone` to fix the color, for a brand like Shopee (`orange`).
+- `size`, `kind` (`person` or `org`), and `tone` to fix the color, for a tool with a known color, like Shopee.
 - `decorative` when the name is written beside it, so screen readers don't hear it twice.
 
 #### AvatarGroup
@@ -1122,7 +1144,7 @@ Overlapping avatars for a team or the tools on a flow, each ringed in `surface`,
 
 - Do use the brand's own logo for connected tools when you have it.
 - Don't use an avatar as a button on its own; put it inside one, with the name.
-- Don't pick a color by role or status. The plume is identity, not meaning.
+- Don't pick a color by role or status. The tone is identity, not meaning.
 
 ### Accordion
 
@@ -1164,7 +1186,7 @@ An eyebrow or a Breadcrumb, then the title (34px, 28px on phones) with an option
 
 ### Icon
 
-The Cendra icon set, drawn from Lucide: 2px rounded strokes on a 24px grid, in `currentColor`.
+The icon set, drawn from Lucide: 2px rounded strokes on a 24px grid, in `currentColor`.
 
 Names:
 - Status: `info`, `success`, `warning`, `danger`.
@@ -1187,13 +1209,9 @@ Names:
 - Don't fill icons or change their stroke width.
 - Don't use emoji in their place.
 
-### Logogram
+### BrandMark
 
-The Cendra bird as a single-ink inline SVG that takes its color from CSS `color`. For the full-color gradient logo and the wordmark, use the files in the Logos asset group.
-
-#### Approved ink and ground pairs
-
-From the brand guide's color flexibility page: white on maroon, maroon on white, green on yellow, red on white, yellow on red. Yellow on maroon appears in the supergraphic examples.
+The active brand's mark (`--brand-mark`) as a single-ink shape that takes its color from CSS `color`. It follows `data-brand`, so the same code shows each brand's mark. For a full-color logo or wordmark, use the brand's own files. Cendra's bird is also available as the `Logogram` component; see the Cendra page.
 
 #### You provide
 
@@ -1201,6 +1219,5 @@ From the brand guide's color flexibility page: white on maroon, maroon on white,
 
 #### Don't
 
-- Don't redraw, rotate, outline or add effects to the mark.
-- Don't set it below 16px; use the favicon files instead.
-- Don't use colors outside the palette or pairs that are not listed above.
+- Don't set it below 16px; use the brand's favicon files instead.
+- Don't use it as a decoration on its own in product UI; the Band already carries it.

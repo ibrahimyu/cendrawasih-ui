@@ -1,162 +1,97 @@
 {
-  "$description": "Cendrawasih UI base tokens: the plumage, spacing, shape and type. Theme-aware colors live in day.tokens.json and night.tokens.json.",
-  "color": {
-    "$type": "color",
-    "brand": {
-      "maroon": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.3216,
-            0.0196,
-            0.0392
-          ],
-          "hex": "#52050a"
-        },
-        "$description": "The brand's dark field: heroes, the Night band, primary buttons on Day. Carries white or yellow text (`on-maroon`, `yellow`). As text on white, 15.2:1, for brand moments only; running text is `ink`."
-      },
-      "maroon-deep": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.2275,
-            0.0118,
-            0.0275
-          ],
-          "hex": "#3a0307"
-        },
-        "$description": "Pressed state of maroon fills; the footer band."
-      },
-      "red": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.8588,
-            0.2392,
-            0.2392
-          ],
-          "hex": "#db3d3d"
-        },
-        "$description": "The Sunrise field and big red shapes. Not a text color: 4.4:1 on white, so white text on red must be 24px+ or bold 19px+."
-      },
-      "red-deep": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.7216,
-            0.1647,
-            0.1647
-          ],
-          "hex": "#b82a2a"
-        },
-        "$description": "Red that carries text or small marks: links, danger buttons, error text. 6.2:1 on white."
-      },
-      "green": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.5725,
-            0.298
-          ],
-          "hex": "#00924c"
-        },
-        "$description": "The Forest field and the crest in illustrations. White text on green must be 24px+ or bold 19px+ (4.0:1)."
-      },
-      "green-deep": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0,
-            0.451,
-            0.2353
-          ],
-          "hex": "#00733c"
-        },
-        "$description": "Green that carries text or small marks: success text, focus ring in the Day theme. 6.0:1 on white."
-      },
-      "yellow": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.9922,
-            0.7686,
-            0.1176
-          ],
-          "hex": "#fdc41e"
-        },
-        "$description": "The plume: one spotlight action per view, highlighted words in headlines on maroon, plumes in the Sunrise and Forest fields. Never text on light surfaces (1.6:1)."
-      },
-      "yellow-light": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            0.8275,
-            0.302
-          ],
-          "hex": "#ffd34d"
-        },
-        "$description": "Hover fill of yellow buttons; the primary hover on Night."
-      },
-      "yellow-deep": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.9098,
-            0.6902,
-            0.0627
-          ],
-          "hex": "#e8b010"
-        },
-        "$description": "Pressed fill of yellow buttons; the primary pressed state on Night (7.7:1 with maroon text)."
-      },
-      "orange": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.9098,
-            0.5255,
-            0.1647
-          ],
-          "hex": "#e8862a"
-        },
-        "$description": "From the logo gradient. Fourth stripe of the plume bar and illustration accents; maroon text on it (5.7:1). Never white text."
-      },
-      "white": {
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            1.0,
-            1.0,
-            1.0
-          ],
-          "hex": "#ffffff"
-        },
-        "$description": "Paper. Logo knock-outs and text on maroon, red-deep and green-deep fills."
-      }
-    },
-    "on": {
-      "maroon": {
-        "$value": "{color.brand.white}",
-        "$description": "Text on maroon and maroon-deep fills (15:1+)."
-      },
-      "yellow": {
-        "$value": "{color.brand.maroon}",
-        "$description": "Text on yellow fills: the plume button, yellow tags (9.5:1)."
-      },
-      "red": {
-        "$value": "{color.brand.white}",
-        "$description": "Text on red-deep (6.2:1). On plain red, display sizes only."
-      },
-      "green": {
-        "$value": "{color.brand.white}",
-        "$description": "Text on green-deep (6.0:1). On plain green, display sizes only."
+  "$description": "Cendrawasih UI system tokens: role defaults, spacing, shape, motion and type. Brand-neutral: a brand in tokens/brands/ supplies the palette roles listed in $extensions and may override any color here.",
+  "$extensions": {
+    "co.cendra": {
+      "brandContract": {
+        "primary": "The brand's main color: the Day action fill, heroes, the primary tone. Must carry on-primary at 4.5:1.",
+        "primary-hover": "primary one step darker (or lighter on a dark primary): hover on primary fills.",
+        "primary-pressed": "One step past primary-hover: primary fills while pressed.",
+        "on-primary": "Text and icons on primary, primary-hover and primary-pressed (4.5:1+).",
+        "secondary": "Second brand color: big shapes, outlines, watermarks, filled bands.",
+        "on-secondary": "Text on secondary-strong (4.5:1+), and display text on secondary (3:1+).",
+        "tertiary": "Third brand color.",
+        "on-tertiary": "Text on tertiary-strong (4.5:1+), and display text on tertiary (3:1+).",
+        "spotlight": "The one color that calls for attention: the spotlight button, the highlighted word, the selected wash, the Night action.",
+        "spotlight-hover": "spotlight on hover.",
+        "spotlight-pressed": "spotlight while pressed.",
+        "on-spotlight": "Text and icons on spotlight and its hover and pressed steps (4.5:1+).",
+        "accent": "Fifth brand color. A brand with fewer colors may repeat one, or use a tint of primary.",
+        "on-accent": "Text on accent-strong (4.5:1+), and display text on accent (3:1+)."
       }
     }
   },
+  "color": {
+    "$type": "color",
+    "primary-strong": {
+      "$value": "{color.primary}",
+      "$description": "primary as a small fill that carries text: tags, avatars, icon tiles. Defaults to primary; a brand deepens it when on-primary needs more contrast."
+    },
+    "secondary-strong": {
+      "$value": "{color.secondary}",
+      "$description": "secondary as a small fill that carries text: tags, avatars, icon tiles. Defaults to secondary; a brand deepens it when on-secondary needs more contrast."
+    },
+    "tertiary-strong": {
+      "$value": "{color.tertiary}",
+      "$description": "tertiary as a small fill that carries text: tags, avatars, icon tiles. Defaults to tertiary; a brand deepens it when on-tertiary needs more contrast."
+    },
+    "spotlight-strong": {
+      "$value": "{color.spotlight}",
+      "$description": "spotlight as a small fill that carries text: tags, avatars, icon tiles. Defaults to spotlight; a brand deepens it when on-spotlight needs more contrast."
+    },
+    "accent-strong": {
+      "$value": "{color.accent}",
+      "$description": "accent as a small fill that carries text: tags, avatars, icon tiles. Defaults to accent; a brand deepens it when on-accent needs more contrast."
+    },
+    "danger-fill": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7216,
+          0.1647,
+          0.1647
+        ],
+        "hex": "#b82a2a"
+      },
+      "$description": "Fill of destructive buttons and alert badges. The same in both themes (6.2:1 with white)."
+    },
+    "danger-fill-hover": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.5608,
+          0.1216,
+          0.1216
+        ],
+        "hex": "#8f1f1f"
+      },
+      "$description": "danger-fill on hover."
+    },
+    "danger-fill-pressed": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4196,
+          0.0902,
+          0.0902
+        ],
+        "hex": "#6b1717"
+      },
+      "$description": "danger-fill while pressed."
+    },
+    "on-danger": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Text and icons on danger-fill and its hover and pressed steps."
+    }
+  },
   "space": {
-    "$type": "dimension",
     "1": {
       "$value": {
         "value": 4,
@@ -226,7 +161,8 @@
         "unit": "px"
       },
       "$description": "Section padding on desktop: the Cendra rhythm is generous."
-    }
+    },
+    "$type": "dimension"
   },
   "breakpoint": {
     "$type": "dimension",
@@ -492,27 +428,6 @@
       "$description": "Slow start, quick exit. Only for things leaving the screen, with duration-fast."
     }
   },
-  "font": {
-    "family": {
-      "$type": "fontFamily",
-      "display": {
-        "$value": [
-          "Google Sans",
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif"
-        ]
-      },
-      "text": {
-        "$value": [
-          "Karla",
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif"
-        ]
-      }
-    }
-  },
   "typography": {
     "$type": "typography",
     "display-xl": {
@@ -741,6 +656,27 @@
           "letterSpacingEm": 0.1,
           "textTransform": "uppercase"
         }
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ],
+        "$description": "Headings, buttons, labels, tags and numbers. A brand sets its own face."
+      },
+      "text": {
+        "$value": [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ],
+        "$description": "Running text. A brand sets its own face."
       }
     }
   }

@@ -1,0 +1,361 @@
+{
+  "$description": "Night theme (dark) system defaults. Same keys as day.tokens.json. Role colors are aliases, so a brand only overrides what its palette needs.",
+  "color": {
+    "$type": "color",
+    "surface": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0667,
+          0.0667,
+          0.0667
+        ],
+        "hex": "#111111"
+      },
+      "$description": "Page background. A neutral near-black: maroon stays an accent, never the room."
+    },
+    "surface-sunk": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0392,
+          0.0392,
+          0.0392
+        ],
+        "hex": "#0a0a0a"
+      },
+      "$description": "Wells, table stripes, quiet section backgrounds."
+    },
+    "surface-raised": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1098,
+          0.1098,
+          0.1098
+        ],
+        "hex": "#1c1c1c"
+      },
+      "$description": "Small lifts on Night: a hovered tab. Cards, panels and overlays stay on surface and are drawn by their outline."
+    },
+    "fill-hover": {
+      "$value": "{color.surface-raised}",
+      "$description": "Hover wash behind neutral controls: secondary and ghost buttons, nav items, menu rows."
+    },
+    "fill-pressed": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1686,
+          0.1686,
+          0.1686
+        ],
+        "hex": "#2b2b2b"
+      },
+      "$description": "Pressed wash behind neutral controls, one step past fill-hover."
+    },
+    "ink": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9608,
+          0.9608,
+          0.9608
+        ],
+        "hex": "#f5f5f5"
+      },
+      "$description": "Primary text and icons. 15.6:1+ on Night surfaces."
+    },
+    "ink-soft": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.6902,
+          0.6902,
+          0.6902
+        ],
+        "hex": "#b0b0b0"
+      },
+      "$description": "Secondary text: intros, hints, metadata. 7.8:1+ on Night surfaces."
+    },
+    "ink-disabled": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.3608,
+          0.3608,
+          0.3608
+        ],
+        "hex": "#5c5c5c"
+      },
+      "$description": "Text and icons of disabled controls. Deliberately below 4.5:1; never use it for anything a person must read."
+    },
+    "line": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2275,
+          0.2275,
+          0.2275
+        ],
+        "hex": "#3a3a3a"
+      },
+      "$description": "Decorative hairlines and the 2px outline of neutral cards and panels."
+    },
+    "line-control": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.4392,
+          0.4392,
+          0.4392
+        ],
+        "hex": "#707070"
+      },
+      "$description": "Input and checkbox borders at rest. 3.4:1+ on Night surfaces."
+    },
+    "line-strong": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9608,
+          0.9608,
+          0.9608
+        ],
+        "hex": "#f5f5f5"
+      },
+      "$description": "Hover border on cards, secondary button border, the selected tab rule."
+    },
+    "primary-edge": {
+      "$value": "{color.primary}",
+      "$description": "primary as a 3px outline on the surface: primary-toned cards, stats and bands. Must reach 3:1 on surface; a dark primary lifts on Night."
+    },
+    "secondary-edge": {
+      "$value": "{color.secondary}",
+      "$description": "secondary as a 3px outline on the surface. Decorative: the box's filled label carries the meaning."
+    },
+    "tertiary-edge": {
+      "$value": "{color.tertiary}",
+      "$description": "tertiary as a 3px outline on the surface. Decorative: the box's filled label carries the meaning."
+    },
+    "spotlight-edge": {
+      "$value": "{color.spotlight}",
+      "$description": "spotlight as a 3px outline on the surface. Decorative: the box's filled label carries the meaning."
+    },
+    "accent-edge": {
+      "$value": "{color.accent}",
+      "$description": "accent as a 3px outline on the surface. Decorative: the box's filled label carries the meaning."
+    },
+    "primary-mark": {
+      "$value": "{color.secondary}",
+      "$description": "The watermark color of a primary-toned box, shown at opacity-watermark: the second plume in its tone pair."
+    },
+    "secondary-mark": {
+      "$value": "{color.tertiary}",
+      "$description": "The watermark color of a secondary-toned box, shown at opacity-watermark: the second plume in its tone pair."
+    },
+    "tertiary-mark": {
+      "$value": "{color.primary-edge}",
+      "$description": "The watermark color of a tertiary-toned box, shown at opacity-watermark: the second plume in its tone pair."
+    },
+    "spotlight-mark": {
+      "$value": "{color.accent}",
+      "$description": "The watermark color of a spotlight-toned box, shown at opacity-watermark: the second plume in its tone pair."
+    },
+    "accent-mark": {
+      "$value": "{color.spotlight}",
+      "$description": "The watermark color of a accent-toned box, shown at opacity-watermark: the second plume in its tone pair."
+    },
+    "primary-tint": {
+      "$value": "{color.surface-sunk}",
+      "$description": "A pale primary wash behind soft primary tags, with ink text (4.5:1+). Defaults to surface-sunk."
+    },
+    "secondary-tint": {
+      "$value": "{color.surface-sunk}",
+      "$description": "A pale secondary wash behind soft secondary tags, with ink text (4.5:1+). Defaults to surface-sunk."
+    },
+    "tertiary-tint": {
+      "$value": "{color.surface-sunk}",
+      "$description": "A pale tertiary wash behind soft tertiary tags, with ink text (4.5:1+). Defaults to surface-sunk."
+    },
+    "spotlight-tint": {
+      "$value": "{color.surface-sunk}",
+      "$description": "A pale spotlight wash behind soft spotlight tags, with ink text (4.5:1+). Defaults to surface-sunk."
+    },
+    "accent-tint": {
+      "$value": "{color.surface-sunk}",
+      "$description": "A pale accent wash behind soft accent tags, with ink text (4.5:1+). Defaults to surface-sunk."
+    },
+    "action": {
+      "$value": "{color.spotlight}",
+      "$description": "Primary button fill, checked controls, the selected-row bar. primary on Day, spotlight on Night, where a dark primary would sink into the page."
+    },
+    "action-hover": {
+      "$value": "{color.spotlight-hover}",
+      "$description": "action on hover."
+    },
+    "action-pressed": {
+      "$value": "{color.spotlight-pressed}",
+      "$description": "action while pressed: one step past hover."
+    },
+    "on-action": {
+      "$value": "{color.on-spotlight}",
+      "$description": "Text and icons on action (4.5:1+)."
+    },
+    "selected": {
+      "$value": "{color.spotlight-tint}",
+      "$description": "Where you are: the active tab, nav item, page and filter chip. A spotlight wash, never the action fill, so it never reads as a button."
+    },
+    "on-selected": {
+      "$value": "{color.spotlight}",
+      "$description": "Text and icons on selected (4.5:1+)."
+    },
+    "link": {
+      "$value": "{color.spotlight}",
+      "$description": "Inline links on any surface (4.5:1+). Underlined, always."
+    },
+    "focus": {
+      "$value": "{color.spotlight}",
+      "$description": "Keyboard focus ring: 3px solid, 2px gap in the surface color (3:1+ on surface)."
+    },
+    "success": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2353,
+          0.8118,
+          0.5255
+        ],
+        "hex": "#3ccf86"
+      },
+      "$description": "Success text and icons on surfaces and on success-tint."
+    },
+    "warning": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9608,
+          0.6471,
+          0.2902
+        ],
+        "hex": "#f5a54a"
+      },
+      "$description": "Warning text and icons on surfaces and on warning-tint (4.5:1+)."
+    },
+    "danger": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          0.5412,
+          0.4941
+        ],
+        "hex": "#ff8a7e"
+      },
+      "$description": "Error text and icons on surfaces and on danger-tint."
+    },
+    "success-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0431,
+          0.1961,
+          0.1255
+        ],
+        "hex": "#0b3220"
+      },
+      "$description": "Wash behind success notices, banners and success tags."
+    },
+    "warning-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.2275,
+          0.1647,
+          0.0157
+        ],
+        "hex": "#3a2a04"
+      },
+      "$description": "Wash behind warning notices, banners and warning tags."
+    },
+    "danger-tint": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.251,
+          0.0627,
+          0.0588
+        ],
+        "hex": "#40100f"
+      },
+      "$description": "Wash behind error notices, banners and danger tags. Ink on it 4.5:1+."
+    },
+    "chart-1": {
+      "$value": "{color.primary-edge}",
+      "$description": "First chart series, and the only color of a single-series chart."
+    },
+    "chart-2": {
+      "$value": "{color.success}",
+      "$description": "Second series."
+    },
+    "chart-3": {
+      "$value": "{color.tertiary}",
+      "$description": "Third series."
+    },
+    "chart-4": {
+      "$value": "{color.spotlight}",
+      "$description": "Fourth and last series. Often below 3:1 on Day surfaces, so never alone and always with its numbers in text."
+    },
+    "chart-other": {
+      "$value": "{color.line-control}",
+      "$description": "Every series past the fourth, grouped as Other, and the rest of the data when one series is highlighted."
+    },
+    "scrim": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0,
+          0,
+          0
+        ],
+        "hex": "#000000",
+        "alpha": 0.64
+      },
+      "$description": "Backdrop behind dialogs and sheets."
+    }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "overlay": {
+      "$value": {
+        "color": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "hex": "#000000",
+          "alpha": 0.7
+        },
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 18,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 40,
+          "unit": "px"
+        },
+        "spread": {
+          "value": -12,
+          "unit": "px"
+        }
+      },
+      "$description": "Things that float only: menus, dialogs, sheets and toasts. Cards on the page use borders, not shadows."
+    }
+  }
+}

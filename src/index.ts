@@ -3,11 +3,12 @@ export { AppShell, TopBar, type AppShellProps, type TopBarProps } from './compon
 export { Banner, type BannerProps } from './components/Banner.js';
 export { Avatar, AvatarGroup, type AvatarGroupProps, type AvatarProps } from './components/Avatar.js';
 export { Band, type BandProps } from './components/Band.js';
+export { BrandMark, type BrandMarkProps } from './components/BrandMark.js';
 export { Breadcrumb, type BreadcrumbProps, type Crumb } from './components/Breadcrumb.js';
 export { Button, type ButtonProps } from './components/Button.js';
 export { Card, type CardProps } from './components/Card.js';
 export { Checkbox, ChoiceGroup, RadioGroup, Switch, type CheckboxProps, type ChoiceGroupProps, type RadioGroupProps, type RadioOption, type SwitchProps } from './components/Choice.js';
-export { cx, type Plume } from './components/cx.js';
+export { cx, type Status, type Tone } from './components/cx.js';
 export { Dialog, Sheet, type DialogProps, type SheetProps } from './components/Dialog.js';
 export { EmptyState, type EmptyStateProps } from './components/EmptyState.js';
 export { FilterBar, FilterChip, type FilterBarProps, type FilterChipProps } from './components/Filter.js';

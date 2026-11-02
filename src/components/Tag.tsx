@@ -1,10 +1,10 @@
 import type { ComponentProps } from 'react';
-import { cx, type Plume } from './cx.js';
+import { cx, type Status, type Tone } from './cx.js';
 
 export interface TagProps extends ComponentProps<'span'> {
-  /** Default neutral */
-  tone?: Plume | 'neutral';
-  /** A tinted wash instead of the full fill, for status in tables and lists */
+  /** A brand tone, neutral, or a status. Status tags are always soft. Default neutral */
+  tone?: Tone | Status | 'neutral';
+  /** A tinted wash instead of the full fill. Brand tones only: status tags are soft already */
   soft?: boolean;
 }
 

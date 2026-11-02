@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { cx, type Plume } from './cx.js';
+import { cx, type Tone } from './cx.js';
 import { Icon, type IconName } from './Icon.js';
 import { Tag } from './Tag.js';
 
@@ -9,8 +9,8 @@ export interface StatProps {
   value: ReactNode;
   /** One line of context under the number */
   meta?: ReactNode;
-  /** The outline and tag color. Default maroon */
-  tone?: Plume;
+  /** The outline and tag color. Default primary */
+  tone?: Tone;
   /** The watermark icon */
   icon?: IconName;
   /** Sets the number in the danger color */
@@ -21,7 +21,7 @@ export interface StatProps {
 }
 
 /** A key number in a large outlined box: the label is a small filled tag, the icon a watermark */
-export function Stat({ label, value, meta, tone = 'maroon', icon, alert, shape, className }: StatProps) {
+export function Stat({ label, value, meta, tone = 'primary', icon, alert, shape, className }: StatProps) {
   return (
     <div className={cx('cx-stat', `cx-tone--${tone}`, shape === 'plume' && 'cx-stat--plume', className)}>
       {icon ? <Icon name={icon} className="cx-watermark" /> : null}

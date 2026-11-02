@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { AppShell, Button, Icon, type NavItem } from '@cendra/ui';
+import { AppShell, BrandMark, Button, Icon, type NavItem } from '@cendra/ui';
 import logoDay from '../assets/logos/cendra-main-horizontal.svg';
 import logoNight from '../assets/logos/cendra-white-horizontal.svg';
 import './dashboard.css';
@@ -10,6 +10,7 @@ const logo = (
   <a href="#dashboard" className="db-home">
     <img className="db-logo--day" src={logoDay} alt="Cendra" />
     <img className="db-logo--night" src={logoNight} alt="Cendra" />
+    <span className="db-brandname"><BrandMark size={28} />Example</span>
   </a>
 );
 
@@ -39,7 +40,7 @@ export function Frame({ page, children }: { page: AppPage; children: ReactNode }
         </div>
       }
       sideBottom={
-        <div className="db-help cx-tone--maroon">
+        <div className="db-help cx-tone--primary">
           <Icon name="chat" className="cx-watermark" />
           <span className="cx-subtitle">Need a hand?</span>
           <span className="cx-body-sm">Your Cendra engineer replies within an hour on WhatsApp.</span>

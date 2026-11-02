@@ -1,7 +1,7 @@
 {
   "name": "@cendra/ui",
-  "version": "0.1.0",
-  "description": "Cendrawasih UI: the Cendra design language as tokens, CSS and React components.",
+  "version": "0.2.0",
+  "description": "Cendrawasih UI: a design language as tokens, CSS and React components, with Cendra as its first brand.",
   "private": true,
   "type": "module",
   "sideEffects": [
@@ -15,6 +15,7 @@
     "./styles.css": "./dist/styles/index.css",
     "./tokens.css": "./dist/styles/tokens.css",
     "./tailwind.css": "./dist/styles/tailwind.css",
+    "./brands/*": "./dist/styles/brands/*",
     "./tokens/*": "./tokens/*",
     "./logos/*": "./assets/logos/*",
     "./illustrations/*": "./assets/illustrations/*"
@@ -22,7 +23,9 @@
   "files": [
     "dist",
     "tokens",
-    "assets"
+    "assets",
+    "docs",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "dev": "vite",

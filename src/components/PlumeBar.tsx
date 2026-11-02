@@ -1,13 +1,13 @@
 import { cx } from './cx.js';
 
-const STRIPES = ['maroon', 'red', 'orange', 'yellow', 'green'] as const;
+const STRIPES = ['primary', 'secondary', 'tertiary', 'spotlight', 'accent'] as const;
 
 export interface PlumeBarProps {
   thin?: boolean;
   className?: string;
 }
 
-/** The five-color stripe, in logo order. Once per screen */
+/** The five brand roles as a stripe. Once per screen */
 export function PlumeBar({ thin, className }: PlumeBarProps) {
   return (
     <div className={cx('cx-plumebar', thin && 'cx-plumebar--thin', className)} aria-hidden>

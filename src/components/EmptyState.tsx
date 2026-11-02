@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { cx, type Plume } from './cx.js';
+import { cx, type Tone } from './cx.js';
 import { Icon, type IconName } from './Icon.js';
 
 export interface EmptyStateProps {
@@ -12,7 +12,7 @@ export interface EmptyStateProps {
   /** One or two buttons. The main one first */
   actions?: ReactNode;
   /** Makes it a large outlined box with the icon as a watermark, for an empty page. Plain otherwise, for inside a panel */
-  tone?: Plume;
+  tone?: Tone;
   /** The heading level for the title. Default h2 */
   as?: 'h2' | 'h3' | 'h4';
   className?: string;
@@ -20,7 +20,7 @@ export interface EmptyStateProps {
 
 /**
  * What a list, a table or a page shows when there is nothing in it yet, and how to fill it. Plain inside a
- * panel; toned, it is a large box: outlined in a plume color with its icon as a watermark
+ * panel; toned, it is a large box: outlined in its tone with its icon as a watermark
  */
 export function EmptyState({ icon, title, children, actions, tone, as: Heading = 'h2', className }: EmptyStateProps) {
   return (

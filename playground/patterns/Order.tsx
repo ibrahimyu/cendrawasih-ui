@@ -13,8 +13,8 @@ const shipping = 63000;
 const total = items.reduce((sum, i) => sum + i.qty * i.price, 0) + shipping;
 
 const history = [
-  { who: 'Shopee', kind: 'org' as const, tone: 'orange' as const, what: 'Order received from Shopee', when: '09:51 WIB' },
-  { who: 'Cendra', kind: 'org' as const, tone: 'maroon' as const, what: 'Sent to Accurate: failed, SKU KAOS-HTM-L missing', when: '09:51 WIB', failed: true },
+  { who: 'Shopee', kind: 'org' as const, tone: 'tertiary' as const, what: 'Order received from Shopee', when: '09:51 WIB' },
+  { who: 'Cendra', kind: 'org' as const, tone: 'primary' as const, what: 'Sent to Accurate: failed, SKU KAOS-HTM-L missing', when: '09:51 WIB', failed: true },
   { who: 'Rina Wulandari', kind: 'person' as const, what: 'Rina Wulandari retried the sync: failed again', when: '09:58 WIB', failed: true },
 ];
 
@@ -38,7 +38,7 @@ export function Order() {
         <PageHeader
           breadcrumb={[{ label: 'Orders', href: '#orders' }, { label: 'INV-2026-01280' }]}
           title="INV-2026-01280"
-          status={<Tag tone="red" soft>Failed</Tag>}
+          status={<Tag tone="danger">Failed</Tag>}
           actions={<>
             {/* Busy keeps its look and ignores presses; disabled would say it can't be used */}
             <Button onClick={() => { if (!retrying) retry(); }} aria-busy={retrying} iconStart={<Icon name="sync" size={18} />}>
@@ -63,7 +63,7 @@ export function Order() {
         <div className="cx-grid">
           <div className="cx-span-laptop-8 pt-stack">
             <Accordion>
-              <AccordionItem title="Items" meta={<Tag tone="red" soft>1 unmapped</Tag>} defaultOpen>
+              <AccordionItem title="Items" meta={<Tag tone="danger">1 unmapped</Tag>} defaultOpen>
                 <ul className="pt-lines">
                   {items.map((i) => (
                     <li key={i.sku}>

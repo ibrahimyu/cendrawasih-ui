@@ -2,8 +2,8 @@ import type { ComponentProps, ReactNode } from 'react';
 import { cx } from './cx.js';
 
 interface Common {
-  /** primary: the main action. plume: the one yellow spotlight per view. Default primary */
-  variant?: 'primary' | 'plume' | 'secondary' | 'ghost' | 'danger';
+  /** primary: the main action. spotlight: the one call for attention per view. Default primary */
+  variant?: 'primary' | 'spotlight' | 'secondary' | 'ghost' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   iconStart?: ReactNode;
   iconEnd?: ReactNode;

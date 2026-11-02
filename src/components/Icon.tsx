@@ -2,7 +2,7 @@ import { createElement, type SVGProps } from 'react';
 import { cx } from './cx.js';
 import { ICONS } from './icons.js';
 
-// The Cendra icon set: 2px rounded-stroke outline icons on a 24px grid, drawn from Lucide.
+// The icon set: 2px rounded-stroke outline icons on a 24px grid, drawn from Lucide.
 // To add one, add it to scripts/build-icons.mjs and run npm run icons
 export type IconName = keyof typeof ICONS;
 export const iconNames = Object.keys(ICONS) as IconName[];

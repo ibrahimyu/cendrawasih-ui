@@ -1,0 +1,213 @@
+{
+  "$description": "A calm teal and sun palette, to show the system outside Cendra and to copy when starting a new brand.",
+  "$extensions": {
+    "co.cendra": {
+      "name": "Example",
+      "mark": "tokens/brands/example/mark.svg",
+      "fontFaces": []
+    }
+  },
+  "palette": {
+    "$type": "color",
+    "teal": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0588,
+          0.298,
+          0.3608
+        ],
+        "hex": "#0f4c5c"
+      },
+      "$description": "The main color. White on it 9.5:1."
+    },
+    "teal-hover": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0431,
+          0.2275,
+          0.2745
+        ],
+        "hex": "#0b3a46"
+      }
+    },
+    "teal-pressed": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0314,
+          0.1686,
+          0.2039
+        ],
+        "hex": "#082b34"
+      }
+    },
+    "coral": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9059,
+          0.4353,
+          0.3176
+        ],
+        "hex": "#e76f51"
+      },
+      "$description": "Warm second color. White on it for display text only (3.1:1)."
+    },
+    "coral-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.7137,
+          0.2706,
+          0.1686
+        ],
+        "hex": "#b6452b"
+      },
+      "$description": "Coral that carries white text (5.4:1)."
+    },
+    "sky": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.3725,
+          0.6588,
+          0.8275
+        ],
+        "hex": "#5fa8d3"
+      }
+    },
+    "navy": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.0431,
+          0.1333,
+          0.1882
+        ],
+        "hex": "#0b2230"
+      },
+      "$description": "Text on sky (6.3:1)."
+    },
+    "sun": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9569,
+          0.7725,
+          0.2588
+        ],
+        "hex": "#f4c542"
+      },
+      "$description": "The spotlight. Teal on it 5.8:1."
+    },
+    "sun-light": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9686,
+          0.8235,
+          0.4157
+        ],
+        "hex": "#f7d26a"
+      }
+    },
+    "sun-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8784,
+          0.6824,
+          0.1333
+        ],
+        "hex": "#e0ae22"
+      }
+    },
+    "green": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1647,
+          0.6157,
+          0.5608
+        ],
+        "hex": "#2a9d8f"
+      }
+    },
+    "green-deep": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1216,
+          0.4784,
+          0.4353
+        ],
+        "hex": "#1f7a6f"
+      },
+      "$description": "Green that carries white text (5.2:1)."
+    },
+    "white": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      }
+    }
+  },
+  "color": {
+    "$type": "color",
+    "primary": {
+      "$value": "{palette.teal}"
+    },
+    "primary-hover": {
+      "$value": "{palette.teal-hover}"
+    },
+    "primary-pressed": {
+      "$value": "{palette.teal-pressed}"
+    },
+    "on-primary": {
+      "$value": "{palette.white}"
+    },
+    "secondary": {
+      "$value": "{palette.coral}"
+    },
+    "secondary-strong": {
+      "$value": "{palette.coral-deep}"
+    },
+    "on-secondary": {
+      "$value": "{palette.white}"
+    },
+    "tertiary": {
+      "$value": "{palette.sky}"
+    },
+    "on-tertiary": {
+      "$value": "{palette.navy}"
+    },
+    "spotlight": {
+      "$value": "{palette.sun}"
+    },
+    "spotlight-hover": {
+      "$value": "{palette.sun-light}"
+    },
+    "spotlight-pressed": {
+      "$value": "{palette.sun-deep}"
+    },
+    "on-spotlight": {
+      "$value": "{palette.teal}"
+    },
+    "accent": {
+      "$value": "{palette.green}"
+    },
+    "accent-strong": {
+      "$value": "{palette.green-deep}"
+    },
+    "on-accent": {
+      "$value": "{palette.white}"
+    }
+  }
+}

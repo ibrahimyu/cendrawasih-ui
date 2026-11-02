@@ -14,7 +14,7 @@ export interface LogogramProps extends Omit<SVGProps<SVGSVGElement>, 'children'>
   title?: string;
 }
 
-/** The bird mark, drawn in currentColor */
+/** Cendra's bird mark, drawn in currentColor. For whichever brand is active, use BrandMark */
 export function Logogram({ size = 32, title, className, ...rest }: LogogramProps) {
   return (
     <svg

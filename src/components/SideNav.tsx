@@ -6,7 +6,7 @@ export interface NavItem {
   label: ReactNode;
   href: string;
   icon?: IconName;
-  /** The page you are on: takes the plume wash and aria-current="page" */
+  /** The page you are on: takes the selected wash and aria-current="page" */
   current?: boolean;
   /** A count of things to act on, as a feather badge */
   badge?: number | string;
@@ -34,7 +34,7 @@ export interface SideNavProps {
 
 const isSections = (items: NavItem[] | NavSection[]): items is NavSection[] => items.length > 0 && 'items' in items[0]!;
 
-/** The app's main navigation: 44px pill rows. The current page takes the plume wash, never the action fill */
+/** The app's main navigation: 44px pill rows. The current page takes the selected wash, never the action fill */
 export function SideNav({ items, linkAs: Link = 'a', onNavigate, className, ...aria }: SideNavProps) {
   const sections = isSections(items) ? items : [{ items }];
   return (

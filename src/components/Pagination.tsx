@@ -35,7 +35,7 @@ function pageList(page: number, count: number): (number | null)[] {
 }
 
 /**
- * Which rows are showing, and buttons to move between pages. The current page takes the plume wash
+ * Which rows are showing, and buttons to move between pages. The current page takes the selected wash
  * (you are here). On phones the page numbers give way to the range and the arrows. Nothing to page: renders nothing
  */
 export function Pagination({

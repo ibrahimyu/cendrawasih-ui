@@ -60,7 +60,7 @@ export interface AppShellProps {
 }
 
 /**
- * The frame of a Cendra app. From laptop width, a side column with the logo, the nav and whatever you
+ * The frame of an app. From laptop width, a side column with the logo, the nav and whatever you
  * put above and below it. Below, a top bar whose menu button opens the same column in a sheet
  */
 export function AppShell({

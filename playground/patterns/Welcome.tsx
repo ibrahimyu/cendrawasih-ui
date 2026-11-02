@@ -21,12 +21,12 @@ export function Welcome() {
         <Progress label="Getting set up" value={done} max={steps.length} valueText={`${done} of ${steps.length} steps done`} />
         <ol className="pt-steps">
           {steps.map((s, i) => (
-            <li key={s.title} className={`pt-step pt-step--${s.state}${s.state === 'current' ? ' cx-tone--yellow' : ''}`} aria-current={s.state === 'current' ? 'step' : undefined}>
+            <li key={s.title} className={`pt-step pt-step--${s.state}${s.state === 'current' ? ' cx-tone--spotlight' : ''}`} aria-current={s.state === 'current' ? 'step' : undefined}>
               <span className="pt-step__mark" aria-hidden>{s.state === 'done' ? <Icon name="check" size={18} /> : i + 1}</span>
               <div className="pt-step__text">
                 <div className="pt-step__title">
                   <h2 className="cx-subtitle">{s.title}</h2>
-                  {s.state === 'done' ? <Tag tone="green" soft>Done</Tag> : null}
+                  {s.state === 'done' ? <Tag tone="success">Done</Tag> : null}
                 </div>
                 <p className="cx-body-sm pt-soft">{s.body}</p>
                 {s.action ? <Button iconEnd={<Icon name="arrow-right" size={18} />}>{s.action}</Button> : null}

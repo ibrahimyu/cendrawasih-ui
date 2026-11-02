@@ -6,6 +6,11 @@
 .db-home { display: inline-flex; border-radius: var(--radius-quill); }
 .db-home:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 4px; }
 .db .db-logo--night { display: none; }
+/* The playground's Example brand has no logo files: its mark and name stand in */
+.db .db-home { text-decoration: none; }
+.db .db-brandname { display: none; align-items: center; gap: 8px; color: var(--primary-edge); font: 700 20px/1 var(--font-display); }
+:root[data-brand="example"] .db .db-home img { display: none; }
+[data-brand="example"] .db .db-brandname { display: inline-flex; }
 [data-theme="dark"] .db .db-logo--day { display: none; }
 [data-theme="dark"] .db .db-logo--night { display: block; }
 @media (prefers-color-scheme: dark) {
@@ -70,10 +75,10 @@
   flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
   border-radius: var(--radius-sm); font: 700 13px/1 var(--font-display);
 }
-.db-tile--orange { background: var(--orange); color: var(--on-yellow); }
-.db-tile--green { background: var(--green-deep); color: var(--on-green); }
-.db-tile--maroon { background: var(--maroon); color: var(--on-maroon); }
-.db-tile--red { background: var(--red-deep); color: var(--on-red); }
+.db-tile--primary { background: var(--primary-strong); color: var(--on-primary); }
+.db-tile--secondary { background: var(--secondary-strong); color: var(--on-secondary); }
+.db-tile--tertiary { background: var(--tertiary-strong); color: var(--on-tertiary); }
+.db-tile--accent { background: var(--accent-strong); color: var(--on-accent); }
 
 .db-table { overflow-x: auto; margin: 0 -8px; }
 .db-table table { width: 100%; min-width: 720px; border-collapse: collapse; }

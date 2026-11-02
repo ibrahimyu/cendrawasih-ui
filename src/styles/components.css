@@ -2,10 +2,11 @@
 
 @layer cendra.components {
   .cx-logogram { display: inline-block; flex: none; }
+  .cx-brandmark { display: inline-block; flex: none; background: currentColor; mask: var(--brand-mark) center / contain no-repeat; }
   .cx-icon { display: block; flex: none; }
 
   /* Button: a flat pill you press. Anything you can press is a pill; labels take the feather tip.
-     Primary is maroon on Day, yellow on Night; plume is the one yellow spotlight */
+     Primary is the action color; spotlight is the one call for attention per view */
   .cx-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
     min-height: var(--size-control); padding: 0 var(--space-6);
@@ -24,9 +25,9 @@
   .cx-btn--primary:hover { background: var(--action-hover); }
   .cx-btn--primary:active { background: var(--action-pressed); }
 
-  .cx-btn--plume { background: var(--yellow); color: var(--on-yellow); }
-  .cx-btn--plume:hover { background: var(--yellow-light); }
-  .cx-btn--plume:active { background: var(--yellow-deep); }
+  .cx-btn--spotlight { background: var(--spotlight); color: var(--on-spotlight); }
+  .cx-btn--spotlight:hover { background: var(--spotlight-hover); }
+  .cx-btn--spotlight:active { background: var(--spotlight-pressed); }
 
   .cx-btn--secondary { background: transparent; color: var(--ink); border-color: var(--line-control); }
   .cx-btn--secondary:hover { background: var(--fill-hover); border-color: var(--line-strong); }
@@ -36,40 +37,43 @@
   .cx-btn--ghost:hover { background: var(--fill-hover); }
   .cx-btn--ghost:active { background: var(--fill-pressed); }
 
-  .cx-btn--danger { background: var(--red-deep); color: var(--on-red); }
-  .cx-btn--danger:hover { background: var(--maroon); color: var(--on-maroon); }
-  .cx-btn--danger:active { background: var(--maroon-deep); color: var(--on-maroon); }
+  .cx-btn--danger { background: var(--danger-fill); color: var(--on-danger); }
+  .cx-btn--danger:hover { background: var(--danger-fill-hover); }
+  .cx-btn--danger:active { background: var(--danger-fill-pressed); }
 
   /* Disabled looks the same for every variant: a sunk fill and disabled ink, never faded with opacity */
   .cx-btn:is(:disabled, [aria-disabled="true"]) { background: var(--surface-sunk); color: var(--ink-disabled); border-color: var(--line); cursor: not-allowed; }
 
-  /* Tag: labels, never buttons */
+  /* Tag: labels, never buttons. Brand tones fill with their strong step; status tags are always soft */
   .cx-tag {
     display: inline-flex; align-items: center; gap: var(--space-1);
     min-height: 28px; padding: 0 var(--space-3); border-radius: var(--radius-feather);
     font-family: var(--font-display); font-size: 13px; font-weight: 600; line-height: 1.2; white-space: nowrap;
   }
-  .cx-tag--maroon { background: var(--maroon); color: var(--on-maroon); }
-  .cx-tag--red { background: var(--red-deep); color: var(--on-red); }
-  .cx-tag--green { background: var(--green-deep); color: var(--on-green); }
-  .cx-tag--yellow { background: var(--yellow); color: var(--on-yellow); }
-  .cx-tag--orange { background: var(--orange); color: var(--on-yellow); }
+  .cx-tag--primary { background: var(--primary-strong); color: var(--on-primary); }
+  .cx-tag--secondary { background: var(--secondary-strong); color: var(--on-secondary); }
+  .cx-tag--tertiary { background: var(--tertiary-strong); color: var(--on-tertiary); }
+  .cx-tag--spotlight { background: var(--spotlight-strong); color: var(--on-spotlight); }
+  .cx-tag--accent { background: var(--accent-strong); color: var(--on-accent); }
   .cx-tag--neutral { background: var(--surface-sunk); color: var(--ink); box-shadow: inset 0 0 0 var(--stroke-bold) var(--line); }
-  .cx-tag--soft.cx-tag--maroon { background: var(--surface-sunk); color: var(--ink); }
-  .cx-tag--soft.cx-tag--red { background: var(--tint-red); color: var(--danger); }
-  .cx-tag--soft.cx-tag--green { background: var(--tint-green); color: var(--success); }
-  .cx-tag--soft.cx-tag--yellow { background: var(--tint-yellow); color: var(--ink); }
-  .cx-tag--soft.cx-tag--orange { background: var(--tint-orange); color: var(--ink); }
+  .cx-tag--soft.cx-tag--primary { background: var(--primary-tint); color: var(--ink); }
+  .cx-tag--soft.cx-tag--secondary { background: var(--secondary-tint); color: var(--ink); }
+  .cx-tag--soft.cx-tag--tertiary { background: var(--tertiary-tint); color: var(--ink); }
+  .cx-tag--soft.cx-tag--spotlight { background: var(--spotlight-tint); color: var(--ink); }
+  .cx-tag--soft.cx-tag--accent { background: var(--accent-tint); color: var(--ink); }
+  .cx-tag--success { background: var(--success-tint); color: var(--success); }
+  .cx-tag--warning { background: var(--warning-tint); color: var(--warning); }
+  .cx-tag--danger { background: var(--danger-tint); color: var(--danger); }
 
-  /* Plume bar: the five feathers, in logo order */
+  /* Plume bar: the five brand roles, in order */
   .cx-plumebar { display: flex; height: 8px; width: 100%; }
   .cx-plumebar--thin { height: 6px; }
   .cx-plumebar > span { flex: 1; }
-  .cx-plumebar__maroon { background: var(--maroon); }
-  .cx-plumebar__red { background: var(--red); }
-  .cx-plumebar__orange { background: var(--orange); }
-  .cx-plumebar__yellow { background: var(--yellow); }
-  .cx-plumebar__green { background: var(--green); }
+  .cx-plumebar__primary { background: var(--primary); }
+  .cx-plumebar__secondary { background: var(--secondary); }
+  .cx-plumebar__tertiary { background: var(--tertiary); }
+  .cx-plumebar__spotlight { background: var(--spotlight); }
+  .cx-plumebar__accent { background: var(--accent); }
 
   /* Card: 2px line, no shadow. The plume shape is for the featured one */
   .cx-card {
@@ -90,24 +94,24 @@
   }
   .cx-card--plume .cx-card__media { border-radius: calc(var(--radius-plume) - var(--space-2)) var(--radius-quill); }
   .cx-card__media img { display: block; max-width: 100%; max-height: 144px; object-fit: contain; }
-  .cx-card__media--maroon { background: var(--maroon); color: var(--on-maroon); }
-  .cx-card__media--red { background: var(--red); color: var(--on-red); }
-  .cx-card__media--green { background: var(--green); color: var(--on-green); }
-  .cx-card__media--yellow { background: var(--yellow); color: var(--on-yellow); }
-  .cx-card__media--orange { background: var(--orange); color: var(--on-yellow); }
+  .cx-card__media--primary { background: var(--primary); color: var(--on-primary); }
+  .cx-card__media--secondary { background: var(--secondary); color: var(--on-secondary); }
+  .cx-card__media--tertiary { background: var(--tertiary); color: var(--on-tertiary); }
+  .cx-card__media--spotlight { background: var(--spotlight); color: var(--on-spotlight); }
+  .cx-card__media--accent { background: var(--accent); color: var(--on-accent); }
   .cx-card__eyebrow, .cx-card__title, .cx-card__body, .cx-card__footer { padding: 0 var(--space-1); }
   .cx-card__eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
   .cx-card__title { font-family: var(--font-display); font-size: 22px; line-height: 1.25; font-weight: 600; letter-spacing: -0.01em; }
   .cx-card__body { font-family: var(--font-text); font-size: 16px; line-height: 1.6; font-weight: 500; color: var(--ink-soft); }
   .cx-card__footer { display: flex; flex-wrap: wrap; gap: var(--space-3); padding-bottom: var(--space-1); }
 
-  /* Fill small, outline large. A tone gives a large box its outline (--cx-edge) and the second
-     plume color for its watermark (--cx-mark) */
-  .cx-tone--maroon { --cx-edge: var(--maroon-edge); --cx-mark: var(--red); }
-  .cx-tone--red { --cx-edge: var(--red); --cx-mark: var(--orange); }
-  .cx-tone--orange { --cx-edge: var(--orange); --cx-mark: var(--maroon-edge); }
-  .cx-tone--yellow { --cx-edge: var(--yellow); --cx-mark: var(--green); }
-  .cx-tone--green { --cx-edge: var(--green); --cx-mark: var(--yellow); }
+  /* Fill small, outline large. A tone gives a large box its outline (--cx-edge), the second plume
+     color for its watermark (--cx-mark), and the fill and text of a filled band (--cx-fill, --cx-on) */
+  .cx-tone--primary { --cx-edge: var(--primary-edge); --cx-mark: var(--primary-mark); --cx-fill: var(--primary); --cx-on: var(--on-primary); }
+  .cx-tone--secondary { --cx-edge: var(--secondary-edge); --cx-mark: var(--secondary-mark); --cx-fill: var(--secondary); --cx-on: var(--on-secondary); }
+  .cx-tone--tertiary { --cx-edge: var(--tertiary-edge); --cx-mark: var(--tertiary-mark); --cx-fill: var(--tertiary); --cx-on: var(--on-tertiary); }
+  .cx-tone--spotlight { --cx-edge: var(--spotlight-edge); --cx-mark: var(--spotlight-mark); --cx-fill: var(--spotlight); --cx-on: var(--on-spotlight); }
+  .cx-tone--accent { --cx-edge: var(--accent-edge); --cx-mark: var(--accent-mark); --cx-fill: var(--accent); --cx-on: var(--on-accent); }
   .cx-watermark {
     position: absolute; z-index: -1; pointer-events: none;
     right: -20px; bottom: -24px; width: 136px; height: 136px;
@@ -115,7 +119,7 @@
   }
   .cx-highlight {
     padding: 0 0.18em; border-radius: var(--radius-quill);
-    background: var(--yellow); color: var(--on-yellow);
+    background: var(--spotlight); color: var(--on-spotlight);
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
   }
 
@@ -135,7 +139,8 @@
   .cx-stat__value--alert { color: var(--danger); }
   .cx-stat__meta { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); }
 
-  /* Band: the logogram supergraphic. Outlined in layouts; filled for full-bleed marketing moments */
+  /* Band: the brand mark as a supergraphic. Outlined in layouts; filled for full-bleed marketing moments.
+     The mark is --brand-mark, masked over currentColor, so it takes the watermark color */
   .cx-band { position: relative; overflow: hidden; isolation: isolate; }
   .cx-band:not(.cx-band--filled) {
     background: var(--surface); color: var(--ink);
@@ -144,23 +149,24 @@
   .cx-band__plume {
     position: absolute; z-index: -1; pointer-events: none;
     height: 150%; width: auto; aspect-ratio: 1; top: -22%; left: 54%;
+    background: currentColor; mask: var(--brand-mark) center / contain no-repeat;
   }
   .cx-band:not(.cx-band--filled) .cx-band__plume { color: var(--cx-mark); opacity: var(--opacity-watermark); }
   .cx-band__inner {
     position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5);
     max-width: min(600px, 50%); padding: var(--space-8) var(--space-7);
   }
-  .cx-band--filled { color: var(--on-maroon); }
+  /* Filled: the tone's color as the ground, its on- color for text and focus, and the spotlight as the
+     supergraphic. Primary and spotlight grounds take their tone pair's mark instead */
+  .cx-band--filled { background: var(--cx-fill); color: var(--cx-on); --focus: var(--cx-on); --cx-band-mark: var(--spotlight); }
   .cx-band--filled .cx-band__inner { padding: var(--space-9) var(--space-6); }
-  .cx-band--filled.cx-band--night { background: var(--maroon); --focus: var(--yellow); }
-  .cx-band--filled.cx-band--sunrise { background: var(--red); --focus: var(--white); }
-  .cx-band--filled.cx-band--forest { background: var(--green); --focus: var(--white); }
-  .cx-band--filled.cx-band--night .cx-band__plume { color: var(--red); }
-  .cx-band--filled.cx-band--sunrise .cx-band__plume, .cx-band--filled.cx-band--forest .cx-band__plume { color: var(--yellow); }
-  .cx-band--filled .cx-btn--primary { background: var(--white); color: var(--maroon); }
-  .cx-band--filled .cx-btn--primary:hover { background: var(--yellow); color: var(--on-yellow); }
-  .cx-band--filled .cx-btn--secondary { color: var(--white); border-color: var(--white); }
-  .cx-band--filled .cx-btn--secondary:hover { background: var(--white); color: var(--maroon); }
+  .cx-band--filled.cx-tone--primary { --focus: var(--spotlight); --cx-band-mark: var(--cx-mark); }
+  .cx-band--filled.cx-tone--spotlight { --cx-band-mark: var(--cx-mark); }
+  .cx-band--filled .cx-band__plume { color: var(--cx-band-mark); }
+  .cx-band--filled .cx-btn--primary { background: var(--cx-on); color: var(--cx-fill); }
+  .cx-band--filled .cx-btn--primary:hover { background: var(--spotlight); color: var(--on-spotlight); }
+  .cx-band--filled .cx-btn--secondary { color: var(--cx-on); border-color: var(--cx-on); }
+  .cx-band--filled .cx-btn--secondary:hover { background: var(--cx-on); color: var(--cx-fill); }
   @media (max-width: 599px) {
     .cx-band__plume { height: 280px; top: -96px; left: auto; right: -96px; }
     .cx-band__inner { max-width: none; padding: var(--space-7) var(--space-5); }
@@ -193,7 +199,7 @@
     clip-path: inset(50%); white-space: nowrap; border: 0;
   }
 
-  /* Select: a native select in field clothing, with Cendra's chevron */
+  /* Select: a native select in field clothing, with the system's chevron */
   .cx-select, .cx-search { position: relative; display: block; }
   .cx-select__control { appearance: none; padding-right: calc(var(--space-4) + 28px); cursor: pointer; }
   .cx-select__chevron { position: absolute; right: var(--space-4); top: 50%; translate: 0 -50%; pointer-events: none; color: var(--ink-soft); }
@@ -266,9 +272,9 @@
     padding: var(--space-4) var(--space-5); border-radius: var(--radius-md); color: var(--ink);
   }
   .cx-notice--info { background: var(--surface-sunk); box-shadow: inset 0 0 0 var(--stroke-bold) var(--line); }
-  .cx-notice--success { background: var(--tint-green); }
-  .cx-notice--warning { background: var(--tint-yellow); }
-  .cx-notice--danger { background: var(--tint-red); }
+  .cx-notice--success { background: var(--success-tint); }
+  .cx-notice--warning { background: var(--warning-tint); }
+  .cx-notice--danger { background: var(--danger-tint); }
   .cx-notice__icon { padding-top: 1px; color: var(--ink); }
   .cx-notice--success .cx-notice__icon { color: var(--success); }
   .cx-notice--warning .cx-notice__icon { color: var(--warning); }
@@ -281,7 +287,7 @@
   .cx-notice { container-type: inline-size; }
   @container (max-width: 480px) { .cx-notice__action { grid-column: 2; grid-row: 2; justify-self: start; } }
 
-  /* Tabs: a pill track; the selected tab takes the plume wash (selected), never the action fill. Counts are feather badges */
+  /* Tabs: a pill track; the selected tab takes the selected wash, never the action fill. Counts are feather badges */
   .cx-tabs {
     display: inline-flex; align-self: flex-start; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
     padding: var(--space-1); background: var(--surface-sunk);
@@ -493,7 +499,7 @@
   .cx-table__sort-icon--on { color: var(--ink); }
   .cx-table__table .cx-table__empty { height: auto; padding: var(--space-8) var(--space-5); text-align: center; color: var(--ink-soft); }
 
-  /* Pagination: pill buttons; the current page takes the plume wash, like a selected tab */
+  /* Pagination: pill buttons; the current page takes the selected wash, like a selected tab */
   .cx-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5); }
   .cx-pagination__range { margin: 0; font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
   .cx-pagination__pages { display: flex; align-items: center; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
@@ -511,7 +517,7 @@
   .cx-pagination__gap { min-width: 24px; text-align: center; color: var(--ink-soft); font-family: var(--font-display); font-weight: 600; }
   @media (max-width: 599px) { .cx-pagination__page, .cx-pagination__gap { display: none; } }
 
-  /* Filter chip: a toggle pill. On, it takes the plume wash with an on-selected edge and a check */
+  /* Filter chip: a toggle pill. On, it takes the selected wash with an on-selected edge and a check */
   .cx-chip {
     display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-control-sm); padding: 0 var(--space-4);
     border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer;
@@ -536,7 +542,7 @@
   .cx-filterbar__status { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
   .cx-filterbar__result { margin: 0; font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
-  /* Side nav: 44px pill rows. The current page takes the plume wash; counts are feather badges */
+  /* Side nav: 44px pill rows. The current page takes the selected wash; counts are feather badges */
   .cx-sidenav { display: flex; flex-direction: column; gap: var(--space-5); }
   .cx-sidenav__section { display: flex; flex-direction: column; gap: var(--space-1); }
   .cx-sidenav__heading {
@@ -559,7 +565,7 @@
     min-width: 24px; padding: 2px var(--space-2); box-sizing: border-box; border-radius: var(--radius-feather);
     background: var(--surface-sunk); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
   }
-  .cx-sidenav__badge--alert { background: var(--red-deep); color: var(--on-red); }
+  .cx-sidenav__badge--alert { background: var(--danger-fill); color: var(--on-danger); }
 
   /* Top bar: the app's frame below laptop width. Sticky, on surface, drawn by a 2px line */
   .cx-topbar {
@@ -643,12 +649,12 @@
   }
   .cx-progress--success { --cx-progress: var(--success); }
   .cx-progress--danger { --cx-progress: var(--danger); }
-  /* Nobody knows how long: a segment sweeps across at an even speed. The one loop in Cendra, and the one
+  /* Nobody knows how long: a segment sweeps across at an even speed. The one loop in the system, and the one
      linear timing; still and hatched under reduced motion */
   .cx-progress--indeterminate .cx-progress__fill { width: 40%; animation: cx-sweep 1.4s linear infinite; }
   @keyframes cx-sweep { from { translate: -100% 0; } to { translate: 250% 0; } }
 
-  /* Skeleton: still blocks in the shape of what is coming. No shimmer: Cendra doesn't loop */
+  /* Skeleton: still blocks in the shape of what is coming. No shimmer: nothing loops */
   .cx-skeleton { display: block; background: var(--fill-pressed); border-radius: var(--radius-quill); }
   .cx-skeleton-lines { display: flex; flex-direction: column; gap: 10px; padding: 5px 0; }
   .cx-skeleton--text { height: 12px; width: 100%; }
@@ -682,9 +688,9 @@
     padding: var(--space-3) var(--layout-margin-phone); color: var(--ink);
   }
   .cx-banner--info { background: var(--surface-sunk); border-bottom: var(--stroke-bold) solid var(--line); }
-  .cx-banner--success { background: var(--tint-green); }
-  .cx-banner--warning { background: var(--tint-yellow); }
-  .cx-banner--danger { background: var(--tint-red); }
+  .cx-banner--success { background: var(--success-tint); }
+  .cx-banner--warning { background: var(--warning-tint); }
+  .cx-banner--danger { background: var(--danger-tint); }
   .cx-banner__icon { display: flex; align-self: start; padding-top: 2px; color: var(--ink); }
   .cx-banner--success .cx-banner__icon { color: var(--success); }
   .cx-banner--warning .cx-banner__icon { color: var(--warning); }
@@ -699,7 +705,7 @@
   }
   @media (min-width: 1024px) { .cx-banner { padding-inline: var(--layout-margin-laptop); } }
 
-  /* Avatar: small, so filled. Initials on a plume fill picked from the name, or a photo. People are circles,
+  /* Avatar: small, so filled. Initials on a brand tone picked from the name, or a photo. People are circles,
      organizations rounded squares */
   .cx-avatar {
     --cx-av: 32px;
@@ -715,11 +721,11 @@
   .cx-avatar--org { border-radius: var(--radius-sm); }
   .cx-avatar--org.cx-avatar--sm { border-radius: var(--radius-quill); }
   .cx-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .cx-avatar--maroon { background: var(--maroon); color: var(--on-maroon); }
-  .cx-avatar--red { background: var(--red-deep); color: var(--on-red); }
-  .cx-avatar--green { background: var(--green-deep); color: var(--on-green); }
-  .cx-avatar--yellow { background: var(--yellow); color: var(--on-yellow); }
-  .cx-avatar--orange { background: var(--orange); color: var(--on-yellow); }
+  .cx-avatar--primary { background: var(--primary-strong); color: var(--on-primary); }
+  .cx-avatar--secondary { background: var(--secondary-strong); color: var(--on-secondary); }
+  .cx-avatar--tertiary { background: var(--tertiary-strong); color: var(--on-tertiary); }
+  .cx-avatar--spotlight { background: var(--spotlight-strong); color: var(--on-spotlight); }
+  .cx-avatar--accent { background: var(--accent-strong); color: var(--on-accent); }
 
   /* Avatar group: overlapping, each ringed in the surface; the rest is a feather count */
   .cx-avatar-group { --cx-av: 32px; display: inline-flex; align-items: center; }

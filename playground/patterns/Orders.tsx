@@ -94,7 +94,7 @@ export function Orders() {
                 { key: 'id', header: 'Order', sort: true, cell: (o) => <a className="pt-link" href="#order">{o.id}</a> },
                 { key: 'buyer', header: 'Buyer', sort: true },
                 { key: 'channel', header: 'Channel' },
-                { key: 'status', header: 'Status', cell: (o) => <Tag tone={statusTone[o.status]} soft>{o.status}</Tag> },
+                { key: 'status', header: 'Status', cell: (o) => <Tag tone={statusTone[o.status]}>{o.status}</Tag> },
                 { key: 'total', header: 'Total', numeric: true, sort: true, cell: (o) => `Rp ${rupiah.format(o.total)}` },
                 { key: 'time', header: 'Time', numeric: true, sort: true },
               ]}
