@@ -6,7 +6,7 @@
 
 /* Playground chrome */
 .pg-bar {
-  position: fixed; z-index: 10; right: 16px; bottom: 16px;
+  position: fixed; z-index: 10; left: 16px; bottom: 16px;
   display: flex; align-items: center; gap: 12px; padding: 6px 6px 6px 8px;
   background: var(--surface-raised); border: 2px solid var(--line); border-radius: 999px;
   box-shadow: var(--shadow-overlay); font: 600 13px/1 var(--font-display);

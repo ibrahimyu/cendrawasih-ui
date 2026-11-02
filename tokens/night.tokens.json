@@ -48,7 +48,7 @@
         ],
         "hex": "#1c1c1c"
       },
-      "$description": "Small lifts on Night: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline."
+      "$description": "Small lifts on Night: a hovered tab. Cards, panels and overlays stay on surface and are drawn by their outline."
     },
     "fill-hover": {
       "$value": "{color.surface-raised}",
@@ -343,7 +343,7 @@
           "unit": "px"
         }
       },
-      "$description": "Menus, popovers and dialogs only. Cards on the page use borders, not shadows."
+      "$description": "Things that float only: menus, dialogs, sheets and toasts. Cards on the page use borders, not shadows."
     }
   }
 }

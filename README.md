@@ -10,7 +10,7 @@ The rules (principles, color pairings, type, voice) are in [docs/design-language
 | --- | --- |
 | `tokens/*.tokens.json` | The source of truth, in the W3C Design Tokens format (DTCG 2025.10). `brand` holds the plumage, spacing, radii and type; `day` and `night` hold the theme colors under the same keys. |
 | `src/styles/` | `tokens.css` and `tailwind.css` are generated from the tokens. `components.css` styles the components. `index.css` brings them together. |
-| `src/components/` | React 19 components: Button, Tag, PlumeBar, Card, Band, TextField, Notice, Tabs, Stat, Icon, Logogram. |
+| `src/components/` | React 19 components: Button, Tag, PlumeBar, Card, Band, TextField, Select, SearchField, Checkbox, RadioGroup, Switch, Notice, Tabs, Dialog, Sheet, Menu, Tooltip, Toast, Stat, Icon, Logogram. |
 | `src/fonts/` | Google Sans (variable, 400 to 700) and Karla, self-hosted as woff2. |
 | `assets/` | Logos (SVG) and illustrations (PNG). |
 | `playground/` | A sync dashboard mockup and a component gallery, run with `npm run dev`. |
@@ -46,7 +46,9 @@ import { Band, Button, Stat } from '@cendra/ui';
 <Stat tone="green" icon="payments" label="Payments matched" value="Rp 48,2 jt" />
 ```
 
-`Tabs` and `TextField` hold state and are marked `'use client'`, so they work in React Server Component apps. The others render on the server.
+Components that hold state or use the browser (the form controls, Tabs and the overlays) are marked `'use client'`, so they work in React Server Component apps. The others render on the server.
+
+For toasts, put `<ToastProvider>` around the app once and call `useToast()` where you need one.
 
 ### Any stack (Vue, Nuxt, plain HTML)
 
@@ -76,4 +78,4 @@ Everything ships inside the `cendra` cascade layer, so your own unlayered CSS al
 
 ## Browser support
 
-The styles rely on `light-dark()`, cascade layers and container query units. All three are Baseline: Chrome 123, Safari 17.5 and Firefox 120 or later.
+The styles rely on `light-dark()`, cascade layers and container query units, and Menu and Tooltip on the popover API. All are Baseline: Chrome 123, Safari 17.5 and Firefox 125 or later. Dialogs, menus and tooltips animate out only where the browser can animate the top layer (Chrome); elsewhere they close at once.

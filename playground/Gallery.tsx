@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { Band, Button, Card, Checkbox, ChoiceGroup, Icon, iconNames, Logogram, Notice, PlumeBar, RadioGroup, SearchField, Select, Stat, Switch, Tabs, Tag, TextField, type Plume } from '@cendra/ui';
+import { useState, type ReactNode } from 'react';
+import { Band, Button, Card, Checkbox, ChoiceGroup, Dialog, Icon, iconNames, Logogram, Menu, Notice, PlumeBar, RadioGroup, SearchField, Select, Sheet, Stat, Switch, Tabs, Tag, TextField, ToastProvider, Tooltip, useToast, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import './gallery.css';
 
@@ -23,8 +23,75 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
+function Overlays() {
+  const [dialog, setDialog] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [sheet, setSheet] = useState(false);
+  const toast = useToast();
+  const toasts = () => {
+    toast({ tone: 'success', title: '1.284 orders synced', body: 'Shopee → Accurate, 09:42 WIB' });
+    toast({ tone: 'info', title: 'Mapping archived', action: { label: 'Undo', onClick: () => toast({ title: 'Mapping restored' }) } });
+    toast({ tone: 'danger', title: '12 orders failed to sync', body: 'The SKU is missing in Accurate.' });
+  };
+  return (
+    <>
+      <Section title="Dialog and Sheet">
+        <p className="cx-body-sm gl-note">Native modal dialogs on the scrim. Escape, the close button or a click outside closes them; focus goes back to the button.</p>
+        <div className="gl-row">
+          <Button variant="secondary" onClick={() => setDialog(true)}>Rename mapping</Button>
+          <Button variant="danger" onClick={() => setAlert(true)}>Disconnect Xendit</Button>
+          <Button variant="secondary" iconStart={<Icon name="filter" />} onClick={() => setSheet(true)}>Filters</Button>
+          <Button variant="ghost" onClick={toasts}>Show toasts</Button>
+        </div>
+        <Dialog open={dialog} onClose={() => setDialog(false)} title="Rename mapping"
+          actions={<><Button variant="ghost" onClick={() => setDialog(false)}>Cancel</Button><Button onClick={() => setDialog(false)}>Save</Button></>}>
+          <TextField label="Name" defaultValue="Shopee orders → Accurate invoices" hint="Only your team sees this name." />
+        </Dialog>
+        <Dialog alert size="sm" open={alert} onClose={() => setAlert(false)} title="Disconnect Xendit?"
+          description="Payments stop matching at once. Matches made so far stay in Accurate."
+          actions={<><Button variant="ghost" data-autofocus onClick={() => setAlert(false)}>Keep connected</Button><Button variant="danger" onClick={() => setAlert(false)}>Disconnect</Button></>} />
+        <Sheet open={sheet} onClose={() => setSheet(false)} title="Filters"
+          actions={<><Button variant="ghost" onClick={() => setSheet(false)}>Clear all</Button><Button onClick={() => setSheet(false)}>Show 128 orders</Button></>}>
+          <Select label="Channel" defaultValue="all" options={[{ value: 'all', label: 'All channels' }, { value: 'shopee', label: 'Shopee' }, { value: 'tokopedia', label: 'Tokopedia' }]} />
+          <ChoiceGroup legend="Status">
+            <Checkbox label="Synced" defaultChecked />
+            <Checkbox label="Waiting" defaultChecked />
+            <Checkbox label="Failed" />
+          </ChoiceGroup>
+          <RadioGroup legend="Date" defaultValue="7" options={[{ value: '1', label: 'Today' }, { value: '7', label: 'Last 7 days' }, { value: '30', label: 'Last 30 days' }]} />
+        </Sheet>
+      </Section>
+
+      <Section title="Menu and Tooltip">
+        <p className="cx-body-sm gl-note">Menus open from a button; arrow keys move, Escape closes. Tooltips are filled ink labels whose feather tip points at the trigger.</p>
+        <div className="gl-row">
+          <Menu aria-label="Export" items={[
+            { id: 'csv', label: 'Download CSV', icon: 'download' },
+            { id: 'xlsx', label: 'Download Excel', icon: 'download' },
+            { id: 'copy', label: 'Copy link', icon: 'link' },
+            { id: 'email', label: 'Email to accountant', icon: 'mail', disabled: true },
+          ]} trigger={(p) => <Button {...p} variant="secondary" iconEnd={<Icon name="chevron-down" />}>Export</Button>} />
+          <Menu aria-label="Mapping actions" align="end" items={[
+            { id: 'edit', label: 'Edit mapping', icon: 'edit' },
+            { id: 'copy', label: 'Duplicate', icon: 'copy' },
+            { separator: true },
+            { id: 'delete', label: 'Delete mapping', icon: 'delete', danger: true },
+          ]} trigger={(p) => <Button {...p} variant="ghost" aria-label="Mapping actions"><Icon name="more" /></Button>} />
+          <Tooltip content="Sync now" kind="label">
+            {(p) => <Button {...p} variant="secondary"><Icon name="sync" /></Button>}
+          </Tooltip>
+          <Tooltip content="Every 5 minutes, 06:00–23:00 WIB">
+            {(p) => <Button {...p} variant="ghost" iconStart={<Icon name="clock" />}>Sync schedule</Button>}
+          </Tooltip>
+        </div>
+      </Section>
+    </>
+  );
+}
+
 export function Gallery() {
   return (
+    <ToastProvider>
     <div className="gl">
       <PlumeBar />
       <main className="gl-main">
@@ -211,6 +278,8 @@ export function Gallery() {
           <Tabs aria-label="Example" items={[{ id: 'a', label: 'All', count: 128 }, { id: 'o', label: 'Orders' }, { id: 'f', label: 'Failed', count: 12 }]} />
         </Section>
 
+        <Overlays />
+
         <Section title="Icon and logogram">
           <div className="gl-row">
             {iconNames.map((n) => <span key={n} className="gl-icon"><Icon name={n} size={24} />{n}</span>)}
@@ -224,5 +293,6 @@ export function Gallery() {
         </Section>
       </main>
     </div>
+    </ToastProvider>
   );
 }

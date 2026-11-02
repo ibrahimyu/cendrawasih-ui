@@ -88,9 +88,9 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 
 - Radii: `radius-pill` for buttons, tabs and nav items; `radius-feather` (three 10px corners and a 2px tip) for tags, badges and counts; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box.
 - Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
-- Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts (a hovered tab) and for menus and dialogs.
+- Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts, like a hovered tab.
 - Selected: the active tab and nav item take `selected` (a pale plume wash) with `on-selected` text: maroon on Day, yellow on Night. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other.
-- Elevation: no shadows on things that sit on the page. `shadow-overlay` is for menus and dialogs. Buttons are flat: no ledges, no drop shadows.
+- Elevation: no shadows on things that sit on the page. Things that float (menus, dialogs, sheets, toasts) sit on `surface` like everything else, with a 2px `line` border and `shadow-overlay`; that shadow is what lifts them, never a grey fill or a blur. Tooltips are the exception: small labels, so they are filled in `ink`. Buttons are flat: no ledges, no drop shadows.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones. Page structure follows the grid under Layout.
 
 ## Layout
@@ -245,7 +245,7 @@ The source of truth is `tokens/` (W3C design token format). `npm run tokens` com
 | `maroon-edge` | `maroon` | `#b8434a` | Maroon as an outline: the border of maroon-toned cards, stats and bands. Lifts to a lighter maroon on Night so it still shows (3.5:1 on surface). |
 | `surface` | `white` | `#111111` | Page background. |
 | `surface-sunk` | `#f5f5f5` | `#0a0a0a` | Wells, table stripes and quiet section backgrounds. A true grey, never tinted. |
-| `surface-raised` | `white` | `#1c1c1c` | Small lifts: a hovered tab, menus and dialogs. Cards and panels stay on surface and are drawn by their outline, in both themes. |
+| `surface-raised` | `white` | `#1c1c1c` | Small lifts: a hovered tab. Cards, panels and overlays stay on surface and are drawn by their outline, in both themes. |
 | `fill-hover` | `surface-sunk` | `surface-raised` | Hover wash behind neutral controls: secondary and ghost buttons, nav items, menu rows. |
 | `fill-pressed` | `#e6e6e6` | `#2b2b2b` | Pressed wash behind neutral controls, one step past fill-hover. |
 | `ink` | `#121212` | `#f5f5f5` | Primary text and icons on every surface and tint. A neutral near-black (17:1+ on Day surfaces). |
@@ -344,7 +344,7 @@ Fonts are self-hosted in `src/fonts/`: Google Sans (variable, 400 to 700) and Ka
 | `ease-out` | cubic-bezier(0.2, 0, 0, 1) | Quick start, soft landing. For everything that changes, moves or appears. |
 | `ease-in` | cubic-bezier(0.4, 0, 1, 1) | Slow start, quick exit. Only for things leaving the screen, with duration-fast. |
 | `radius-feather` | `radius-sm radius-sm radius-sm radius-nib` | Tags, badges and counts: three round corners and one sharp tip. Never on anything clickable. |
-| `shadow-overlay` | Day and Night pair | Menus, popovers and dialogs only. Cards on the page use borders, not shadows. |
+| `shadow-overlay` | Day and Night pair | Things that float only: menus, dialogs, sheets and toasts. Cards on the page use borders, not shadows. |
 <!-- tokens:end -->
 
 ## Components
@@ -683,6 +683,115 @@ Arrow keys, Home and End move between tabs.
 - Do use `count` for things a person should act on (errors, unread), in tabular figures.
 - Don't use Tabs for navigation between unrelated pages; that is the app's nav.
 - Don't put more than five items in the track; on phones it scrolls sideways inside itself.
+
+### Dialog
+
+A modal box in the middle of the screen, for a short task or a decision that has to be made before going on: rename something, confirm a disconnect. Built on the native `<dialog>`, so focus stays inside while it is open, Escape closes it, and focus goes back to the button that opened it.
+
+#### Anatomy
+
+`surface` with a 2px `line` border, `radius-lg` and `shadow-overlay`, on the `scrim`. A title in the title style with a round close button beside it, an optional description in `ink-soft`, the body, and the actions bottom right. It opens over `duration-slow`, rising 8px, and leaves over `duration-fast`. On phones the actions stretch to share the width.
+
+#### You provide
+
+- `open` and `onClose`. `onClose` runs on Escape, the close button and a click on the scrim.
+- `title`: the question or the task, in a few words. `description`: one or two sentences, read out when it opens.
+- `actions`: the buttons, with the main one last. `size`: `sm` (400px) for confirmations, `md` (560px, the default), `lg` (720px).
+- `alert` for a confirmation that needs an answer. It becomes an `alertdialog`, and a click on the scrim no longer closes it.
+- `data-autofocus` on the control that should take focus first. On a destructive confirmation, that is the safe choice.
+- `closeLabel` to translate "Close".
+
+#### Do and don't
+
+- Do name the action on the button: *Disconnect*, not *OK*. The safe choice says what it keeps: *Keep connected*.
+- Do keep it to one task. If it needs scrolling or more than a few fields, use a Sheet or a page.
+- Don't open a dialog from a dialog.
+- Don't use a dialog to report that something worked; use a Toast.
+
+### Sheet
+
+A modal panel from the edge of the screen, for work that needs more room than a dialog but keeps the page in view behind it: filters, a record's details, a mapping's settings.
+
+#### Anatomy
+
+The same parts as Dialog. `side="end"` is a full-height panel up to 480px wide, coming in from the right with its two inner corners rounded. `side="bottom"` rises from the bottom edge, up to 90% of the screen height. On phones every sheet is a bottom sheet. The body scrolls; the actions stay pinned under a 2px `line`.
+
+#### You provide
+
+- `open`, `onClose`, `title`, `children`, `actions` and `closeLabel`, as for Dialog.
+- `side`: `end` (the default) or `bottom`.
+
+#### Do and don't
+
+- Do put the action that applies the sheet last and say what it does: *Show 128 orders*.
+- Don't use a sheet for navigation; that is the app's nav.
+- Don't stack a sheet on a sheet.
+
+### Menu
+
+A list of actions that opens from a button: export options, the actions on a row behind a *more* button. Built on the native popover, so it sits above everything and closes on Escape or a click outside.
+
+#### Anatomy
+
+`surface` with a 2px `line` border, `radius-md` and `shadow-overlay`, 200 to 320px wide, 6px under its button. It flips above when there is no room below. Rows are 44px pills with an optional 20px icon. They take the `fill-hover` wash on hover and keyboard focus, and the focus ring inside the pill. Destructive rows are in `danger`, after a 2px `line` separator. Disabled rows are in `ink-disabled` and stay in the list.
+
+#### You provide
+
+- `trigger`: a function that gets the props the button needs and returns it, usually a Button: `trigger={(p) => <Button {...p}>Export</Button>}`.
+- `items`: `[{ id, label, icon?, danger?, disabled?, onSelect }]`, with `{ separator: true }` between groups.
+- `aria-label` naming the menu. `align="end"` lines the menu up with the button's right edge, for buttons on the right of a row.
+
+Enter, Space, Arrow Down or Arrow Up opens it. Arrow keys, Home and End move between rows. Escape and Tab close it, and focus goes back to the button.
+
+#### Do and don't
+
+- Do start each label with a verb: *Download CSV*, *Duplicate*, *Delete mapping*.
+- Do give an icon-only trigger an `aria-label` and a Tooltip.
+- Don't put more than about eight rows in a menu, or nest menus.
+- Don't use a Menu to pick a value in a form; that is a Select.
+
+### Tooltip
+
+A short label that appears on hover and keyboard focus. Mostly it names an icon-only button. It is a label, not a button, so it is filled (`ink` with `surface` text, which flips on Night) and takes the feather tip. The tip is the corner that points at the trigger.
+
+#### Anatomy
+
+13px label style, padding 6 × 12px, up to 240px wide. It sits 6px above the trigger, starting at its middle, and flips below or to the other side when there is no room. The sharp corner always faces the trigger. It appears after 400ms on hover and at once on keyboard focus, fading in over `duration-fast`. Escape hides it without moving focus, and the pointer can move onto it without it going away.
+
+#### You provide
+
+- `content`: plain text, a few words.
+- `children`: a function that gets the props the trigger needs: `{(p) => <Button {...p}>…</Button>}`.
+- `kind="label"` when the tooltip is the trigger's name (icon-only buttons); the default `description` adds detail to a trigger that already has a name.
+
+#### Do and don't
+
+- Do put a tooltip on every icon-only button.
+- Don't put anything a person needs only in a tooltip. Touch screens never show them.
+- Don't put links or buttons in a tooltip, or put a tooltip on something that can't take focus, like a tag or plain text.
+
+### Toast
+
+A short message about something that just happened in the background, or an action that can be undone: *1.284 orders synced*, *Mapping archived · Undo*. It is a floating Notice that goes away by itself.
+
+#### Anatomy
+
+`surface` with a 2px `line` border, `radius-md` and `shadow-overlay`, up to 400px wide. Toasts stack bottom right on laptops (32px in) and bottom center on phones, three at most, newest at the bottom. The icon takes the status color, as in Notice, and the text stays `ink`. There is an optional `sm` secondary action and a round close button. Toasts rise 8px as they come in. The region is a polite live region, so toasts are read out; danger toasts are announced at once.
+
+#### You provide
+
+- A `ToastProvider` around the app. `useToast()` returns the function that shows one.
+- `toast({ tone, title, body?, action?, duration? })`. `tone` is `info`, `success`, `warning` or `danger`. `action` is `{ label, onClick }`.
+- Timing: six seconds by default, ten with an action. Danger toasts stay until closed. The countdown pauses while the pointer or focus is on the toasts.
+- `label` and `closeLabel` on the provider to translate "Notifications" and "Dismiss".
+
+#### Do and don't
+
+- Do lead with the thing and the number, as in Notice.
+- Do offer Undo instead of asking for confirmation, when the action can be undone.
+- Don't make the toast's action the only way to do something; it disappears.
+- Don't toast errors that block work on the current screen; put a Notice or a field error where the problem is.
+- Don't show a toast while a dialog is open. Close the dialog first; the toast confirms what it did.
 
 ### Icon
 

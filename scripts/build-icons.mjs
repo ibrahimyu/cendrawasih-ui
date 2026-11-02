@@ -16,7 +16,7 @@ const set = {
   // Actions
   search: 'Search', add: 'Plus', close: 'X', check: 'Check', edit: 'Pencil', copy: 'Copy',
   delete: 'Trash2', download: 'Download', upload: 'Upload', filter: 'Filter', external: 'ExternalLink',
-  show: 'Eye', hide: 'EyeOff',
+  show: 'Eye', hide: 'EyeOff', more: 'Ellipsis',
   // Direction
   'arrow-right': 'ArrowRight', 'chevron-down': 'ChevronDown', 'chevron-right': 'ChevronRight',
 };
