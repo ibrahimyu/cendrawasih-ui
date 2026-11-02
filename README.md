@@ -93,3 +93,7 @@ Everything ships inside the `cendra` cascade layer, so your own unlayered CSS al
 ## Browser support
 
 The styles rely on `light-dark()`, cascade layers and container query units, and Menu and Tooltip on the popover API. All are Baseline: Chrome 123, Safari 17.5 and Firefox 125 or later. Dialogs, menus and tooltips animate out only where the browser can animate the top layer (Chrome); elsewhere they close at once.
+
+## License
+
+The code, tokens and docs are [MIT](LICENSE). Cendra's name, logos, bird mark and illustrations are not: they stay Cendra's, so build your own products on the system with your own brand (start from the Example brand). See [TRADEMARKS.md](TRADEMARKS.md). The fonts are under the SIL Open Font License and the icons come from Lucide under ISC; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

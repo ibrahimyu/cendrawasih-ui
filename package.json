@@ -3,6 +3,7 @@
   "version": "0.2.0",
   "description": "Cendrawasih UI: a design language as tokens, CSS and React components, with Cendra as its first brand.",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "sideEffects": [
     "**/*.css"
@@ -25,7 +26,9 @@
     "tokens",
     "assets",
     "docs",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "TRADEMARKS.md",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "scripts": {
     "dev": "vite",
