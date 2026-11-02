@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from 'react';
-import { Band, Button, Card, Checkbox, ChoiceGroup, Dialog, Icon, iconNames, Logogram, Menu, Notice, PlumeBar, RadioGroup, SearchField, Select, Sheet, Stat, Switch, Tabs, Tag, TextField, ToastProvider, Tooltip, useToast, type Plume } from '@cendra/ui';
+import { useMemo, useState, type ReactNode } from 'react';
+import { Band, Button, Card, Checkbox, ChoiceGroup, Dialog, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, RadioGroup, SearchField, Select, Sheet, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, Tooltip, useToast, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import './gallery.css';
 
@@ -20,6 +20,67 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
       <h2 className="cx-title">{title}</h2>
       {children}
     </section>
+  );
+}
+
+type Status = 'Synced' | 'Waiting' | 'Failed';
+interface Order { id: string; channel: string; buyer: string; total: number; status: Status; time: string }
+const buyers = ['Toko Sinar Abadi', 'CV Maju Jaya', 'Rina Wulandari', 'Budi Santoso', 'PT Sumber Rejeki', 'Dewi Lestari', 'Agus Pratama'];
+const statuses: Status[] = ['Synced', 'Synced', 'Waiting', 'Synced', 'Failed', 'Synced', 'Waiting'];
+const orders: Order[] = Array.from({ length: 23 }, (_, i) => ({
+  id: `INV-2026-${String(1284 - i).padStart(5, '0')}`,
+  channel: i % 3 === 0 ? 'Tokopedia' : 'Shopee',
+  buyer: buyers[i % buyers.length]!,
+  total: 85000 + ((i * 137000) % 2400000),
+  status: statuses[i % statuses.length]!,
+  time: `09:${String(59 - i * 2).padStart(2, '0')} WIB`,
+}));
+const rupiah = new Intl.NumberFormat('id-ID');
+const statusTone = { Synced: 'green', Waiting: 'yellow', Failed: 'red' } as const;
+
+function DataDemo() {
+  const [query, setQuery] = useState('');
+  const [on, setOn] = useState<Status[]>([]);
+  const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [sort, setSort] = useState<TableSort>({ key: 'time', direction: 'descending' });
+  const size = 8;
+  // Filter and sort the whole list, then page it: what a server does for a real list
+  const matching = useMemo(() => {
+    const k = sort.key as keyof Order;
+    const sign = sort.direction === 'ascending' ? 1 : -1;
+    return orders
+      .filter((o) => (on.length === 0 || on.includes(o.status)) && (!query || `${o.id} ${o.buyer}`.toLowerCase().includes(query.toLowerCase())))
+      .sort((a, b) => sign * (typeof a[k] === 'number' ? (a[k] as number) - (b[k] as number) : String(a[k]).localeCompare(String(b[k]))));
+  }, [on, query, sort]);
+  const toggle = (st: Status) => (p: boolean) => { setOn(p ? [...on, st] : on.filter((x) => x !== st)); setPage(1); };
+  return (
+    <div className="gl-stack gl-data">
+      <FilterBar label="Filter orders" active={on.length > 0 || query !== ''} onClear={() => { setOn([]); setQuery(''); setPage(1); }}
+        result={`${rupiah.format(matching.length)} orders${selected.length ? ` · ${selected.length} selected` : ''}`}>
+        <SearchField label="Search orders" hideLabel placeholder="Order ID or buyer" value={query}
+          onChange={(e) => { setQuery(e.target.value); setPage(1); }} onClear={() => setQuery('')} />
+        {(['Synced', 'Waiting', 'Failed'] as Status[]).map((st) => (
+          <FilterChip key={st} pressed={on.includes(st)} onPressedChange={toggle(st)} count={orders.filter((o) => o.status === st).length}>{st}</FilterChip>
+        ))}
+      </FilterBar>
+      <Table<Order>
+        caption="Orders today" hideCaption rowKey={(o) => o.id} selectable selected={selected} onSelectionChange={setSelected}
+        selectLabel={(o) => `Select ${o.id}`} sort={sort} onSortChange={(next) => { setSort(next); setPage(1); }} manualSort
+        rows={matching.slice((page - 1) * size, page * size)}
+        empty="No orders match these filters."
+        columns={[
+          { key: 'id', header: 'Order', sort: true, width: '200px' },
+          { key: 'buyer', header: 'Buyer', sort: true },
+          { key: 'channel', header: 'Channel' },
+          { key: 'status', header: 'Status', cell: (o) => <Tag tone={statusTone[o.status]} soft>{o.status}</Tag> },
+          { key: 'total', header: 'Total', numeric: true, sort: true, cell: (o) => `Rp ${rupiah.format(o.total)}` },
+          { key: 'time', header: 'Time', numeric: true, sort: true },
+        ]}
+      />
+      <Pagination page={page} pageSize={size} total={matching.length} onPageChange={setPage} />
+      <Pagination page={7} pageSize={25} total={1284} onPageChange={() => {}} label="Pagination example" />
+    </div>
   );
 }
 
@@ -276,6 +337,11 @@ export function Gallery() {
 
         <Section title="Tabs">
           <Tabs aria-label="Example" items={[{ id: 'a', label: 'All', count: 128 }, { id: 'o', label: 'Orders' }, { id: 'f', label: 'Failed', count: 12 }]} />
+        </Section>
+
+        <Section title="Table, Pagination and filters">
+          <p className="cx-body-sm gl-note">Search, filter, sort, select and page. The list is filtered and sorted as a whole, then paged, so the table gets manualSort.</p>
+          <DataDemo />
         </Section>
 
         <Overlays />

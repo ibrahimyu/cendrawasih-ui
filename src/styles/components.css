@@ -439,6 +439,95 @@
     .cx-toasts { right: var(--layout-margin-phone); bottom: var(--layout-margin-phone); }
   }
 
+  /* Table: records on hairlines inside an outlined box. Rows are 48px; numbers align right in tabular figures */
+  .cx-table {
+    overflow-x: auto; background: var(--surface); color: var(--ink);
+    border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg);
+  }
+  .cx-table:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-table__table { width: 100%; border-collapse: collapse; font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; }
+  .cx-table__caption {
+    caption-side: top; padding: var(--space-5) var(--space-5) var(--space-2); text-align: start;
+    font-family: var(--font-display); font-size: 18px; line-height: 1.35; font-weight: 600;
+  }
+  .cx-table__table :is(th, td) {
+    height: 48px; box-sizing: border-box; padding: var(--space-2) var(--space-4); text-align: start; vertical-align: middle;
+    border-bottom: var(--stroke-hair) solid var(--line); white-space: nowrap;
+  }
+  .cx-table__table .cx-table__wrap { min-width: 200px; white-space: normal; }
+  .cx-table__table :is(th, td):first-child { padding-left: var(--space-5); }
+  .cx-table__table :is(th, td):last-child { padding-right: var(--space-5); }
+  .cx-table__table thead th {
+    border-bottom: var(--stroke-bold) solid var(--line); color: var(--ink-soft);
+    font-family: var(--font-display); font-size: 14px; line-height: 1.3; font-weight: 600;
+  }
+  .cx-table__table thead th[aria-sort="ascending"], .cx-table__table thead th[aria-sort="descending"] { color: var(--ink); }
+  .cx-table__table tbody th { font-weight: 500; }
+  .cx-table__table tbody tr:last-child > * { border-bottom: 0; }
+  .cx-table__table tbody tr { transition: background-color var(--duration-base) var(--ease-out); }
+  .cx-table__table tbody tr:hover { background: var(--fill-hover); }
+  /* A checked row is a selection, not "you are here": a sunk fill and an action bar at its leading edge */
+  .cx-table__table tbody tr.cx-table__row--selected { background: var(--surface-sunk); }
+  .cx-table__table tbody tr.cx-table__row--selected > :first-child { box-shadow: inset var(--stroke-accent) 0 0 var(--action); }
+  .cx-table__table .cx-table__num { text-align: end; font-variant-numeric: tabular-nums; }
+  .cx-table__select-col { width: 52px; }
+  .cx-table__table .cx-table__select { width: 52px; padding-right: 0; }
+  .cx-table__select .cx-choice__input { margin: 0; }
+  .cx-table__sort {
+    display: inline-flex; align-items: center; gap: var(--space-1); margin: 0 calc(-1 * var(--space-2)); padding: 6px var(--space-2);
+    border: 0; border-radius: var(--radius-pill); background: transparent; color: inherit; font: inherit; cursor: pointer;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  }
+  .cx-table__sort:hover { background: var(--fill-hover); color: var(--ink); }
+  .cx-table__sort:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  .cx-table__sort:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 0; }
+  .cx-table__sort-icon { color: var(--ink-soft); }
+  .cx-table__sort-icon--on { color: var(--ink); }
+  .cx-table__table .cx-table__empty { height: auto; padding: var(--space-8) var(--space-5); text-align: center; color: var(--ink-soft); }
+
+  /* Pagination: pill buttons; the current page takes the plume wash, like a selected tab */
+  .cx-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5); }
+  .cx-pagination__range { margin: 0; font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .cx-pagination__pages { display: flex; align-items: center; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+  .cx-pagination__btn {
+    display: inline-flex; align-items: center; justify-content: center; min-width: var(--size-control-sm); height: var(--size-control-sm);
+    padding: 0 var(--space-2); box-sizing: border-box; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer;
+    font-family: var(--font-display); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  }
+  .cx-pagination__btn:hover { background: var(--fill-hover); }
+  .cx-pagination__btn:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  .cx-pagination__btn[aria-current="page"] { background: var(--selected); color: var(--on-selected); }
+  .cx-pagination__btn:disabled { background: transparent; color: var(--ink-disabled); cursor: not-allowed; }
+  .cx-pagination__btn:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-pagination__gap { min-width: 24px; text-align: center; color: var(--ink-soft); font-family: var(--font-display); font-weight: 600; }
+  @media (max-width: 599px) { .cx-pagination__page, .cx-pagination__gap { display: none; } }
+
+  /* Filter chip: a toggle pill. On, it takes the plume wash with an on-selected edge and a check */
+  .cx-chip {
+    display: inline-flex; align-items: center; gap: var(--space-2); min-height: var(--size-control-sm); padding: 0 var(--space-4);
+    border: var(--stroke-bold) solid var(--line-control); border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer;
+    font-family: var(--font-display); font-size: 14px; font-weight: 600; line-height: 1.2; white-space: nowrap;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out), border-color var(--duration-base) var(--ease-out);
+  }
+  .cx-chip:hover { background: var(--fill-hover); border-color: var(--line-strong); }
+  .cx-chip:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  .cx-chip[aria-pressed="true"] { background: var(--selected); color: var(--on-selected); border-color: var(--on-selected); padding-left: var(--space-3); }
+  .cx-chip:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-chip:disabled { background: var(--surface-sunk); color: var(--ink-disabled); border-color: var(--line); cursor: not-allowed; }
+  .cx-chip__count {
+    min-width: 22px; padding: 2px 6px; box-sizing: border-box; border-radius: var(--radius-feather);
+    background: var(--surface-sunk); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
+  }
+  .cx-chip[aria-pressed="true"] .cx-chip__count { background: var(--on-selected); color: var(--selected); }
+
+  /* Filter bar: the controls on the left, what they match and Clear on the right */
+  .cx-filterbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5); }
+  .cx-filterbar__controls { flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); min-width: 0; }
+  .cx-filterbar__controls > .cx-field { width: min(320px, 100%); margin-right: var(--space-2); }
+  .cx-filterbar__status { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
+  .cx-filterbar__result { margin: 0; font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
   /* One density, but touch screens get full-size targets */
   @media (pointer: coarse) {
     .cx-btn--sm, .cx-tab, .cx-search__clear { min-height: var(--size-touch); }
@@ -446,12 +535,13 @@
     .cx-choice { min-height: var(--size-touch); align-items: center; }
     .cx-choice__text { padding-top: 0; }
     .cx-dialog__close, .cx-toast__close { width: var(--size-touch); height: var(--size-touch); }
+    .cx-chip, .cx-pagination__btn { min-height: var(--size-touch); height: auto; min-width: var(--size-touch); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .cx-btn, .cx-card, .cx-tab, .cx-field__control, .cx-search__clear, .cx-choice__input, .cx-choice__input::before,
     .cx-dialog, .cx-dialog::backdrop, .cx-menu, .cx-menu__item, .cx-tooltip, .cx-toast,
-    .cx-dialog__close, .cx-toast__close { transition: none; }
+    .cx-dialog__close, .cx-toast__close, .cx-table__table tbody tr, .cx-table__sort, .cx-pagination__btn, .cx-chip { transition: none; }
     a.cx-card:hover { transform: none; }
     .cx-dialog, .cx-menu { translate: none; }
   }

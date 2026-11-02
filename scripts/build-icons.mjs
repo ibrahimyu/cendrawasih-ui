@@ -18,7 +18,8 @@ const set = {
   delete: 'Trash2', download: 'Download', upload: 'Upload', filter: 'Filter', external: 'ExternalLink',
   show: 'Eye', hide: 'EyeOff', more: 'Ellipsis',
   // Direction
-  'arrow-right': 'ArrowRight', 'chevron-down': 'ChevronDown', 'chevron-right': 'ChevronRight',
+  'arrow-right': 'ArrowRight', 'arrow-up': 'ArrowUp', 'arrow-down': 'ArrowDown', sort: 'ChevronsUpDown',
+  'chevron-down': 'ChevronDown', 'chevron-left': 'ChevronLeft', 'chevron-right': 'ChevronRight',
 };
 
 const entries = Object.entries(set).map(([name, lucide]) => {

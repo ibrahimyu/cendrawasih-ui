@@ -89,7 +89,7 @@ A yellow outline is decorative (1.6:1 on white); the box's filled label carries 
 - Radii: `radius-pill` for buttons, tabs and nav items; `radius-feather` (three 10px corners and a 2px tip) for tags, badges and counts; `radius-sm` for inputs; `radius-md` for tiles and notices; `radius-lg` for cards and dialogs; `radius-plume` with `radius-quill` for the featured box.
 - Lines: Cendra draws with a 2px line (`stroke-bold`). Neutral card borders use `line` at rest and `line-strong` on hover. Colored outlines on large boxes use `stroke-accent` (3px). Hairlines (`stroke-hair`) are for tables only.
 - Surfaces: cards, panels, stats and bands sit on `surface` in both themes and are drawn by their outline alone. Never give a large box a lighter grey fill on Night: grey on near-black with a faint edge reads as frosted glass. `surface-raised` is only for small lifts, like a hovered tab.
-- Selected: the active tab and nav item take `selected` (a pale plume wash) with `on-selected` text: maroon on Day, yellow on Night. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other.
+- Selected: the active tab and nav item take `selected` (a pale plume wash) with `on-selected` text: maroon on Day, yellow on Night. The current page in Pagination and a FilterChip that is on take it too. The `action` fill means "press this"; `selected` means "you are here". Never use one for the other. Checked rows in a table are a selection, not a place: they take `surface-sunk` with a 3px `action` bar at the leading edge, so soft yellow tags inside them stay visible.
 - Elevation: no shadows on things that sit on the page. Things that float (menus, dialogs, sheets, toasts) sit on `surface` like everything else, with a 2px `line` border and `shadow-overlay`; that shadow is what lifts them, never a grey fill or a blur. Tooltips are the exception: small labels, so they are filled in `ink`. Buttons are flat: no ledges, no drop shadows.
 - Spacing: a 4px base (`space-1` to `space-10`). The rhythm is generous: sections are `space-10` (112px) apart on desktop and `space-9` (72px) on phones. Page structure follows the grid under Layout.
 
@@ -792,6 +792,86 @@ A short message about something that just happened in the background, or an acti
 - Don't make the toast's action the only way to do something; it disappears.
 - Don't toast errors that block work on the current screen; put a Notice or a field error where the problem is.
 - Don't show a toast while a dialog is open. Close the dialog first; the toast confirms what it did.
+
+### Table
+
+Rows of records: orders, sync runs, failed items. A real `<table>` on hairlines inside an outlined box, with sortable headers and optional checkboxes.
+
+#### Anatomy
+
+A 2px `line` box with `radius-lg`. Header cells are in the label style, `ink-soft`, over a 2px `line`; body rows are 48px, `body-sm`, split by 1px `line` hairlines. Numbers and amounts align right in tabular figures. A sortable header is a pill button with a sort mark: two chevrons in `ink-soft` until it is sorted, then an arrow in `ink`, with `aria-sort` on the header. Rows take the `fill-hover` wash on hover. Checked rows take `surface-sunk` and a 3px `action` bar at their leading edge. Cells stay on one line, so a table wider than its column scrolls sideways inside its box and takes keyboard focus while it does.
+
+#### You provide
+
+- `caption`, always: it names the table for screen readers. `hideCaption` when a heading above already says it.
+- `columns`: `[{ key, header, cell?, numeric?, sort?, width?, wrap? }]`. `cell` renders the content (default `row[key]`); `sort: true` compares `row[key]`, or pass a compare function; `wrap` lets long text break onto more lines.
+- `rows` and `rowKey`. The first column is the row's header: put the record's name or ID there.
+- Sorting: `defaultSort`, or `sort` with `onSortChange`. Pass `manualSort` when the rows arrive already sorted, as they do from a server.
+- Selection: `selectable`, with `selected` and `onSelectionChange` or `defaultSelected`, and `selectLabel` to name each row's checkbox (*Select INV-2026-01282*). The header checkbox selects the rows shown.
+- `empty`: what to say when there are no rows, ideally what to do about it.
+
+#### Do and don't
+
+- Do put status in a soft Tag, never in color alone.
+- Do format amounts and dates for the locale: `Rp 1.318.000`, `09:41 WIB`.
+- Do sort, filter and page the whole list on the server, then pass the page with `manualSort`.
+- Don't put more than one or two actions in a row; use a row Menu behind a *more* button.
+- Don't zebra-stripe. The hairlines separate rows.
+
+### Pagination
+
+Which rows are showing and buttons to move between pages, under a Table.
+
+#### Anatomy
+
+The range on the left in `body-sm` `ink-soft`, like *151–175 of 1.284*, read out when it changes. On the right, 36px pill buttons: previous, the first and last pages, the current page with a neighbor each side, and an ellipsis for the gaps. The current page takes the plume wash (`selected`, `on-selected`) with `aria-current="page"`. Previous and next are disabled at the ends. On phones only the range and the arrows show; on touch screens the buttons grow to 44px. With nothing to page, it renders nothing.
+
+#### You provide
+
+- `page` (from 1), `pageSize`, `total` and `onPageChange`.
+- `locale` for the numbers (default `id-ID`), `rangeText` to translate the range, and `label`, `previousLabel`, `nextLabel` and `pageLabel` for the buttons.
+
+#### Do and don't
+
+- Do keep the page size the same across a product: 25 rows is the default.
+- Do move focus or scroll back to the top of the table when the page changes.
+- Don't use pagination for fewer than two pages of rows, or for a feed that grows; load more instead.
+
+### FilterChip
+
+A filter you turn on and off: a status, a channel. It is a pill, because you press it.
+
+#### Anatomy
+
+36px, a 2px `line-control` border and label text. On, it takes the plume wash with an `on-selected` border and a check before the label. An optional count sits in a feather badge. It is a toggle button (`aria-pressed`). It grows to 44px on touch screens.
+
+#### You provide
+
+- `pressed` and `onPressedChange`, `children` (one or two words) and optionally `count`.
+
+#### Do and don't
+
+- Do use chips for a handful of values people switch often; put the rest in a Select or a filter Sheet.
+- Don't use a chip as a tag: tags are labels and have the feather tip. Chips are buttons.
+
+### FilterBar
+
+The row of filters above a Table: search, chips, a select or a button that opens a filter Sheet. It also shows what they match, and a way to clear them.
+
+#### Anatomy
+
+The controls on the left, wrapping when there is no room. On the right, the result in `body-sm` `ink-soft` (*6 orders · 2 selected*), announced politely when it changes, and a ghost *Clear filters* button while any filter is on.
+
+#### You provide
+
+- `children`: the controls. A SearchField in the bar can hide its label.
+- `result`, `active` and `onClear`, and `label` (default "Filters") and `clearLabel` to translate.
+
+#### Do and don't
+
+- Do go back to page 1 when a filter changes.
+- Do say the count with the noun: *6 orders*, not *6 results*.
+- Don't hide the bar when nothing matches; the Table's empty message and Clear filters get people back.
 
 ### Icon
 
