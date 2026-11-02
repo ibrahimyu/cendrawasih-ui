@@ -1,5 +1,5 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
+import { Accordion, AccordionItem, Avatar, AvatarGroup, Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import './gallery.css';
 
@@ -337,6 +337,35 @@ export function Gallery() {
 
         <Section title="Tabs">
           <Tabs aria-label="Example" items={[{ id: 'a', label: 'All', count: 128 }, { id: 'o', label: 'Orders' }, { id: 'f', label: 'Failed', count: 12 }]} />
+        </Section>
+
+        <Section title="Avatar and Accordion">
+          <div className="gl-row">
+            {(['sm', 'md', 'lg', 'xl'] as const).map((size) => <Avatar key={size} size={size} name="Rina Wulandari" />)}
+            <Avatar size="lg" name="Budi Santoso" />
+            <Avatar size="lg" name="Dewi Lestari" />
+            <Avatar size="lg" name="Agus" />
+            <Avatar size="lg" name="Toko Sinar Abadi" kind="org" />
+            <Avatar size="lg" name="Shopee" kind="org" tone="orange" />
+            <Avatar size="lg" name="Accurate" kind="org" tone="green" src="/missing-logo.png" />
+          </div>
+          <div className="gl-row">
+            <AvatarGroup label="6 people on this workspace">
+              {['Rina Wulandari', 'Budi Santoso', 'Dewi Lestari', 'Agus Pratama', 'Sari Indah', 'Yoga Putra'].map((n) => <Avatar key={n} name={n} />)}
+            </AvatarGroup>
+            <span className="gl-person"><Avatar name="Rina Wulandari" decorative /><span className="cx-body-sm">Rina Wulandari changed the mapping · 09:12 WIB</span></span>
+          </div>
+          <Accordion exclusive>
+            <AccordionItem title="Orders" meta="12 fields" defaultOpen>
+              <p>Shopee order number goes to the Accurate invoice number; the buyer's name to the customer. Shipping is a separate line.</p>
+            </AccordionItem>
+            <AccordionItem title="Payments" meta="5 fields">
+              <p>Matched to invoices by amount and date, within one day.</p>
+            </AccordionItem>
+            <AccordionItem title="Stock levels" meta={<Tag tone="red" soft>2 unmapped</Tag>}>
+              <p>Two SKUs exist in Shopee but not in Accurate. Map them or skip them.</p>
+            </AccordionItem>
+          </Accordion>
         </Section>
 
         <Section title="Progress, Skeleton, EmptyState and Banner">

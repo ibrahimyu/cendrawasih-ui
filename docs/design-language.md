@@ -1025,6 +1025,50 @@ A full-width strip with square edges in the Notice tints (`info` on `surface-sun
 - Do let people dismiss anything that isn't still true right now, and remember that they did.
 - Don't use a banner for marketing.
 
+### Avatar
+
+A person or an organization: a photo or a logo, or initials on a plume fill. Avatars are small, so they are filled, and the same name always gets the same plume. People are circles; organizations (stores, companies, connected tools) are rounded squares.
+
+#### Anatomy
+
+`sm` 24px, `md` 32px, `lg` 40px, `xl` 56px. Up to two initials in the display face, from the first and last words of the name (*Toko Sinar Abadi* → TA), on `maroon`, `red-deep`, `green-deep`, `yellow` or `orange` with their paired text color. A photo fills the shape; if it fails to load, the initials take its place.
+
+#### You provide
+
+- `name`, always: it gives the initials, the color and the accessible name. `src` for a photo or logo.
+- `size`, `kind` (`person` or `org`), and `tone` to fix the color, for a brand like Shopee (`orange`).
+- `decorative` when the name is written beside it, so screen readers don't hear it twice.
+
+#### AvatarGroup
+
+Overlapping avatars for a team or the tools on a flow, each ringed in `surface`, with the rest as a feather count (*+2*). Give it a `label` that says the whole: *6 people on this workspace*. `max` sets how many show (default 4).
+
+#### Do and don't
+
+- Do use the brand's own logo for connected tools when you have it.
+- Don't use an avatar as a button on its own; put it inside one, with the name.
+- Don't pick a color by role or status. The plume is identity, not meaning.
+
+### Accordion
+
+Sections that open and close in place, in one outlined box: the parts of a mapping, the steps of a setup, answers to questions. Each section is a native `details` element, so it works without script, Enter and Space toggle it, and the browser's find-in-page opens a section that holds the match.
+
+#### Anatomy
+
+A 2px `line` box with `radius-lg`, sections split by the same line. Each header is 56px: the title in the subtitle face at 16px, an optional fact on the right in `body-sm` `ink-soft` (or a soft Tag), and a chevron that turns over `duration-base` when the section opens. Headers take `fill-hover` on hover and draw the focus ring inside the box. Where the browser can (Chrome), the section grows open over `duration-slow`; elsewhere it opens at once.
+
+#### You provide
+
+- `Accordion` around `AccordionItem`s. `exclusive` when opening one should close the others.
+- Each item: `title`, `meta` (*12 fields*, *2 unmapped*), `children`, and `defaultOpen`, or `open` with `onToggle`.
+
+#### Do and don't
+
+- Do open the first section, or the one that needs attention, by default.
+- Do put the state in `meta` so a closed section still says what is inside: *2 unmapped*.
+- Don't hide something a person must do inside a closed section without saying so in its header.
+- Don't nest accordions.
+
 ### Icon
 
 The Cendra icon set, drawn from Lucide: 2px rounded strokes on a 24px grid, in `currentColor`.

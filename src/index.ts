@@ -1,5 +1,7 @@
+export { Accordion, AccordionItem, type AccordionItemProps, type AccordionProps } from './components/Accordion.js';
 export { AppShell, TopBar, type AppShellProps, type TopBarProps } from './components/AppShell.js';
 export { Banner, type BannerProps } from './components/Banner.js';
+export { Avatar, AvatarGroup, type AvatarGroupProps, type AvatarProps } from './components/Avatar.js';
 export { Band, type BandProps } from './components/Band.js';
 export { Breadcrumb, type BreadcrumbProps, type Crumb } from './components/Breadcrumb.js';
 export { Button, type ButtonProps } from './components/Button.js';
