@@ -36,6 +36,7 @@ function App() {
 
   return (
     <>
+      {page === 'dashboard' ? <Dashboard /> : <Gallery />}
       <div className="pg-bar">
         <nav aria-label="Playground">
           {Object.entries(pages).map(([id, label]) => (
@@ -51,7 +52,6 @@ function App() {
           </select>
         </label>
       </div>
-      {page === 'dashboard' ? <Dashboard /> : <Gallery />}
     </>
   );
 }

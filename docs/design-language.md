@@ -105,7 +105,7 @@ A 12-column fluid grid at every size, mobile first, with four breakpoints. Conte
 | Wide | 1440px (`breakpoint-wide`) | 24px | 32px | 3, or 8 + 4 |
 
 - Use `cx-container` for the page width and `cx-grid` for the columns. Children span all 12 until told otherwise: `cx-span-6` everywhere, `cx-span-tablet-6`, `cx-span-laptop-4`, `cx-span-wide-3` from that breakpoint up. With Tailwind, the same breakpoints are the `tablet:`, `laptop:` and `wide:` variants.
-- Below laptop, the app's side nav becomes a top bar. Below tablet, bands and heroes switch to their phone layout.
+- Below laptop, the app's side nav becomes a top bar whose menu button opens the same nav in a sheet; AppShell does this for you. Below tablet, bands and heroes switch to their phone layout.
 - Inside a component, respond to the space it has (container queries), not the screen: a Stat in a narrow column shrinks its number on its own.
 - Keep reading text under about 70 characters a line (680px at body size), even on wide screens.
 
@@ -714,17 +714,17 @@ A modal panel from the edge of the screen, for work that needs more room than a 
 
 #### Anatomy
 
-The same parts as Dialog. `side="end"` is a full-height panel up to 480px wide, coming in from the right with its two inner corners rounded. `side="bottom"` rises from the bottom edge, up to 90% of the screen height. On phones every sheet is a bottom sheet. The body scrolls; the actions stay pinned under a 2px `line`.
+The same parts as Dialog. `side="end"` is a full-height panel up to 480px wide, coming in from the right with its two inner corners rounded; `side="start"` is the same from the left, for navigation. `side="bottom"` rises from the bottom edge, up to 90% of the screen height. On phones every sheet is a bottom sheet. The body scrolls; the actions stay pinned under a 2px `line`.
 
 #### You provide
 
 - `open`, `onClose`, `title`, `children`, `actions` and `closeLabel`, as for Dialog.
-- `side`: `end` (the default) or `bottom`.
+- `side`: `end` (the default), `start` or `bottom`.
 
 #### Do and don't
 
 - Do put the action that applies the sheet last and say what it does: *Show 128 orders*.
-- Don't use a sheet for navigation; that is the app's nav.
+- Don't use a sheet for navigation, except the app's own nav below laptop width, which AppShell puts in a `start` sheet.
 - Don't stack a sheet on a sheet.
 
 ### Menu
@@ -872,6 +872,79 @@ The controls on the left, wrapping when there is no room. On the right, the resu
 - Do go back to page 1 when a filter changes.
 - Do say the count with the noun: *6 orders*, not *6 results*.
 - Don't hide the bar when nothing matches; the Table's empty message and Clear filters get people back.
+
+### AppShell
+
+The frame of a Cendra app: the plume bar, the navigation and the page. From laptop width (1024px), a 264px side column holds the logo, what you put above the nav (usually the workspace), the SideNav, and what you put at its foot (help, the account). Below laptop, a TopBar takes its place, and its menu button opens the same column in a sheet: from the left on tablets, from the bottom on phones.
+
+#### Anatomy
+
+The plume bar stays at the top as the page scrolls. The side column sits under it, the full height of the screen, scrolling on its own when its content is taller, and drawn by a 2px `line` on its right. A *Skip to content* link appears on the first Tab and jumps to the page. Choosing a page in the menu sheet closes it.
+
+#### You provide
+
+- `logo`: the logo, as a link home. It shows in the column and in the top bar.
+- `nav`: the SideNav items, flat or in sections. `linkAs` for your router's link component.
+- `sideTop` and `sideBottom`: what goes above the nav and at the foot of the column.
+- `actions`: one or two icon buttons at the end of the top bar below laptop width.
+- `children`: the page. Its padding and width are yours: use `cx-container` and the grid.
+- `plumeBar={false}` to leave out the plume bar; `menuLabel` and `skipLabel` to translate.
+
+#### Do and don't
+
+- Do keep the column for navigation and where you are; actions belong on the page.
+- Don't put the page's main action in the top bar; it stays on the page, where it shows at every width.
+
+### SideNav
+
+The app's main navigation: a list of pages, each a 44px pill row with an icon. The current page takes the plume wash (`selected`, `on-selected`) and `aria-current="page"`, never the `action` fill. AppShell renders it; use it alone for a settings page with its own sections.
+
+#### Anatomy
+
+Rows are `ink-soft` in the button type at rest, take `fill-hover` on hover and `fill-pressed` while pressed, and draw the focus ring around the pill. A count sits at the end in a feather badge: neutral (`surface-sunk`) for things to look at, red (`red-deep`) with `alert` for failures. Sections can have an eyebrow heading.
+
+#### You provide
+
+- `items`: `[{ label, href, icon?, current?, badge?, alert? }]`, or sections `[{ heading?, items }]`.
+- `aria-label` (default "Main") and `linkAs` for your router's link component.
+
+#### Do and don't
+
+- Do keep it to about seven pages; group the rest under a heading or move them into Settings.
+- Do give every row an icon, or none of them.
+- Don't use a badge for anything that isn't a count to act on.
+
+### TopBar
+
+The bar across the top of the app below laptop width: a menu button, the logo, and one or two actions. Sticky, on `surface`, drawn by a 2px `line` underneath, 64px tall. AppShell renders it.
+
+#### You provide
+
+- `logo`, and `onMenu` with `menuOpen` for the menu button (`menuLabel` to translate "Menu").
+- `actions`: icon buttons, each with an `aria-label`.
+
+#### Don't
+
+- Don't put more than two actions in it. On a phone the logo needs the room.
+
+### Breadcrumb
+
+Where this page sits, as a trail of quiet links above its title: *Integrations › Tokopedia → Accurate › Field mapping*. The current page ends the trail as plain text with `aria-current="page"`.
+
+#### Anatomy
+
+`body-sm` links in `ink-soft`, underlined and in `ink` on hover, separated by a 16px chevron. On phones only the parent shows, as a back link with a left chevron, and grows to 44px on touch screens.
+
+#### You provide
+
+- `items`: `[{ label, href }]` from the top level down, ending with the current page (no `href`).
+- `aria-label` (default "Breadcrumb") and `linkAs` for your router's link component.
+
+#### Do and don't
+
+- Do use it on pages two or more levels below the nav: a record, a mapping, a run.
+- Don't use it on top-level pages; the SideNav already says where you are.
+- Don't repeat the page title as a link; it ends the trail as text.
 
 ### Icon
 

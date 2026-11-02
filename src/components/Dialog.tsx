@@ -26,8 +26,9 @@ export interface DialogProps extends ModalCommon {
 }
 
 export interface SheetProps extends ModalCommon {
-  /** end: a full-height panel from the right. bottom: up from the bottom edge. Phones always get bottom. Default end */
-  side?: 'end' | 'bottom';
+  /** end: a full-height panel from the right. start: from the left, for navigation. bottom: up from the bottom edge.
+   *  Phones always get bottom. Default end */
+  side?: 'start' | 'end' | 'bottom';
 }
 
 function Modal({ open, onClose, title, description, children, actions, closeLabel = 'Close', className, role, dismissible, kind }: ModalCommon & {

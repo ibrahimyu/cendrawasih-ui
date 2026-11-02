@@ -1,5 +1,5 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { Band, Button, Card, Checkbox, ChoiceGroup, Dialog, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, RadioGroup, SearchField, Select, Sheet, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, Tooltip, useToast, type Plume } from '@cendra/ui';
+import { Band, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, RadioGroup, SearchField, Select, Sheet, SideNav, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import './gallery.css';
 
@@ -337,6 +337,33 @@ export function Gallery() {
 
         <Section title="Tabs">
           <Tabs aria-label="Example" items={[{ id: 'a', label: 'All', count: 128 }, { id: 'o', label: 'Orders' }, { id: 'f', label: 'Failed', count: 12 }]} />
+        </Section>
+
+        <Section title="SideNav, TopBar and Breadcrumb">
+          <p className="cx-body-sm gl-note">AppShell puts SideNav in a column from laptop width, and a TopBar with a menu sheet below it. The dashboard uses it: narrow the window to see.</p>
+          <div className="gl-nav">
+            <div className="gl-nav__side">
+              <SideNav aria-label="Example" items={[
+                { items: [
+                  { label: 'Overview', icon: 'overview', href: '#components', current: true },
+                  { label: 'Sync runs', icon: 'sync', href: '#components', badge: 128 },
+                  { label: 'Alerts', icon: 'alerts', href: '#components', badge: 12, alert: true },
+                ] },
+                { heading: 'Setup', items: [
+                  { label: 'Integrations', icon: 'plug', href: '#components' },
+                  { label: 'Field mapping', icon: 'mapping', href: '#components' },
+                  { label: 'Settings', icon: 'settings', href: '#components' },
+                ] },
+              ]} />
+            </div>
+            <div className="gl-stack gl-nav__main">
+              <TopBar className="gl-nav__bar" logo={<span className="cx-subtitle">Cendra</span>} onMenu={() => {}}
+                actions={<Button variant="ghost" size="sm" aria-label="Alerts"><Icon name="alerts" /></Button>} />
+              <Breadcrumb items={[{ label: 'Integrations', href: '#components' }, { label: 'Tokopedia → Accurate', href: '#components' }, { label: 'Field mapping' }]} />
+              <h3 className="cx-headline">Field mapping</h3>
+              <Breadcrumb aria-label="Short breadcrumb" items={[{ label: 'Sync runs', href: '#components' }, { label: 'Run 09:35 WIB' }]} />
+            </div>
+          </div>
         </Section>
 
         <Section title="Table, Pagination and filters">

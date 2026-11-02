@@ -1,21 +1,16 @@
 /* The sync dashboard mockup. Layout only: every color, radius and font is a Cendrawasih token */
-.db { min-height: 100vh; background: var(--surface); color: var(--ink); }
 .db h1, .db h2, .db p { margin: 0; }
 .db-soft { color: var(--ink-soft); }
 .db-strong { font-weight: 700; }
 
-.db-shell { display: flex; flex-wrap: wrap; align-items: stretch; }
-.db-side {
-  flex: 1 1 248px; box-sizing: border-box; padding: 28px 20px;
-  display: flex; flex-direction: column; gap: 28px; border-right: var(--stroke-bold) solid var(--line);
-}
-.db-logo { height: 34px; width: auto; align-self: flex-start; margin-left: 8px; }
-.db-logo--night { display: none; }
-[data-theme="dark"] .db-logo--day { display: none; }
-[data-theme="dark"] .db-logo--night { display: block; }
+.db-home { display: inline-flex; border-radius: var(--radius-quill); }
+.db-home:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 4px; }
+.db .db-logo--night { display: none; }
+[data-theme="dark"] .db .db-logo--day { display: none; }
+[data-theme="dark"] .db .db-logo--night { display: block; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .db-logo--day { display: none; }
-  :root:not([data-theme="light"]) .db-logo--night { display: block; }
+  :root:not([data-theme="light"]) .db .db-logo--day { display: none; }
+  :root:not([data-theme="light"]) .db .db-logo--night { display: block; }
 }
 .db-workspace {
   display: flex; flex-direction: column; gap: 2px; padding: 14px 16px;
@@ -23,25 +18,9 @@
 }
 .db-workspace .cx-caption { color: var(--ink-soft); }
 
-.db-nav { display: flex; flex-direction: column; gap: 4px; }
-.db-nav a {
-  display: flex; align-items: center; gap: 12px; min-height: var(--size-control); padding: 0 16px;
-  border-radius: var(--radius-pill); color: var(--ink-soft); text-decoration: none;
-  font: 600 15px/1.2 var(--font-display);
-  transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
-}
-.db-nav a:hover { background: var(--fill-hover); color: var(--ink); }
-.db-nav a:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
-.db-nav a[aria-current="page"] { background: var(--selected); color: var(--on-selected); }
-.db-nav a:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
-.db-badge {
-  margin-left: auto; min-width: 24px; padding: 2px 8px; box-sizing: border-box; border-radius: var(--radius-feather);
-  background: var(--red-deep); color: var(--on-red); font-size: 12px; text-align: center;
-}
-
 /* Fill small, outline large: the help card is outlined, with a watermark icon */
 .db-help {
-  position: relative; overflow: hidden; isolation: isolate; margin-top: auto;
+  position: relative; overflow: hidden; isolation: isolate;
   display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px;
   border-radius: var(--radius-plume) var(--radius-quill); border: var(--stroke-accent) solid var(--cx-edge);
   background: var(--surface);
@@ -49,7 +28,7 @@
 .db-help .cx-body-sm { color: var(--ink-soft); }
 
 .db-main {
-  flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px 40px 96px;
+  box-sizing: border-box; padding: 32px 40px 96px;
   display: flex; flex-direction: column; gap: 28px;
 }
 .db-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
@@ -112,12 +91,5 @@
 .db-table .num { text-align: right; }
 
 @media (max-width: 1023px) {
-  .db-side { border-right: 0; border-bottom: var(--stroke-bold) solid var(--line); }
-  .db-nav { flex-direction: row; overflow-x: auto; }
-  .db-nav a { flex: none; }
-  .db-help { display: none; }
   .db-main { padding: 20px 16px 96px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .db-nav a { transition: none; }
 }

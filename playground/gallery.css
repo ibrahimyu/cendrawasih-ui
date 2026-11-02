@@ -28,3 +28,7 @@
 .gl-bar { display: flex; flex-direction: column-reverse; gap: 2px; width: 48px; }
 .gl-bar i { display: block; border-radius: 2px; }
 @media (prefers-reduced-motion: reduce) { .gl-motion__dot { transition: none; } }
+.gl-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: start; }
+.gl-nav__side { padding: 16px; border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg); }
+.gl-nav__main { gap: 20px; }
+.gl-nav__bar { position: static; border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg); }

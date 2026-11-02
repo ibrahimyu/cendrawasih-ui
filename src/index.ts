@@ -1,4 +1,6 @@
+export { AppShell, TopBar, type AppShellProps, type TopBarProps } from './components/AppShell.js';
 export { Band, type BandProps } from './components/Band.js';
+export { Breadcrumb, type BreadcrumbProps, type Crumb } from './components/Breadcrumb.js';
 export { Button, type ButtonProps } from './components/Button.js';
 export { Card, type CardProps } from './components/Card.js';
 export { Checkbox, ChoiceGroup, RadioGroup, Switch, type CheckboxProps, type ChoiceGroupProps, type RadioGroupProps, type RadioOption, type SwitchProps } from './components/Choice.js';
@@ -13,6 +15,7 @@ export { Pagination, type PaginationProps } from './components/Pagination.js';
 export { SearchField, type SearchFieldProps } from './components/SearchField.js';
 export { Select, type SelectOption, type SelectProps } from './components/Select.js';
 export { PlumeBar, type PlumeBarProps } from './components/PlumeBar.js';
+export { SideNav, type NavItem, type NavSection, type SideNavProps } from './components/SideNav.js';
 export { Stat, type StatProps } from './components/Stat.js';
 export { Table, type TableColumn, type TableProps, type TableSort } from './components/Table.js';
 export { Tabs, type TabItem, type TabsProps } from './components/Tabs.js';

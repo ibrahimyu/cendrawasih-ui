@@ -364,6 +364,11 @@
     border-width: var(--stroke-bold) 0 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     translate: 0 24px;
   }
+  .cx-sheet--start {
+    inset: 0 auto 0 0; border-width: 0 var(--stroke-bold) 0 0; border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    translate: -24px 0;
+  }
+  @starting-style { .cx-sheet--start[open] { translate: -24px 0; } }
   .cx-sheet[open] { translate: 0 0; }
   @starting-style { .cx-sheet[open] { opacity: 0; translate: 24px 0; } .cx-sheet--bottom[open] { translate: 0 24px; } }
   @media (max-width: 599px) {
@@ -528,6 +533,101 @@
   .cx-filterbar__status { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
   .cx-filterbar__result { margin: 0; font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
+  /* Side nav: 44px pill rows. The current page takes the plume wash; counts are feather badges */
+  .cx-sidenav { display: flex; flex-direction: column; gap: var(--space-5); }
+  .cx-sidenav__section { display: flex; flex-direction: column; gap: var(--space-1); }
+  .cx-sidenav__heading {
+    margin: 0 0 var(--space-1); padding: 0 var(--space-4); color: var(--ink-soft);
+    font-family: var(--font-display); font-size: 12px; line-height: 1.3; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cx-sidenav__list { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+  .cx-sidenav__link {
+    display: flex; align-items: center; gap: var(--space-3); min-height: var(--size-control); padding: 0 var(--space-4);
+    border-radius: var(--radius-pill); color: var(--ink-soft); text-decoration: none;
+    font-family: var(--font-display); font-size: 15px; line-height: 1.2; font-weight: 600;
+    transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  }
+  .cx-sidenav__link:hover { background: var(--fill-hover); color: var(--ink); }
+  .cx-sidenav__link:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  .cx-sidenav__link[aria-current="page"] { background: var(--selected); color: var(--on-selected); }
+  .cx-sidenav__link:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-sidenav__label { flex: 1; min-width: 0; }
+  .cx-sidenav__badge {
+    min-width: 24px; padding: 2px var(--space-2); box-sizing: border-box; border-radius: var(--radius-feather);
+    background: var(--surface-sunk); color: var(--ink); font-size: 12px; text-align: center; font-variant-numeric: tabular-nums;
+  }
+  .cx-sidenav__badge--alert { background: var(--red-deep); color: var(--on-red); }
+
+  /* Top bar: the app's frame below laptop width. Sticky, on surface, drawn by a 2px line */
+  .cx-topbar {
+    position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: var(--space-2);
+    min-height: 64px; padding: 0 var(--layout-margin-phone) 0 var(--space-2); box-sizing: border-box;
+    background: var(--surface); color: var(--ink); border-bottom: var(--stroke-bold) solid var(--line);
+  }
+  .cx-topbar__menu {
+    flex: none; display: inline-flex; align-items: center; justify-content: center; width: var(--size-control); height: var(--size-control);
+    border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink); cursor: pointer;
+    transition: background-color var(--duration-base) var(--ease-out);
+  }
+  .cx-topbar__menu:hover { background: var(--fill-hover); }
+  .cx-topbar__menu:active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  .cx-topbar__menu:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-topbar__logo { flex: 1; min-width: 0; display: flex; align-items: center; }
+  .cx-topbar__actions { display: flex; align-items: center; gap: var(--space-2); }
+  :is(.cx-topbar__logo, .cx-shell__logo) :is(img, svg) { display: block; height: 28px; width: auto; }
+
+  /* App shell: a side column from laptop width; a top bar and a menu sheet below it */
+  /* The plume bar stays at the top with the frame; the column and the top bar sit under it */
+  .cx-shell { --cx-shell-top: 0px; min-height: 100dvh; background: var(--surface); color: var(--ink); }
+  .cx-shell:has(> .cx-plumebar) { --cx-shell-top: 8px; }
+  .cx-shell > .cx-plumebar { position: sticky; top: 0; z-index: 11; }
+  .cx-shell > .cx-topbar { top: var(--cx-shell-top); }
+  .cx-shell__skip {
+    position: absolute; z-index: 100; left: var(--space-2); top: var(--space-2); translate: 0 -200%;
+    padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--action); color: var(--on-action);
+    font-family: var(--font-display); font-size: 15px; font-weight: 600; text-decoration: none;
+  }
+  .cx-shell__skip:focus { translate: 0 0; outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-shell__side { display: none; }
+  .cx-shell__main { min-width: 0; }
+  .cx-shell__main:focus { outline: none; }
+  .cx-shell__sheet .cx-dialog__body { gap: var(--space-6); }
+  @media (min-width: 1024px) {
+    .cx-shell > .cx-topbar { display: none; }
+    .cx-shell__body { display: grid; grid-template-columns: 264px minmax(0, 1fr); }
+    .cx-shell__side {
+      position: sticky; top: var(--cx-shell-top); height: calc(100dvh - var(--cx-shell-top)); overflow-y: auto; box-sizing: border-box;
+      display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-6) var(--space-4);
+      border-right: var(--stroke-bold) solid var(--line);
+    }
+    .cx-shell__logo { padding: var(--space-1) var(--space-2) 0; }
+    .cx-shell__logo :is(img, svg) { height: 34px; }
+    .cx-shell__foot { margin-top: auto; }
+  }
+
+  /* Breadcrumb: a trail of quiet links above the page title. On phones, only the parent, as a back link */
+  .cx-breadcrumb__list {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); margin: 0; padding: 0; list-style: none;
+    font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500;
+  }
+  .cx-breadcrumb__item { display: inline-flex; align-items: center; gap: var(--space-1); min-width: 0; }
+  .cx-breadcrumb__link {
+    display: inline-flex; align-items: center; gap: 2px; min-height: var(--size-target); border-radius: var(--radius-quill);
+    color: var(--ink-soft); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px;
+    transition: color var(--duration-base) var(--ease-out), text-decoration-color var(--duration-base) var(--ease-out);
+  }
+  .cx-breadcrumb__link:hover { color: var(--ink); text-decoration-color: currentColor; }
+  .cx-breadcrumb__link:focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  .cx-breadcrumb__current { color: var(--ink); }
+  .cx-breadcrumb__sep { color: var(--ink-soft); }
+  .cx-breadcrumb__back { display: none; }
+  @media (max-width: 599px) {
+    .cx-breadcrumb__item { display: none; }
+    .cx-breadcrumb__item--parent { display: inline-flex; }
+    .cx-breadcrumb__item--parent .cx-breadcrumb__sep { display: none; }
+    .cx-breadcrumb__back { display: block; }
+  }
+
   /* One density, but touch screens get full-size targets */
   @media (pointer: coarse) {
     .cx-btn--sm, .cx-tab, .cx-search__clear { min-height: var(--size-touch); }
@@ -536,12 +636,14 @@
     .cx-choice__text { padding-top: 0; }
     .cx-dialog__close, .cx-toast__close { width: var(--size-touch); height: var(--size-touch); }
     .cx-chip, .cx-pagination__btn { min-height: var(--size-touch); height: auto; min-width: var(--size-touch); }
+    .cx-breadcrumb__link { min-height: var(--size-touch); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .cx-btn, .cx-card, .cx-tab, .cx-field__control, .cx-search__clear, .cx-choice__input, .cx-choice__input::before,
     .cx-dialog, .cx-dialog::backdrop, .cx-menu, .cx-menu__item, .cx-tooltip, .cx-toast,
-    .cx-dialog__close, .cx-toast__close, .cx-table__table tbody tr, .cx-table__sort, .cx-pagination__btn, .cx-chip { transition: none; }
+    .cx-dialog__close, .cx-toast__close, .cx-table__table tbody tr, .cx-table__sort, .cx-pagination__btn, .cx-chip,
+    .cx-sidenav__link, .cx-topbar__menu, .cx-breadcrumb__link { transition: none; }
     a.cx-card:hover { transform: none; }
     .cx-dialog, .cx-menu { translate: none; }
   }

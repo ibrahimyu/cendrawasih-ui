@@ -1,4 +1,4 @@
-import { Band, Button, Icon, Notice, PlumeBar, Stat, Tabs, Tag, type IconName, type Plume } from '@cendra/ui';
+import { AppShell, Band, Button, Icon, Notice, Stat, Tabs, Tag, type NavItem, type Plume } from '@cendra/ui';
 import logoDay from '../assets/logos/cendra-main-horizontal.svg';
 import logoNight from '../assets/logos/cendra-white-horizontal.svg';
 import './dashboard.css';
@@ -30,46 +30,46 @@ const runs: { time: string; flow: string; data: string; records: string; status:
   { time: '09:15', flow: 'Accurate → Tokopedia', data: 'Stock levels', records: '1.120', status: 'Retrying', tone: 'orange', duration: '2m 10s' },
 ];
 
-const nav: { label: string; icon: IconName; current?: boolean; badge?: number }[] = [
-  { label: 'Overview', icon: 'overview', current: true },
-  { label: 'Integrations', icon: 'plug' },
-  { label: 'Sync runs', icon: 'sync' },
-  { label: 'Field mapping', icon: 'mapping' },
-  { label: 'Alerts', icon: 'alerts', badge: 12 },
-  { label: 'Settings', icon: 'settings' },
+const nav: NavItem[] = [
+  { label: 'Overview', icon: 'overview', href: '#dashboard', current: true },
+  { label: 'Integrations', icon: 'plug', href: '#integrations' },
+  { label: 'Sync runs', icon: 'sync', href: '#runs' },
+  { label: 'Field mapping', icon: 'mapping', href: '#mapping' },
+  { label: 'Alerts', icon: 'alerts', href: '#alerts', badge: 12, alert: true },
+  { label: 'Settings', icon: 'settings', href: '#settings' },
 ];
+
+const logo = (
+  <a href="#dashboard" className="db-home">
+    <img className="db-logo--day" src={logoDay} alt="Cendra" />
+    <img className="db-logo--night" src={logoNight} alt="Cendra" />
+  </a>
+);
 
 export function Dashboard() {
   return (
-    <div className="db">
-      <PlumeBar />
-      <div className="db-shell">
-        <aside className="db-side">
-          <img className="db-logo db-logo--day" src={logoDay} alt="Cendra" />
-          <img className="db-logo db-logo--night" src={logoNight} alt="Cendra" />
-          <div className="db-workspace">
-            <span className="cx-caption">Workspace</span>
-            <span className="cx-label">Toko Sinar Abadi</span>
-            <span className="cx-caption">Jakarta · 5 tools connected</span>
-          </div>
-          <nav className="db-nav" aria-label="Main">
-            {nav.map((item) => (
-              <a key={item.label} href="#dashboard" aria-current={item.current ? 'page' : undefined}>
-                <Icon name={item.icon} />
-                {item.label}
-                {item.badge ? <span className="db-badge">{item.badge}</span> : null}
-              </a>
-            ))}
-          </nav>
-          <div className="db-help cx-tone--maroon">
-            <Icon name="chat" className="cx-watermark" />
-            <span className="cx-subtitle">Need a hand?</span>
-            <span className="cx-body-sm">Your Cendra engineer replies within an hour on WhatsApp.</span>
-            <Button variant="secondary" size="sm" iconStart={<Icon name="chat" size={16} />}>Chat on WhatsApp</Button>
-          </div>
-        </aside>
-
-        <main className="db-main">
+    <AppShell
+      className="db"
+      logo={logo}
+      nav={nav}
+      sideTop={
+        <div className="db-workspace">
+          <span className="cx-caption">Workspace</span>
+          <span className="cx-label">Toko Sinar Abadi</span>
+          <span className="cx-caption">Jakarta · 5 tools connected</span>
+        </div>
+      }
+      sideBottom={
+        <div className="db-help cx-tone--maroon">
+          <Icon name="chat" className="cx-watermark" />
+          <span className="cx-subtitle">Need a hand?</span>
+          <span className="cx-body-sm">Your Cendra engineer replies within an hour on WhatsApp.</span>
+          <Button variant="secondary" size="sm" iconStart={<Icon name="chat" size={16} />}>Chat on WhatsApp</Button>
+        </div>
+      }
+      actions={<Button variant="ghost" size="sm" aria-label="Alerts, 12 new"><Icon name="alerts" /></Button>}
+    >
+        <div className="db-main">
           <header className="db-header">
             <div>
               <span className="cx-eyebrow">Toko Sinar Abadi</span>
@@ -182,8 +182,7 @@ export function Dashboard() {
               </table>
             </div>
           </section>
-        </main>
-      </div>
-    </div>
+        </div>
+    </AppShell>
   );
 }
