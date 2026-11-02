@@ -14,7 +14,7 @@ export interface ProgressProps {
   tone?: 'action' | 'success' | 'danger';
   /** Keeps the label for screen readers only, when the words are already beside the bar */
   hideLabel?: boolean;
-  /** For the percentage. Default id-ID */
+  /** For the percentage. Default: the browser's locale */
   locale?: string;
   className?: string;
 }
@@ -23,7 +23,7 @@ export interface ProgressProps {
  * How far along a sync, an import or an upload is: a label, the amount, and an 8px pill bar. Without a
  * value, the bar sweeps: the one looping animation in Cendra, and it stops under reduced motion
  */
-export function Progress({ label, value, max = 100, valueText, tone = 'action', hideLabel, locale = 'id-ID', className }: ProgressProps) {
+export function Progress({ label, value, max = 100, valueText, tone = 'action', hideLabel, locale, className }: ProgressProps) {
   const id = useId();
   const known = value != null;
   const ratio = known ? Math.min(Math.max(value / max, 0), 1) : 0;

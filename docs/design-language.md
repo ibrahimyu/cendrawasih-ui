@@ -11,7 +11,7 @@ Cendrawasih UI is how every Cendra product looks and talks: cendra.co, AppGrout,
 3. **One plume per view.** Yellow is the spotlight. Each screen gets at most one yellow action (`Button variant="plume"`) and at most one highlighted word in a headline (`cx-highlight`).
 4. **Contrast before decoration.** Every text pair in this system is checked (see Color). When a brand color fails as text, use its `-deep` partner; never lighten the brand to make it work.
 5. **Shape says what it does.** Pills (`radius-pill`) are things you press: buttons, tabs, nav items. The feather tip (`radius-feather`: three round corners and one sharp one) is things that only label or report: tags, badges and counts, never clickable. Inputs are softly rounded (`radius-sm`). Rounded rectangles (`radius-lg`) hold content. The large plume (`radius-plume` + `radius-quill`) marks the one featured box.
-6. **Two languages, one layout.** Every product ships in English and Bahasa Indonesia. Leave about 30% slack in every label and button.
+6. **Any language, one layout.** Products ship in whatever languages their customers read. Leave about 30% slack in every label and button for longer translations.
 
 ## Content fundamentals
 
@@ -20,7 +20,7 @@ Cendrawasih UI is how every Cendra product looks and talks: cendra.co, AppGrout,
 - **Casing:** sentence case everywhere: headings, buttons, tabs, labels. Product names keep their own casing (AppGrout, TractionCue, Lyvia AI). The `eyebrow` style sets its own caps; write it in sentence case.
 - **Name real things.** Say *ERP, CRM, payments, WhatsApp, Xendit, Accurate, Shopee*, not *platforms* or *solutions*. Say *12 orders failed to sync*, not *An error occurred*.
 - **Buttons are verbs:** *Book a call*, *Discuss an integration*, *Retry sync*, *Disconnect Xendit*.
-- **Numbers and money:** Indonesian contexts use `Rp 1.250.000` and `12 Nov 2026`, times in WIB; English contexts use `$300` and `Nov 12, 2026`. Set columns of figures with `font-variant-numeric: tabular-nums`.
+- **Numbers and money:** format for the reader's locale, never by hand (see Language and locale): the same amount is `$1,250.00` in the US and `Rp 1.250.000` in Indonesia. Set columns of figures with `font-variant-numeric: tabular-nums`.
 - **No emoji** in product UI or marketing headlines. Exclamation marks: none.
 
 Examples from cendra.co:
@@ -210,13 +210,15 @@ Every Cendra product meets WCAG 2.2 level AA. This is the floor, not the goal.
 
 ## Language and locale
 
-Indonesian first. Most Cendra customers work in Bahasa Indonesia, so every screen is designed in Indonesian and translated to English, not the other way round.
+Cendrawasih works for any market. Nothing in it assumes a country, a currency or a language: each product chooses the locales it ships in, and the components follow the reader's.
 
-- **Numbers:** Indonesian contexts use a dot for thousands and a comma for decimals (`1.284`, `48,2`); English contexts use `1,284` and `48.2`. Format with `Intl.NumberFormat`, never by hand.
-- **Money:** `Rp 1.250.000`, with a space after Rp and no decimals. Shorten large amounts only in tight spaces: `Rp 48,2 jt` (juta) and `Rp 1,2 M` (miliar). English contexts write `IDR` amounts the same way, or `$300` for dollars.
-- **Dates and times:** `12 Nov 2026` and `09:42 WIB` (24-hour). Name the time zone (WIB, WITA, WIT) whenever times cross teams. Weeks start on Monday.
-- **Length:** Indonesian runs about 20 to 30% longer than English. Buttons and tabs grow with their label, labels wrap instead of truncating, and nothing has a fixed width sized for English.
-- **Terms:** keep product and platform names as their owners write them (Shopee, Tokopedia, Accurate, Xendit, WhatsApp). Use the Indonesian terms merchants use (*faktur*, *stok*, *pesanan*), not literal translations of English UI words.
+- **Locale:** components that format numbers (Pagination, Progress) or sort text (Table) take a `locale` prop and use the browser's locale when you don't pass one. Pass the app's locale when it has one, so every screen agrees.
+- **Numbers:** format with `Intl.NumberFormat`, never by hand. Separators differ by locale: `1,284.5` (en-US), `1.284,5` (id-ID, de-DE), `1 284,5` (fr-FR), and Indian grouping writes `12,84,000`.
+- **Money:** format with the currency, and let the locale place the symbol and decide the decimals: `$1,250.00` (en-US, USD), `Rp 1.250.000` (id-ID, IDR), `1 250,00 €` (fr-FR, EUR), `￥1,250` (ja-JP, JPY). Shorten large amounts only in tight spaces, with compact notation and one decimal: `$48.2K`, `Rp 48,2 jt`.
+- **Dates and times:** format with `Intl.DateTimeFormat`; the order of day and month, 12- or 24-hour time and the first day of the week all follow the locale. Name the time zone whenever times cross teams or regions: `09:42 WIB`, `09:42 CET`, `9:42 AM EST`.
+- **Length:** translations usually run longer than English: about 30% for German and Indonesian, and short labels can double. Buttons and tabs grow with their label, labels wrap instead of truncating, and nothing has a fixed width sized for English.
+- **Words:** every string a component shows on its own (*Close*, *Clear search*, *Previous page*) is a prop with an English default; translate them all. Keep product and platform names as their owners write them, and use the words people in that market already use, not literal translations of the English UI.
+- **Right to left:** not supported yet. Components assume left-to-right, so Arabic, Hebrew, Persian and Urdu need a pass on layout direction before they ship.
 
 ## Patterns
 
@@ -439,7 +441,7 @@ Sizes: `sm` 36px (tables, toolbars), `md` 44px (default; the minimum touch targe
 
 #### You provide
 
-- `children`: the label, in sentence case, a verb first. Leave about 30% slack for Bahasa Indonesia (*Book a call* becomes *Jadwalkan panggilan*).
+- `children`: the label, in sentence case, a verb first. Leave about 30% slack for longer translations (*Book a call* is *Jadwalkan panggilan* in Indonesian and *Termin vereinbaren* in German).
 - `href` to render a link that looks like a button, otherwise it is a `<button type="button">`.
 - `iconStart` / `iconEnd`: an optional 20px icon node.
 - Any native button or anchor attribute (`onClick`, `disabled`, `type="submit"`, `target`).
@@ -881,11 +883,12 @@ A 2px `line` box with `radius-lg`. Header cells are in the label style, `ink-sof
 - Sorting: `defaultSort`, or `sort` with `onSortChange`. Pass `manualSort` when the rows arrive already sorted, as they do from a server.
 - Selection: `selectable`, with `selected` and `onSelectionChange` or `defaultSelected`, and `selectLabel` to name each row's checkbox (*Select INV-2026-01282*). The header checkbox selects the rows shown.
 - `empty`: what to say when there are no rows, ideally what to do about it.
+- `locale` for sorting text (default: the browser's).
 
 #### Do and don't
 
 - Do put status in a soft Tag, never in color alone.
-- Do format amounts and dates for the locale: `Rp 1.318.000`, `09:41 WIB`.
+- Do format amounts and dates for the reader's locale: `Rp 1.318.000` and `09:41 WIB` in Indonesia, `$1,318.00` and `9:41 AM` in the US.
 - Do sort, filter and page the whole list on the server, then pass the page with `manualSort`.
 - Don't put more than one or two actions in a row; use a row Menu behind a *more* button.
 - Don't zebra-stripe. The hairlines separate rows.
@@ -901,7 +904,7 @@ The range on the left in `body-sm` `ink-soft`, like *151–175 of 1.284*, read o
 #### You provide
 
 - `page` (from 1), `pageSize`, `total` and `onPageChange`.
-- `locale` for the numbers (default `id-ID`), `rangeText` to translate the range, and `label`, `previousLabel`, `nextLabel` and `pageLabel` for the buttons.
+- `locale` for the numbers (default: the browser's), `rangeText` to translate the range, and `label`, `previousLabel`, `nextLabel` and `pageLabel` for the buttons.
 
 #### Do and don't
 
@@ -1030,7 +1033,7 @@ The label in the label style on the left, the amount in `body-sm` `ink-soft` on 
 
 - `label`: what is happening, in words. `hideLabel` only when the words are beside it anyway.
 - `value` and `max` (default 100), or neither when nobody knows. `valueText` replaces the percentage: *214 of 1.120 orders*.
-- `tone`: `action` (default), `success` or `danger`. `locale` for the percentage.
+- `tone`: `action` (default), `success` or `danger`. `locale` for the percentage (default: the browser's).
 
 #### Do and don't
 

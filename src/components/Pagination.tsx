@@ -10,9 +10,9 @@ export interface PaginationProps {
   /** All rows, across every page */
   total: number;
   onPageChange: (page: number) => void;
-  /** For the numbers. Default id-ID: 1.284 */
+  /** For the numbers, like "id-ID" (1.284) or "en-US" (1,284). Default: the browser's locale */
   locale?: string;
-  /** The range text. Default "1–25 of 1.284" */
+  /** The range text. Default "1–25 of 1,284" */
   rangeText?: (from: string, to: string, total: string) => string;
   /** Names the nav. Default "Pagination" */
   label?: string;
@@ -39,7 +39,7 @@ function pageList(page: number, count: number): (number | null)[] {
  * (you are here). On phones the page numbers give way to the range and the arrows. Nothing to page: renders nothing
  */
 export function Pagination({
-  page, pageSize, total, onPageChange, locale = 'id-ID',
+  page, pageSize, total, onPageChange, locale,
   rangeText = (from, to, all) => `${from}–${to} of ${all}`,
   label = 'Pagination', previousLabel = 'Previous page', nextLabel = 'Next page', pageLabel = (p) => `Page ${p}`,
   className,

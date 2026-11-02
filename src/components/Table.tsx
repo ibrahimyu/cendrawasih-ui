@@ -49,12 +49,12 @@ export interface TableProps<Row> {
   selectAllLabel?: string;
   /** Shown in place of the rows when there are none */
   empty?: ReactNode;
+  /** For sorting text, like "de-DE" or "id-ID". Default: the browser's locale */
+  locale?: string;
   className?: string;
 }
 
-const collator = new Intl.Collator('id', { numeric: true, sensitivity: 'base' });
-
-function compareBy<Row>(column: TableColumn<Row>) {
+function compareBy<Row>(column: TableColumn<Row>, collator: Intl.Collator) {
   if (typeof column.sort === 'function') return column.sort;
   return (a: Row, b: Row) => {
     const x = (a as Record<string, unknown>)[column.key];
@@ -71,7 +71,7 @@ function compareBy<Row>(column: TableColumn<Row>) {
 export function Table<Row>({
   caption, hideCaption, columns, rows, rowKey, sort, defaultSort, onSortChange, manualSort,
   selectable, selected, defaultSelected, onSelectionChange, selectLabel = () => 'Select row', selectAllLabel = 'Select all rows',
-  empty, className,
+  empty, locale, className,
 }: TableProps<Row>) {
   const id = useId();
   const [ownSort, setOwnSort] = useState<TableSort | null>(defaultSort ?? null);
@@ -82,10 +82,10 @@ export function Table<Row>({
   const shown = useMemo(() => {
     const column = current && columns.find((c) => c.key === current.key);
     if (!column || !column.sort || manualSort) return rows;
-    const compare = compareBy(column);
+    const compare = compareBy(column, new Intl.Collator(locale, { numeric: true, sensitivity: 'base' }));
     const sign = current.direction === 'ascending' ? 1 : -1;
     return [...rows].sort((a, b) => sign * compare(a, b));
-  }, [rows, columns, current, manualSort]);
+  }, [rows, columns, current, manualSort, locale]);
 
   function sortBy(key: string) {
     const next: TableSort = { key, direction: current?.key === key && current.direction === 'ascending' ? 'descending' : 'ascending' };

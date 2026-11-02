@@ -51,6 +51,7 @@ function DataDemo() {
         ))}
       </FilterBar>
       <Table<Order>
+        locale="id-ID"
         caption="Orders today" hideCaption rowKey={(o) => o.id} selectable selected={selected} onSelectionChange={setSelected}
         selectLabel={(o) => `Select ${o.id}`} sort={sort} onSortChange={(next) => { setSort(next); setPage(1); }} manualSort
         rows={matching.slice((page - 1) * size, page * size)}
@@ -64,8 +65,8 @@ function DataDemo() {
           { key: 'time', header: 'Time', numeric: true, sort: true },
         ]}
       />
-      <Pagination page={page} pageSize={size} total={matching.length} onPageChange={setPage} />
-      <Pagination page={7} pageSize={25} total={1284} onPageChange={() => {}} label="Pagination example" />
+      <Pagination locale="id-ID" page={page} pageSize={size} total={matching.length} onPageChange={setPage} />
+      <Pagination locale="id-ID" page={7} pageSize={25} total={1284} onPageChange={() => {}} label="Pagination example" />
     </div>
   );
 }
@@ -362,11 +363,11 @@ export function Gallery() {
           </div>
           <div className="gl-grid">
             <div className="gl-stack">
-              <Progress label="Syncing Shopee orders" value={214} max={1120} valueText="214 of 1.120 orders" />
-              <Progress label="Importing products" value={62} />
-              <Progress label="Stock levels synced" value={1} max={1} tone="success" valueText="Done" />
-              <Progress label="Tokopedia orders" value={41} max={120} tone="danger" valueText="Stopped at 41 of 120" />
-              <Progress label="Connecting to Accurate" />
+              <Progress locale="id-ID" label="Syncing Shopee orders" value={214} max={1120} valueText="214 of 1.120 orders" />
+              <Progress locale="id-ID" label="Importing products" value={62} />
+              <Progress locale="id-ID" label="Stock levels synced" value={1} max={1} tone="success" valueText="Done" />
+              <Progress locale="id-ID" label="Tokopedia orders" value={41} max={120} tone="danger" valueText="Stopped at 41 of 120" />
+              <Progress locale="id-ID" label="Connecting to Accurate" />
             </div>
             <div className="gl-stack gl-skel" aria-busy="true">
               <span className="cx-visually-hidden">Loading the latest sync</span>

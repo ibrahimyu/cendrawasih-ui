@@ -80,6 +80,7 @@ export function Orders() {
             </div>
           ) : (
             <Table<Order>
+        locale="id-ID"
               caption="Orders" hideCaption rowKey={(o) => o.id}
               selectable selected={selected} onSelectionChange={setSelected} selectLabel={(o) => `Select ${o.id}`}
               sort={sort} onSortChange={(next) => { setSort(next); setPage(1); }} manualSort
@@ -100,7 +101,7 @@ export function Orders() {
             />
           )}
         </div>
-        {!loading ? <Pagination page={page} pageSize={SIZE} total={matching.length} onPageChange={setPage} /> : null}
+        {!loading ? <Pagination locale="id-ID" page={page} pageSize={SIZE} total={matching.length} onPageChange={setPage} /> : null}
       </div>
     </Frame>
   );
