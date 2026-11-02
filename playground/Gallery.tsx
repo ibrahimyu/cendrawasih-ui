@@ -1,6 +1,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { Accordion, AccordionItem, Avatar, AvatarGroup, Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
+import { Accordion, AccordionItem, Avatar, AvatarGroup, Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
+import { orders, rupiah, statusTone, type Order, type Status } from './data';
 import './gallery.css';
 
 const plumes: Plume[] = ['maroon', 'red', 'orange', 'yellow', 'green'];
@@ -22,21 +23,6 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
     </section>
   );
 }
-
-type Status = 'Synced' | 'Waiting' | 'Failed';
-interface Order { id: string; channel: string; buyer: string; total: number; status: Status; time: string }
-const buyers = ['Toko Sinar Abadi', 'CV Maju Jaya', 'Rina Wulandari', 'Budi Santoso', 'PT Sumber Rejeki', 'Dewi Lestari', 'Agus Pratama'];
-const statuses: Status[] = ['Synced', 'Synced', 'Waiting', 'Synced', 'Failed', 'Synced', 'Waiting'];
-const orders: Order[] = Array.from({ length: 23 }, (_, i) => ({
-  id: `INV-2026-${String(1284 - i).padStart(5, '0')}`,
-  channel: i % 3 === 0 ? 'Tokopedia' : 'Shopee',
-  buyer: buyers[i % buyers.length]!,
-  total: 85000 + ((i * 137000) % 2400000),
-  status: statuses[i % statuses.length]!,
-  time: `09:${String(59 - i * 2).padStart(2, '0')} WIB`,
-}));
-const rupiah = new Intl.NumberFormat('id-ID');
-const statusTone = { Synced: 'green', Waiting: 'yellow', Failed: 'red' } as const;
 
 function DataDemo() {
   const [query, setQuery] = useState('');
@@ -152,7 +138,6 @@ function Overlays() {
 
 export function Gallery() {
   return (
-    <ToastProvider>
     <div className="gl">
       <PlumeBar />
       <main className="gl-main">
@@ -449,6 +434,5 @@ export function Gallery() {
         </Section>
       </main>
     </div>
-    </ToastProvider>
   );
 }

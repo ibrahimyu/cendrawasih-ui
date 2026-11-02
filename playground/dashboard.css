@@ -31,11 +31,6 @@
   box-sizing: border-box; padding: 32px 40px 96px;
   display: flex; flex-direction: column; gap: 28px;
 }
-.db-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
-.db-header > div:first-child { display: flex; flex-direction: column; gap: 6px; }
-.db-header .cx-eyebrow { color: var(--ink-soft); }
-.db-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-.db-actions .cx-body-sm { color: var(--ink-soft); }
 
 .db-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
 

@@ -218,6 +218,78 @@ Indonesian first. Most Cendra customers work in Bahasa Indonesia, so every scree
 - **Length:** Indonesian runs about 20 to 30% longer than English. Buttons and tabs grow with their label, labels wrap instead of truncating, and nothing has a fixed width sized for English.
 - **Terms:** keep product and platform names as their owners write them (Shopee, Tokopedia, Accurate, Xendit, WhatsApp). Use the Indonesian terms merchants use (*faktur*, *stok*, *pesanan*), not literal translations of English UI words.
 
+## Patterns
+
+Whole screens and the rules that cross them. Each recipe has a working example in the playground (`npm run dev`, then the Screen menu). They use only the components below, inside AppShell.
+
+### Every page
+
+- **Header:** a PageHeader. Top-level pages get an eyebrow (the workspace); pages below them get a Breadcrumb instead. The title is the thing's own name: *Orders*, *INV-2026-01280*. A record's state is a soft Tag beside the title.
+- **Actions:** at most one primary button per page, in the header, on the right. Other actions are secondary buttons, then a *more* Menu. Destructive actions live in that Menu, last, after a separator.
+- **Order, top to bottom:** header; the one Notice that matters most, if any; then the content. A Banner, when there is one, goes above the header.
+- **Width:** forms and reading stay under about 680px; tables and dashboards use the full container.
+
+### List page
+
+Example: *List: Orders*.
+
+1. PageHeader with an eyebrow, a count in its line (*23 orders today from Shopee and Tokopedia*) and Export as a secondary Menu.
+2. If something needs attention, a Notice with an action that filters to it: *3 orders failed to sync · Show failed*.
+3. FilterBar: search first, then a few FilterChips with counts. The result count says the noun.
+4. When rows are checked, a bulk bar above the table: how many, the actions, *Clear selection*.
+5. Table, with the record's ID in the first column as a link to its detail page. Its empty message says what to try.
+6. Pagination under the table.
+
+Filter, sort and page the whole list on the server. Any change to the filters goes back to page 1 and clears the selection.
+
+### Detail page
+
+Example: *Detail: Order*.
+
+1. PageHeader with a Breadcrumb back to the list, the status Tag, one line of facts (*Shopee · Rp 633.000 · 12 Nov 2026, 09:51 WIB*), the primary action for this record's state (*Retry sync* when it failed) and a *more* Menu.
+2. If the record has a problem, a Notice that names it and how to fix it, with the fix as its action: *Map SKU*.
+3. On laptops, 8 + 4 columns: the record's parts on the left in an Accordion, each header carrying its state (*1 unmapped*); who and what happened on the right (the buyer, the sync history). Phones stack them.
+
+### Settings
+
+Example: *Settings*. Tabs split the areas; each area is one of two kinds, never both on one screen.
+
+- **A form:** fields that save together with *Save changes*. Validate when it is submitted, not on every keystroke; put each error under its field as an instruction and move focus to the first one. Say *Unsaved changes* beside the button once anything changed, and offer *Discard*.
+- **Settings that apply at once:** Switches, each confirmed by a Toast (*Daily summary on*). No save button.
+
+### First run
+
+Example: *First run*. Greet the person, say how long it takes, and show the steps:
+
+- A Progress bar that counts steps: *1 of 3 steps done*.
+- Each step in a box: done steps with a green check and a *Done* tag; the one current step as a large toned box (yellow outline) with its primary button; later steps muted, without buttons.
+- A way to get a human: *Book 15 minutes*.
+
+### Saving and confirming
+
+- If an action can be undone, do it at once and offer *Undo* in a Toast: removing a teammate, archiving a mapping.
+- If it can't be undone, ask first in an alert Dialog that names the thing and the consequence (*Cancel this order? It is cancelled in Shopee too, and the buyer is refunded.*), with focus on the safe choice.
+- While an action runs, its button says what is happening (*Retrying…*) and stops taking presses; it does not go grey.
+- When a row or the thing that had focus disappears, move focus to the next sensible control.
+
+### Where messages go
+
+| What | Where |
+| --- | --- |
+| A field is wrong | Under the field, as an instruction, in `danger` |
+| Something about one region is wrong or needs doing | A Notice at the top of that region |
+| Something about the whole app or account | A Banner above the page header |
+| An action finished in the background, or can be undone | A Toast |
+| A decision that can't be undone | An alert Dialog |
+| Nothing to show | An EmptyState in the list or page |
+
+### Loading
+
+- Under a second: nothing; just show the result.
+- Content on its way: Skeletons in its shape, the region `aria-busy`, and a hidden line saying what is loading. The FilterBar result can say *Loading orders…*.
+- Work that takes a while: a Progress bar that counts the real thing.
+- Work that runs in the background: let people leave, and confirm with a Toast when it is done.
+
 <!-- tokens:start (generated by scripts/build-tokens.mjs; edit tokens/ instead) -->
 ## Tokens
 
@@ -656,7 +728,7 @@ An inline message about the state of something: a sync, a payment, a form. Icon 
 #### You provide
 
 - `tone`, `title` (what happened, in a few words), `children` (what it means or what to do next).
-- `action`: an optional `sm` Button, usually `secondary`.
+- `action`: an optional `sm` Button, usually `secondary`. In a region narrower than 480px it drops under the text.
 - Placement: at the top of the region it is about, full width of that region.
 
 #### Do and don't
@@ -1068,6 +1140,24 @@ A 2px `line` box with `radius-lg`, sections split by the same line. Each header 
 - Do put the state in `meta` so a closed section still says what is inside: *2 unmapped*.
 - Don't hide something a person must do inside a closed section without saying so in its header.
 - Don't nest accordions.
+
+### PageHeader
+
+The top of every page: where it sits, what it is, its state, and what you can do with it.
+
+#### Anatomy
+
+An eyebrow or a Breadcrumb, then the title (34px, 28px on phones) with an optional status Tag beside it, one line of facts in `ink-soft`, and the actions on the right. On narrow screens the actions wrap under the title.
+
+#### You provide
+
+- `title`, and either `eyebrow` (top-level pages) or `breadcrumb` (pages below them).
+- `status`: a soft Tag. `children`: one sentence or a line of facts.
+- `actions`: at most one primary button, then secondary ones or a Menu. `linkAs` for the breadcrumb's links.
+
+#### Don't
+
+- Don't put more than one primary button in a header, or any in the facts line.
 
 ### Icon
 

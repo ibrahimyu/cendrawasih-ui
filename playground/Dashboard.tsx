@@ -1,7 +1,5 @@
-import { AppShell, Band, Button, Icon, Notice, Stat, Tabs, Tag, type NavItem, type Plume } from '@cendra/ui';
-import logoDay from '../assets/logos/cendra-main-horizontal.svg';
-import logoNight from '../assets/logos/cendra-white-horizontal.svg';
-import './dashboard.css';
+import { Band, Button, Icon, Notice, PageHeader, Stat, Tabs, Tag, type Plume } from '@cendra/ui';
+import { Frame } from './Frame';
 
 const fmt = (n: number) => n.toLocaleString('id-ID');
 
@@ -30,57 +28,14 @@ const runs: { time: string; flow: string; data: string; records: string; status:
   { time: '09:15', flow: 'Accurate → Tokopedia', data: 'Stock levels', records: '1.120', status: 'Retrying', tone: 'orange', duration: '2m 10s' },
 ];
 
-const nav: NavItem[] = [
-  { label: 'Overview', icon: 'overview', href: '#dashboard', current: true },
-  { label: 'Integrations', icon: 'plug', href: '#integrations' },
-  { label: 'Sync runs', icon: 'sync', href: '#runs' },
-  { label: 'Field mapping', icon: 'mapping', href: '#mapping' },
-  { label: 'Alerts', icon: 'alerts', href: '#alerts', badge: 12, alert: true },
-  { label: 'Settings', icon: 'settings', href: '#settings' },
-];
-
-const logo = (
-  <a href="#dashboard" className="db-home">
-    <img className="db-logo--day" src={logoDay} alt="Cendra" />
-    <img className="db-logo--night" src={logoNight} alt="Cendra" />
-  </a>
-);
-
 export function Dashboard() {
   return (
-    <AppShell
-      className="db"
-      logo={logo}
-      nav={nav}
-      sideTop={
-        <div className="db-workspace">
-          <span className="cx-caption">Workspace</span>
-          <span className="cx-label">Toko Sinar Abadi</span>
-          <span className="cx-caption">Jakarta · 5 tools connected</span>
-        </div>
-      }
-      sideBottom={
-        <div className="db-help cx-tone--maroon">
-          <Icon name="chat" className="cx-watermark" />
-          <span className="cx-subtitle">Need a hand?</span>
-          <span className="cx-body-sm">Your Cendra engineer replies within an hour on WhatsApp.</span>
-          <Button variant="secondary" size="sm" iconStart={<Icon name="chat" size={16} />}>Chat on WhatsApp</Button>
-        </div>
-      }
-      actions={<Button variant="ghost" size="sm" aria-label="Alerts, 12 new"><Icon name="alerts" /></Button>}
-    >
+    <Frame page="dashboard">
         <div className="db-main">
-          <header className="db-header">
-            <div>
-              <span className="cx-eyebrow">Toko Sinar Abadi</span>
-              <h1 className="cx-headline">Overview</h1>
-            </div>
-            <div className="db-actions">
-              <span className="cx-body-sm">Last sync 09:42 WIB</span>
-              <Button variant="ghost">Export report</Button>
-              <Button variant="secondary">Connect a tool</Button>
-            </div>
-          </header>
+          <PageHeader eyebrow="Toko Sinar Abadi" title="Overview"
+            actions={<><Button variant="ghost">Export report</Button><Button variant="secondary">Connect a tool</Button></>}>
+            Last sync 09:42 WIB
+          </PageHeader>
 
           <Band tone="night">
             <Tag tone="maroon">Sunday, 1 Nov 2026</Tag>
@@ -183,6 +138,6 @@ export function Dashboard() {
             </div>
           </section>
         </div>
-    </AppShell>
+    </Frame>
   );
 }

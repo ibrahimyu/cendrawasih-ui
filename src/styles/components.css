@@ -277,10 +277,13 @@
   .cx-notice__title { font-family: var(--font-display); font-size: 16px; line-height: 1.35; font-weight: 600; }
   .cx-notice__body { font-family: var(--font-text); font-size: 15px; line-height: 1.55; font-weight: 500; }
   .cx-notice__action { align-self: center; }
+  /* In a narrow region the action drops under the text instead of squeezing it */
+  .cx-notice { container-type: inline-size; }
+  @container (max-width: 480px) { .cx-notice__action { grid-column: 2; grid-row: 2; justify-self: start; } }
 
   /* Tabs: a pill track; the selected tab takes the plume wash (selected), never the action fill. Counts are feather badges */
   .cx-tabs {
-    display: inline-flex; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
+    display: inline-flex; align-self: flex-start; gap: var(--space-1); max-width: 100%; overflow-x: auto; box-sizing: border-box;
     padding: var(--space-1); background: var(--surface-sunk);
     border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-pill);
   }
@@ -758,6 +761,22 @@
     transition: block-size var(--duration-slow) var(--ease-out), content-visibility var(--duration-slow) allow-discrete;
   }
   .cx-accordion__item[open]::details-content { block-size: auto; }
+
+  /* Page header: breadcrumb or eyebrow, the h1 with its status, one line of facts, and the actions */
+  .cx-pageheader { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+  .cx-pageheader__row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4) var(--space-6); }
+  .cx-pageheader__text { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+  .cx-pageheader__eyebrow {
+    color: var(--ink-soft); font-family: var(--font-display); font-size: 12px; line-height: 1.3; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cx-pageheader__titleline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+  .cx-pageheader__title {
+    margin: 0; color: var(--ink); overflow-wrap: anywhere;
+    font-family: var(--font-display); font-size: 34px; line-height: 1.15; font-weight: 600; letter-spacing: -0.015em;
+  }
+  .cx-pageheader__meta { font-family: var(--font-text); font-size: 15px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); }
+  .cx-pageheader__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+  @media (max-width: 599px) { .cx-pageheader__title { font-size: 28px; } }
 
   /* One density, but touch screens get full-size targets */
   @media (pointer: coarse) {

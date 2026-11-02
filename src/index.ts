@@ -15,6 +15,7 @@ export { Icon, iconNames, type IconName, type IconProps } from './components/Ico
 export { Logogram, type LogogramProps } from './components/Logogram.js';
 export { Menu, type MenuItem, type MenuProps, type MenuTriggerProps } from './components/Menu.js';
 export { Notice, type NoticeProps } from './components/Notice.js';
+export { PageHeader, type PageHeaderProps } from './components/PageHeader.js';
 export { Pagination, type PaginationProps } from './components/Pagination.js';
 export { Progress, type ProgressProps } from './components/Progress.js';
 export { SearchField, type SearchFieldProps } from './components/SearchField.js';
