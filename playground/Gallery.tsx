@@ -1,5 +1,5 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import { Band, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, RadioGroup, SearchField, Select, Sheet, SideNav, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
+import { Band, Banner, Breadcrumb, Button, Card, Checkbox, ChoiceGroup, Dialog, EmptyState, FilterBar, FilterChip, Icon, type TableSort, iconNames, Logogram, Menu, Notice, Pagination, PlumeBar, Progress, RadioGroup, SearchField, Select, Sheet, SideNav, Skeleton, Stat, Switch, Table, Tabs, Tag, TextField, ToastProvider, TopBar, Tooltip, useToast, type Plume } from '@cendra/ui';
 import mainstream from '../assets/illustrations/mainstream.png';
 import './gallery.css';
 
@@ -337,6 +337,40 @@ export function Gallery() {
 
         <Section title="Tabs">
           <Tabs aria-label="Example" items={[{ id: 'a', label: 'All', count: 128 }, { id: 'o', label: 'Orders' }, { id: 'f', label: 'Failed', count: 12 }]} />
+        </Section>
+
+        <Section title="Progress, Skeleton, EmptyState and Banner">
+          <div className="gl-feedback">
+            <Banner tone="warning" title="Accurate maintenance" action={<Button size="sm" variant="secondary">Details</Button>} onDismiss={() => {}}>
+              Syncing pauses Sunday 22:00–23:00 WIB. Nothing is lost; it catches up after.
+            </Banner>
+            <Banner tone="danger" title="Tokopedia is not responding.">Orders from Tokopedia wait until it is back. We retry every 5 minutes.</Banner>
+          </div>
+          <div className="gl-grid">
+            <div className="gl-stack">
+              <Progress label="Syncing Shopee orders" value={214} max={1120} valueText="214 of 1.120 orders" />
+              <Progress label="Importing products" value={62} />
+              <Progress label="Stock levels synced" value={1} max={1} tone="success" valueText="Done" />
+              <Progress label="Tokopedia orders" value={41} max={120} tone="danger" valueText="Stopped at 41 of 120" />
+              <Progress label="Connecting to Accurate" />
+            </div>
+            <div className="gl-stack gl-skel" aria-busy="true">
+              <span className="cx-visually-hidden">Loading the latest sync</span>
+              <div className="gl-row"><Skeleton shape="circle" /><Skeleton width="50%" /></div>
+              <Skeleton lines={3} />
+              <Skeleton shape="block" height={96} />
+            </div>
+          </div>
+          <div className="gl-grid">
+            <div className="gl-panel">
+              <EmptyState icon="check" title="No failed records" actions={<Button size="sm" variant="secondary">See all sync runs</Button>}>
+                Everything from the last 24 hours reached Accurate.
+              </EmptyState>
+            </div>
+            <EmptyState tone="green" icon="plug" title="Connect your first store" actions={<><Button>Connect a store</Button><Button variant="ghost">How it works</Button></>}>
+              Shopee, Tokopedia or your website. Orders start flowing into Accurate within minutes.
+            </EmptyState>
+          </div>
         </Section>
 
         <Section title="SideNav, TopBar and Breadcrumb">

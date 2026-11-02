@@ -307,14 +307,14 @@
     box-sizing: border-box; background: var(--surface); color: var(--ink);
     border: var(--stroke-bold) solid var(--line); box-shadow: var(--shadow-overlay);
   }
-  :is(.cx-dialog__close, .cx-toast__close) {
+  :is(.cx-dialog__close, .cx-toast__close, .cx-banner__close) {
     flex: none; display: inline-flex; align-items: center; justify-content: center;
     border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--ink-soft); cursor: pointer;
     transition: background-color var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
   }
-  :is(.cx-dialog__close, .cx-toast__close):hover { background: var(--fill-hover); color: var(--ink); }
-  :is(.cx-dialog__close, .cx-toast__close):active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
-  :is(.cx-dialog__close, .cx-toast__close):focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
+  :is(.cx-dialog__close, .cx-toast__close, .cx-banner__close):hover { background: var(--fill-hover); color: var(--ink); }
+  :is(.cx-dialog__close, .cx-toast__close, .cx-banner__close):active { background: var(--fill-pressed); transition-duration: var(--duration-fast); }
+  :is(.cx-dialog__close, .cx-toast__close, .cx-banner__close):focus-visible { outline: var(--stroke-focus) solid var(--focus); outline-offset: 2px; }
 
   /* Dialog and Sheet: a native modal dialog on the scrim. It opens over duration-slow and leaves over
      duration-fast; browsers that can't animate the top layer just open and close */
@@ -628,13 +628,81 @@
     .cx-breadcrumb__back { display: block; }
   }
 
+  /* Progress: a label, the amount, and an 8px pill bar in the action color */
+  .cx-progress { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+  .cx-progress__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+  .cx-progress__label { font-family: var(--font-display); font-size: 14px; line-height: 1.3; font-weight: 600; color: var(--ink); }
+  .cx-progress__value { font-family: var(--font-text); font-size: 14px; line-height: 1.5; font-weight: 500; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .cx-progress__track { position: relative; height: 8px; overflow: hidden; border-radius: var(--radius-pill); background: var(--fill-pressed); }
+  .cx-progress__fill {
+    height: 100%; border-radius: var(--radius-pill); background: var(--cx-progress, var(--action));
+    transition: width var(--duration-slow) var(--ease-out), background-color var(--duration-base) var(--ease-out);
+  }
+  .cx-progress--success { --cx-progress: var(--success); }
+  .cx-progress--danger { --cx-progress: var(--danger); }
+  /* Nobody knows how long: a segment sweeps across at an even speed. The one loop in Cendra, and the one
+     linear timing; still and hatched under reduced motion */
+  .cx-progress--indeterminate .cx-progress__fill { width: 40%; animation: cx-sweep 1.4s linear infinite; }
+  @keyframes cx-sweep { from { translate: -100% 0; } to { translate: 250% 0; } }
+
+  /* Skeleton: still blocks in the shape of what is coming. No shimmer: Cendra doesn't loop */
+  .cx-skeleton { display: block; background: var(--fill-pressed); border-radius: var(--radius-quill); }
+  .cx-skeleton-lines { display: flex; flex-direction: column; gap: 10px; padding: 5px 0; }
+  .cx-skeleton--text { height: 12px; width: 100%; }
+  .cx-skeleton--block { width: 100%; height: 120px; border-radius: var(--radius-md); }
+  .cx-skeleton--circle { flex: none; width: 40px; height: 40px; border-radius: 50%; }
+
+  /* Empty state: plain and centered inside a panel; toned, a large outlined box with its icon as a watermark */
+  .cx-empty { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-8) var(--space-5); text-align: center; color: var(--ink); }
+  .cx-empty__icon {
+    display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; margin-bottom: var(--space-1);
+    border-radius: 50%; background: var(--fill-hover); color: var(--ink-soft);
+  }
+  .cx-empty__title { margin: 0; font-family: var(--font-display); font-size: 18px; line-height: 1.35; font-weight: 600; }
+  .cx-empty__body { max-width: 48ch; font-family: var(--font-text); font-size: 15px; line-height: 1.55; font-weight: 500; color: var(--ink-soft); }
+  .cx-empty__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-2); }
+  .cx-empty--toned {
+    position: relative; overflow: hidden; isolation: isolate; align-items: flex-start; text-align: start;
+    padding: var(--space-7) var(--space-6); background: var(--surface);
+    border: var(--stroke-accent) solid var(--cx-edge); border-radius: var(--radius-lg);
+  }
+  .cx-empty--toned .cx-empty__title { max-width: 24ch; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+  .cx-empty--toned .cx-empty__actions { justify-content: flex-start; }
+  /* The watermark sizes to the box, so it stays in the corner and out from under the words */
+  .cx-empty--toned { container-type: inline-size; }
+  .cx-empty .cx-empty__mark { width: 120px; height: 120px; right: -24px; bottom: -28px; }
+  @container (min-width: 560px) { .cx-empty .cx-empty__mark { width: 200px; height: 200px; right: -32px; bottom: -40px; } }
+
+  /* Banner: a full-width strip about the whole app. Same tints as Notice, square edges, a close button */
+  .cx-banner {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--layout-margin-phone); color: var(--ink);
+  }
+  .cx-banner--info { background: var(--surface-sunk); border-bottom: var(--stroke-bold) solid var(--line); }
+  .cx-banner--success { background: var(--tint-green); }
+  .cx-banner--warning { background: var(--tint-yellow); }
+  .cx-banner--danger { background: var(--tint-red); }
+  .cx-banner__icon { display: flex; align-self: start; padding-top: 2px; color: var(--ink); }
+  .cx-banner--success .cx-banner__icon { color: var(--success); }
+  .cx-banner--warning .cx-banner__icon { color: var(--warning); }
+  .cx-banner--danger .cx-banner__icon { color: var(--danger); }
+  .cx-banner__text { margin: 0; font-family: var(--font-text); font-size: 15px; line-height: 1.5; font-weight: 500; }
+  .cx-banner__title { margin-right: var(--space-2); font-family: var(--font-display); font-weight: 600; }
+  .cx-banner__close { grid-column: -2; width: 32px; height: 32px; color: var(--ink); }
+  @media (max-width: 599px) {
+    .cx-banner { grid-template-columns: auto minmax(0, 1fr) auto; }
+    .cx-banner__action { grid-column: 2; grid-row: 2; }
+    .cx-banner__close { grid-column: 3; grid-row: 1; align-self: start; }
+  }
+  @media (min-width: 1024px) { .cx-banner { padding-inline: var(--layout-margin-laptop); } }
+
   /* One density, but touch screens get full-size targets */
   @media (pointer: coarse) {
     .cx-btn--sm, .cx-tab, .cx-search__clear { min-height: var(--size-touch); }
     .cx-search__clear { width: var(--size-touch); right: 2px; }
     .cx-choice { min-height: var(--size-touch); align-items: center; }
     .cx-choice__text { padding-top: 0; }
-    .cx-dialog__close, .cx-toast__close { width: var(--size-touch); height: var(--size-touch); }
+    .cx-dialog__close, .cx-toast__close, .cx-banner__close { width: var(--size-touch); height: var(--size-touch); }
     .cx-chip, .cx-pagination__btn { min-height: var(--size-touch); height: auto; min-width: var(--size-touch); }
     .cx-breadcrumb__link { min-height: var(--size-touch); }
   }
@@ -643,8 +711,12 @@
     .cx-btn, .cx-card, .cx-tab, .cx-field__control, .cx-search__clear, .cx-choice__input, .cx-choice__input::before,
     .cx-dialog, .cx-dialog::backdrop, .cx-menu, .cx-menu__item, .cx-tooltip, .cx-toast,
     .cx-dialog__close, .cx-toast__close, .cx-table__table tbody tr, .cx-table__sort, .cx-pagination__btn, .cx-chip,
-    .cx-sidenav__link, .cx-topbar__menu, .cx-breadcrumb__link { transition: none; }
+    .cx-sidenav__link, .cx-topbar__menu, .cx-breadcrumb__link, .cx-progress__fill, .cx-banner__close { transition: none; }
     a.cx-card:hover { transform: none; }
     .cx-dialog, .cx-menu { translate: none; }
+    .cx-progress--indeterminate .cx-progress__fill {
+      width: 100%; animation: none;
+      background: repeating-linear-gradient(-45deg, var(--cx-progress, var(--action)) 0 6px, transparent 6px 12px);
+    }
   }
 }

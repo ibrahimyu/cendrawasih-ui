@@ -138,7 +138,7 @@ Crisp: quick, physical and never decorative. Three durations and two easings cov
 - `duration-base` (160ms) with `ease-out` for color and border changes: hover, selected, a field taking focus.
 - `duration-fast` (120ms) for press feedback, so a press always feels immediate, and for anything leaving the screen (with `ease-in`).
 - `duration-slow` (240ms) with `ease-out` for things that move or appear: a linked card lifting 4px, a menu or dialog opening. Nothing takes longer.
-- Buttons, tabs and nav items change color, never shape or size. No bounce or overshoot, no parallax, no looping animation.
+- Buttons, tabs and nav items change color, never shape or size. No bounce or overshoot, no parallax, no looping animation. The one exception is a Progress bar with no known value: its segment sweeps across at an even (linear) speed while work runs, and it stops under reduced motion. Skeletons stay still.
 - Under `prefers-reduced-motion`, nothing moves: transitions are off and cards don't lift. Color changes still happen, instantly.
 - Motion never carries meaning on its own. If something changed, the screen says so in words.
 
@@ -154,7 +154,7 @@ Every state is its own color step, named as a token. Nothing is faded with opaci
 | Selected | You are here | `selected` with `on-selected` text, for the active tab and nav item. Never the `action` fill: that means "press this". |
 | Focus | The keyboard is on it | A 3px solid ring in `focus` with a 2px gap: green-deep on Day, yellow on Night, yellow on the Night band and white on Sunrise and Forest bands. Only on `:focus-visible`. |
 | Disabled | Can't be used right now | The same for every variant: `surface-sunk` fill, `line` border, `ink-disabled` text, no pointer. Prefer leaving a control enabled and explaining what's missing when it's used. |
-| Loading | Working on it | The label changes to the action in progress ("Syncing…") and the control stops taking presses (`aria-busy`). No spinner on its own; say what's happening. |
+| Loading | Working on it | The label changes to the action in progress ("Syncing…") and the control stops taking presses (`aria-busy`). Longer work gets a Progress bar with words; content on its way gets still Skeleton blocks. No spinner on its own; say what's happening. |
 | Error | Something needs fixing | A `danger` border on the field and the message under it, in `danger`, written as an instruction. Never color alone: the message and an icon carry it. |
 
 ## Data visualization
@@ -945,6 +945,85 @@ Where this page sits, as a trail of quiet links above its title: *Integrations �
 - Do use it on pages two or more levels below the nav: a record, a mapping, a run.
 - Don't use it on top-level pages; the SideNav already says where you are.
 - Don't repeat the page title as a link; it ends the trail as text.
+
+### Progress
+
+How far along a sync, an import or an upload is: a label, the amount, and an 8px pill bar.
+
+#### Anatomy
+
+The label in the label style on the left, the amount in `body-sm` `ink-soft` on the right, and the bar under them: a `fill-pressed` track with the fill in `action` while working, `success` when done, `danger` when it stopped. The fill grows over `duration-slow`. With no value, a 40% segment sweeps across at an even speed, the one loop in Cendra. Under reduced motion it stands still, full width and hatched. It is a `progressbar` named by its label, with the amount as its value text.
+
+#### You provide
+
+- `label`: what is happening, in words. `hideLabel` only when the words are beside it anyway.
+- `value` and `max` (default 100), or neither when nobody knows. `valueText` replaces the percentage: *214 of 1.120 orders*.
+- `tone`: `action` (default), `success` or `danger`. `locale` for the percentage.
+
+#### Do and don't
+
+- Do count the real thing: *214 of 1.120 orders* says more than *19%*.
+- Do say what happened when it stops, in the `valueText` and nearby: *Stopped at 41 of 120*.
+- Don't show a bar for anything that takes under a second; change the button label instead.
+
+### Skeleton
+
+The shape of content on its way: lines of text, a chart, an avatar. Still blocks of `fill-pressed`, no shimmer.
+
+#### Anatomy
+
+`text` is 12px lines 10px apart, with a shorter last line; `block` is a `radius-md` box, 120px tall by default; `circle` is 40px. Every skeleton is hidden from screen readers.
+
+#### You provide
+
+- `shape`, `lines` for text, and `width` and `height` in any CSS length.
+- On the region that is loading: `aria-busy="true"` and a visually hidden line that says what is loading.
+
+#### Do and don't
+
+- Do match the layout that is coming, so nothing jumps when it arrives.
+- Do switch to a Progress bar or a message if loading takes more than a few seconds.
+- Don't skeleton a whole page; skeleton the parts that are waiting.
+
+### EmptyState
+
+What a list, a table or a page shows when there is nothing in it yet, and how to fill it.
+
+#### Anatomy
+
+Plain, inside a panel or a Table: centered, with the icon in a 56px `fill-hover` circle, a title in the subtitle style, a sentence in `ink-soft` and up to two buttons. Toned, for an empty page: a large box, so outlined (3px in its plume color) with its icon as a watermark in the paired color at 30% (120px, or 200px once the box is 560px wide inside), left-aligned, the title in the title style.
+
+#### You provide
+
+- `title`: what is empty or what happened: *No failed records*, *Connect your first store*.
+- `children`: why, and what to do next. `actions`: one or two buttons, the main one first.
+- `icon`, `tone` (any plume) for the page version, and `as` for the heading level (default `h2`).
+
+#### Do and don't
+
+- Do turn an empty first run into the first step: *Connect a store*.
+- Do say good news plainly: *No failed records* is a result, not an absence.
+- Don't blame or joke. Say what to do.
+
+### Banner
+
+A message about the whole app or account, across the top of the page: planned maintenance, an expiring plan, a connection down everywhere. For a message about one region of the page, use Notice.
+
+#### Anatomy
+
+A full-width strip with square edges in the Notice tints (`info` on `surface-sunk` with a 2px `line` underneath). The icon takes the status color, and the text stays `ink`. A bold title runs into one sentence, then an optional action and a close button. On phones the action drops under the text. A danger banner is announced at once; the others politely.
+
+#### You provide
+
+- `tone`, `title` and `children` (one sentence: what, when, what it means).
+- `action`: a link or a `sm` secondary button. `onDismiss` to show the close button, and `dismissLabel` to translate it.
+- Placement: at the very top of the page content, above the page header. One at a time.
+
+#### Do and don't
+
+- Do give times with their zone: *22:00–23:00 WIB*.
+- Do let people dismiss anything that isn't still true right now, and remember that they did.
+- Don't use a banner for marketing.
 
 ### Icon
 

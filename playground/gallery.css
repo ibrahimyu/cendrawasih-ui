@@ -32,3 +32,6 @@
 .gl-nav__side { padding: 16px; border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg); }
 .gl-nav__main { gap: 20px; }
 .gl-nav__bar { position: static; border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg); }
+.gl-feedback { display: flex; flex-direction: column; gap: 12px; margin: 0 -24px; }
+.gl-skel { padding: 20px; border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg); }
+.gl-panel { border: var(--stroke-bold) solid var(--line); border-radius: var(--radius-lg); }
